@@ -3,11 +3,18 @@ var tr = Object.defineProperty;
 var Vi = Object.getOwnPropertyDescriptor;
 var Mi = Object.getOwnPropertyNames;
 var Ni = Object.getPrototypeOf, Pi = Object.prototype.hasOwnProperty;
-var rr = ((t) => typeof require < "u" ? require : typeof Proxy < "u" ? new Proxy(t, { get: (e, r) => (typeof require < "u" ? require : e)[r] }) : t)(function(t) {
+var rr = ((t) => typeof require < "u" ? require : typeof Proxy < "u" ? new Proxy(t, {
+  get: (e, r) => (typeof require < "u" ? require : e)[r]
+}) : t)(function(t) {
   if (typeof require < "u") return require.apply(this, arguments);
   throw Error('Dynamic require of "' + t + '" is not supported');
 });
-var ki = (t, e) => () => (e || t((e = { exports: {} }).exports, e), e.exports);
+var ki = (t, e) => () => (e || t(
+  (e = {
+    exports: {}
+  }).exports,
+  e
+), e.exports);
 var Oi = (t, e, r, i) => {
   if (e && typeof e == "object" || typeof e == "function")
     for (let n of Mi(e))
@@ -18,7 +25,10 @@ var Oi = (t, e, r, i) => {
   return t;
 };
 var Li = (t, e, r) => (r = t != null ? Ri(Ni(t)) : {}, Oi(
-  e || !t || !t.__esModule ? tr(r, "default", { value: t, enumerable: true }) : r,
+  e || !t || !t.__esModule ? tr(r, "default", {
+    value: t,
+    enumerable: true
+  }) : r,
   t
 ));
 var hr = ki((Nl, mr) => {
@@ -41,7 +51,11 @@ var D = {};
   }
   function e() {
     try {
-      var a = new WebAssembly.Memory({ initial: 1, maximum: 1, shared: true });
+      var a = new WebAssembly.Memory({
+        initial: 1,
+        maximum: 1,
+        shared: true
+      });
       return a.buffer instanceof SharedArrayBuffer;
     } catch {
     }
@@ -227,7 +241,9 @@ var D = {};
           return D.factories[d] = LibAVFactory;
         });
     }).then(function(h) {
-      return m === "worker" ? (f = {}, f.worker = new Worker(d, { type: u ? "module" : "classic" }), f.worker.postMessage({
+      return m === "worker" ? (f = {}, f.worker = new Worker(d, {
+        type: u ? "module" : "classic"
+      }), f.worker.postMessage({
         config: {
           variant: a.variant || D.variant,
           wasmurl: a.wasmurl || D.wasmurl
@@ -256,7 +272,9 @@ var D = {};
                   });
                 });
               } catch (w) {
-                f.ff_reader_dev_send(p[0], null, { error: w });
+                f.ff_reader_dev_send(p[0], null, {
+                  error: w
+                });
               }
             },
             null
@@ -307,7 +325,10 @@ var D = {};
           var I = Array.prototype.slice.call(arguments);
           return new Promise(function(X, $) {
             var M = _++;
-            I = [M].concat(I), w[M] = [X, $], y.postMessage({ c: "libavjs_run", a: I });
+            I = [M].concat(I), w[M] = [X, $], y.postMessage({
+              c: "libavjs_run",
+              a: I
+            });
           });
         };
         var T = y.onmessage;
@@ -315,7 +336,7 @@ var D = {};
           if (I.data && I.data.c === "libavjs_ret") {
             var X = I.data.a, $ = w[X[0]];
             $ && (X[2] ? $[0](X[3]) : $[1](X[3]), delete w[X[0]]);
-          } else if (I.data && I.data.c === "libavjs_wait_reader")
+          } else if (I.data && I.data.c === "libavjs_wait_reader") {
             if (f.readerDevReady(I.data.fd))
               y.postMessage({
                 c: "libavjs_wait_reader",
@@ -330,7 +351,8 @@ var D = {};
                 });
               });
             }
-          else if (I.data && I.data.c === "libavjs_ready") S();
+          } else if (I.data && I.data.c === "libavjs_ready")
+            S();
           else return T.apply(this, arguments);
         }, f.terminate = function() {
           f.PThread.unusedWorkers.concat(f.PThread.runningWorkers).forEach(function(I) {
@@ -1055,7 +1077,10 @@ var Ui = (function() {
   }, t.prototype[Symbol.iterator] = function() {
     return {
       next: function() {
-        return { done: true, value: void 0 };
+        return {
+          done: true,
+          value: void 0
+        };
       }
     };
   }, t.prototype.unwrapOr = function(e) {
@@ -1098,7 +1123,10 @@ var Gi = (function() {
     var e = Object(this.value);
     return Symbol.iterator in e ? e[Symbol.iterator]() : {
       next: function() {
-        return { done: true, value: void 0 };
+        return {
+          done: true,
+          value: void 0
+        };
       }
     };
   }, t.prototype.unwrapOr = function(e) {
@@ -1177,7 +1205,10 @@ var be = function(t, e, r) {
   }, t.prototype[Symbol.iterator] = function() {
     return {
       next: function() {
-        return { done: true, value: void 0 };
+        return {
+          done: true,
+          value: void 0
+        };
       }
     };
   }, t.prototype.else = function(e) {
@@ -1191,7 +1222,9 @@ var be = function(t, e, r) {
         `
 `
       ).concat(this._stack),
-      { cause: this.error }
+      {
+        cause: this.error
+      }
     );
   }, t.prototype.expectErr = function(e) {
     return this.error;
@@ -1202,7 +1235,9 @@ var be = function(t, e, r) {
         `
 `
       ).concat(this._stack),
-      { cause: this.error }
+      {
+        cause: this.error
+      }
     );
   }, t.prototype.unwrapErr = function() {
     return this.error;
@@ -1251,7 +1286,10 @@ var v = Yi, Qi = (function() {
     var e = Object(this.value);
     return Symbol.iterator in e ? e[Symbol.iterator]() : {
       next: function() {
-        return { done: true, value: void 0 };
+        return {
+          done: true,
+          value: void 0
+        };
       }
     };
   }, t.prototype.else = function(e) {
@@ -1385,7 +1423,11 @@ var Xe = function(t, e, r, i) {
     trys: [],
     ops: []
   }, i, n, o, a;
-  return a = { next: s(0), throw: s(1), return: s(2) }, typeof Symbol == "function" && (a[Symbol.iterator] = function() {
+  return a = {
+    next: s(0),
+    throw: s(1),
+    return: s(2)
+  }, typeof Symbol == "function" && (a[Symbol.iterator] = function() {
     return this;
   }), a;
   function s(A) {
@@ -1405,7 +1447,10 @@ var Xe = function(t, e, r, i) {
             o = A;
             break;
           case 4:
-            return r.label++, { value: A[1], done: false };
+            return r.label++, {
+              value: A[1],
+              done: false
+            };
           case 5:
             r.label++, n = A[1], A = [0];
             continue;
@@ -1439,7 +1484,10 @@ var Xe = function(t, e, r, i) {
         i = o = 0;
       }
     if (A[0] & 5) throw A[1];
-    return { value: A[0] ? A[1] : void 0, done: true };
+    return {
+      value: A[0] ? A[1] : void 0,
+      done: true
+    };
   }
 }, Pe = (function() {
   function t(e) {
@@ -1545,7 +1593,11 @@ var _t = function(t, e, r, i) {
     trys: [],
     ops: []
   }, i, n, o, a;
-  return a = { next: s(0), throw: s(1), return: s(2) }, typeof Symbol == "function" && (a[Symbol.iterator] = function() {
+  return a = {
+    next: s(0),
+    throw: s(1),
+    return: s(2)
+  }, typeof Symbol == "function" && (a[Symbol.iterator] = function() {
     return this;
   }), a;
   function s(A) {
@@ -1565,7 +1617,10 @@ var _t = function(t, e, r, i) {
             o = A;
             break;
           case 4:
-            return r.label++, { value: A[1], done: false };
+            return r.label++, {
+              value: A[1],
+              done: false
+            };
           case 5:
             r.label++, n = A[1], A = [0];
             continue;
@@ -1599,7 +1654,10 @@ var _t = function(t, e, r, i) {
         i = o = 0;
       }
     if (A[0] & 5) throw A[1];
-    return { value: A[0] ? A[1] : void 0, done: true };
+    return {
+      value: A[0] ? A[1] : void 0,
+      done: true
+    };
   }
 }, Ne = (function() {
   function t(e) {
@@ -1692,20 +1750,39 @@ async function or(t, e) {
     r = setTimeout(() => {
       e.removeEventListener("abort", n), i();
     }, t);
-  }), e.aborted ? { aborted: true, timeout_id: r } : { timed_out: true, timeout_id: r };
+  }), e.aborted ? {
+    aborted: true,
+    timeout_id: r
+  } : {
+    timed_out: true,
+    timeout_id: r
+  };
 }
 async function Ki(t, e, r, i, n, o, a) {
   let s = o ? "reload" : "default", l;
   for (let A = 0; A < r; ++A) {
     let u = new AbortController(), d = AbortSignal.any([u.signal, a]), f = setTimeout(() => u.abort(`Timed out after ${i}`), i);
     try {
-      let c = await fetch(t, { headers: e, cache: s, signal: d });
+      let c = await fetch(t, {
+        headers: e,
+        cache: s,
+        signal: d
+      });
       if (c.ok) return c;
-      if (c.status == 404 || c.status == 416) return { err_status: c.status };
-      l = { err_status: c.status };
+      if (c.status == 404 || c.status == 416)
+        return {
+          err_status: c.status
+        };
+      l = {
+        err_status: c.status
+      };
     } catch (c) {
       if (c instanceof DOMException && c.name == "AbortError")
-        return a.aborted ? { aborted: true } : { timeout: true };
+        return a.aborted ? {
+          aborted: true
+        } : {
+          timeout: true
+        };
       l = c;
     } finally {
       clearTimeout(f);
@@ -1713,7 +1790,10 @@ async function Ki(t, e, r, i, n, o, a) {
     let m = Math.pow(2, A) * n;
     A + 1 < r;
     let h = await or(m, a);
-    if (h.timeout_id && clearTimeout(f), h.aborted) return { aborted: true };
+    if (h.timeout_id && clearTimeout(f), h.aborted)
+      return {
+        aborted: true
+      };
   }
   return l;
 }
@@ -1761,7 +1841,10 @@ var gt = {
 var yt = new BroadcastChannel("worker_service");
 function ie(t) {
   let e = gt.FromWorkerToService;
-  yt.postMessage({ msg: t, channel: e });
+  yt.postMessage({
+    msg: t,
+    channel: e
+  });
 }
 function sr(t) {
   let e = (r) => {
@@ -1774,7 +1857,9 @@ function sr(t) {
 }
 var q = class {
   constructor(e) {
-    this.download_id = e, this.progress = { status: "queuing" }, this.postNow();
+    this.download_id = e, this.progress = {
+      status: "queuing"
+    }, this.postNow();
   }
   schedulePost() {
     this.timeout || (this.timeout = setTimeout(() => this.postNow(), 500));
@@ -1782,7 +1867,10 @@ var q = class {
   postNow() {
     this.timeout && (clearTimeout(this.timeout), delete this.timeout), ie({
       name: "download_progress",
-      data: { download_id: this.download_id, progress: this.progress }
+      data: {
+        download_id: this.download_id,
+        progress: this.progress
+      }
     });
   }
   set_progress(e) {
@@ -1794,7 +1882,10 @@ var q = class {
   add_bytes(e) {
     this.progress.status == "downloading" ? this.progress.fetched_bytes_count += e : this.progress.status == "queuing" && (this.progress = {
       status: "downloading",
-      percent: { is_known: true, value: 0 },
+      percent: {
+        is_known: true,
+        value: 0
+      },
       fetched_bytes_count: e,
       output_duration_s: 0
     }), this.schedulePost();
@@ -1805,7 +1896,10 @@ var q = class {
   set_percent(e) {
     this.progress.status == "downloading" && this.progress.percent.is_known ? this.progress.percent.value = e : this.progress.status == "queuing" && (this.progress = {
       status: "downloading",
-      percent: { is_known: true, value: e },
+      percent: {
+        is_known: true,
+        value: e
+      },
       fetched_bytes_count: 0,
       output_duration_s: 0
     }), this.schedulePost();
@@ -1815,7 +1909,9 @@ var q = class {
     super(e);
   }
   nextStream() {
-    this.second_stream = true, this.progress = { status: "queuing" }, this.postNow();
+    this.second_stream = true, this.progress = {
+      status: "queuing"
+    }, this.postNow();
   }
   postNow() {
     if (this.timeout && (clearTimeout(this.timeout), delete this.timeout), !(!this.second_stream && this.progress.status == "finalizing")) {
@@ -1823,7 +1919,10 @@ var q = class {
         let e = structuredClone(this.progress);
         e.status == "downloading" && e.percent.is_known && (this.second_stream ? (e.percent.value *= 0.5, e.percent.value += 50) : e.percent.value *= 0.5), ie({
           name: "download_progress",
-          data: { download_id: this.download_id, progress: e }
+          data: {
+            download_id: this.download_id,
+            progress: e
+          }
         });
       }
     }
@@ -1834,12 +1933,20 @@ var L = class {
     this.filename_writable_map = /* @__PURE__ */ new Map();
   }
   async open(e) {
-    let i = await (await navigator.storage.getDirectory()).getFileHandle(e, { create: true }), n = await i.createSyncAccessHandle();
-    this.filename_writable_map.set(e, { writable: n, handle: i, size: 0 });
+    let i = await (await navigator.storage.getDirectory()).getFileHandle(e, {
+      create: true
+    }), n = await i.createSyncAccessHandle();
+    this.filename_writable_map.set(e, {
+      writable: n,
+      handle: i,
+      size: 0
+    });
   }
   async onwrite(e, r, i) {
     let n = this.filename_writable_map.get(e);
-    n && (await n.writable.write(i, { at: r }), n.size += i.length);
+    n && (await n.writable.write(i, {
+      at: r
+    }), n.size += i.length);
   }
   async close(e) {
     let r = this.filename_writable_map.get(e);
@@ -1857,10 +1964,16 @@ async function Q(t, e) {
   switch (t.extension) {
     case "mkv":
       return URL.createObjectURL(
-        new File([n], e, { type: "video/x-matroska" })
+        new File([n], e, {
+          type: "video/x-matroska"
+        })
       );
     case "flv":
-      return URL.createObjectURL(new File([n], e, { type: "video/x-flv" }));
+      return URL.createObjectURL(
+        new File([n], e, {
+          type: "video/x-flv"
+        })
+      );
     default:
       return URL.createObjectURL(n);
   }
@@ -1912,8 +2025,10 @@ function Et(t) {
 function Xi(t) {
   return t.strategy == "http_audio_video_one_source" || t.strategy == "http_audio_video_one_source_jsfetch" || t.strategy == "http_audio_video_two_sources_jsfetch" || t.strategy == "http_strip_audio_jsfetch" || t.strategy == "http_video_preview_jsfetch";
 }
-async function U(t, e, r, i, n) {
-  let o = await we.LibAV({ noworker: true }), a = new L();
+async function runFfmpeg(t, e, r, i, n) {
+  let o = await we.LibAV({
+    noworker: true
+  }), a = new L();
   o.onwrite = a.onwrite.bind(a), Ar && lr && ur && (await o.jsfetch_set_read_timeout(Ar), await o.jsfetch_set_fetch_timeout(lr), await o.jsfetch_set_initial_retry_delay(ur)), await o.jsfetch_set_bypass_cache(t.cache == "reload"), await o.jsfetch_set_is_http(Xi(t));
   let s = false;
   e.addEventListener("abort", async (y) => {
@@ -2428,10 +2543,13 @@ var Fl = (() => {
     }
   };
   return new Map(
-    dr.map((e) => ({ code: e, native_name: t(e) })).sort((e, r) => e.native_name.localeCompare(r.native_name)).map((e) => [e.code, e])
+    dr.map((e) => ({
+      code: e,
+      native_name: t(e)
+    })).sort((e, r) => e.native_name.localeCompare(r.native_name)).map((e) => [e.code, e])
   );
 })();
-async function fr(t, e) {
+async function downloadMpdVideo(t, e) {
   let r = `${t.download_id}.${t.extension}`, i = t.subtitles, n = [], o = [], a = [], s = [], l = t.muxer == "mp4";
   return n = t.audio_track_id.isSome() ? ["-map", `0:a:m:id:${t.audio_track_id.value}`] : ["-map", "0:a:0?"], t.audio_language.isSome() && (s = ["-metadata:s:a:0", `language=${J(t.audio_language.value)}`]), i.isSome() && (i.value.type == "id" ? (o = ["-i", `jsfetch:${t.url}`], a = [
     "-map",
@@ -2447,7 +2565,7 @@ async function fr(t, e) {
     l ? "mov_text" : "copy",
     "-metadata:s:s:0",
     `language=${J(i.value.language)}`
-  ])), await U(t, e, r, void 0, [
+  ])), await runFfmpeg(t, e, r, void 0, [
     "-analyzeduration",
     "10M",
     "-f",
@@ -2472,9 +2590,9 @@ async function fr(t, e) {
     r
   ]);
 }
-async function pr(t, e) {
+async function downloadMpdAudio(t, e) {
   let r = `${t.download_id}.${t.extension}`, i = [], n = [];
-  return n = t.audio_track_id.isSome() ? ["-map", `0:m:id:${t.audio_track_id.value}`] : ["-map", "0:a:0?"], t.audio_language.isSome() && (i = ["-metadata:s:a:0", `language=${J(t.audio_language.value)}`]), await U(t, e, r, void 0, [
+  return n = t.audio_track_id.isSome() ? ["-map", `0:m:id:${t.audio_track_id.value}`] : ["-map", "0:a:0?"], t.audio_language.isSome() && (i = ["-metadata:s:a:0", `language=${J(t.audio_language.value)}`]), await runFfmpeg(t, e, r, void 0, [
     "-analyzeduration",
     "10M",
     "-f",
@@ -2491,9 +2609,9 @@ async function pr(t, e) {
     r
   ]);
 }
-async function _r(t, e) {
+async function downloadMpdPreview(t, e) {
   let r = `${t.download_id}.${t.extension}`;
-  return await U(t, e, r, void 0, [
+  return await runFfmpeg(t, e, r, void 0, [
     "-analyzeduration",
     "1M",
     "-f",
@@ -2595,7 +2713,10 @@ var Tt = class extends je {
     let r, i;
     if (e = e.trim(), e.length === 0) return;
     if (e[0] !== "#") {
-      this.trigger("data", { type: "uri", uri: e });
+      this.trigger("data", {
+        type: "uri",
+        uri: e
+      });
       return;
     }
     this.tagMappers.reduce(
@@ -2608,47 +2729,80 @@ var Tt = class extends je {
       for (let a = 0; a < this.customParsers.length; a++)
         if (this.customParsers[a].call(this, o)) return;
       if (o.indexOf("#EXT") !== 0) {
-        this.trigger("data", { type: "comment", text: o.slice(1) });
+        this.trigger("data", {
+          type: "comment",
+          text: o.slice(1)
+        });
         return;
       }
       if (o = o.replace("\r", ""), r = /^#EXTM3U/.exec(o), r) {
-        this.trigger("data", { type: "tag", tagType: "m3u" });
+        this.trigger("data", {
+          type: "tag",
+          tagType: "m3u"
+        });
         return;
       }
       if (r = /^#EXTINF:([0-9\.]*)?,?(.*)?$/.exec(o), r) {
-        i = { type: "tag", tagType: "inf" }, r[1] && (i.duration = parseFloat(r[1])), r[2] && (i.title = r[2]), this.trigger("data", i);
+        i = {
+          type: "tag",
+          tagType: "inf"
+        }, r[1] && (i.duration = parseFloat(r[1])), r[2] && (i.title = r[2]), this.trigger("data", i);
         return;
       }
       if (r = /^#EXT-X-TARGETDURATION:([0-9.]*)?/.exec(o), r) {
-        i = { type: "tag", tagType: "targetduration" }, r[1] && (i.duration = parseInt(r[1], 10)), this.trigger("data", i);
+        i = {
+          type: "tag",
+          tagType: "targetduration"
+        }, r[1] && (i.duration = parseInt(r[1], 10)), this.trigger("data", i);
         return;
       }
       if (r = /^#EXT-X-VERSION:([0-9.]*)?/.exec(o), r) {
-        i = { type: "tag", tagType: "version" }, r[1] && (i.version = parseInt(r[1], 10)), this.trigger("data", i);
+        i = {
+          type: "tag",
+          tagType: "version"
+        }, r[1] && (i.version = parseInt(r[1], 10)), this.trigger("data", i);
         return;
       }
       if (r = /^#EXT-X-MEDIA-SEQUENCE:(\-?[0-9.]*)?/.exec(o), r) {
-        i = { type: "tag", tagType: "media-sequence" }, r[1] && (i.number = parseInt(r[1], 10)), this.trigger("data", i);
+        i = {
+          type: "tag",
+          tagType: "media-sequence"
+        }, r[1] && (i.number = parseInt(r[1], 10)), this.trigger("data", i);
         return;
       }
       if (r = /^#EXT-X-DISCONTINUITY-SEQUENCE:(\-?[0-9.]*)?/.exec(o), r) {
-        i = { type: "tag", tagType: "discontinuity-sequence" }, r[1] && (i.number = parseInt(r[1], 10)), this.trigger("data", i);
+        i = {
+          type: "tag",
+          tagType: "discontinuity-sequence"
+        }, r[1] && (i.number = parseInt(r[1], 10)), this.trigger("data", i);
         return;
       }
       if (r = /^#EXT-X-PLAYLIST-TYPE:(.*)?$/.exec(o), r) {
-        i = { type: "tag", tagType: "playlist-type" }, r[1] && (i.playlistType = r[1]), this.trigger("data", i);
+        i = {
+          type: "tag",
+          tagType: "playlist-type"
+        }, r[1] && (i.playlistType = r[1]), this.trigger("data", i);
         return;
       }
       if (r = /^#EXT-X-BYTERANGE:(.*)?$/.exec(o), r) {
-        i = fe(Ct(r[1]), { type: "tag", tagType: "byterange" }), this.trigger("data", i);
+        i = fe(Ct(r[1]), {
+          type: "tag",
+          tagType: "byterange"
+        }), this.trigger("data", i);
         return;
       }
       if (r = /^#EXT-X-ALLOW-CACHE:(YES|NO)?/.exec(o), r) {
-        i = { type: "tag", tagType: "allow-cache" }, r[1] && (i.allowed = !/NO/.test(r[1])), this.trigger("data", i);
+        i = {
+          type: "tag",
+          tagType: "allow-cache"
+        }, r[1] && (i.allowed = !/NO/.test(r[1])), this.trigger("data", i);
         return;
       }
       if (r = /^#EXT-X-MAP:(.*)$/.exec(o), r) {
-        if (i = { type: "tag", tagType: "map" }, r[1]) {
+        if (i = {
+          type: "tag",
+          tagType: "map"
+        }, r[1]) {
           let a = G(r[1]);
           a.URI && (i.uri = a.URI), a.BYTERANGE && (i.byterange = Ct(a.BYTERANGE));
         }
@@ -2656,7 +2810,10 @@ var Tt = class extends je {
         return;
       }
       if (r = /^#EXT-X-STREAM-INF:(.*)$/.exec(o), r) {
-        i = { type: "tag", tagType: "stream-inf" }, r[1] && (i.attributes = G(r[1]), i.attributes.RESOLUTION && (i.attributes.RESOLUTION = gr(i.attributes.RESOLUTION)), i.attributes.BANDWIDTH && (i.attributes.BANDWIDTH = parseInt(
+        i = {
+          type: "tag",
+          tagType: "stream-inf"
+        }, r[1] && (i.attributes = G(r[1]), i.attributes.RESOLUTION && (i.attributes.RESOLUTION = gr(i.attributes.RESOLUTION)), i.attributes.BANDWIDTH && (i.attributes.BANDWIDTH = parseInt(
           i.attributes.BANDWIDTH,
           10
         )), i.attributes["FRAME-RATE"] && (i.attributes["FRAME-RATE"] = parseFloat(
@@ -2668,52 +2825,85 @@ var Tt = class extends je {
         return;
       }
       if (r = /^#EXT-X-MEDIA:(.*)$/.exec(o), r) {
-        i = { type: "tag", tagType: "media" }, r[1] && (i.attributes = G(r[1])), this.trigger("data", i);
+        i = {
+          type: "tag",
+          tagType: "media"
+        }, r[1] && (i.attributes = G(r[1])), this.trigger("data", i);
         return;
       }
       if (r = /^#EXT-X-ENDLIST/.exec(o), r) {
-        this.trigger("data", { type: "tag", tagType: "endlist" });
+        this.trigger("data", {
+          type: "tag",
+          tagType: "endlist"
+        });
         return;
       }
       if (r = /^#EXT-X-DISCONTINUITY/.exec(o), r) {
-        this.trigger("data", { type: "tag", tagType: "discontinuity" });
+        this.trigger("data", {
+          type: "tag",
+          tagType: "discontinuity"
+        });
         return;
       }
       if (r = /^#EXT-X-PROGRAM-DATE-TIME:(.*)$/.exec(o), r) {
-        i = { type: "tag", tagType: "program-date-time" }, r[1] && (i.dateTimeString = r[1], i.dateTimeObject = new Date(r[1])), this.trigger("data", i);
+        i = {
+          type: "tag",
+          tagType: "program-date-time"
+        }, r[1] && (i.dateTimeString = r[1], i.dateTimeObject = new Date(r[1])), this.trigger("data", i);
         return;
       }
       if (r = /^#EXT-X-KEY:(.*)$/.exec(o), r) {
-        i = { type: "tag", tagType: "key" }, r[1] && (i.attributes = G(r[1]), i.attributes.IV && (i.attributes.IV.substring(0, 2).toLowerCase() === "0x" && (i.attributes.IV = i.attributes.IV.substring(2)), i.attributes.IV = i.attributes.IV.match(/.{8}/g), i.attributes.IV[0] = parseInt(i.attributes.IV[0], 16), i.attributes.IV[1] = parseInt(i.attributes.IV[1], 16), i.attributes.IV[2] = parseInt(i.attributes.IV[2], 16), i.attributes.IV[3] = parseInt(i.attributes.IV[3], 16), i.attributes.IV = new Uint32Array(i.attributes.IV))), this.trigger("data", i);
+        i = {
+          type: "tag",
+          tagType: "key"
+        }, r[1] && (i.attributes = G(r[1]), i.attributes.IV && (i.attributes.IV.substring(0, 2).toLowerCase() === "0x" && (i.attributes.IV = i.attributes.IV.substring(2)), i.attributes.IV = i.attributes.IV.match(/.{8}/g), i.attributes.IV[0] = parseInt(i.attributes.IV[0], 16), i.attributes.IV[1] = parseInt(i.attributes.IV[1], 16), i.attributes.IV[2] = parseInt(i.attributes.IV[2], 16), i.attributes.IV[3] = parseInt(i.attributes.IV[3], 16), i.attributes.IV = new Uint32Array(i.attributes.IV))), this.trigger("data", i);
         return;
       }
       if (r = /^#EXT-X-START:(.*)$/.exec(o), r) {
-        i = { type: "tag", tagType: "start" }, r[1] && (i.attributes = G(r[1]), i.attributes["TIME-OFFSET"] = parseFloat(
+        i = {
+          type: "tag",
+          tagType: "start"
+        }, r[1] && (i.attributes = G(r[1]), i.attributes["TIME-OFFSET"] = parseFloat(
           i.attributes["TIME-OFFSET"]
         ), i.attributes.PRECISE = /YES/.test(i.attributes.PRECISE)), this.trigger("data", i);
         return;
       }
       if (r = /^#EXT-X-CUE-OUT-CONT:(.*)?$/.exec(o), r) {
-        i = { type: "tag", tagType: "cue-out-cont" }, r[1] ? i.data = r[1] : i.data = "", this.trigger("data", i);
+        i = {
+          type: "tag",
+          tagType: "cue-out-cont"
+        }, r[1] ? i.data = r[1] : i.data = "", this.trigger("data", i);
         return;
       }
       if (r = /^#EXT-X-CUE-OUT:(.*)?$/.exec(o), r) {
-        i = { type: "tag", tagType: "cue-out" }, r[1] ? i.data = r[1] : i.data = "", this.trigger("data", i);
+        i = {
+          type: "tag",
+          tagType: "cue-out"
+        }, r[1] ? i.data = r[1] : i.data = "", this.trigger("data", i);
         return;
       }
       if (r = /^#EXT-X-CUE-IN:?(.*)?$/.exec(o), r) {
-        i = { type: "tag", tagType: "cue-in" }, r[1] ? i.data = r[1] : i.data = "", this.trigger("data", i);
+        i = {
+          type: "tag",
+          tagType: "cue-in"
+        }, r[1] ? i.data = r[1] : i.data = "", this.trigger("data", i);
         return;
       }
       if (r = /^#EXT-X-SKIP:(.*)$/.exec(o), r && r[1]) {
-        i = { type: "tag", tagType: "skip" }, i.attributes = G(r[1]), i.attributes.hasOwnProperty("SKIPPED-SEGMENTS") && (i.attributes["SKIPPED-SEGMENTS"] = parseInt(
+        i = {
+          type: "tag",
+          tagType: "skip"
+        }, i.attributes = G(r[1]), i.attributes.hasOwnProperty("SKIPPED-SEGMENTS") && (i.attributes["SKIPPED-SEGMENTS"] = parseInt(
           i.attributes["SKIPPED-SEGMENTS"],
           10
         )), i.attributes.hasOwnProperty("RECENTLY-REMOVED-DATERANGES") && (i.attributes["RECENTLY-REMOVED-DATERANGES"] = i.attributes["RECENTLY-REMOVED-DATERANGES"].split(zi)), this.trigger("data", i);
         return;
       }
       if (r = /^#EXT-X-PART:(.*)$/.exec(o), r && r[1]) {
-        i = { type: "tag", tagType: "part" }, i.attributes = G(r[1]), ["DURATION"].forEach(function(a) {
+        i = {
+          type: "tag",
+          tagType: "part"
+        }, i.attributes = G(r[1]), ["DURATION"].forEach(function(a) {
           i.attributes.hasOwnProperty(a) && (i.attributes[a] = parseFloat(i.attributes[a]));
         }), ["INDEPENDENT", "GAP"].forEach(function(a) {
           i.attributes.hasOwnProperty(a) && (i.attributes[a] = /YES/.test(i.attributes[a]));
@@ -2721,7 +2911,10 @@ var Tt = class extends je {
         return;
       }
       if (r = /^#EXT-X-SERVER-CONTROL:(.*)$/.exec(o), r && r[1]) {
-        i = { type: "tag", tagType: "server-control" }, i.attributes = G(r[1]), ["CAN-SKIP-UNTIL", "PART-HOLD-BACK", "HOLD-BACK"].forEach(
+        i = {
+          type: "tag",
+          tagType: "server-control"
+        }, i.attributes = G(r[1]), ["CAN-SKIP-UNTIL", "PART-HOLD-BACK", "HOLD-BACK"].forEach(
           function(a) {
             i.attributes.hasOwnProperty(a) && (i.attributes[a] = parseFloat(i.attributes[a]));
           }
@@ -2731,13 +2924,19 @@ var Tt = class extends je {
         return;
       }
       if (r = /^#EXT-X-PART-INF:(.*)$/.exec(o), r && r[1]) {
-        i = { type: "tag", tagType: "part-inf" }, i.attributes = G(r[1]), ["PART-TARGET"].forEach(function(a) {
+        i = {
+          type: "tag",
+          tagType: "part-inf"
+        }, i.attributes = G(r[1]), ["PART-TARGET"].forEach(function(a) {
           i.attributes.hasOwnProperty(a) && (i.attributes[a] = parseFloat(i.attributes[a]));
         }), this.trigger("data", i);
         return;
       }
       if (r = /^#EXT-X-PRELOAD-HINT:(.*)$/.exec(o), r && r[1]) {
-        i = { type: "tag", tagType: "preload-hint" }, i.attributes = G(r[1]), ["BYTERANGE-START", "BYTERANGE-LENGTH"].forEach(function(a) {
+        i = {
+          type: "tag",
+          tagType: "preload-hint"
+        }, i.attributes = G(r[1]), ["BYTERANGE-START", "BYTERANGE-LENGTH"].forEach(function(a) {
           if (i.attributes.hasOwnProperty(a)) {
             i.attributes[a] = parseInt(i.attributes[a], 10);
             let s = a === "BYTERANGE-LENGTH" ? "length" : "offset";
@@ -2747,13 +2946,19 @@ var Tt = class extends je {
         return;
       }
       if (r = /^#EXT-X-RENDITION-REPORT:(.*)$/.exec(o), r && r[1]) {
-        i = { type: "tag", tagType: "rendition-report" }, i.attributes = G(r[1]), ["LAST-MSN", "LAST-PART"].forEach(function(a) {
+        i = {
+          type: "tag",
+          tagType: "rendition-report"
+        }, i.attributes = G(r[1]), ["LAST-MSN", "LAST-PART"].forEach(function(a) {
           i.attributes.hasOwnProperty(a) && (i.attributes[a] = parseInt(i.attributes[a], 10));
         }), this.trigger("data", i);
         return;
       }
       if (r = /^#EXT-X-DATERANGE:(.*)$/.exec(o), r && r[1]) {
-        i = { type: "tag", tagType: "daterange" }, i.attributes = G(r[1]), ["ID", "CLASS"].forEach(function(s) {
+        i = {
+          type: "tag",
+          tagType: "daterange"
+        }, i.attributes = G(r[1]), ["ID", "CLASS"].forEach(function(s) {
           i.attributes.hasOwnProperty(s) && (i.attributes[s] = String(i.attributes[s]));
         }), ["START-DATE", "END-DATE"].forEach(function(s) {
           i.attributes.hasOwnProperty(s) && (i.attributes[s] = new Date(i.attributes[s]));
@@ -2781,15 +2986,24 @@ var Tt = class extends je {
         return;
       }
       if (r = /^#EXT-X-I-FRAMES-ONLY/.exec(o), r) {
-        this.trigger("data", { type: "tag", tagType: "i-frames-only" });
+        this.trigger("data", {
+          type: "tag",
+          tagType: "i-frames-only"
+        });
         return;
       }
       if (r = /^#EXT-X-CONTENT-STEERING:(.*)$/.exec(o), r) {
-        i = { type: "tag", tagType: "content-steering" }, i.attributes = G(r[1]), this.trigger("data", i);
+        i = {
+          type: "tag",
+          tagType: "content-steering"
+        }, i.attributes = G(r[1]), this.trigger("data", i);
         return;
       }
       if (r = /^#EXT-X-I-FRAME-STREAM-INF:(.*)$/.exec(o), r) {
-        i = { type: "tag", tagType: "i-frame-playlist" }, i.attributes = G(r[1]), i.attributes.URI && (i.uri = i.attributes.URI), i.attributes.BANDWIDTH && (i.attributes.BANDWIDTH = parseInt(i.attributes.BANDWIDTH, 10)), i.attributes.RESOLUTION && (i.attributes.RESOLUTION = gr(i.attributes.RESOLUTION)), i.attributes["AVERAGE-BANDWIDTH"] && (i.attributes["AVERAGE-BANDWIDTH"] = parseInt(
+        i = {
+          type: "tag",
+          tagType: "i-frame-playlist"
+        }, i.attributes = G(r[1]), i.attributes.URI && (i.uri = i.attributes.URI), i.attributes.BANDWIDTH && (i.attributes.BANDWIDTH = parseInt(i.attributes.BANDWIDTH, 10)), i.attributes.RESOLUTION && (i.attributes.RESOLUTION = gr(i.attributes.RESOLUTION)), i.attributes["AVERAGE-BANDWIDTH"] && (i.attributes["AVERAGE-BANDWIDTH"] = parseInt(
           i.attributes["AVERAGE-BANDWIDTH"],
           10
         )), i.attributes["FRAME-RATE"] && (i.attributes["FRAME-RATE"] = parseFloat(
@@ -2798,10 +3012,16 @@ var Tt = class extends je {
         return;
       }
       if (r = /^#EXT-X-DEFINE:(.*)$/.exec(o), r) {
-        i = { type: "tag", tagType: "define" }, i.attributes = G(r[1]), this.trigger("data", i);
+        i = {
+          type: "tag",
+          tagType: "define"
+        }, i.attributes = G(r[1]), this.trigger("data", i);
         return;
       }
-      this.trigger("data", { type: "tag", data: o.slice(4) });
+      this.trigger("data", {
+        type: "tag",
+        data: o.slice(4)
+      });
     });
   }
   addParser({ expression: e, customType: r, dataParser: i, segment: n }) {
@@ -2841,7 +3061,12 @@ var Tt = class extends je {
   constructor(e = {}) {
     super(), this.lineStream = new Tt(), this.parseStream = new Dt(), this.lineStream.pipe(this.parseStream), this.mainDefinitions = e.mainDefinitions || {}, this.params = new URL(e.uri, "https://a.com").searchParams, this.lastProgramDateTime = null;
     let r = this, i = [], n = {}, o, a, s = false, l = function() {
-    }, A = { AUDIO: {}, VIDEO: {}, "CLOSED-CAPTIONS": {}, SUBTITLES: {} }, u = "urn:uuid:edef8ba9-79d6-4ace-a3c8-27dcd51d21ed", d = 0;
+    }, A = {
+      AUDIO: {},
+      VIDEO: {},
+      "CLOSED-CAPTIONS": {},
+      SUBTITLES: {}
+    }, u = "urn:uuid:edef8ba9-79d6-4ace-a3c8-27dcd51d21ed", d = 0;
     this.manifest = {
       allowCache: true,
       discontinuityStarts: [],
@@ -2908,11 +3133,15 @@ var Tt = class extends je {
                 return;
               }
               if (c.attributes.KEYFORMAT === "com.apple.streamingkeydelivery") {
-                this.manifest.contentProtection = this.manifest.contentProtection || {}, this.manifest.contentProtection["com.apple.fps.1_0"] = { attributes: c.attributes };
+                this.manifest.contentProtection = this.manifest.contentProtection || {}, this.manifest.contentProtection["com.apple.fps.1_0"] = {
+                  attributes: c.attributes
+                };
                 return;
               }
               if (c.attributes.KEYFORMAT === "com.microsoft.playready") {
-                this.manifest.contentProtection = this.manifest.contentProtection || {}, this.manifest.contentProtection["com.microsoft.playready"] = { uri: c.attributes.URI };
+                this.manifest.contentProtection = this.manifest.contentProtection || {}, this.manifest.contentProtection["com.microsoft.playready"] = {
+                  uri: c.attributes.URI
+                };
                 return;
               }
               if (c.attributes.KEYFORMAT === u) {
@@ -3003,7 +3232,9 @@ var Tt = class extends je {
                 return;
               }
               let p = this.manifest.mediaGroups[c.attributes.TYPE];
-              p[c.attributes["GROUP-ID"]] = p[c.attributes["GROUP-ID"]] || {}, g = p[c.attributes["GROUP-ID"]], y = { default: /yes/i.test(c.attributes.DEFAULT) }, y.default ? y.autoselect = true : y.autoselect = /yes/i.test(c.attributes.AUTOSELECT), c.attributes.LANGUAGE && (y.language = c.attributes.LANGUAGE), c.attributes.URI && (y.uri = c.attributes.URI), c.attributes["INSTREAM-ID"] && (y.instreamId = c.attributes["INSTREAM-ID"]), c.attributes.CHARACTERISTICS && (y.characteristics = c.attributes.CHARACTERISTICS), c.attributes.FORCED && (y.forced = /yes/i.test(c.attributes.FORCED)), g[c.attributes.NAME] = y;
+              p[c.attributes["GROUP-ID"]] = p[c.attributes["GROUP-ID"]] || {}, g = p[c.attributes["GROUP-ID"]], y = {
+                default: /yes/i.test(c.attributes.DEFAULT)
+              }, y.default ? y.autoselect = true : y.autoselect = /yes/i.test(c.attributes.AUTOSELECT), c.attributes.LANGUAGE && (y.language = c.attributes.LANGUAGE), c.attributes.URI && (y.uri = c.attributes.URI), c.attributes["INSTREAM-ID"] && (y.instreamId = c.attributes["INSTREAM-ID"]), c.attributes.CHARACTERISTICS && (y.characteristics = c.attributes.CHARACTERISTICS), c.attributes.FORCED && (y.forced = /yes/i.test(c.attributes.FORCED)), g[c.attributes.NAME] = y;
             },
             discontinuity() {
               d += 1, n.discontinuity = true, this.manifest.discontinuityStarts.push(i.length);
@@ -3319,7 +3550,12 @@ var Gl = new Error("timeout while waiting for mutex to become available"), Yl = 
   acquire(e = 1, r = 0) {
     if (e <= 0) throw new Error(`invalid weight ${e}: must be positive`);
     return new Promise((i, n) => {
-      let o = { resolve: i, reject: n, weight: e, priority: r }, a = yr(this._queue, (s) => r <= s.priority);
+      let o = {
+        resolve: i,
+        reject: n,
+        weight: e,
+        priority: r
+      }, a = yr(this._queue, (s) => r <= s.priority);
       a === -1 && e <= this._value ? this._dispatchItem(o) : this._queue.splice(a + 1, 0, o);
     });
   }
@@ -3336,7 +3572,10 @@ var Gl = new Error("timeout while waiting for mutex to become available"), Yl = 
   waitForUnlock(e = 1, r = 0) {
     if (e <= 0) throw new Error(`invalid weight ${e}: must be positive`);
     return this._couldLockImmediately(e, r) ? Promise.resolve() : new Promise((i) => {
-      this._weightedWaiters[e - 1] || (this._weightedWaiters[e - 1] = []), rn(this._weightedWaiters[e - 1], { resolve: i, priority: r });
+      this._weightedWaiters[e - 1] || (this._weightedWaiters[e - 1] = []), rn(this._weightedWaiters[e - 1], {
+        resolve: i,
+        priority: r
+      });
     });
   }
   isLocked() {
@@ -3403,7 +3642,10 @@ function Z(t, e) {
 }
 function qe(t) {
   let e = Number(t & 0xffffffffn), r = Number(t >> 32n);
-  return { lo: e, hi: r };
+  return {
+    lo: e,
+    hi: r
+  };
 }
 function wr(t) {
   let e, r;
@@ -3442,7 +3684,11 @@ function Ee(t) {
 }
 function le(t) {
   let e = t.length - 1, r = t[e].dts, i = t[e].dtshi || 0, n = Z(r, i), o = t[e].pts, a = t[e].ptshi || 0, s = Z(o, a), l = Z(t[e].duration, t[e].durationhi);
-  return { last_dts: n, last_pts: s, last_duration: l };
+  return {
+    last_dts: n,
+    last_pts: s,
+    last_duration: l
+  };
 }
 function Ie(t, e) {
   let { last_dts: r, last_pts: i, last_duration: n } = e, o = t[0], a = Z(o.dts, o.dtshi || 0), s = Z(o.pts, o.ptshi || 0);
@@ -3464,12 +3710,27 @@ async function Ir(t, e, r) {
   if (r.length !== 16) throw new Error("IV must be 16 bytes (128 bits).");
   if (e.length !== 16) throw new Error("Key must be 16 bytes (128 bits).");
   try {
-    let i = await crypto.subtle.importKey("raw", e, { name: "AES-CBC" }, false, [
-      "decrypt"
-    ]), n = await crypto.subtle.decrypt({ name: "AES-CBC", iv: r }, i, t);
+    let i = await crypto.subtle.importKey(
+      "raw",
+      e,
+      {
+        name: "AES-CBC"
+      },
+      false,
+      ["decrypt"]
+    ), n = await crypto.subtle.decrypt(
+      {
+        name: "AES-CBC",
+        iv: r
+      },
+      i,
+      t
+    );
     return C(new Uint8Array(n));
   } catch {
-    return v({ type: "decryption_failed" });
+    return v({
+      type: "decryption_failed"
+    });
   }
 }
 var $e = class {
@@ -3519,13 +3780,18 @@ async function Cr(t) {
     return e instanceof DOMException && e.name == "AbortError" ? v(de()) : v(F(e.toString()));
   }
 }
-var j = { Audio: 0, Video: 1 };
+var j = {
+  Audio: 0,
+  Video: 1
+};
 var on = ["mp4", "webm", "mkv"], an = ["mp3", "m4a", "ogg"], sn = [...on, ...an];
 function Sr(t) {
   let e = new Date((/* @__PURE__ */ new Date()).getTime() - 6e5);
   return !t.dateTimeObject && !t.programDateTime ? false : typeof t.dateTimeObject == "object" ? t.dateTimeObject > e : typeof t.programDateTime == "number" ? t.programDateTime > e.getTime() : false;
 }
-var un = 0.35, tt = 5, cn = 1500, dn = 500, fn = 4, xr = 5, ce = new L(), b = await we.LibAV({ noworker: true });
+var un = 0.35, tt = 5, cn = 1500, dn = 500, fn = 4, xr = 5, ce = new L(), b = await we.LibAV({
+  noworker: true
+});
 b.onwrite = ce.onwrite.bind(ce);
 async function ue(t) {
   await b.avformat_close_input_js(t.fmt_ctx), await b.av_packet_free_js(t.pkt), await b.unlink(t.filename_tmp);
@@ -3533,7 +3799,11 @@ async function ue(t) {
 async function Ft(t, e, r) {
   let i = new Headers(e.headers);
   r && i.set("Range", `bytes=${r.offset}-${r.offset + r.length - 1}`);
-  let n = await ne(t, { headers: i, signal: e.signal, cache: e.cache });
+  let n = await ne(t, {
+    headers: i,
+    signal: e.signal,
+    cache: e.cache
+  });
   if (n.isErr()) return n;
   e.known_segments_url.add(t);
   let o = n.value, a = new Uint8Array();
@@ -3608,11 +3878,26 @@ async function Dr(t, e, r) {
     let a = `${crypto.randomUUID()}.tmp`;
     await b.writeFile(a, n);
     let [s, l] = await b.ff_init_demuxer_file(a), A = l.find((y) => y.codec_type === b.AVMEDIA_TYPE_VIDEO);
-    if (!A && r == j.Video) return C(v({ type: "bad_segment" }));
+    if (!A && r == j.Video)
+      return C(
+        v({
+          type: "bad_segment"
+        })
+      );
     let u = l.find((y) => y.codec_type === b.AVMEDIA_TYPE_AUDIO);
-    if (!u && r == j.Audio) return C(v({ type: "bad_segment" }));
+    if (!u && r == j.Audio)
+      return C(
+        v({
+          type: "bad_segment"
+        })
+      );
     let d = await b.av_packet_alloc(), [f, m] = await b.ff_read_frame_multi(s, d);
-    if (f !== b.AVERROR_EOF) return C(v({ type: "bad_segment" }));
+    if (f !== b.AVERROR_EOF)
+      return C(
+        v({
+          type: "bad_segment"
+        })
+      );
     let h, c;
     if (u) {
       c = m[u.index];
@@ -3625,17 +3910,50 @@ async function Dr(t, e, r) {
     }
     let g;
     return u && A ? g = {
-      video: { stream: A, packets: h },
-      audio: { stream: u, packets: c }
-    } : A ? g = { video: { stream: A, packets: h }, audio: false } : g = { video: false, audio: { stream: u, packets: c } }, C(C({ av: g, pkt: d, fmt_ctx: s, filename_tmp: a, is_live: t.is_live }));
+      video: {
+        stream: A,
+        packets: h
+      },
+      audio: {
+        stream: u,
+        packets: c
+      }
+    } : A ? g = {
+      video: {
+        stream: A,
+        packets: h
+      },
+      audio: false
+    } : g = {
+      video: false,
+      audio: {
+        stream: u,
+        packets: c
+      }
+    }, C(
+      C({
+        av: g,
+        pkt: d,
+        fmt_ctx: s,
+        filename_tmp: a,
+        is_live: t.is_live
+      })
+    );
   } catch {
-    return C(v({ type: "bad_segment" }));
+    return C(
+      v({
+        type: "bad_segment"
+      })
+    );
   }
 }
 function Fr(t) {
   if ("byterange" in t && "length" in t.byterange && "offset" in t.byterange) {
     let r = t.byterange, i = r.offset, n = r.length;
-    return { offset: i, length: n };
+    return {
+      offset: i,
+      length: n
+    };
   }
 }
 function _n(t) {
@@ -3652,7 +3970,11 @@ function mn(t) {
 }
 async function oe(t, e, r, i, n) {
   let o = v(F(""));
-  for (let u = 0; u < xr && (o = await ne(t, { headers: e, signal: r, cache: i }), !o.isOk()); ++u)
+  for (let u = 0; u < xr && (o = await ne(t, {
+    headers: e,
+    signal: r,
+    cache: i
+  }), !o.isOk()); ++u)
     if (o.error.user_abort) break;
   if (o.isErr()) return o;
   let a = await Cr(o.value);
@@ -3668,19 +3990,31 @@ async function oe(t, e, r, i, n) {
   let A = s.segments.map((u) => {
     let d = u.uri, f = Sr(u), m = new URL(d, t);
     n && t.search && (m.search = t.search);
-    let h = { url: m.href, is_live: f, sequence_number: l };
+    let h = {
+      url: m.href,
+      is_live: f,
+      sequence_number: l
+    };
     if (typeof u.duration == "number" && (h.duration_s = u.duration), u.key?.method == "AES-128") {
       let y = u.key?.uri, p;
-      !u.key.iv && (!u.attributes?.KEYFORMAT || u.attributes.KEYFORMAT == "identity") ? p = _n(l) : p = mn(u.key.iv), h.encryption = { url: new URL(y, t).href, iv: p };
+      !u.key.iv && (!u.attributes?.KEYFORMAT || u.attributes.KEYFORMAT == "identity") ? p = _n(l) : p = mn(u.key.iv), h.encryption = {
+        url: new URL(y, t).href,
+        iv: p
+      };
     }
     let c = Fr(u);
     c && (h.byte_range = c);
     let g = u.map;
     if (g && "uri" in g) {
       let y = g.uri, p = new URL(y, t).href;
-      if (h.init = { url: p }, u.map.key?.method == "AES-128") {
+      if (h.init = {
+        url: p
+      }, u.map.key?.method == "AES-128") {
         let w = u.map.key.uri, S = u.map.key.iv;
-        S = new Uint8Array(S.buffer), h.init.encryption = { url: new URL(w, t).href, iv: S };
+        S = new Uint8Array(S.buffer), h.init.encryption = {
+          url: new URL(w, t).href,
+          iv: S
+        };
       }
       let _ = Fr(g);
       _ && (h.init.byte_range = _);
@@ -3715,7 +4049,7 @@ async function ve(t, e, r, i) {
   if (o.type == "decryption_failed") return v(F("Decryption failed."));
   o.type, N("unreachable");
 }
-async function Br(t, e) {
+async function downloadHlsPreview(t, e) {
   let r = await oe(t.url, t.headers, e, t.cache, t.carry_get_params);
   if (r.isErr())
     return {
@@ -3748,7 +4082,12 @@ async function Br(t, e) {
     let g = A.av.video.stream;
     u.push([g.codecpar, g.time_base_num, g.time_base_den]);
   } else N("No video for preview");
-  let d = { filename: o.output_filename, open: true, codecpars: true, device: true }, [f, , m] = await b.ff_init_muxer(d, u), h = await b.av_opt_set(f, "avoid_negative_ts", "make_zero", 0);
+  let d = {
+    filename: o.output_filename,
+    open: true,
+    codecpars: true,
+    device: true
+  }, [f, , m] = await b.ff_init_muxer(d, u), h = await b.av_opt_set(f, "avoid_negative_ts", "make_zero", 0);
   Me(b, h), h = await b.avformat_write_header(f, 0), Ve(b, h), await b.ff_write_multi(f, A.pkt, A.av.video.packets), A.av.audio && await b.ff_write_multi(f, A.pkt, A.av.audio.packets), await ue(A);
   let c = await xt(f, m, o.output_filename);
   return c.isErr() && N(c.error), {
@@ -3772,7 +4111,9 @@ function rt(t, e, r, i) {
       progress_tracker: new q(t.download_id),
       cache: t.cache
     },
-    failures: { count: 0 },
+    failures: {
+      count: 0
+    },
     muxer: t.muxer,
     output_filename: `${t.download_id}.${t.extension}`,
     expect_two_streams: i,
@@ -3780,7 +4121,7 @@ function rt(t, e, r, i) {
     duration_s: 0
   };
 }
-async function Rr(t, e) {
+async function downloadHlsTwoSources(t, e) {
   let r = await oe(t.url, t.headers, e, t.cache, t.carry_get_params);
   if (r.isErr())
     return {
@@ -3850,7 +4191,9 @@ async function Rr(t, e) {
   A.av.video && (p = y ? Ee(A.av.video.packets) : le(A.av.video.packets), await b.ff_write_multi(h, A.pkt, A.av.video.packets));
   let _;
   u.av.audio && (_ = y ? Ee(u.av.audio.packets) : le(u.av.audio.packets), await b.ff_write_multi(h, u.pkt, u.av.audio.packets)), await ue(A), await ue(u);
-  let w = v(F("not started")), S = { value: tt }, E = false;
+  let w = v(F("not started")), S = {
+    value: tt
+  }, E = false;
   for (; ; ) {
     let I = [], X = Math.max(i.length, o.length);
     for (let M = 0; M < X; M++) {
@@ -3902,7 +4245,7 @@ async function Rr(t, e) {
     ending_reason: w.isOk() ? "end_of_file" : w.error
   };
 }
-async function Vr(t, e) {
+async function downloadHlsSingleSource(t, e) {
   let r = await oe(t.url, t.headers, e, t.cache, t.carry_get_params);
   if (r.isErr())
     return {
@@ -3950,7 +4293,9 @@ async function Vr(t, e) {
   a.av.video && (h = m ? Ee(a.av.video.packets) : le(a.av.video.packets), await b.ff_write_multi(u, a.pkt, a.av.video.packets));
   let c;
   a.av.audio && (c = m ? Ee(a.av.audio.packets) : le(a.av.audio.packets), await b.ff_write_multi(u, a.pkt, a.av.audio.packets)), await ue(a);
-  let g = v(F("not started")), y = { value: tt }, p = false;
+  let g = v(F("not started")), y = {
+    value: tt
+  }, p = false;
   for (; ; ) {
     let w = [];
     for (let E = 0; E < i.length; E++) {
@@ -3982,7 +4327,7 @@ async function Vr(t, e) {
     ending_reason: g.isOk() ? "end_of_file" : g.error
   };
 }
-async function Mr(t, e) {
+async function downloadHlsAudio(t, e) {
   let n = t.url, o = await oe(n, t.headers, e, t.cache, t.carry_get_params);
   if (o.isErr())
     return {
@@ -4009,7 +4354,9 @@ async function Mr(t, e) {
   a.shift();
   let u;
   A.av.audio && (u = Ee(A.av.audio.packets)), A.av.audio || N("No audio stream found");
-  let d = A.av.audio.stream, [, f, m, h] = await b.ff_init_decoder(d.codec_id, d.codecpar), c = await b.ff_decode_multi(f, m, h, A.av.audio.packets, { fin: false }), g = "aresample=isf=s16p:osf=fltp,asetnsamples=n=1152:p=0", [y, p, _] = await b.ff_init_filter_graph(
+  let d = A.av.audio.stream, [, f, m, h] = await b.ff_init_decoder(d.codec_id, d.codecpar), c = await b.ff_decode_multi(f, m, h, A.av.audio.packets, {
+    fin: false
+  }), g = "aresample=isf=s16p:osf=fltp,asetnsamples=n=1152:p=0", [y, p, _] = await b.ff_init_filter_graph(
     g,
     {
       sample_rate: c[0].sample_rate,
@@ -4021,7 +4368,9 @@ async function Mr(t, e) {
       sample_fmt: b.AV_SAMPLE_FMT_FLTP,
       channel_layout: c[0].channel_layout
     }
-  ), w = await b.ff_filter_multi(p, _, h, c, { fin: false }), [S, E, T, I, X] = await b.ff_init_encoder("libmp3lame", {
+  ), w = await b.ff_filter_multi(p, _, h, c, {
+    fin: false
+  }), [S, E, T, I, X] = await b.ff_init_encoder("libmp3lame", {
     ctx: {
       bit_rate: 128e3,
       sample_fmt: b.AV_SAMPLE_FMT_FLTP,
@@ -4040,7 +4389,9 @@ async function Mr(t, e) {
     format_name: "mp3"
   }, [x, ge, Be, [Po]] = await b.ff_init_muxer(M, [[E, 1, 44100]]), ye = await b.av_opt_set(x, "avoid_negative_ts", "make_zero", 0);
   Me(b, ye), ye = await b.avformat_write_header(x, 0), Ve(b, ye), await b.ff_write_multi(x, I, $), await ue(A);
-  let ae = v(F("not started")), Fi = { value: tt }, er = false;
+  let ae = v(F("not started")), Fi = {
+    value: tt
+  }, er = false;
   for (; ; ) {
     let Re = [];
     for (let z = 0; z < a.length; z++) {
@@ -4054,7 +4405,9 @@ async function Mr(t, e) {
       re.av.audio || N(`No audio found in segment ${ct + 1}`), u = Ie(re.av.audio.packets, u);
       let dt = await b.ff_decode_multi(f, m, h, re.av.audio.packets, {
         fin: false
-      }), xi = await b.ff_filter_multi(p, _, h, dt, { fin: false }), Bi = await b.ff_encode_multi(E, T, I, xi, false);
+      }), xi = await b.ff_filter_multi(p, _, h, dt, {
+        fin: false
+      }), Bi = await b.ff_encode_multi(E, T, I, xi, false);
       await b.ff_write_multi(x, re.pkt, Bi), s.fetch_args.progress_tracker?.set_percent(
         100 * (ct / s.total_segments)
       ), await ue(re);
@@ -4088,9 +4441,9 @@ function Nr(t) {
   let e = t.headers.get("content-length"), r = parseInt(e);
   return r <= 0 ? B : P(r);
 }
-function Pr(t, e) {
+function downloadHttpPreview(t, e) {
   let r = `${t.download_id}.${t.muxer}`;
-  return U(t, e, r, void 0, [
+  return runFfmpeg(t, e, r, void 0, [
     "-analyzeduration",
     "1M",
     "-ss",
@@ -4107,9 +4460,9 @@ function Pr(t, e) {
     r
   ]);
 }
-async function kr(t, e) {
+async function downloadHttpSingleSource(t, e) {
   let r = `${t.download_id}.${t.muxer}`;
-  return await U(t, e, r, void 0, [
+  return await runFfmpeg(t, e, r, void 0, [
     "-analyzeduration",
     "10M",
     "-i",
@@ -4122,9 +4475,9 @@ async function kr(t, e) {
     r
   ]);
 }
-async function Or(t, e) {
+async function downloadHttpTwoSources(t, e) {
   let r = `${t.download_id}.${t.muxer}`;
-  return await U(t, e, r, void 0, [
+  return await runFfmpeg(t, e, r, void 0, [
     "-analyzeduration",
     "10M",
     "-i",
@@ -4143,10 +4496,10 @@ async function Or(t, e) {
     r
   ]);
 }
-async function Lr(t, e) {
+async function extractHttpAudio(t, e) {
   let r = `${t.download_id}.${t.muxer}`;
   try {
-    return await U(t, e, r, void 0, [
+    return await runFfmpeg(t, e, r, void 0, [
       "-analyzeduration",
       "10M",
       "-i",
@@ -4176,26 +4529,43 @@ async function Lr(t, e) {
     };
   }
 }
-async function Ce(t, e, r, i, n, { headers: o, download_id: a, cache: s }) {
-  let l = await ne(i, { headers: o, signal: n, cache: s });
+async function streamHttpToStorage(t, e, r, i, n, { headers: o, download_id: a, cache: s }) {
+  let l = await ne(i, {
+    headers: o,
+    signal: n,
+    cache: s
+  });
   if (l.isErr())
-    return { aborted_no_partial: true, download_id: a, ending_reason: l.error };
+    return {
+      aborted_no_partial: true,
+      download_id: a,
+      ending_reason: l.error
+    };
   let A = l.value.body.getReader(), u = Nr(l.value), d;
   u.isSome() && (d = u.value);
   let f = 0;
   for (; ; ) {
     let m = await pe(A);
     if (m.isErr())
-      return { aborted_no_partial: true, download_id: a, ending_reason: m.error };
+      return {
+        aborted_no_partial: true,
+        download_id: a,
+        ending_reason: m.error
+      };
     let { done: h, value: c } = m.value;
     if (h) break;
     t.onwrite(e, f, c), f += c.length, d ? r.set_progress({
-      percent: { is_known: true, value: 100 * (f / d) },
+      percent: {
+        is_known: true,
+        value: 100 * (f / d)
+      },
       fetched_bytes_count: f,
       status: "downloading",
       output_duration_s: 0
     }) : r.set_progress({
-      percent: { is_known: false },
+      percent: {
+        is_known: false
+      },
       fetched_bytes_count: f,
       status: "downloading",
       output_duration_s: 0
@@ -4209,10 +4579,10 @@ async function Ce(t, e, r, i, n, { headers: o, download_id: a, cache: s }) {
     internal_bloburl: void 0
   };
 }
-async function Ur(t, e) {
+async function downloadHttpDirect(t, e) {
   let r = `${t.download_id}.${t.extension}`, i = new L();
   await i.open(r);
-  let n = new q(t.download_id), o = await Ce(i, r, n, t.url, e, t);
+  let n = new q(t.download_id), o = await streamHttpToStorage(i, r, n, t.url, e, t);
   return await i.close(r), o.aborted_no_partial ? i.remove(r) : o.internal_bloburl = await Q(t, r), o;
 }
 var Gr = ":A-Za-z_\\u00C0-\\u00D6\\u00D8-\\u00F6\\u00F8-\\u02FF\\u0370-\\u037D\\u037F-\\u1FFF\\u200C-\\u200D\\u2070-\\u218F\\u2C00-\\u2FEF\\u3001-\\uD7FF\\uF900-\\uFDCF\\uFDF0-\\uFFFD", yn = Gr + "\\-.\\d\\u00B7\\u0300-\\u036F\\u203F-\\u2040", wn = "[" + Gr + "][" + yn + "]*", bn = new RegExp("^" + wn + "$");
@@ -4243,7 +4613,10 @@ var Ue = [
   "__lookupGetter__",
   "__lookupSetter__"
 ], nt = ["__proto__", "constructor", "prototype"];
-var En = { allowBooleanAttributes: false, unpairedTags: [] };
+var En = {
+  allowBooleanAttributes: false,
+  unpairedTags: []
+};
 function Xr(t, e) {
   e = Object.assign({}, En, e);
   let r = [], i = false, n = false;
@@ -4281,7 +4654,7 @@ function Xr(t, e) {
           let f = Hr(u, e);
           if (f === true) i = true;
           else return V(f.err.code, f.err.msg, Y(t, d + f.err.line));
-        } else if (s)
+        } else if (s) {
           if (A.tagClosed) {
             if (u.trim().length > 0)
               return V(
@@ -4313,7 +4686,7 @@ function Xr(t, e) {
               "Closing tag '" + l + "' doesn't have proper closing.",
               Y(t, o)
             );
-        else {
+        } else {
           let d = Hr(u, e);
           if (d !== true)
             return V(d.err.code, d.err.msg, Y(t, o - u.length + d.err.line));
@@ -4323,17 +4696,20 @@ function Xr(t, e) {
               "Multiple possible root nodes found.",
               Y(t, o)
             );
-          e.unpairedTags.indexOf(l) !== -1 || r.push({ tagName: l, tagStartPos: a }), i = true;
+          e.unpairedTags.indexOf(l) !== -1 || r.push({
+            tagName: l,
+            tagStartPos: a
+          }), i = true;
         }
         for (o++; o < t.length; o++)
-          if (t[o] === "<")
+          if (t[o] === "<") {
             if (t[o + 1] === "!") {
               o++, o = Wr(t, o);
               continue;
             } else if (t[o + 1] === "?") {
               if (o = Kr(t, ++o), o.err) return o;
             } else break;
-          else if (t[o] === "&") {
+          } else if (t[o] === "&") {
             let d = Dn(t, o);
             if (d == -1)
               return V("InvalidChar", "char '&' is not expected.", Y(t, o));
@@ -4361,7 +4737,10 @@ function Xr(t, e) {
           null,
           4
         ).replace(/\r?\n/g, "") + "' found.",
-        { line: 1, col: 1 }
+        {
+          line: 1,
+          col: 1
+        }
       );
   } else return V("InvalidXml", "Start tag expected.", 1);
   return true;
@@ -4421,7 +4800,11 @@ function Cn(t, e) {
     }
     r += t[e];
   }
-  return i !== "" ? false : { value: r, index: e, tagClosed: n };
+  return i !== "" ? false : {
+    value: r,
+    index: e,
+    tagClosed: n
+  };
 }
 var Sn = new RegExp(
   `(\\s*)([^\\s=]+)(\\s*=)?(\\s*(['"])(([\\s\\S])*?)\\5)?`,
@@ -4481,7 +4864,14 @@ function Dn(t, e) {
   return e;
 }
 function V(t, e, r) {
-  return { err: { code: t, msg: e, line: r.line || r, col: r.col } };
+  return {
+    err: {
+      code: t,
+      msg: e,
+      line: r.line || r,
+      col: r.col
+    }
+  };
 }
 function Fn(t) {
   return Rt(t);
@@ -4491,7 +4881,10 @@ function xn(t) {
 }
 function Y(t, e) {
   let r = t.substring(0, e).split(/\r?\n/);
-  return { line: r.length, col: r[r.length - 1].length + 1 };
+  return {
+    line: r.length,
+    col: r[r.length - 1].length + 1
+  };
 }
 function Ge(t) {
   return t.startIndex + t[1].length;
@@ -5533,7 +5926,13 @@ var Jr = {
   ...ot,
   ...ni,
   ...oi
-}, Ye = { amp: "&", apos: "'", gt: ">", lt: "<", quot: '"' }, Vt = {
+}, Ye = {
+  amp: "&",
+  apos: "'",
+  gt: ">",
+  lt: "<",
+  quot: '"'
+}, Vt = {
   nbsp: "\xA0",
   copy: "\xA9",
   reg: "\xAE",
@@ -5586,11 +5985,25 @@ var _e = "external", at = "base", Nt = "all";
 function Vn(t) {
   return !t || t === _e ? /* @__PURE__ */ new Set([_e]) : t === Nt ? /* @__PURE__ */ new Set([Nt]) : t === at ? /* @__PURE__ */ new Set([at]) : Array.isArray(t) ? new Set(t) : /* @__PURE__ */ new Set([_e]);
 }
-var K = Object.freeze({ allow: 0, leave: 1, remove: 2, throw: 3 }), Mn = /* @__PURE__ */ new Set([9, 10, 13]);
+var K = Object.freeze({
+  allow: 0,
+  leave: 1,
+  remove: 2,
+  throw: 3
+}), Mn = /* @__PURE__ */ new Set([9, 10, 13]);
 function Nn(t) {
-  if (!t) return { xmlVersion: 1, onLevel: K.allow, nullLevel: K.remove };
+  if (!t)
+    return {
+      xmlVersion: 1,
+      onLevel: K.allow,
+      nullLevel: K.remove
+    };
   let e = t.xmlVersion === 1.1 ? 1.1 : 1, r = K[t.onNCR] ?? K.allow, i = K[t.nullNCR] ?? K.remove, n = Math.max(i, K.remove);
-  return { xmlVersion: e, onLevel: r, nullLevel: n };
+  return {
+    xmlVersion: e,
+    onLevel: r,
+    nullLevel: n
+  };
 }
 var Se = class {
   constructor(e = {}) {
@@ -5680,10 +6093,21 @@ var Se = class {
     return this._limitTiers.has(Nt) ? true : this._limitTiers.has(e);
   }
   _resolveName(e) {
-    if (e in this._inputMap) return { value: this._inputMap[e], tier: _e };
+    if (e in this._inputMap)
+      return {
+        value: this._inputMap[e],
+        tier: _e
+      };
     if (e in this._externalMap)
-      return { value: this._externalMap[e], tier: _e };
-    if (e in this._baseMap) return { value: this._baseMap[e], tier: at };
+      return {
+        value: this._externalMap[e],
+        tier: _e
+      };
+    if (e in this._baseMap)
+      return {
+        value: this._baseMap[e],
+        tier: at
+      };
   }
   _classifyNCR(e) {
     return e === 0 ? this._ncrNullLevel : e >= 55296 && e <= 57343 || this._ncrXmlVersion === 1 && e >= 1 && e <= 31 && !Mn.has(e) ? K.remove : -1;
@@ -5726,7 +6150,11 @@ var si = (t) => Ue.includes(t) ? "__" + t : t, Pn = {
   parseAttributeValue: false,
   trimValues: true,
   cdataPropName: false,
-  numberParseOptions: { hex: true, leadingZeros: true, eNotation: true },
+  numberParseOptions: {
+    hex: true,
+    leadingZeros: true,
+    eNotation: true
+  },
   tagValueProcessor: function(t, e) {
     return e;
   },
@@ -5791,11 +6219,26 @@ function Ai(t, e) {
 }
 var li = function(t) {
   let e = Object.assign({}, Pn, t), r = [
-    { value: e.attributeNamePrefix, name: "attributeNamePrefix" },
-    { value: e.attributesGroupName, name: "attributesGroupName" },
-    { value: e.textNodeName, name: "textNodeName" },
-    { value: e.cdataPropName, name: "cdataPropName" },
-    { value: e.commentPropName, name: "commentPropName" }
+    {
+      value: e.attributeNamePrefix,
+      name: "attributeNamePrefix"
+    },
+    {
+      value: e.attributesGroupName,
+      name: "attributesGroupName"
+    },
+    {
+      value: e.textNodeName,
+      name: "textNodeName"
+    },
+    {
+      value: e.cdataPropName,
+      name: "cdataPropName"
+    },
+    {
+      value: e.commentPropName,
+      name: "commentPropName"
+    }
   ];
   for (let { value: i, name: n } of r) i && kn(i, n);
   return e.onDangerousProperty === null && (e.onDangerousProperty = si), e.processEntities = Ai(e.processEntities, e.htmlEntities), e.unpairedTagsSet = new Set(e.unpairedTags), e.stopNodes && Array.isArray(e.stopNodes) && (e.stopNodes = e.stopNodes.map(
@@ -5809,10 +6252,19 @@ var W = class {
     this.tagname = e, this.child = [], this[":@"] = /* @__PURE__ */ Object.create(null);
   }
   add(e, r) {
-    e === "__proto__" && (e = "#__proto__"), this.child.push({ [e]: r });
+    e === "__proto__" && (e = "#__proto__"), this.child.push({
+      [e]: r
+    });
   }
   addChild(e, r) {
-    e.tagname === "__proto__" && (e.tagname = "#__proto__"), e[":@"] && Object.keys(e[":@"]).length > 0 ? this.child.push({ [e.tagname]: e.child, ":@": e[":@"] }) : this.child.push({ [e.tagname]: e.child }), r !== void 0 && (this.child[this.child.length - 1][st] = { startIndex: r });
+    e.tagname === "__proto__" && (e.tagname = "#__proto__"), e[":@"] && Object.keys(e[":@"]).length > 0 ? this.child.push({
+      [e.tagname]: e.child,
+      ":@": e[":@"]
+    }) : this.child.push({
+      [e.tagname]: e.child
+    }), r !== void 0 && (this.child[this.child.length - 1][st] = {
+      startIndex: r
+    });
   }
   static getMetaDataSymbol() {
     return st;
@@ -5879,7 +6331,10 @@ var Ke = class {
         } else e[r] === "[" ? a = true : l += e[r];
       if (o !== 0) throw new Error("Unclosed DOCTYPE");
     } else throw new Error("Invalid Tag instead of DOCTYPE");
-    return { entities: i, i: r };
+    return {
+      entities: i,
+      i: r
+    };
   }
   readEntityExp(e, r) {
     r = H(e, r);
@@ -5887,7 +6342,9 @@ var Ke = class {
     for (; r < e.length && !/\s/.test(e[r]) && e[r] !== '"' && e[r] !== "'"; )
       r++;
     let n = e.substring(i, r);
-    if (Qe(n, { xmlVersion: this.xmlVersion }), r = H(e, r), !this.suppressValidationErr) {
+    if (Qe(n, {
+      xmlVersion: this.xmlVersion
+    }), r = H(e, r), !this.suppressValidationErr) {
       if (e.substring(r, r + 6).toUpperCase() === "SYSTEM")
         throw new Error("External entities are not supported");
       if (e[r] === "%")
@@ -5905,7 +6362,9 @@ var Ke = class {
     let i = r;
     for (; r < e.length && !/\s/.test(e[r]); ) r++;
     let n = e.substring(i, r);
-    !this.suppressValidationErr && Qe(n, { xmlVersion: this.xmlVersion }), r = H(e, r);
+    !this.suppressValidationErr && Qe(n, {
+      xmlVersion: this.xmlVersion
+    }), r = H(e, r);
     let o = e.substring(r, r + 6).toUpperCase();
     if (!this.suppressValidationErr && o !== "SYSTEM" && o !== "PUBLIC")
       throw new Error(`Expected SYSTEM or PUBLIC, found "${o}"`);
@@ -5940,7 +6399,9 @@ var Ke = class {
     let i = r;
     for (; r < e.length && !/\s/.test(e[r]); ) r++;
     let n = e.substring(i, r);
-    if (!this.suppressValidationErr && !Pt(n, { xmlVersion: this.xmlVersion }))
+    if (!this.suppressValidationErr && !Pt(n, {
+      xmlVersion: this.xmlVersion
+    }))
       throw new Error(`Invalid element name: "${n}"`);
     r = H(e, r);
     let o = "";
@@ -5954,17 +6415,25 @@ var Ke = class {
         throw new Error("Unterminated content model");
     } else if (!this.suppressValidationErr)
       throw new Error(`Invalid Element Expression, found "${e[r]}"`);
-    return { elementName: n, contentModel: o.trim(), index: r };
+    return {
+      elementName: n,
+      contentModel: o.trim(),
+      index: r
+    };
   }
   readAttlistExp(e, r) {
     r = H(e, r);
     let i = r;
     for (; r < e.length && !/\s/.test(e[r]); ) r++;
     let n = e.substring(i, r);
-    for (Qe(n, { xmlVersion: this.xmlVersion }), r = H(e, r), i = r; r < e.length && !/\s/.test(e[r]); )
+    for (Qe(n, {
+      xmlVersion: this.xmlVersion
+    }), r = H(e, r), i = r; r < e.length && !/\s/.test(e[r]); )
       r++;
     let o = e.substring(i, r);
-    if (!Qe(o, { xmlVersion: this.xmlVersion }))
+    if (!Qe(o, {
+      xmlVersion: this.xmlVersion
+    }))
       throw new Error(`Invalid attribute name: "${o}"`);
     r = H(e, r);
     let a = "";
@@ -5977,7 +6446,9 @@ var Ke = class {
         let A = r;
         for (; r < e.length && e[r] !== "|" && e[r] !== ")"; ) r++;
         let u = e.substring(A, r);
-        if (u = u.trim(), !Qe(u, { xmlVersion: this.xmlVersion }))
+        if (u = u.trim(), !Qe(u, {
+          xmlVersion: this.xmlVersion
+        }))
           throw new Error(`Invalid notation name: "${u}"`);
         l.push(u), e[r] === "|" && (r++, r = H(e, r));
       }
@@ -6019,7 +6490,10 @@ function me(t, e, r) {
   return true;
 }
 function Qe(t, e) {
-  if (Pt(t, { xmlVersion: e })) return t;
+  if (Pt(t, {
+    xmlVersion: e
+  }))
+    return t;
   throw new Error(`Invalid entity name ${t}`);
 }
 var Qn = /^[-+]?0x[a-fA-F0-9]+$/, Kn = /^0b[01]+$/, Wn = /^0o[0-7]+$/, Hn = /^([\-\+])?(0*)([0-9]*(\.[0-9]*)?)$/, Xn = {
@@ -6117,11 +6591,15 @@ var he = class {
   _parse(e) {
     let r = [], i = 0, n = "";
     for (; i < e.length; )
-      e[i] === this.separator ? i + 1 < e.length && e[i + 1] === this.separator ? (n.trim() && (r.push(this._parseSegment(n.trim())), n = ""), r.push({ type: "deep-wildcard" }), i += 2) : (n.trim() && r.push(this._parseSegment(n.trim())), n = "", i++) : (n += e[i], i++);
+      e[i] === this.separator ? i + 1 < e.length && e[i + 1] === this.separator ? (n.trim() && (r.push(this._parseSegment(n.trim())), n = ""), r.push({
+        type: "deep-wildcard"
+      }), i += 2) : (n.trim() && r.push(this._parseSegment(n.trim())), n = "", i++) : (n += e[i], i++);
     return n.trim() && r.push(this._parseSegment(n.trim())), r;
   }
   _parseSegment(e) {
-    let r = { type: "tag" }, i = null, n = e, o = e.match(/^([^\[]+)(\[[^\]]*\])(.*)$/);
+    let r = {
+      type: "tag"
+    }, i = null, n = e, o = e.match(/^([^\[]+)(\[[^\]]*\])(.*)$/);
     if (o && (n = o[1] + o[3], o[2])) {
       let u = o[2].slice(1, -1);
       u && (i = u);
@@ -6281,7 +6759,11 @@ var Ut = class {
     let o = this.siblingStacks[n], a = i ? `${i}:${e}` : e, s = o.get(a) || 0, l = 0;
     for (let u of o.values()) l += u;
     o.set(a, s + 1);
-    let A = { tag: e, position: l, counter: s };
+    let A = {
+      tag: e,
+      position: l,
+      counter: s
+    };
     i != null && (A.namespace = i), r != null && (A.values = r), this.path.push(A);
   }
   pop() {
@@ -6388,12 +6870,16 @@ var Ut = class {
   }
   snapshot() {
     return {
-      path: this.path.map((e) => ({ ...e })),
+      path: this.path.map((e) => ({
+        ...e
+      })),
       siblingStacks: this.siblingStacks.map((e) => new Map(e))
     };
   }
   restore(e) {
-    this._pathStringCache = null, this.path = e.path.map((r) => ({ ...r })), this.siblingStacks = e.siblingStacks.map((r) => new Map(r));
+    this._pathStringCache = null, this.path = e.path.map((r) => ({
+      ...r
+    })), this.siblingStacks = e.siblingStacks.map((r) => new Map(r));
   }
   readOnly() {
     return this._view;
@@ -6422,9 +6908,17 @@ function $n(t) {
 var We = class {
   constructor(e, r) {
     this.options = e, this.currentNode = null, this.tagsNodeStack = [], this.parseXml = no, this.parseTextData = eo, this.resolveNameSpace = to, this.buildAttributesMap = io, this.isItStopNode = Ao, this.replaceEntitiesValue = ao, this.readStopNodeData = co, this.saveTextToParentTag = so, this.addChild = oo, this.ignoreAttributesFn = Lt(this.options.ignoreAttributes), this.entityExpansionCount = 0, this.currentExpandedLength = 0;
-    let i = { ...Ye };
-    this.options.entityDecoder ? this.entityDecoder = this.options.entityDecoder : (typeof this.options.htmlEntities == "object" ? i = this.options.htmlEntities : this.options.htmlEntities === true && (i = { ...Vt, ...ot }), this.entityDecoder = new Se({
-      namedEntities: { ...i, ...r },
+    let i = {
+      ...Ye
+    };
+    this.options.entityDecoder ? this.entityDecoder = this.options.entityDecoder : (typeof this.options.htmlEntities == "object" ? i = this.options.htmlEntities : this.options.htmlEntities === true && (i = {
+      ...Vt,
+      ...ot
+    }), this.entityDecoder = new Se({
+      namedEntities: {
+        ...i,
+        ...r
+      },
       numericAllowed: this.options.htmlEntities,
       limit: {
         maxTotalExpansions: this.options.processEntities.maxTotalExpansions,
@@ -6533,7 +7027,11 @@ var no = function(t) {
         let u = Fe(t, "-->", s + 4, "Comment is not closed.");
         if (n.commentPropName) {
           let d = t.substring(s + 4, u - 2);
-          i = this.saveTextToParentTag(i, r, this.readonlyMatcher), r.add(n.commentPropName, [{ [n.textNodeName]: d }]);
+          i = this.saveTextToParentTag(i, r, this.readonlyMatcher), r.add(n.commentPropName, [
+            {
+              [n.textNodeName]: d
+            }
+          ]);
         }
         s = u;
       } else if (A === 33 && t.charCodeAt(s + 2) === 68) {
@@ -6551,7 +7049,11 @@ var no = function(t) {
           true,
           true
         );
-        f == null && (f = ""), n.cdataPropName ? r.add(n.cdataPropName, [{ [n.textNodeName]: d }]) : r.add(n.textNodeName, f), s = u + 2;
+        f == null && (f = ""), n.cdataPropName ? r.add(n.cdataPropName, [
+          {
+            [n.textNodeName]: d
+          }
+        ]) : r.add(n.textNodeName, f), s = u + 2;
       } else {
         let u = Yt(t, s, n.removeNSPrefix);
         if (!u) {
@@ -6641,12 +7143,19 @@ function lo(t, e, r = ">") {
     let u = t.charCodeAt(A);
     if (i) u === i && (i = 0);
     else if (u === 34 || u === 39) i = u;
-    else if (u === o)
+    else if (u === o) {
       if (a !== -1) {
         if (t.charCodeAt(A + 1) === a)
-          return s += t.substring(l, A), { data: s, index: A };
-      } else return s += t.substring(l, A), { data: s, index: A };
-    else u === 9 && !i && (s += t.substring(l, A) + " ", l = A + 1);
+          return s += t.substring(l, A), {
+            data: s,
+            index: A
+          };
+      } else
+        return s += t.substring(l, A), {
+          data: s,
+          index: A
+        };
+    } else u === 9 && !i && (s += t.substring(l, A) + " ", l = A + 1);
   }
 }
 function Fe(t, e, r, i) {
@@ -6685,7 +7194,10 @@ function co(t, e, r) {
       if (a === 47) {
         let s = uo(t, ">", r, `${e} is not closed`);
         if (t.substring(r + 2, s).trim() === e && (n--, n === 0))
-          return { tagContent: t.substring(i, r), i: s };
+          return {
+            tagContent: t.substring(i, r),
+            i: s
+          };
         r = s;
       } else if (a === 63) r = Fe(t, "?>", r + 1, "StopNode is not closed.");
       else if (a === 33 && t.charCodeAt(r + 2) === 45 && t.charCodeAt(r + 3) === 45)
@@ -6709,7 +7221,10 @@ function Gt(t, e, r, i) {
     let n = t(e);
     r === e && (r = n), e = n;
   }
-  return e = fi(e, i), { tagName: e, tagExp: r };
+  return e = fi(e, i), {
+    tagName: e,
+    tagExp: r
+  };
 }
 function fi(t, e) {
   if (nt.includes(t))
@@ -7051,14 +7566,22 @@ var hi;
   t[t.UTF8 = 0] = "UTF8", t[t.ASCII = 1] = "ASCII", t[t.Extensive = 2] = "Extensive", t[t.Attribute = 3] = "Attribute", t[t.Text = 4] = "Text";
 })(hi || (hi = {}));
 var wi = 1048576 * 10;
-async function lt(t, e, r, i, n, { headers: o, download_id: a, cache: s }, l) {
+async function streamYoutubeRanges(t, e, r, i, n, { headers: o, download_id: a, cache: s }, l) {
   let A = l, u = 0, d = 0;
   for (; !(u >= A); ) {
     let f = Math.min(u + wi, A), m = `${i.href}&range=${u}-${f}`;
     u = f + 1;
-    let h = await ne(m, { headers: o, signal: n, cache: s });
+    let h = await ne(m, {
+      headers: o,
+      signal: n,
+      cache: s
+    });
     if (h.isErr())
-      return { aborted_no_partial: true, download_id: a, ending_reason: h.error };
+      return {
+        aborted_no_partial: true,
+        download_id: a,
+        ending_reason: h.error
+      };
     let c = h.value.body.getReader();
     for (; ; ) {
       let g = await pe(c);
@@ -7071,7 +7594,10 @@ async function lt(t, e, r, i, n, { headers: o, download_id: a, cache: s }, l) {
       let { done: y, value: p } = g.value;
       if (y) break;
       t.onwrite(e, d, p), d += p.length, r.set_progress({
-        percent: { is_known: true, value: 100 * (d / A) },
+        percent: {
+          is_known: true,
+          value: 100 * (d / A)
+        },
         fetched_bytes_count: d,
         status: "downloading",
         output_duration_s: 0
@@ -7086,24 +7612,32 @@ async function lt(t, e, r, i, n, { headers: o, download_id: a, cache: s }, l) {
     internal_bloburl: void 0
   };
 }
-async function bi(t, e) {
+async function downloadYoutubeSingleSource(t, e) {
   let r = new q(t.download_id), i = `${t.good_basename}.${t.extension}`, n = new L();
   await n.open(i);
   let o;
-  return t.content_length.isSome() ? o = await lt(n, i, r, t.url, e, t, t.content_length.value) : o = await Ce(n, i, r, t.url, e, t), await n.close(i), o.aborted_no_partial ? (n.remove(i), o) : await vi(
+  return t.content_length.isSome() ? o = await streamYoutubeRanges(
+    n,
+    i,
+    r,
+    t.url,
+    e,
+    t,
+    t.content_length.value
+  ) : o = await streamHttpToStorage(n, i, r, t.url, e, t), await n.close(i), o.aborted_no_partial ? (n.remove(i), o) : await muxYoutubeTracks(
     t,
     i,
     B,
-    await ut(t.subtitles),
+    await downloadSubtitleTrack(t.subtitles),
     t.subtitles.map((a) => a.language)
   );
 }
-async function Ei(t, e) {
+async function downloadYoutubeTwoSources(t, e) {
   let r = new ke(t.download_id), i = new L(), n;
   {
     n = `${t.download_id}_audio`, await i.open(n);
     let A;
-    if (t.audio_content_length.isSome() ? A = await lt(
+    if (t.audio_content_length.isSome() ? A = await streamYoutubeRanges(
       i,
       n,
       r,
@@ -7111,7 +7645,7 @@ async function Ei(t, e) {
       e,
       t,
       t.audio_content_length.value
-    ) : A = await Ce(i, n, r, t.url_audio, e, t), await i.close(n), A.aborted_no_partial)
+    ) : A = await streamHttpToStorage(i, n, r, t.url_audio, e, t), await i.close(n), A.aborted_no_partial)
       return i.remove(n), A;
   }
   r.nextStream();
@@ -7119,16 +7653,28 @@ async function Ei(t, e) {
   {
     o = `${t.download_id}_video`, await i.open(o);
     let A;
-    if (t.content_length.isSome() ? A = await lt(i, o, r, t.url, e, t, t.content_length.value) : A = await Ce(i, o, r, t.url, e, t), await i.close(o), A.aborted_no_partial)
+    if (t.content_length.isSome() ? A = await streamYoutubeRanges(
+      i,
+      o,
+      r,
+      t.url,
+      e,
+      t,
+      t.content_length.value
+    ) : A = await streamHttpToStorage(i, o, r, t.url, e, t), await i.close(o), A.aborted_no_partial)
       return i.remove(o), A;
   }
-  let a = n ? P(n) : B, s = await ut(t.subtitles), l = t.subtitles.isSome() ? P(t.subtitles.value.language) : B;
-  return await vi(t, o, a, s, l);
+  let a = n ? P(n) : B, s = await downloadSubtitleTrack(t.subtitles), l = t.subtitles.isSome() ? P(t.subtitles.value.language) : B;
+  return await muxYoutubeTracks(t, o, a, s, l);
 }
-async function Ii(t, e) {
+async function downloadYoutubePreview(t, e) {
   let r = new L(), i = `${t.download_id}.${t.extension}`, n = `${t.url.href}&range=0-${wi}`, o = 0;
   await r.open(i);
-  let a = await ne(n, { headers: t.headers, signal: e, cache: t.cache });
+  let a = await ne(n, {
+    headers: t.headers,
+    signal: e,
+    cache: t.cache
+  });
   if (a.isErr())
     return {
       aborted_no_partial: true,
@@ -7160,19 +7706,21 @@ async function Ii(t, e) {
     throw r.close(i), r.remove(i), l;
   }
 }
-async function ut(t) {
+async function downloadSubtitleTrack(t) {
   if (t.isNone()) return B;
   let e = new L(), r;
   {
     let i = await ne(t.value.url);
     if (r = `${t.value.hash}.vtt`, i.isErr()) return B;
-    let n = await i.value.text(), o = Bo(n);
+    let n = await i.value.text(), o = convertTimedTextToVtt(n);
     r = `${t.value.hash}.vtt`, await e.open(r), await e.onwrite(r, 0, new TextEncoder().encode(o)), await e.close(r);
   }
   return r ? P(r) : B;
 }
-async function vi(t, e, r, i, n) {
-  let o = new L(), a = await we.LibAV({ noworker: true });
+async function muxYoutubeTracks(t, e, r, i, n) {
+  let o = new L(), a = await we.LibAV({
+    noworker: true
+  });
   a.onwrite = o.onwrite.bind(o);
   let s = await navigator.storage.getDirectory(), A = await (await s.getFileHandle(e)).getFile(), u = URL.createObjectURL(A), d, f, m;
   r.isSome() && (d = await s.getFileHandle(r.value), f = await d.getFile(), m = URL.createObjectURL(f));
@@ -7218,14 +7766,22 @@ async function vi(t, e, r, i, n) {
     };
   }
 }
-async function Ci(t, e) {
+async function downloadYoutubeAudio(t, e) {
   let r = new ke(t.download_id), i = `${t.download_id}_audio`, n = new L();
   await n.open(i);
   let o;
-  if (t.content_length.isSome() ? o = await lt(n, i, r, t.url, e, t, t.content_length.value) : o = await Ce(n, i, r, t.url, e, t), await n.close(i), o.aborted_no_partial)
+  if (t.content_length.isSome() ? o = await streamYoutubeRanges(
+    n,
+    i,
+    r,
+    t.url,
+    e,
+    t,
+    t.content_length.value
+  ) : o = await streamHttpToStorage(n, i, r, t.url, e, t), await n.close(i), o.aborted_no_partial)
     return n.remove(i), o;
   r.nextStream();
-  let a = await Q(t, i), s = `${t.download_id}.mp3`, l = await U(t, e, s, r, [
+  let a = await Q(t, i), s = `${t.download_id}.mp3`, l = await runFfmpeg(t, e, s, r, [
     "-analyzeduration",
     "10M",
     "-i",
@@ -7258,7 +7814,7 @@ function yi(t, e, r, i) {
 `));
   return o.join("");
 }
-function Bo(t) {
+function convertTimedTextToVtt(t) {
   let r = new xe({
     ignoreAttributes: false,
     attributeNamePrefix: "@_",
@@ -7285,9 +7841,9 @@ function Bo(t) {
 
 `;
 }
-async function Si(t, e) {
+async function downloadHlsAudioWithFfmpeg(t, e) {
   let r = `${t.download_id}.${t.muxer}`;
-  return await U(t, e, r, void 0, [
+  return await runFfmpeg(t, e, r, void 0, [
     "-analyzeduration",
     "10M",
     "-f",
@@ -7302,7 +7858,7 @@ async function Si(t, e) {
     r
   ]);
 }
-async function Ti(t, e) {
+async function downloadHlsSingleWithFfmpeg(t, e) {
   let r = `${t.download_id}.${t.muxer}`, i = t.muxer == "mp4", n = t.subtitles, o = [], a = [], s = [];
   return n.isSome() && (o = ["-i", `jsfetch:${n.value.url}`], a = [
     "-map",
@@ -7311,7 +7867,7 @@ async function Ti(t, e) {
     i ? "mov_text" : "copy",
     "-metadata:s:s:0",
     `language=${J(n.value.language)}`
-  ]), t.audio_language.isSome() && (s = ["-metadata:s:a:0", `language=${J(t.audio_language.value)}`]), await U(t, e, r, void 0, [
+  ]), t.audio_language.isSome() && (s = ["-metadata:s:a:0", `language=${J(t.audio_language.value)}`]), await runFfmpeg(t, e, r, void 0, [
     "-analyzeduration",
     "10M",
     "-f",
@@ -7335,10 +7891,10 @@ async function Ti(t, e) {
     r
   ]);
 }
-async function Di(t, e) {
+async function downloadHlsTwoWithFfmpeg(t, e) {
   let r = `${t.download_id}.${t.muxer}`, i = t.muxer == "mp4", n = t.subtitles, o = [], a = [], s = [], l;
   if (n.isSome() && t.is_youtube) {
-    let f = await navigator.storage.getDirectory(), m = await ut(n);
+    let f = await navigator.storage.getDirectory(), m = await downloadSubtitleTrack(n);
     if (m.isSome()) {
       let c = await (await f.getFileHandle(m.value)).getFile();
       l = URL.createObjectURL(c);
@@ -7352,7 +7908,7 @@ async function Di(t, e) {
     i ? "mov_text" : "copy",
     "-metadata:s:s:0",
     `language=${J(n.value.language)}`
-  ]), t.audio_language.isSome() && (s = ["-metadata:s:a:0", `language=${J(t.audio_language.value)}`]), await U(t, e, r, void 0, [
+  ]), t.audio_language.isSome() && (s = ["-metadata:s:a:0", `language=${J(t.audio_language.value)}`]), await runFfmpeg(t, e, r, void 0, [
     "-analyzeduration",
     "10M",
     "-f",
@@ -7378,42 +7934,57 @@ async function Di(t, e) {
     r
   ]);
 }
-async function Mo(t, e) {
+async function executeDownloadStrategyLegacy(t, e) {
   try {
     let r;
     if (t.strategy == "m3u8_audio_only")
-      r = t.will_use_jsfetch ? await Si(t, e) : await Mr(t, e);
+      r = t.will_use_jsfetch ? await downloadHlsAudioWithFfmpeg(t, e) : await downloadHlsAudio(t, e);
     else if (t.strategy == "m3u8_audio_video_one_source")
-      r = t.will_use_jsfetch ? await Ti(t, e) : await Vr(t, e);
+      r = t.will_use_jsfetch ? await downloadHlsSingleWithFfmpeg(t, e) : await downloadHlsSingleSource(t, e);
     else if (t.strategy == "m3u8_audio_video_two_sources")
-      r = t.will_use_jsfetch ? await Di(t, e) : await Rr(t, e);
-    else if (t.strategy == "m3u8_video_preview") r = await Br(t, e);
-    else if (t.strategy == "youtube_audio_only") r = await Ci(t, e);
-    else if (t.strategy == "youtube_audio_video_one_source") r = await bi(t, e);
+      r = t.will_use_jsfetch ? await downloadHlsTwoWithFfmpeg(t, e) : await downloadHlsTwoSources(t, e);
+    else if (t.strategy == "m3u8_video_preview")
+      r = await downloadHlsPreview(t, e);
+    else if (t.strategy == "youtube_audio_only")
+      r = await downloadYoutubeAudio(t, e);
+    else if (t.strategy == "youtube_audio_video_one_source")
+      r = await downloadYoutubeSingleSource(t, e);
     else if (t.strategy == "youtube_audio_video_two_sources")
-      r = await Ei(t, e);
-    else if (t.strategy == "youtube_video_preview") r = await Ii(t, e);
-    else if (t.strategy == "http_audio_video_one_source") r = await Ur(t, e);
+      r = await downloadYoutubeTwoSources(t, e);
+    else if (t.strategy == "youtube_video_preview")
+      r = await downloadYoutubePreview(t, e);
+    else if (t.strategy == "http_audio_video_one_source")
+      r = await downloadHttpDirect(t, e);
     else if (t.strategy == "http_audio_video_two_sources_jsfetch")
-      r = await Or(t, e);
+      r = await downloadHttpTwoSources(t, e);
     else if (t.strategy == "http_audio_video_one_source_jsfetch")
-      r = await kr(t, e);
-    else if (t.strategy == "http_strip_audio_jsfetch") r = await Lr(t, e);
-    else if (t.strategy == "http_video_preview_jsfetch") r = await Pr(t, e);
-    else if (t.strategy == "mpd_audio_only") r = await pr(t, e);
-    else if (t.strategy == "mpd_audio_video_one_source") r = await fr(t, e);
-    else if (t.strategy == "mpd_video_preview") r = await _r(t, e);
+      r = await downloadHttpSingleSource(t, e);
+    else if (t.strategy == "http_strip_audio_jsfetch")
+      r = await extractHttpAudio(t, e);
+    else if (t.strategy == "http_video_preview_jsfetch")
+      r = await downloadHttpPreview(t, e);
+    else if (t.strategy == "mpd_audio_only") r = await downloadMpdAudio(t, e);
+    else if (t.strategy == "mpd_audio_video_one_source")
+      r = await downloadMpdVideo(t, e);
+    else if (t.strategy == "mpd_video_preview")
+      r = await downloadMpdPreview(t, e);
     else throw new Error("Unreachable");
-    ie({ name: "download_result", data: r });
+    ie({
+      name: "download_result",
+      data: r
+    });
   } catch (r) {
     let i = nr(r);
     throw ie({
       name: "download_error",
-      data: { download_id: t.download_id, error: i }
+      data: {
+        download_id: t.download_id,
+        error: i
+      }
     }), r;
   }
 }
-function No() {
+function startDownloadWorkerMessaging() {
   ar();
   let t = /* @__PURE__ */ new Map();
   sr(async (e) => {
@@ -7422,24 +7993,32 @@ function No() {
       r && r.abort();
     } else if (e.name == "download") {
       let r = ee(e.data.download_args), i = new AbortController();
-      t.set(r.download_id, i), await Mo(r, i.signal), t.delete(r.download_id), i.abort(), ie({
+      t.set(r.download_id, i), await executeDownloadStrategyLegacy(r, i.signal), t.delete(r.download_id), i.abort(), ie({
         name: "download_progress",
         data: {
           download_id: r.download_id,
-          progress: { status: "finalizing" }
+          progress: {
+            status: "finalizing"
+          }
         }
       });
     } else
-      e.name == "revoke_blob_url" ? URL.revokeObjectURL(e.data.blob_url) : e.name == "is_ready" && ie({ name: "is_ready_success", data: null });
-  }), ie({ name: "is_ready_success", data: null });
+      e.name == "revoke_blob_url" ? URL.revokeObjectURL(e.data.blob_url) : e.name == "is_ready" && ie({
+        name: "is_ready_success",
+        data: null
+      });
+  }), ie({
+    name: "is_ready_success",
+    data: null
+  });
 }
-No();
+startDownloadWorkerMessaging();
 /*! Bundled license information:
 
 m3u8-parser/dist/m3u8-parser.es.js:
   (*! @name m3u8-parser @version 7.2.0 @license Apache-2.0 *)
 */
 export {
-  Mo as Download
+  executeDownloadStrategyLegacy as Download
 };
 //# sourceMappingURL=main.js.map

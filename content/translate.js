@@ -3,8 +3,17 @@ var qr = Object.defineProperty;
 var L_ = Object.getOwnPropertyDescriptor;
 var H_ = Object.getOwnPropertyNames;
 var F_ = Object.getPrototypeOf, W_ = Object.prototype.hasOwnProperty;
-var B_ = (e, i) => () => (i || e((i = { exports: {} }).exports, i), i.exports), de = (e, i) => {
-  for (var r in i) qr(e, r, { get: i[r], enumerable: true });
+var B_ = (e, i) => () => (i || e(
+  (i = {
+    exports: {}
+  }).exports,
+  i
+), i.exports), de = (e, i) => {
+  for (var r in i)
+    qr(e, r, {
+      get: i[r],
+      enumerable: true
+    });
 }, K_ = (e, i, r, o) => {
   if (i && typeof i == "object" || typeof i == "function")
     for (let t of H_(i))
@@ -15,7 +24,10 @@ var B_ = (e, i) => () => (i || e((i = { exports: {} }).exports, i), i.exports), 
   return e;
 };
 var Wt = (e, i, r) => (r = e != null ? Z_(F_(e)) : {}, K_(
-  i || !e || !e.__esModule ? qr(r, "default", { value: e, enumerable: true }) : r,
+  i || !e || !e.__esModule ? qr(r, "default", {
+    value: e,
+    enumerable: true
+  }) : r,
   e
 ));
 var nt = B_((Er, Us) => {
@@ -24,7 +36,9 @@ var nt = B_((Er, Us) => {
       define("webextension-polyfill", ["module"], i);
     else if (typeof Er < "u") i(Us);
     else {
-      var r = { exports: {} };
+      var r = {
+        exports: {}
+      };
       i(r), e.browser = r.exports;
     }
   })(
@@ -41,32 +55,100 @@ var nt = B_((Er, Us) => {
         let i = "The message port closed before a response was received.", r = (o) => {
           let t = {
             alarms: {
-              clear: { minArgs: 0, maxArgs: 1 },
-              clearAll: { minArgs: 0, maxArgs: 0 },
-              get: { minArgs: 0, maxArgs: 1 },
-              getAll: { minArgs: 0, maxArgs: 0 }
+              clear: {
+                minArgs: 0,
+                maxArgs: 1
+              },
+              clearAll: {
+                minArgs: 0,
+                maxArgs: 0
+              },
+              get: {
+                minArgs: 0,
+                maxArgs: 1
+              },
+              getAll: {
+                minArgs: 0,
+                maxArgs: 0
+              }
             },
             bookmarks: {
-              create: { minArgs: 1, maxArgs: 1 },
-              get: { minArgs: 1, maxArgs: 1 },
-              getChildren: { minArgs: 1, maxArgs: 1 },
-              getRecent: { minArgs: 1, maxArgs: 1 },
-              getSubTree: { minArgs: 1, maxArgs: 1 },
-              getTree: { minArgs: 0, maxArgs: 0 },
-              move: { minArgs: 2, maxArgs: 2 },
-              remove: { minArgs: 1, maxArgs: 1 },
-              removeTree: { minArgs: 1, maxArgs: 1 },
-              search: { minArgs: 1, maxArgs: 1 },
-              update: { minArgs: 2, maxArgs: 2 }
+              create: {
+                minArgs: 1,
+                maxArgs: 1
+              },
+              get: {
+                minArgs: 1,
+                maxArgs: 1
+              },
+              getChildren: {
+                minArgs: 1,
+                maxArgs: 1
+              },
+              getRecent: {
+                minArgs: 1,
+                maxArgs: 1
+              },
+              getSubTree: {
+                minArgs: 1,
+                maxArgs: 1
+              },
+              getTree: {
+                minArgs: 0,
+                maxArgs: 0
+              },
+              move: {
+                minArgs: 2,
+                maxArgs: 2
+              },
+              remove: {
+                minArgs: 1,
+                maxArgs: 1
+              },
+              removeTree: {
+                minArgs: 1,
+                maxArgs: 1
+              },
+              search: {
+                minArgs: 1,
+                maxArgs: 1
+              },
+              update: {
+                minArgs: 2,
+                maxArgs: 2
+              }
             },
             browserAction: {
-              disable: { minArgs: 0, maxArgs: 1, fallbackToNoCallback: true },
-              enable: { minArgs: 0, maxArgs: 1, fallbackToNoCallback: true },
-              getBadgeBackgroundColor: { minArgs: 1, maxArgs: 1 },
-              getBadgeText: { minArgs: 1, maxArgs: 1 },
-              getPopup: { minArgs: 1, maxArgs: 1 },
-              getTitle: { minArgs: 1, maxArgs: 1 },
-              openPopup: { minArgs: 0, maxArgs: 0 },
+              disable: {
+                minArgs: 0,
+                maxArgs: 1,
+                fallbackToNoCallback: true
+              },
+              enable: {
+                minArgs: 0,
+                maxArgs: 1,
+                fallbackToNoCallback: true
+              },
+              getBadgeBackgroundColor: {
+                minArgs: 1,
+                maxArgs: 1
+              },
+              getBadgeText: {
+                minArgs: 1,
+                maxArgs: 1
+              },
+              getPopup: {
+                minArgs: 1,
+                maxArgs: 1
+              },
+              getTitle: {
+                minArgs: 1,
+                maxArgs: 1
+              },
+              openPopup: {
+                minArgs: 0,
+                maxArgs: 0
+              },
               setBadgeBackgroundColor: {
                 minArgs: 1,
                 maxArgs: 1,
@@ -77,178 +159,570 @@ var nt = B_((Er, Us) => {
                 maxArgs: 1,
                 fallbackToNoCallback: true
               },
-              setIcon: { minArgs: 1, maxArgs: 1 },
-              setPopup: { minArgs: 1, maxArgs: 1, fallbackToNoCallback: true },
-              setTitle: { minArgs: 1, maxArgs: 1, fallbackToNoCallback: true }
+              setIcon: {
+                minArgs: 1,
+                maxArgs: 1
+              },
+              setPopup: {
+                minArgs: 1,
+                maxArgs: 1,
+                fallbackToNoCallback: true
+              },
+              setTitle: {
+                minArgs: 1,
+                maxArgs: 1,
+                fallbackToNoCallback: true
+              }
             },
             browsingData: {
-              remove: { minArgs: 2, maxArgs: 2 },
-              removeCache: { minArgs: 1, maxArgs: 1 },
-              removeCookies: { minArgs: 1, maxArgs: 1 },
-              removeDownloads: { minArgs: 1, maxArgs: 1 },
-              removeFormData: { minArgs: 1, maxArgs: 1 },
-              removeHistory: { minArgs: 1, maxArgs: 1 },
-              removeLocalStorage: { minArgs: 1, maxArgs: 1 },
-              removePasswords: { minArgs: 1, maxArgs: 1 },
-              removePluginData: { minArgs: 1, maxArgs: 1 },
-              settings: { minArgs: 0, maxArgs: 0 }
+              remove: {
+                minArgs: 2,
+                maxArgs: 2
+              },
+              removeCache: {
+                minArgs: 1,
+                maxArgs: 1
+              },
+              removeCookies: {
+                minArgs: 1,
+                maxArgs: 1
+              },
+              removeDownloads: {
+                minArgs: 1,
+                maxArgs: 1
+              },
+              removeFormData: {
+                minArgs: 1,
+                maxArgs: 1
+              },
+              removeHistory: {
+                minArgs: 1,
+                maxArgs: 1
+              },
+              removeLocalStorage: {
+                minArgs: 1,
+                maxArgs: 1
+              },
+              removePasswords: {
+                minArgs: 1,
+                maxArgs: 1
+              },
+              removePluginData: {
+                minArgs: 1,
+                maxArgs: 1
+              },
+              settings: {
+                minArgs: 0,
+                maxArgs: 0
+              }
             },
-            commands: { getAll: { minArgs: 0, maxArgs: 0 } },
+            commands: {
+              getAll: {
+                minArgs: 0,
+                maxArgs: 0
+              }
+            },
             contextMenus: {
-              remove: { minArgs: 1, maxArgs: 1 },
-              removeAll: { minArgs: 0, maxArgs: 0 },
-              update: { minArgs: 2, maxArgs: 2 }
+              remove: {
+                minArgs: 1,
+                maxArgs: 1
+              },
+              removeAll: {
+                minArgs: 0,
+                maxArgs: 0
+              },
+              update: {
+                minArgs: 2,
+                maxArgs: 2
+              }
             },
             cookies: {
-              get: { minArgs: 1, maxArgs: 1 },
-              getAll: { minArgs: 1, maxArgs: 1 },
-              getAllCookieStores: { minArgs: 0, maxArgs: 0 },
-              remove: { minArgs: 1, maxArgs: 1 },
-              set: { minArgs: 1, maxArgs: 1 }
+              get: {
+                minArgs: 1,
+                maxArgs: 1
+              },
+              getAll: {
+                minArgs: 1,
+                maxArgs: 1
+              },
+              getAllCookieStores: {
+                minArgs: 0,
+                maxArgs: 0
+              },
+              remove: {
+                minArgs: 1,
+                maxArgs: 1
+              },
+              set: {
+                minArgs: 1,
+                maxArgs: 1
+              }
             },
             devtools: {
               inspectedWindow: {
-                eval: { minArgs: 1, maxArgs: 2, singleCallbackArg: false }
+                eval: {
+                  minArgs: 1,
+                  maxArgs: 2,
+                  singleCallbackArg: false
+                }
               },
               panels: {
-                create: { minArgs: 3, maxArgs: 3, singleCallbackArg: true },
-                elements: { createSidebarPane: { minArgs: 1, maxArgs: 1 } }
+                create: {
+                  minArgs: 3,
+                  maxArgs: 3,
+                  singleCallbackArg: true
+                },
+                elements: {
+                  createSidebarPane: {
+                    minArgs: 1,
+                    maxArgs: 1
+                  }
+                }
               }
             },
             downloads: {
-              cancel: { minArgs: 1, maxArgs: 1 },
-              download: { minArgs: 1, maxArgs: 1 },
-              erase: { minArgs: 1, maxArgs: 1 },
-              getFileIcon: { minArgs: 1, maxArgs: 2 },
-              open: { minArgs: 1, maxArgs: 1, fallbackToNoCallback: true },
-              pause: { minArgs: 1, maxArgs: 1 },
-              removeFile: { minArgs: 1, maxArgs: 1 },
-              resume: { minArgs: 1, maxArgs: 1 },
-              search: { minArgs: 1, maxArgs: 1 },
-              show: { minArgs: 1, maxArgs: 1, fallbackToNoCallback: true }
+              cancel: {
+                minArgs: 1,
+                maxArgs: 1
+              },
+              download: {
+                minArgs: 1,
+                maxArgs: 1
+              },
+              erase: {
+                minArgs: 1,
+                maxArgs: 1
+              },
+              getFileIcon: {
+                minArgs: 1,
+                maxArgs: 2
+              },
+              open: {
+                minArgs: 1,
+                maxArgs: 1,
+                fallbackToNoCallback: true
+              },
+              pause: {
+                minArgs: 1,
+                maxArgs: 1
+              },
+              removeFile: {
+                minArgs: 1,
+                maxArgs: 1
+              },
+              resume: {
+                minArgs: 1,
+                maxArgs: 1
+              },
+              search: {
+                minArgs: 1,
+                maxArgs: 1
+              },
+              show: {
+                minArgs: 1,
+                maxArgs: 1,
+                fallbackToNoCallback: true
+              }
             },
             extension: {
-              isAllowedFileSchemeAccess: { minArgs: 0, maxArgs: 0 },
-              isAllowedIncognitoAccess: { minArgs: 0, maxArgs: 0 }
+              isAllowedFileSchemeAccess: {
+                minArgs: 0,
+                maxArgs: 0
+              },
+              isAllowedIncognitoAccess: {
+                minArgs: 0,
+                maxArgs: 0
+              }
             },
             history: {
-              addUrl: { minArgs: 1, maxArgs: 1 },
-              deleteAll: { minArgs: 0, maxArgs: 0 },
-              deleteRange: { minArgs: 1, maxArgs: 1 },
-              deleteUrl: { minArgs: 1, maxArgs: 1 },
-              getVisits: { minArgs: 1, maxArgs: 1 },
-              search: { minArgs: 1, maxArgs: 1 }
+              addUrl: {
+                minArgs: 1,
+                maxArgs: 1
+              },
+              deleteAll: {
+                minArgs: 0,
+                maxArgs: 0
+              },
+              deleteRange: {
+                minArgs: 1,
+                maxArgs: 1
+              },
+              deleteUrl: {
+                minArgs: 1,
+                maxArgs: 1
+              },
+              getVisits: {
+                minArgs: 1,
+                maxArgs: 1
+              },
+              search: {
+                minArgs: 1,
+                maxArgs: 1
+              }
             },
             i18n: {
-              detectLanguage: { minArgs: 1, maxArgs: 1 },
-              getAcceptLanguages: { minArgs: 0, maxArgs: 0 }
+              detectLanguage: {
+                minArgs: 1,
+                maxArgs: 1
+              },
+              getAcceptLanguages: {
+                minArgs: 0,
+                maxArgs: 0
+              }
             },
-            identity: { launchWebAuthFlow: { minArgs: 1, maxArgs: 1 } },
-            idle: { queryState: { minArgs: 1, maxArgs: 1 } },
+            identity: {
+              launchWebAuthFlow: {
+                minArgs: 1,
+                maxArgs: 1
+              }
+            },
+            idle: {
+              queryState: {
+                minArgs: 1,
+                maxArgs: 1
+              }
+            },
             management: {
-              get: { minArgs: 1, maxArgs: 1 },
-              getAll: { minArgs: 0, maxArgs: 0 },
-              getSelf: { minArgs: 0, maxArgs: 0 },
-              setEnabled: { minArgs: 2, maxArgs: 2 },
-              uninstallSelf: { minArgs: 0, maxArgs: 1 }
+              get: {
+                minArgs: 1,
+                maxArgs: 1
+              },
+              getAll: {
+                minArgs: 0,
+                maxArgs: 0
+              },
+              getSelf: {
+                minArgs: 0,
+                maxArgs: 0
+              },
+              setEnabled: {
+                minArgs: 2,
+                maxArgs: 2
+              },
+              uninstallSelf: {
+                minArgs: 0,
+                maxArgs: 1
+              }
             },
             notifications: {
-              clear: { minArgs: 1, maxArgs: 1 },
-              create: { minArgs: 1, maxArgs: 2 },
-              getAll: { minArgs: 0, maxArgs: 0 },
-              getPermissionLevel: { minArgs: 0, maxArgs: 0 },
-              update: { minArgs: 2, maxArgs: 2 }
+              clear: {
+                minArgs: 1,
+                maxArgs: 1
+              },
+              create: {
+                minArgs: 1,
+                maxArgs: 2
+              },
+              getAll: {
+                minArgs: 0,
+                maxArgs: 0
+              },
+              getPermissionLevel: {
+                minArgs: 0,
+                maxArgs: 0
+              },
+              update: {
+                minArgs: 2,
+                maxArgs: 2
+              }
             },
             pageAction: {
-              getPopup: { minArgs: 1, maxArgs: 1 },
-              getTitle: { minArgs: 1, maxArgs: 1 },
-              hide: { minArgs: 1, maxArgs: 1, fallbackToNoCallback: true },
-              setIcon: { minArgs: 1, maxArgs: 1 },
-              setPopup: { minArgs: 1, maxArgs: 1, fallbackToNoCallback: true },
-              setTitle: { minArgs: 1, maxArgs: 1, fallbackToNoCallback: true },
-              show: { minArgs: 1, maxArgs: 1, fallbackToNoCallback: true }
+              getPopup: {
+                minArgs: 1,
+                maxArgs: 1
+              },
+              getTitle: {
+                minArgs: 1,
+                maxArgs: 1
+              },
+              hide: {
+                minArgs: 1,
+                maxArgs: 1,
+                fallbackToNoCallback: true
+              },
+              setIcon: {
+                minArgs: 1,
+                maxArgs: 1
+              },
+              setPopup: {
+                minArgs: 1,
+                maxArgs: 1,
+                fallbackToNoCallback: true
+              },
+              setTitle: {
+                minArgs: 1,
+                maxArgs: 1,
+                fallbackToNoCallback: true
+              },
+              show: {
+                minArgs: 1,
+                maxArgs: 1,
+                fallbackToNoCallback: true
+              }
             },
             permissions: {
-              contains: { minArgs: 1, maxArgs: 1 },
-              getAll: { minArgs: 0, maxArgs: 0 },
-              remove: { minArgs: 1, maxArgs: 1 },
-              request: { minArgs: 1, maxArgs: 1 }
+              contains: {
+                minArgs: 1,
+                maxArgs: 1
+              },
+              getAll: {
+                minArgs: 0,
+                maxArgs: 0
+              },
+              remove: {
+                minArgs: 1,
+                maxArgs: 1
+              },
+              request: {
+                minArgs: 1,
+                maxArgs: 1
+              }
             },
             runtime: {
-              getBackgroundPage: { minArgs: 0, maxArgs: 0 },
-              getPlatformInfo: { minArgs: 0, maxArgs: 0 },
-              openOptionsPage: { minArgs: 0, maxArgs: 0 },
-              requestUpdateCheck: { minArgs: 0, maxArgs: 0 },
-              sendMessage: { minArgs: 1, maxArgs: 3 },
-              sendNativeMessage: { minArgs: 2, maxArgs: 2 },
-              setUninstallURL: { minArgs: 1, maxArgs: 1 }
+              getBackgroundPage: {
+                minArgs: 0,
+                maxArgs: 0
+              },
+              getPlatformInfo: {
+                minArgs: 0,
+                maxArgs: 0
+              },
+              openOptionsPage: {
+                minArgs: 0,
+                maxArgs: 0
+              },
+              requestUpdateCheck: {
+                minArgs: 0,
+                maxArgs: 0
+              },
+              sendMessage: {
+                minArgs: 1,
+                maxArgs: 3
+              },
+              sendNativeMessage: {
+                minArgs: 2,
+                maxArgs: 2
+              },
+              setUninstallURL: {
+                minArgs: 1,
+                maxArgs: 1
+              }
             },
             sessions: {
-              getDevices: { minArgs: 0, maxArgs: 1 },
-              getRecentlyClosed: { minArgs: 0, maxArgs: 1 },
-              restore: { minArgs: 0, maxArgs: 1 }
+              getDevices: {
+                minArgs: 0,
+                maxArgs: 1
+              },
+              getRecentlyClosed: {
+                minArgs: 0,
+                maxArgs: 1
+              },
+              restore: {
+                minArgs: 0,
+                maxArgs: 1
+              }
             },
             storage: {
               local: {
-                clear: { minArgs: 0, maxArgs: 0 },
-                get: { minArgs: 0, maxArgs: 1 },
-                getBytesInUse: { minArgs: 0, maxArgs: 1 },
-                remove: { minArgs: 1, maxArgs: 1 },
-                set: { minArgs: 1, maxArgs: 1 }
+                clear: {
+                  minArgs: 0,
+                  maxArgs: 0
+                },
+                get: {
+                  minArgs: 0,
+                  maxArgs: 1
+                },
+                getBytesInUse: {
+                  minArgs: 0,
+                  maxArgs: 1
+                },
+                remove: {
+                  minArgs: 1,
+                  maxArgs: 1
+                },
+                set: {
+                  minArgs: 1,
+                  maxArgs: 1
+                }
               },
               managed: {
-                get: { minArgs: 0, maxArgs: 1 },
-                getBytesInUse: { minArgs: 0, maxArgs: 1 }
+                get: {
+                  minArgs: 0,
+                  maxArgs: 1
+                },
+                getBytesInUse: {
+                  minArgs: 0,
+                  maxArgs: 1
+                }
               },
               sync: {
-                clear: { minArgs: 0, maxArgs: 0 },
-                get: { minArgs: 0, maxArgs: 1 },
-                getBytesInUse: { minArgs: 0, maxArgs: 1 },
-                remove: { minArgs: 1, maxArgs: 1 },
-                set: { minArgs: 1, maxArgs: 1 }
+                clear: {
+                  minArgs: 0,
+                  maxArgs: 0
+                },
+                get: {
+                  minArgs: 0,
+                  maxArgs: 1
+                },
+                getBytesInUse: {
+                  minArgs: 0,
+                  maxArgs: 1
+                },
+                remove: {
+                  minArgs: 1,
+                  maxArgs: 1
+                },
+                set: {
+                  minArgs: 1,
+                  maxArgs: 1
+                }
               }
             },
             tabs: {
-              captureVisibleTab: { minArgs: 0, maxArgs: 2 },
-              create: { minArgs: 1, maxArgs: 1 },
-              detectLanguage: { minArgs: 0, maxArgs: 1 },
-              discard: { minArgs: 0, maxArgs: 1 },
-              duplicate: { minArgs: 1, maxArgs: 1 },
-              executeScript: { minArgs: 1, maxArgs: 2 },
-              get: { minArgs: 1, maxArgs: 1 },
-              getCurrent: { minArgs: 0, maxArgs: 0 },
-              getZoom: { minArgs: 0, maxArgs: 1 },
-              getZoomSettings: { minArgs: 0, maxArgs: 1 },
-              goBack: { minArgs: 0, maxArgs: 1 },
-              goForward: { minArgs: 0, maxArgs: 1 },
-              highlight: { minArgs: 1, maxArgs: 1 },
-              insertCSS: { minArgs: 1, maxArgs: 2 },
-              move: { minArgs: 2, maxArgs: 2 },
-              query: { minArgs: 1, maxArgs: 1 },
-              reload: { minArgs: 0, maxArgs: 2 },
-              remove: { minArgs: 1, maxArgs: 1 },
-              removeCSS: { minArgs: 1, maxArgs: 2 },
-              sendMessage: { minArgs: 2, maxArgs: 3 },
-              setZoom: { minArgs: 1, maxArgs: 2 },
-              setZoomSettings: { minArgs: 1, maxArgs: 2 },
-              update: { minArgs: 1, maxArgs: 2 }
+              captureVisibleTab: {
+                minArgs: 0,
+                maxArgs: 2
+              },
+              create: {
+                minArgs: 1,
+                maxArgs: 1
+              },
+              detectLanguage: {
+                minArgs: 0,
+                maxArgs: 1
+              },
+              discard: {
+                minArgs: 0,
+                maxArgs: 1
+              },
+              duplicate: {
+                minArgs: 1,
+                maxArgs: 1
+              },
+              executeScript: {
+                minArgs: 1,
+                maxArgs: 2
+              },
+              get: {
+                minArgs: 1,
+                maxArgs: 1
+              },
+              getCurrent: {
+                minArgs: 0,
+                maxArgs: 0
+              },
+              getZoom: {
+                minArgs: 0,
+                maxArgs: 1
+              },
+              getZoomSettings: {
+                minArgs: 0,
+                maxArgs: 1
+              },
+              goBack: {
+                minArgs: 0,
+                maxArgs: 1
+              },
+              goForward: {
+                minArgs: 0,
+                maxArgs: 1
+              },
+              highlight: {
+                minArgs: 1,
+                maxArgs: 1
+              },
+              insertCSS: {
+                minArgs: 1,
+                maxArgs: 2
+              },
+              move: {
+                minArgs: 2,
+                maxArgs: 2
+              },
+              query: {
+                minArgs: 1,
+                maxArgs: 1
+              },
+              reload: {
+                minArgs: 0,
+                maxArgs: 2
+              },
+              remove: {
+                minArgs: 1,
+                maxArgs: 1
+              },
+              removeCSS: {
+                minArgs: 1,
+                maxArgs: 2
+              },
+              sendMessage: {
+                minArgs: 2,
+                maxArgs: 3
+              },
+              setZoom: {
+                minArgs: 1,
+                maxArgs: 2
+              },
+              setZoomSettings: {
+                minArgs: 1,
+                maxArgs: 2
+              },
+              update: {
+                minArgs: 1,
+                maxArgs: 2
+              }
             },
-            topSites: { get: { minArgs: 0, maxArgs: 0 } },
+            topSites: {
+              get: {
+                minArgs: 0,
+                maxArgs: 0
+              }
+            },
             webNavigation: {
-              getAllFrames: { minArgs: 1, maxArgs: 1 },
-              getFrame: { minArgs: 1, maxArgs: 1 }
+              getAllFrames: {
+                minArgs: 1,
+                maxArgs: 1
+              },
+              getFrame: {
+                minArgs: 1,
+                maxArgs: 1
+              }
             },
             webRequest: {
-              handlerBehaviorChanged: { minArgs: 0, maxArgs: 0 }
+              handlerBehaviorChanged: {
+                minArgs: 0,
+                maxArgs: 0
+              }
             },
             windows: {
-              create: { minArgs: 0, maxArgs: 1 },
-              get: { minArgs: 1, maxArgs: 2 },
-              getAll: { minArgs: 0, maxArgs: 1 },
-              getCurrent: { minArgs: 0, maxArgs: 1 },
-              getLastFocused: { minArgs: 0, maxArgs: 1 },
-              remove: { minArgs: 1, maxArgs: 1 },
-              update: { minArgs: 2, maxArgs: 2 }
+              create: {
+                minArgs: 0,
+                maxArgs: 1
+              },
+              get: {
+                minArgs: 1,
+                maxArgs: 2
+              },
+              getAll: {
+                minArgs: 0,
+                maxArgs: 1
+              },
+              getCurrent: {
+                minArgs: 0,
+                maxArgs: 1
+              },
+              getLastFocused: {
+                minArgs: 0,
+                maxArgs: 1
+              },
+              remove: {
+                minArgs: 1,
+                maxArgs: 1
+              },
+              update: {
+                minArgs: 2,
+                maxArgs: 2
+              }
             }
           };
           if (Object.keys(t).length === 0)
@@ -277,7 +751,16 @@ var nt = B_((Er, Us) => {
             return new Promise((K, J) => {
               if (z.fallbackToNoCallback)
                 try {
-                  T[w](...U, s({ resolve: K, reject: J }, z));
+                  T[w](
+                    ...U,
+                    s(
+                      {
+                        resolve: K,
+                        reject: J
+                      },
+                      z
+                    )
+                  );
                 } catch (I) {
                   console.warn(
                     `${w} API method doesn't seem to support the callback parameter, falling back to call it without a callback: `,
@@ -285,7 +768,16 @@ var nt = B_((Er, Us) => {
                   ), T[w](...U), z.fallbackToNoCallback = false, z.noCallback = true, K();
                 }
               else
-                z.noCallback ? (T[w](...U), K()) : T[w](...U, s({ resolve: K, reject: J }, z));
+                z.noCallback ? (T[w](...U), K()) : T[w](
+                  ...U,
+                  s(
+                    {
+                      resolve: K,
+                      reject: J
+                    },
+                    z
+                  )
+                );
             });
           }, p = (w, z, P) => new Proxy(z, {
             apply(T, U, K) {
@@ -300,13 +792,13 @@ var nt = B_((Er, Us) => {
                 if (I in T) return T[I];
                 if (!(I in w)) return;
                 let M = w[I];
-                if (typeof M == "function")
+                if (typeof M == "function") {
                   if (typeof z[I] == "function") M = p(w, w[I], z[I]);
                   else if (g(P, I)) {
                     let Pe = l(I, P[I]);
                     M = p(w, w[I], Pe);
                   } else M = M.bind(w);
-                else if (typeof M == "object" && M !== null && (g(z, I) || g(P, I)))
+                } else if (typeof M == "object" && M !== null && (g(z, I) || g(P, I)))
                   M = f(M, z[I], P[I]);
                 else if (g(P, "*")) M = f(M, z[I], P["*"]);
                 else
@@ -348,7 +840,12 @@ var nt = B_((Er, Us) => {
               let T = f(
                 P,
                 {},
-                { getContent: { minArgs: 0, maxArgs: 0 } }
+                {
+                  getContent: {
+                    minArgs: 0,
+                    maxArgs: 0
+                  }
+                }
               );
               w(T);
             }
@@ -399,11 +896,18 @@ var nt = B_((Er, Us) => {
                 `Expected at most ${z.maxArgs} ${u(z.maxArgs)} for ${w}(), got ${T.length}`
               );
             return new Promise((U, K) => {
-              let J = j.bind(null, { resolve: U, reject: K });
+              let J = j.bind(null, {
+                resolve: U,
+                reject: K
+              });
               T.push(J), P.sendMessage(...T);
             });
           }, D = {
-            devtools: { network: { onRequestFinished: d(v) } },
+            devtools: {
+              network: {
+                onRequestFinished: d(v)
+              }
+            },
             runtime: {
               onMessage: d(k),
               onMessageExternal: d(k),
@@ -419,14 +923,29 @@ var nt = B_((Er, Us) => {
               })
             }
           }, $ = {
-            clear: { minArgs: 1, maxArgs: 1 },
-            get: { minArgs: 1, maxArgs: 1 },
-            set: { minArgs: 1, maxArgs: 1 }
+            clear: {
+              minArgs: 1,
+              maxArgs: 1
+            },
+            get: {
+              minArgs: 1,
+              maxArgs: 1
+            },
+            set: {
+              minArgs: 1,
+              maxArgs: 1
+            }
           };
           return t.privacy = {
-            network: { "*": $ },
-            services: { "*": $ },
-            websites: { "*": $ }
+            network: {
+              "*": $
+            },
+            services: {
+              "*": $
+            },
+            websites: {
+              "*": $
+            }
           }, f(o, D, t);
         };
         e.exports = r(chrome);
@@ -454,7 +973,10 @@ var G_ = (function() {
   }, e.prototype[Symbol.iterator] = function() {
     return {
       next: function() {
-        return { done: true, value: void 0 };
+        return {
+          done: true,
+          value: void 0
+        };
       }
     };
   }, e.prototype.unwrapOr = function(i) {
@@ -497,7 +1019,10 @@ var Y_ = (function() {
     var i = Object(this.value);
     return Symbol.iterator in i ? i[Symbol.iterator]() : {
       next: function() {
-        return { done: true, value: void 0 };
+        return {
+          done: true,
+          value: void 0
+        };
       }
     };
   }, e.prototype.unwrapOr = function(i) {
@@ -576,7 +1101,10 @@ var Ie = function(e, i, r) {
   }, e.prototype[Symbol.iterator] = function() {
     return {
       next: function() {
-        return { done: true, value: void 0 };
+        return {
+          done: true,
+          value: void 0
+        };
       }
     };
   }, e.prototype.else = function(i) {
@@ -590,7 +1118,9 @@ var Ie = function(e, i, r) {
         `
 `
       ).concat(this._stack),
-      { cause: this.error }
+      {
+        cause: this.error
+      }
     );
   }, e.prototype.expectErr = function(i) {
     return this.error;
@@ -601,7 +1131,9 @@ var Ie = function(e, i, r) {
         `
 `
       ).concat(this._stack),
-      { cause: this.error }
+      {
+        cause: this.error
+      }
     );
   }, e.prototype.unwrapErr = function() {
     return this.error;
@@ -650,7 +1182,10 @@ var Z = J_, X_ = (function() {
     var i = Object(this.value);
     return Symbol.iterator in i ? i[Symbol.iterator]() : {
       next: function() {
-        return { done: true, value: void 0 };
+        return {
+          done: true,
+          value: void 0
+        };
       }
     };
   }, e.prototype.else = function(i) {
@@ -784,7 +1319,11 @@ var Bt = function(e, i, r, o) {
     trys: [],
     ops: []
   }, o, t, n, a;
-  return a = { next: s(0), throw: s(1), return: s(2) }, typeof Symbol == "function" && (a[Symbol.iterator] = function() {
+  return a = {
+    next: s(0),
+    throw: s(1),
+    return: s(2)
+  }, typeof Symbol == "function" && (a[Symbol.iterator] = function() {
     return this;
   }), a;
   function s(l) {
@@ -804,7 +1343,10 @@ var Bt = function(e, i, r, o) {
             n = l;
             break;
           case 4:
-            return r.label++, { value: l[1], done: false };
+            return r.label++, {
+              value: l[1],
+              done: false
+            };
           case 5:
             r.label++, t = l[1], l = [0];
             continue;
@@ -838,7 +1380,10 @@ var Bt = function(e, i, r, o) {
         o = n = 0;
       }
     if (l[0] & 5) throw l[1];
-    return { value: l[0] ? l[1] : void 0, done: true };
+    return {
+      value: l[0] ? l[1] : void 0,
+      done: true
+    };
   }
 }, at = (function() {
   function e(i) {
@@ -944,7 +1489,11 @@ var Vr = function(e, i, r, o) {
     trys: [],
     ops: []
   }, o, t, n, a;
-  return a = { next: s(0), throw: s(1), return: s(2) }, typeof Symbol == "function" && (a[Symbol.iterator] = function() {
+  return a = {
+    next: s(0),
+    throw: s(1),
+    return: s(2)
+  }, typeof Symbol == "function" && (a[Symbol.iterator] = function() {
     return this;
   }), a;
   function s(l) {
@@ -964,7 +1513,10 @@ var Vr = function(e, i, r, o) {
             n = l;
             break;
           case 4:
-            return r.label++, { value: l[1], done: false };
+            return r.label++, {
+              value: l[1],
+              done: false
+            };
           case 5:
             r.label++, t = l[1], l = [0];
             continue;
@@ -998,7 +1550,10 @@ var Vr = function(e, i, r, o) {
         o = n = 0;
       }
     if (l[0] & 5) throw l[1];
-    return { value: l[0] ? l[1] : void 0, done: true };
+    return {
+      value: l[0] ? l[1] : void 0,
+      done: true
+    };
   }
 }, ot = (function() {
   function e(i) {
@@ -1299,8 +1854,18 @@ var je = {
     },
     web: {}
   },
-  ca: { addon: { appDesc: "Download Videos from the Web." }, web: {} },
-  co: { addon: { appDesc: "Download Videos from the Web." }, web: {} },
+  ca: {
+    addon: {
+      appDesc: "Download Videos from the Web."
+    },
+    web: {}
+  },
+  co: {
+    addon: {
+      appDesc: "Download Videos from the Web."
+    },
+    web: {}
+  },
   cs: {
     addon: {
       appDesc: "Stahov\xE1n\xED vide\xED z webu.",
@@ -1489,7 +2054,12 @@ var je = {
       landing_footer_donate: "Dotace"
     }
   },
-  da: { addon: { appDesc: "Download Videos from the Web." }, web: {} },
+  da: {
+    addon: {
+      appDesc: "Download Videos from the Web."
+    },
+    web: {}
+  },
   de: {
     addon: {
       appDesc: "Videos aus dem Internet herunterladen.",
@@ -1770,8 +2340,18 @@ var je = {
       goodbye_thank_you: "Danke"
     }
   },
-  dsb: { addon: { appDesc: "Download Videos from the Web." }, web: {} },
-  el: { addon: { appDesc: "Download Videos from the Web." }, web: {} },
+  dsb: {
+    addon: {
+      appDesc: "Download Videos from the Web."
+    },
+    web: {}
+  },
+  el: {
+    addon: {
+      appDesc: "Download Videos from the Web."
+    },
+    web: {}
+  },
   en: {
     addon: {
       appDesc: "Download Videos from the Web.",
@@ -2698,10 +3278,30 @@ var je = {
       goodbye_thank_you: "Merci"
     }
   },
-  hsb: { addon: { appDesc: "Download Videos from the Web." }, web: {} },
-  hu: { addon: { appDesc: "Download Videos from the Web." }, web: {} },
-  id: { addon: { appDesc: "Download Videos from the Web." }, web: {} },
-  is: { addon: { appDesc: "Download Videos from the Web." }, web: {} },
+  hsb: {
+    addon: {
+      appDesc: "Download Videos from the Web."
+    },
+    web: {}
+  },
+  hu: {
+    addon: {
+      appDesc: "Download Videos from the Web."
+    },
+    web: {}
+  },
+  id: {
+    addon: {
+      appDesc: "Download Videos from the Web."
+    },
+    web: {}
+  },
+  is: {
+    addon: {
+      appDesc: "Download Videos from the Web."
+    },
+    web: {}
+  },
   it: {
     addon: {
       appDesc: "Scarica i video dal web.",
@@ -3494,8 +4094,18 @@ var je = {
       goodbye_thank_you: "\uAC10\uC0AC\uD569\uB2C8\uB2E4"
     }
   },
-  nb: { addon: { appDesc: "Download Videos from the Web." }, web: {} },
-  nl: { addon: { appDesc: "Download Videos from the Web." }, web: {} },
+  nb: {
+    addon: {
+      appDesc: "Download Videos from the Web."
+    },
+    web: {}
+  },
+  nl: {
+    addon: {
+      appDesc: "Download Videos from the Web."
+    },
+    web: {}
+  },
   pl: {
     addon: {
       appDesc: "Pobierz wideo z sieci web.",
@@ -4039,7 +4649,12 @@ var je = {
       goodbye_thank_you: "Obrigado"
     }
   },
-  ro: { addon: { appDesc: "Download Videos from the Web." }, web: {} },
+  ro: {
+    addon: {
+      appDesc: "Download Videos from the Web."
+    },
+    web: {}
+  },
   ru: {
     addon: {
       appDesc: "\u0421\u043A\u0430\u0447\u0430\u0442\u044C \u0432\u0438\u0434\u0435\u043E \u0438\u0437 \u0418\u043D\u0442\u0435\u0440\u043D\u0435\u0442\u0430.",
@@ -4600,8 +5215,18 @@ var je = {
       goodbye_thank_you: "\u010Eakujem"
     }
   },
-  sl: { addon: { appDesc: "Download Videos from the Web." }, web: {} },
-  sv: { addon: { appDesc: "Download Videos from the Web." }, web: {} },
+  sl: {
+    addon: {
+      appDesc: "Download Videos from the Web."
+    },
+    web: {}
+  },
+  sv: {
+    addon: {
+      appDesc: "Download Videos from the Web."
+    },
+    web: {}
+  },
   tr: {
     addon: {
       appDesc: "Web'den Videolar \u0130ndirin.",
@@ -6634,15 +7259,22 @@ de(se, {
 function _(e, i, r) {
   function o(s, u) {
     var l;
-    Object.defineProperty(s, "_zod", { value: s._zod ?? {}, enumerable: false }), (l = s._zod).traits ?? (l.traits = /* @__PURE__ */ new Set()), s._zod.traits.add(e), i(s, u);
+    Object.defineProperty(s, "_zod", {
+      value: s._zod ?? {},
+      enumerable: false
+    }), (l = s._zod).traits ?? (l.traits = /* @__PURE__ */ new Set()), s._zod.traits.add(e), i(s, u);
     for (let p in a.prototype)
-      p in s || Object.defineProperty(s, p, { value: a.prototype[p].bind(s) });
+      p in s || Object.defineProperty(s, p, {
+        value: a.prototype[p].bind(s)
+      });
     s._zod.constr = a, s._zod.def = u;
   }
   let t = r?.Parent ?? Object;
   class n extends t {
   }
-  Object.defineProperty(n, "name", { value: e });
+  Object.defineProperty(n, "name", {
+    value: e
+  });
   function a(s) {
     var u;
     let l = r?.Parent ? new n() : this;
@@ -6650,9 +7282,13 @@ function _(e, i, r) {
     for (let p of l._zod.deferred) p();
     return l;
   }
-  return Object.defineProperty(a, "init", { value: o }), Object.defineProperty(a, Symbol.hasInstance, {
+  return Object.defineProperty(a, "init", {
+    value: o
+  }), Object.defineProperty(a, Symbol.hasInstance, {
     value: (s) => r?.Parent && s instanceof r.Parent ? true : s?._zod?.traits?.has(e)
-  }), Object.defineProperty(a, "name", { value: e }), a;
+  }), Object.defineProperty(a, "name", {
+    value: e
+  }), a;
 }
 var lt = Symbol("zod_brand"), re = class extends Error {
   constructor() {
@@ -6743,7 +7379,9 @@ function dt(e) {
     get value() {
       {
         let r = e();
-        return Object.defineProperty(this, "value", { value: r }), r;
+        return Object.defineProperty(this, "value", {
+          value: r
+        }), r;
       }
       throw new Error("cached value already set");
     }
@@ -6770,7 +7408,9 @@ function q(e, i, r) {
       throw new Error("cached value already set");
     },
     set(t) {
-      Object.defineProperty(e, i, { value: t });
+      Object.defineProperty(e, i, {
+        value: t
+      });
     },
     configurable: true
   });
@@ -6865,13 +7505,19 @@ function W(e, i, r) {
 function h(e) {
   let i = e;
   if (!i) return {};
-  if (typeof i == "string") return { error: () => i };
+  if (typeof i == "string")
+    return {
+      error: () => i
+    };
   if (i?.message !== void 0) {
     if (i?.error !== void 0)
       throw new Error("Cannot specify both `message` and `error` params");
     i.error = i.message;
   }
-  return delete i.message, typeof i.error == "string" ? { ...i, error: () => i.error } : i;
+  return delete i.message, typeof i.error == "string" ? {
+    ...i,
+    error: () => i.error
+  } : i;
 }
 function ld(e) {
   let i;
@@ -6926,21 +7572,34 @@ function ud(e, i) {
     if (!(t in o.shape)) throw new Error(`Unrecognized key: "${t}"`);
     i[t] && (r[t] = o.shape[t]);
   }
-  return W(e, { ...e._zod.def, shape: r, checks: [] });
+  return W(e, {
+    ...e._zod.def,
+    shape: r,
+    checks: []
+  });
 }
 function _d(e, i) {
-  let r = { ...e._zod.def.shape }, o = e._zod.def;
+  let r = {
+    ...e._zod.def.shape
+  }, o = e._zod.def;
   for (let t in i) {
     if (!(t in o.shape)) throw new Error(`Unrecognized key: "${t}"`);
     i[t] && delete r[t];
   }
-  return W(e, { ...e._zod.def, shape: r, checks: [] });
+  return W(e, {
+    ...e._zod.def,
+    shape: r,
+    checks: []
+  });
 }
 function dd(e, i) {
   let r = {
     ...e._zod.def,
     get shape() {
-      let o = { ...e._zod.def.shape, ...i };
+      let o = {
+        ...e._zod.def.shape,
+        ...i
+      };
       return Hr(this, "shape", o), o;
     },
     checks: []
@@ -6951,7 +7610,10 @@ function cd(e, i) {
   return W(e, {
     ...e._zod.def,
     get shape() {
-      let r = { ...e._zod.def.shape, ...i._zod.def.shape };
+      let r = {
+        ...e._zod.def.shape,
+        ...i._zod.def.shape
+      };
       return Hr(this, "shape", r), r;
     },
     catchall: i._zod.def.catchall,
@@ -6959,26 +7621,52 @@ function cd(e, i) {
   });
 }
 function md(e, i, r) {
-  let o = i._zod.def.shape, t = { ...o };
+  let o = i._zod.def.shape, t = {
+    ...o
+  };
   if (r)
     for (let n in r) {
       if (!(n in o)) throw new Error(`Unrecognized key: "${n}"`);
-      r[n] && (t[n] = e ? new e({ type: "optional", innerType: o[n] }) : o[n]);
+      r[n] && (t[n] = e ? new e({
+        type: "optional",
+        innerType: o[n]
+      }) : o[n]);
     }
   else
     for (let n in o)
-      t[n] = e ? new e({ type: "optional", innerType: o[n] }) : o[n];
-  return W(i, { ...i._zod.def, shape: t, checks: [] });
+      t[n] = e ? new e({
+        type: "optional",
+        innerType: o[n]
+      }) : o[n];
+  return W(i, {
+    ...i._zod.def,
+    shape: t,
+    checks: []
+  });
 }
 function pd(e, i, r) {
-  let o = i._zod.def.shape, t = { ...o };
+  let o = i._zod.def.shape, t = {
+    ...o
+  };
   if (r)
     for (let n in r) {
       if (!(n in t)) throw new Error(`Unrecognized key: "${n}"`);
-      r[n] && (t[n] = new e({ type: "nonoptional", innerType: o[n] }));
+      r[n] && (t[n] = new e({
+        type: "nonoptional",
+        innerType: o[n]
+      }));
     }
-  else for (let n in o) t[n] = new e({ type: "nonoptional", innerType: o[n] });
-  return W(i, { ...i._zod.def, shape: t, checks: [] });
+  else
+    for (let n in o)
+      t[n] = new e({
+        type: "nonoptional",
+        innerType: o[n]
+      });
+  return W(i, {
+    ...i._zod.def,
+    shape: t,
+    checks: []
+  });
 }
 function ye(e, i = 0) {
   for (let r = i; r < e.issues.length; r++)
@@ -6995,7 +7683,10 @@ function ut(e) {
   return typeof e == "string" ? e : e?.message;
 }
 function G(e, i, r) {
-  let o = { ...e, path: e.path ?? [] };
+  let o = {
+    ...e,
+    path: e.path ?? []
+  };
   if (!e.message) {
     let t = ut(e.inst?._zod.def?.error?.(e)) ?? ut(i?.error?.(e)) ?? ut(r.customError?.(e)) ?? ut(r.localeError?.(e)) ?? "Invalid input";
     o.message = t;
@@ -7010,7 +7701,14 @@ function ft(e) {
 }
 function Yr(...e) {
   let [i, r, o] = e;
-  return typeof i == "string" ? { message: i, code: "custom", input: r, inst: o } : { ...i };
+  return typeof i == "string" ? {
+    message: i,
+    code: "custom",
+    input: r,
+    inst: o
+  } : {
+    ...i
+  };
 }
 function gd(e) {
   return Object.entries(e).filter(([i, r]) => Number.isNaN(Number.parseInt(i, 10))).map((i) => i[1]);
@@ -7020,34 +7718,61 @@ var Cr = class {
   }
 };
 var Cs = (e, i) => {
-  e.name = "$ZodError", Object.defineProperty(e, "_zod", { value: e._zod, enumerable: false }), Object.defineProperty(e, "issues", { value: i, enumerable: false }), Object.defineProperty(e, "message", {
+  e.name = "$ZodError", Object.defineProperty(e, "_zod", {
+    value: e._zod,
+    enumerable: false
+  }), Object.defineProperty(e, "issues", {
+    value: i,
+    enumerable: false
+  }), Object.defineProperty(e, "message", {
     get() {
       return JSON.stringify(i, Zr, 2);
     },
     enumerable: true
   });
-}, ht = _("$ZodError", Cs), qe = _("$ZodError", Cs, { Parent: Error });
+}, ht = _("$ZodError", Cs), qe = _("$ZodError", Cs, {
+  Parent: Error
+});
 function Ee(e, i = (r) => r.message) {
   let r = {}, o = [];
   for (let t of e.issues)
     t.path.length > 0 ? (r[t.path[0]] = r[t.path[0]] || [], r[t.path[0]].push(i(t))) : o.push(i(t));
-  return { formErrors: o, fieldErrors: r };
+  return {
+    formErrors: o,
+    fieldErrors: r
+  };
 }
 function Oe(e, i) {
   let r = i || function(n) {
     return n.message;
-  }, o = { _errors: [] }, t = (n) => {
+  }, o = {
+    _errors: []
+  }, t = (n) => {
     for (let a of n.issues)
       if (a.code === "invalid_union" && a.errors.length)
-        a.errors.map((s) => t({ issues: s }));
-      else if (a.code === "invalid_key") t({ issues: a.issues });
-      else if (a.code === "invalid_element") t({ issues: a.issues });
+        a.errors.map(
+          (s) => t({
+            issues: s
+          })
+        );
+      else if (a.code === "invalid_key")
+        t({
+          issues: a.issues
+        });
+      else if (a.code === "invalid_element")
+        t({
+          issues: a.issues
+        });
       else if (a.path.length === 0) o._errors.push(r(a));
       else {
         let s = o, u = 0;
         for (; u < a.path.length; ) {
           let l = a.path[u];
-          u === a.path.length - 1 ? (s[l] = s[l] || { _errors: [] }, s[l]._errors.push(r(a))) : s[l] = s[l] || { _errors: [] }, s = s[l], u++;
+          u === a.path.length - 1 ? (s[l] = s[l] || {
+            _errors: []
+          }, s[l]._errors.push(r(a))) : s[l] = s[l] || {
+            _errors: []
+          }, s = s[l], u++;
         }
       }
   };
@@ -7056,13 +7781,34 @@ function Oe(e, i) {
 function Jt(e, i) {
   let r = i || function(n) {
     return n.message;
-  }, o = { errors: [] }, t = (n, a = []) => {
+  }, o = {
+    errors: []
+  }, t = (n, a = []) => {
     var s, u;
     for (let l of n.issues)
       if (l.code === "invalid_union" && l.errors.length)
-        l.errors.map((p) => t({ issues: p }, l.path));
-      else if (l.code === "invalid_key") t({ issues: l.issues }, l.path);
-      else if (l.code === "invalid_element") t({ issues: l.issues }, l.path);
+        l.errors.map(
+          (p) => t(
+            {
+              issues: p
+            },
+            l.path
+          )
+        );
+      else if (l.code === "invalid_key")
+        t(
+          {
+            issues: l.issues
+          },
+          l.path
+        );
+      else if (l.code === "invalid_element")
+        t(
+          {
+            issues: l.issues
+          },
+          l.path
+        );
       else {
         let p = [...a, ...l.path];
         if (p.length === 0) {
@@ -7072,7 +7818,11 @@ function Jt(e, i) {
         let g = o, f = 0;
         for (; f < p.length; ) {
           let d = p[f], v = f === p.length - 1;
-          typeof d == "string" ? (g.properties ?? (g.properties = {}), (s = g.properties)[d] ?? (s[d] = { errors: [] }), g = g.properties[d]) : (g.items ?? (g.items = []), (u = g.items)[d] ?? (u[d] = { errors: [] }), g = g.items[d]), v && g.errors.push(r(l)), f++;
+          typeof d == "string" ? (g.properties ?? (g.properties = {}), (s = g.properties)[d] ?? (s[d] = {
+            errors: []
+          }), g = g.properties[d]) : (g.items ?? (g.items = []), (u = g.items)[d] ?? (u[d] = {
+            errors: []
+          }), g = g.items[d]), v && g.errors.push(r(l)), f++;
         }
       }
   };
@@ -7092,7 +7842,17 @@ function Xt(e) {
 `);
 }
 var Qt = (e) => (i, r, o, t) => {
-  let n = o ? Object.assign(o, { async: false }) : { async: false }, a = i._zod.run({ value: r, issues: [] }, n);
+  let n = o ? Object.assign(o, {
+    async: false
+  }) : {
+    async: false
+  }, a = i._zod.run(
+    {
+      value: r,
+      issues: []
+    },
+    n
+  );
   if (a instanceof Promise) throw new re();
   if (a.issues.length) {
     let s = new (t?.Err ?? e)(a.issues.map((u) => G(u, n, N())));
@@ -7100,19 +7860,62 @@ var Qt = (e) => (i, r, o, t) => {
   }
   return a.value;
 }, ei = Qt(qe), ti = (e) => async (i, r, o, t) => {
-  let n = o ? Object.assign(o, { async: true }) : { async: true }, a = i._zod.run({ value: r, issues: [] }, n);
+  let n = o ? Object.assign(o, {
+    async: true
+  }) : {
+    async: true
+  }, a = i._zod.run(
+    {
+      value: r,
+      issues: []
+    },
+    n
+  );
   if (a instanceof Promise && (a = await a), a.issues.length) {
     let s = new (t?.Err ?? e)(a.issues.map((u) => G(u, n, N())));
     throw Error.captureStackTrace(s, t?.callee), s;
   }
   return a.value;
 }, ii = ti(qe), ri = (e) => (i, r, o) => {
-  let t = o ? { ...o, async: false } : { async: false }, n = i._zod.run({ value: r, issues: [] }, t);
+  let t = o ? {
+    ...o,
+    async: false
+  } : {
+    async: false
+  }, n = i._zod.run(
+    {
+      value: r,
+      issues: []
+    },
+    t
+  );
   if (n instanceof Promise) throw new re();
-  return n.issues.length ? { success: false, error: new (e ?? ht)(n.issues.map((a) => G(a, t, N()))) } : { success: true, data: n.value };
+  return n.issues.length ? {
+    success: false,
+    error: new (e ?? ht)(n.issues.map((a) => G(a, t, N())))
+  } : {
+    success: true,
+    data: n.value
+  };
 }, Jr = ri(qe), ni = (e) => async (i, r, o) => {
-  let t = o ? Object.assign(o, { async: true }) : { async: true }, n = i._zod.run({ value: r, issues: [] }, t);
-  return n instanceof Promise && (n = await n), n.issues.length ? { success: false, error: new e(n.issues.map((a) => G(a, t, N()))) } : { success: true, data: n.value };
+  let t = o ? Object.assign(o, {
+    async: true
+  }) : {
+    async: true
+  }, n = i._zod.run(
+    {
+      value: r,
+      issues: []
+    },
+    t
+  );
+  return n instanceof Promise && (n = await n), n.issues.length ? {
+    success: false,
+    error: new e(n.issues.map((a) => G(a, t, N())))
+  } : {
+    success: true,
+    data: n.value
+  };
 }, Xr = ni(qe);
 var pe = {};
 de(pe, {
@@ -7185,7 +7988,11 @@ var Dn = /^[^A-Z]*$/, Pn = /^[^a-z]*$/;
 var V = _("$ZodCheck", (e, i) => {
   var r;
   e._zod ?? (e._zod = {}), e._zod.def = i, (r = e._zod).onattach ?? (r.onattach = []);
-}), Bs = { number: "number", bigint: "bigint", object: "date" }, ai = _("$ZodCheckLessThan", (e, i) => {
+}), Bs = {
+  number: "number",
+  bigint: "bigint",
+  object: "date"
+}, ai = _("$ZodCheckLessThan", (e, i) => {
   V.init(e, i);
   let r = Bs[typeof i.value];
   e._zod.onattach.push((o) => {
@@ -7364,7 +8171,13 @@ var V = _("$ZodCheck", (e, i) => {
     let n = t > i.size;
     r.issues.push({
       origin: gt(o),
-      ...n ? { code: "too_big", maximum: i.size } : { code: "too_small", minimum: i.size },
+      ...n ? {
+        code: "too_big",
+        maximum: i.size
+      } : {
+        code: "too_small",
+        minimum: i.size
+      },
       input: r.value,
       inst: e,
       continue: !i.abort
@@ -7425,7 +8238,13 @@ var V = _("$ZodCheck", (e, i) => {
     let n = ft(o), a = t > i.length;
     r.issues.push({
       origin: n,
-      ...a ? { code: "too_big", maximum: i.length } : { code: "too_small", minimum: i.length },
+      ...a ? {
+        code: "too_big",
+        maximum: i.length
+      } : {
+        code: "too_small",
+        minimum: i.length
+      },
       input: r.value,
       inst: e,
       continue: !i.abort
@@ -7443,7 +8262,9 @@ var V = _("$ZodCheck", (e, i) => {
       code: "invalid_format",
       format: i.format,
       input: o.value,
-      ...i.pattern ? { pattern: i.pattern.toString() } : {},
+      ...i.pattern ? {
+        pattern: i.pattern.toString()
+      } : {},
       inst: e,
       continue: !i.abort
     });
@@ -7524,7 +8345,10 @@ function Ws(e, i, r) {
 var Hn = _("$ZodCheckProperty", (e, i) => {
   V.init(e, i), e._zod.check = (r) => {
     let o = i.schema._zod.run(
-      { value: r.value[i.property], issues: [] },
+      {
+        value: r.value[i.property],
+        issues: []
+      },
       {}
     );
     if (o instanceof Promise) return o.then((t) => Ws(t, r, i.property));
@@ -7558,7 +8382,11 @@ var vt = class {
   }
   write(i) {
     if (typeof i == "function") {
-      i(this, { execution: "sync" }), i(this, { execution: "async" });
+      i(this, {
+        execution: "sync"
+      }), i(this, {
+        execution: "async"
+      });
       return;
     }
     let o = i.split(
@@ -7576,7 +8404,11 @@ var vt = class {
     );
   }
 };
-var Bn = { major: 4, minor: 0, patch: 0 };
+var Bn = {
+  major: 4,
+  minor: 0,
+  patch: 0
+};
 var x = _("$ZodType", (e, i) => {
   var r;
   e ?? (e = {}), e._zod.id = i.type + "_" + Yt(10), e._zod.def = i, e._zod.bag = e._zod.bag || {}, e._zod.version = Bn;
@@ -7620,10 +8452,18 @@ var x = _("$ZodType", (e, i) => {
     validate: (t) => {
       try {
         let n = Jr(e, t);
-        return n.success ? { value: n.data } : { issues: n.error?.issues };
+        return n.success ? {
+          value: n.data
+        } : {
+          issues: n.error?.issues
+        };
       } catch {
         return Xr(e, t).then(
-          (a) => a.success ? { value: a.data } : { issues: a.error?.issues }
+          (a) => a.success ? {
+            value: a.data
+          } : {
+            issues: a.error?.issues
+          }
         );
       }
     },
@@ -7650,7 +8490,16 @@ var x = _("$ZodType", (e, i) => {
   i.pattern ?? (i.pattern = sn), E.init(e, i);
 }), Yn = _("$ZodUUID", (e, i) => {
   if (i.version) {
-    let o = { v1: 1, v2: 2, v3: 3, v4: 4, v5: 5, v6: 6, v7: 7, v8: 8 }[i.version];
+    let o = {
+      v1: 1,
+      v2: 2,
+      v3: 3,
+      v4: 4,
+      v5: 5,
+      v6: 6,
+      v7: 7,
+      v8: 8
+    }[i.version];
     if (o === void 0) throw new Error(`Invalid UUID version: "${i.version}"`);
     i.pattern ?? (i.pattern = we(o));
   } else i.pattern ?? (i.pattern = we());
@@ -7835,7 +8684,9 @@ var bo = _("$ZodJWT", (e, i) => {
       code: "invalid_type",
       input: t,
       inst: e,
-      ...n ? { received: n } : {}
+      ...n ? {
+        received: n
+      } : {}
     }), r;
   };
 }), yo = _("$ZodNumber", (e, i) => {
@@ -7935,7 +8786,9 @@ var bo = _("$ZodJWT", (e, i) => {
       expected: "date",
       code: "invalid_type",
       input: t,
-      ...n ? { received: "Invalid Date" } : {},
+      ...n ? {
+        received: "Invalid Date"
+      } : {},
       inst: e
     }), r;
   };
@@ -7956,7 +8809,13 @@ var wt = _("$ZodArray", (e, i) => {
     r.value = Array(t.length);
     let n = [];
     for (let a = 0; a < t.length; a++) {
-      let s = t[a], u = i.element._zod.run({ value: s, issues: [] }, o);
+      let s = t[a], u = i.element._zod.run(
+        {
+          value: s,
+          issues: []
+        },
+        o
+      );
       u instanceof Promise ? n.push(u.then((l) => Gs(l, r, a))) : Gs(u, r, a);
     }
     return n.length ? Promise.all(n).then(() => r) : r;
@@ -8058,7 +8917,13 @@ var Io = _("$ZodObject", (e, i) => {
       g.value = {};
       let $ = p.shape;
       for (let w of p.keys) {
-        let z = $[w], P = z._zod.run({ value: d[w], issues: [] }, f), T = z._zod.optin === "optional" && z._zod.optout === "optional";
+        let z = $[w], P = z._zod.run(
+          {
+            value: d[w],
+            issues: []
+          },
+          f
+        ), T = z._zod.optin === "optional" && z._zod.optout === "optional";
         P instanceof Promise ? v.push(P.then((U) => T ? Ys(U, g, w, d) : li(U, g, w))) : T ? Ys(P, g, w, d) : li(P, g, w);
       }
     }
@@ -8070,7 +8935,13 @@ var Io = _("$ZodObject", (e, i) => {
         k.push($);
         continue;
       }
-      let w = A.run({ value: d[$], issues: [] }, f);
+      let w = A.run(
+        {
+          value: d[$],
+          issues: []
+        },
+        f
+      );
       w instanceof Promise ? v.push(w.then((z) => li(z, g, $))) : li(w, g, $);
     }
     return k.length && g.issues.push({
@@ -8102,7 +8973,13 @@ var ci = _("$ZodUnion", (e, i) => {
   }), e._zod.parse = (r, o) => {
     let t = false, n = [];
     for (let a of i.options) {
-      let s = a._zod.run({ value: r.value, issues: [] }, o);
+      let s = a._zod.run(
+        {
+          value: r.value,
+          issues: []
+        },
+        o
+      );
       if (s instanceof Promise) n.push(s), t = true;
       else {
         if (s.issues.length === 0) return s;
@@ -8166,36 +9043,77 @@ var ci = _("$ZodUnion", (e, i) => {
   };
 }), Ao = _("$ZodIntersection", (e, i) => {
   x.init(e, i), e._zod.parse = (r, o) => {
-    let { value: t } = r, n = i.left._zod.run({ value: t, issues: [] }, o), a = i.right._zod.run({ value: t, issues: [] }, o);
+    let { value: t } = r, n = i.left._zod.run(
+      {
+        value: t,
+        issues: []
+      },
+      o
+    ), a = i.right._zod.run(
+      {
+        value: t,
+        issues: []
+      },
+      o
+    );
     return n instanceof Promise || a instanceof Promise ? Promise.all([n, a]).then(([u, l]) => Xs(r, u, l)) : Xs(r, n, a);
   };
 });
 function Kn(e, i) {
-  if (e === i) return { valid: true, data: e };
+  if (e === i)
+    return {
+      valid: true,
+      data: e
+    };
   if (e instanceof Date && i instanceof Date && +e == +i)
-    return { valid: true, data: e };
+    return {
+      valid: true,
+      data: e
+    };
   if (mt(e) && mt(i)) {
-    let r = Object.keys(i), o = Object.keys(e).filter((n) => r.indexOf(n) !== -1), t = { ...e, ...i };
+    let r = Object.keys(i), o = Object.keys(e).filter((n) => r.indexOf(n) !== -1), t = {
+      ...e,
+      ...i
+    };
     for (let n of o) {
       let a = Kn(e[n], i[n]);
       if (!a.valid)
-        return { valid: false, mergeErrorPath: [n, ...a.mergeErrorPath] };
+        return {
+          valid: false,
+          mergeErrorPath: [n, ...a.mergeErrorPath]
+        };
       t[n] = a.data;
     }
-    return { valid: true, data: t };
+    return {
+      valid: true,
+      data: t
+    };
   }
   if (Array.isArray(e) && Array.isArray(i)) {
-    if (e.length !== i.length) return { valid: false, mergeErrorPath: [] };
+    if (e.length !== i.length)
+      return {
+        valid: false,
+        mergeErrorPath: []
+      };
     let r = [];
     for (let o = 0; o < e.length; o++) {
       let t = e[o], n = i[o], a = Kn(t, n);
       if (!a.valid)
-        return { valid: false, mergeErrorPath: [o, ...a.mergeErrorPath] };
+        return {
+          valid: false,
+          mergeErrorPath: [o, ...a.mergeErrorPath]
+        };
       r.push(a.data);
     }
-    return { valid: true, data: r };
+    return {
+      valid: true,
+      data: r
+    };
   }
-  return { valid: false, mergeErrorPath: [] };
+  return {
+    valid: false,
+    mergeErrorPath: []
+  };
 }
 function Xs(e, i, r) {
   if (i.issues.length && e.issues.push(...i.issues), r.issues.length && e.issues.push(...r.issues), ye(e))
@@ -8228,20 +9146,38 @@ var ke = _("$ZodTuple", (e, i) => {
           input: a,
           inst: e,
           origin: "array",
-          ...l ? { code: "too_big", maximum: r.length } : { code: "too_small", minimum: r.length }
+          ...l ? {
+            code: "too_big",
+            maximum: r.length
+          } : {
+            code: "too_small",
+            minimum: r.length
+          }
         }), t;
     }
     let u = -1;
     for (let l of r) {
       if (u++, u >= a.length && u >= o) continue;
-      let p = l._zod.run({ value: a[u], issues: [] }, n);
+      let p = l._zod.run(
+        {
+          value: a[u],
+          issues: []
+        },
+        n
+      );
       p instanceof Promise ? s.push(p.then((g) => ui(g, t, u))) : ui(p, t, u);
     }
     if (i.rest) {
       let l = a.slice(r.length);
       for (let p of l) {
         u++;
-        let g = i.rest._zod.run({ value: p, issues: [] }, n);
+        let g = i.rest._zod.run(
+          {
+            value: p,
+            issues: []
+          },
+          n
+        );
         g instanceof Promise ? s.push(g.then((f) => ui(f, t, u))) : ui(g, t, u);
       }
     }
@@ -8267,7 +9203,13 @@ var To = _("$ZodRecord", (e, i) => {
       r.value = {};
       for (let u of a)
         if (typeof u == "string" || typeof u == "number" || typeof u == "symbol") {
-          let l = i.valueType._zod.run({ value: t[u], issues: [] }, o);
+          let l = i.valueType._zod.run(
+            {
+              value: t[u],
+              issues: []
+            },
+            o
+          );
           l instanceof Promise ? n.push(
             l.then((p) => {
               p.issues.length && r.issues.push(...B(u, p.issues)), r.value[u] = p.value;
@@ -8286,7 +9228,13 @@ var To = _("$ZodRecord", (e, i) => {
       r.value = {};
       for (let a of Reflect.ownKeys(t)) {
         if (a === "__proto__") continue;
-        let s = i.keyType._zod.run({ value: a, issues: [] }, o);
+        let s = i.keyType._zod.run(
+          {
+            value: a,
+            issues: []
+          },
+          o
+        );
         if (s instanceof Promise)
           throw new Error(
             "Async schemas not supported in object keys currently"
@@ -8302,7 +9250,13 @@ var To = _("$ZodRecord", (e, i) => {
           }), r.value[s.value] = s.value;
           continue;
         }
-        let u = i.valueType._zod.run({ value: t[a], issues: [] }, o);
+        let u = i.valueType._zod.run(
+          {
+            value: t[a],
+            issues: []
+          },
+          o
+        );
         u instanceof Promise ? n.push(
           u.then((l) => {
             l.issues.length && r.issues.push(...B(a, l.issues)), r.value[s.value] = l.value;
@@ -8325,7 +9279,19 @@ var To = _("$ZodRecord", (e, i) => {
     let n = [];
     r.value = /* @__PURE__ */ new Map();
     for (let [a, s] of t) {
-      let u = i.keyType._zod.run({ value: a, issues: [] }, o), l = i.valueType._zod.run({ value: s, issues: [] }, o);
+      let u = i.keyType._zod.run(
+        {
+          value: a,
+          issues: []
+        },
+        o
+      ), l = i.valueType._zod.run(
+        {
+          value: s,
+          issues: []
+        },
+        o
+      );
       u instanceof Promise || l instanceof Promise ? n.push(
         Promise.all([u, l]).then(([p, g]) => {
           Qs(p, g, r, a, t, e, o);
@@ -8364,7 +9330,13 @@ var Eo = _("$ZodSet", (e, i) => {
     let n = [];
     r.value = /* @__PURE__ */ new Set();
     for (let a of t) {
-      let s = i.valueType._zod.run({ value: a, issues: [] }, o);
+      let s = i.valueType._zod.run(
+        {
+          value: a,
+          issues: []
+        },
+        o
+      );
       s instanceof Promise ? n.push(s.then((u) => el(u, r))) : el(s, r);
     }
     return n.length ? Promise.all(n).then(() => r) : r;
@@ -8477,12 +9449,16 @@ var Ho = _("$ZodSuccess", (e, i) => {
     return t instanceof Promise ? t.then(
       (n) => (r.value = n.value, n.issues.length && (r.value = i.catchValue({
         ...r,
-        error: { issues: n.issues.map((a) => G(a, o, N())) },
+        error: {
+          issues: n.issues.map((a) => G(a, o, N()))
+        },
         input: r.value
       }), r.issues = []), r)
     ) : (r.value = t.value, t.issues.length && (r.value = i.catchValue({
       ...r,
-      error: { issues: t.issues.map((n) => G(n, o, N())) },
+      error: {
+        issues: t.issues.map((n) => G(n, o, N()))
+      },
       input: r.value
     }), r.issues = []), r);
   };
@@ -8500,7 +9476,13 @@ var Ho = _("$ZodSuccess", (e, i) => {
   };
 });
 function rl(e, i, r) {
-  return ye(e) ? e : i.out._zod.run({ value: e.value, issues: e.issues }, r);
+  return ye(e) ? e : i.out._zod.run(
+    {
+      value: e.value,
+      issues: e.issues
+    },
+    r
+  );
 }
 var Bo = _("$ZodReadonly", (e, i) => {
   x.init(e, i), q(e._zod, "propValues", () => i.innerType._zod.propValues), q(e._zod, "optin", () => i.innerType._zod.optin), q(e._zod, "optout", () => i.innerType._zod.optout), e._zod.parse = (r, o) => {
@@ -8541,7 +9523,13 @@ var Ko = _("$ZodTemplateLiteral", (e, i) => {
   }), o);
 }), Go = _("$ZodPromise", (e, i) => {
   x.init(e, i), e._zod.parse = (r, o) => Promise.resolve(r.value).then(
-    (t) => i.innerType._zod.run({ value: t, issues: [] }, o)
+    (t) => i.innerType._zod.run(
+      {
+        value: t,
+        issues: []
+      },
+      o
+    )
   );
 }), Yo = _("$ZodLazy", (e, i) => {
   x.init(e, i), q(e._zod, "innerType", () => i.getter()), q(e._zod, "pattern", () => e._zod.innerType._zod.pattern), q(e._zod, "propValues", () => e._zod.innerType._zod.propValues), q(e._zod, "optin", () => e._zod.innerType._zod.optin), q(e._zod, "optout", () => e._zod.innerType._zod.optout), e._zod.parse = (r, o) => e._zod.innerType._zod.run(r, o);
@@ -8703,14 +9691,28 @@ var $d = () => {
   };
 };
 function ul() {
-  return { localeError: $d() };
+  return {
+    localeError: $d()
+  };
 }
 var Dd = () => {
   let e = {
-    string: { unit: "simvol", verb: "olmal\u0131d\u0131r" },
-    file: { unit: "bayt", verb: "olmal\u0131d\u0131r" },
-    array: { unit: "element", verb: "olmal\u0131d\u0131r" },
-    set: { unit: "element", verb: "olmal\u0131d\u0131r" }
+    string: {
+      unit: "simvol",
+      verb: "olmal\u0131d\u0131r"
+    },
+    file: {
+      unit: "bayt",
+      verb: "olmal\u0131d\u0131r"
+    },
+    array: {
+      unit: "element",
+      verb: "olmal\u0131d\u0131r"
+    },
+    set: {
+      unit: "element",
+      verb: "olmal\u0131d\u0131r"
+    }
   };
   function i(t) {
     return e[t] ?? null;
@@ -8792,7 +9794,9 @@ var Dd = () => {
   };
 };
 function _l() {
-  return { localeError: Dd() };
+  return {
+    localeError: Dd()
+  };
 }
 function dl(e, i, r, o) {
   let t = Math.abs(e), n = t % 10, a = t % 100;
@@ -8921,14 +9925,28 @@ var Pd = () => {
   };
 };
 function cl() {
-  return { localeError: Pd() };
+  return {
+    localeError: Pd()
+  };
 }
 var Id = () => {
   let e = {
-    string: { unit: "car\xE0cters", verb: "contenir" },
-    file: { unit: "bytes", verb: "contenir" },
-    array: { unit: "elements", verb: "contenir" },
-    set: { unit: "elements", verb: "contenir" }
+    string: {
+      unit: "car\xE0cters",
+      verb: "contenir"
+    },
+    file: {
+      unit: "bytes",
+      verb: "contenir"
+    },
+    array: {
+      unit: "elements",
+      verb: "contenir"
+    },
+    set: {
+      unit: "elements",
+      verb: "contenir"
+    }
   };
   function i(t) {
     return e[t] ?? null;
@@ -9010,14 +10028,28 @@ var Id = () => {
   };
 };
 function ml() {
-  return { localeError: Id() };
+  return {
+    localeError: Id()
+  };
 }
 var jd = () => {
   let e = {
-    string: { unit: "znak\u016F", verb: "m\xEDt" },
-    file: { unit: "bajt\u016F", verb: "m\xEDt" },
-    array: { unit: "prvk\u016F", verb: "m\xEDt" },
-    set: { unit: "prvk\u016F", verb: "m\xEDt" }
+    string: {
+      unit: "znak\u016F",
+      verb: "m\xEDt"
+    },
+    file: {
+      unit: "bajt\u016F",
+      verb: "m\xEDt"
+    },
+    array: {
+      unit: "prvk\u016F",
+      verb: "m\xEDt"
+    },
+    set: {
+      unit: "prvk\u016F",
+      verb: "m\xEDt"
+    }
   };
   function i(t) {
     return e[t] ?? null;
@@ -9111,14 +10143,28 @@ var jd = () => {
   };
 };
 function pl() {
-  return { localeError: jd() };
+  return {
+    localeError: jd()
+  };
 }
 var Ad = () => {
   let e = {
-    string: { unit: "Zeichen", verb: "zu haben" },
-    file: { unit: "Bytes", verb: "zu haben" },
-    array: { unit: "Elemente", verb: "zu haben" },
-    set: { unit: "Elemente", verb: "zu haben" }
+    string: {
+      unit: "Zeichen",
+      verb: "zu haben"
+    },
+    file: {
+      unit: "Bytes",
+      verb: "zu haben"
+    },
+    array: {
+      unit: "Elemente",
+      verb: "zu haben"
+    },
+    set: {
+      unit: "Elemente",
+      verb: "zu haben"
+    }
   };
   function i(t) {
     return e[t] ?? null;
@@ -9200,7 +10246,9 @@ var Ad = () => {
   };
 };
 function gl() {
-  return { localeError: Ad() };
+  return {
+    localeError: Ad()
+  };
 }
 var Td = (e) => {
   let i = typeof e;
@@ -9217,10 +10265,22 @@ var Td = (e) => {
   return i;
 }, qd = () => {
   let e = {
-    string: { unit: "characters", verb: "to have" },
-    file: { unit: "bytes", verb: "to have" },
-    array: { unit: "items", verb: "to have" },
-    set: { unit: "items", verb: "to have" }
+    string: {
+      unit: "characters",
+      verb: "to have"
+    },
+    file: {
+      unit: "bytes",
+      verb: "to have"
+    },
+    array: {
+      unit: "items",
+      verb: "to have"
+    },
+    set: {
+      unit: "items",
+      verb: "to have"
+    }
   };
   function i(o) {
     return e[o] ?? null;
@@ -9289,14 +10349,28 @@ var Td = (e) => {
   };
 };
 function mi() {
-  return { localeError: qd() };
+  return {
+    localeError: qd()
+  };
 }
 var Ed = () => {
   let e = {
-    string: { unit: "caracteres", verb: "tener" },
-    file: { unit: "bytes", verb: "tener" },
-    array: { unit: "elementos", verb: "tener" },
-    set: { unit: "elementos", verb: "tener" }
+    string: {
+      unit: "caracteres",
+      verb: "tener"
+    },
+    file: {
+      unit: "bytes",
+      verb: "tener"
+    },
+    array: {
+      unit: "elementos",
+      verb: "tener"
+    },
+    set: {
+      unit: "elementos",
+      verb: "tener"
+    }
   };
   function i(t) {
     return e[t] ?? null;
@@ -9378,7 +10452,9 @@ var Ed = () => {
   };
 };
 function fl() {
-  return { localeError: Ed() };
+  return {
+    localeError: Ed()
+  };
 }
 var Od = () => {
   let e = {
@@ -9479,18 +10555,44 @@ var Od = () => {
   };
 };
 function hl() {
-  return { localeError: Od() };
+  return {
+    localeError: Od()
+  };
 }
 var Nd = () => {
   let e = {
-    string: { unit: "merkki\xE4", subject: "merkkijonon" },
-    file: { unit: "tavua", subject: "tiedoston" },
-    array: { unit: "alkiota", subject: "listan" },
-    set: { unit: "alkiota", subject: "joukon" },
-    number: { unit: "", subject: "luvun" },
-    bigint: { unit: "", subject: "suuren kokonaisluvun" },
-    int: { unit: "", subject: "kokonaisluvun" },
-    date: { unit: "", subject: "p\xE4iv\xE4m\xE4\xE4r\xE4n" }
+    string: {
+      unit: "merkki\xE4",
+      subject: "merkkijonon"
+    },
+    file: {
+      unit: "tavua",
+      subject: "tiedoston"
+    },
+    array: {
+      unit: "alkiota",
+      subject: "listan"
+    },
+    set: {
+      unit: "alkiota",
+      subject: "joukon"
+    },
+    number: {
+      unit: "",
+      subject: "luvun"
+    },
+    bigint: {
+      unit: "",
+      subject: "suuren kokonaisluvun"
+    },
+    int: {
+      unit: "",
+      subject: "kokonaisluvun"
+    },
+    date: {
+      unit: "",
+      subject: "p\xE4iv\xE4m\xE4\xE4r\xE4n"
+    }
   };
   function i(t) {
     return e[t] ?? null;
@@ -9572,14 +10674,28 @@ var Nd = () => {
   };
 };
 function vl() {
-  return { localeError: Nd() };
+  return {
+    localeError: Nd()
+  };
 }
 var Vd = () => {
   let e = {
-    string: { unit: "caract\xE8res", verb: "avoir" },
-    file: { unit: "octets", verb: "avoir" },
-    array: { unit: "\xE9l\xE9ments", verb: "avoir" },
-    set: { unit: "\xE9l\xE9ments", verb: "avoir" }
+    string: {
+      unit: "caract\xE8res",
+      verb: "avoir"
+    },
+    file: {
+      unit: "octets",
+      verb: "avoir"
+    },
+    array: {
+      unit: "\xE9l\xE9ments",
+      verb: "avoir"
+    },
+    set: {
+      unit: "\xE9l\xE9ments",
+      verb: "avoir"
+    }
   };
   function i(t) {
     return e[t] ?? null;
@@ -9661,14 +10777,28 @@ var Vd = () => {
   };
 };
 function bl() {
-  return { localeError: Vd() };
+  return {
+    localeError: Vd()
+  };
 }
 var Ud = () => {
   let e = {
-    string: { unit: "caract\xE8res", verb: "avoir" },
-    file: { unit: "octets", verb: "avoir" },
-    array: { unit: "\xE9l\xE9ments", verb: "avoir" },
-    set: { unit: "\xE9l\xE9ments", verb: "avoir" }
+    string: {
+      unit: "caract\xE8res",
+      verb: "avoir"
+    },
+    file: {
+      unit: "octets",
+      verb: "avoir"
+    },
+    array: {
+      unit: "\xE9l\xE9ments",
+      verb: "avoir"
+    },
+    set: {
+      unit: "\xE9l\xE9ments",
+      verb: "avoir"
+    }
   };
   function i(t) {
     return e[t] ?? null;
@@ -9750,7 +10880,9 @@ var Ud = () => {
   };
 };
 function yl() {
-  return { localeError: Ud() };
+  return {
+    localeError: Ud()
+  };
 }
 var Rd = () => {
   let e = {
@@ -9851,14 +10983,28 @@ var Rd = () => {
   };
 };
 function wl() {
-  return { localeError: Rd() };
+  return {
+    localeError: Rd()
+  };
 }
 var Md = () => {
   let e = {
-    string: { unit: "karakter", verb: "legyen" },
-    file: { unit: "byte", verb: "legyen" },
-    array: { unit: "elem", verb: "legyen" },
-    set: { unit: "elem", verb: "legyen" }
+    string: {
+      unit: "karakter",
+      verb: "legyen"
+    },
+    file: {
+      unit: "byte",
+      verb: "legyen"
+    },
+    array: {
+      unit: "elem",
+      verb: "legyen"
+    },
+    set: {
+      unit: "elem",
+      verb: "legyen"
+    }
   };
   function i(t) {
     return e[t] ?? null;
@@ -9940,14 +11086,28 @@ var Md = () => {
   };
 };
 function kl() {
-  return { localeError: Md() };
+  return {
+    localeError: Md()
+  };
 }
 var Cd = () => {
   let e = {
-    string: { unit: "karakter", verb: "memiliki" },
-    file: { unit: "byte", verb: "memiliki" },
-    array: { unit: "item", verb: "memiliki" },
-    set: { unit: "item", verb: "memiliki" }
+    string: {
+      unit: "karakter",
+      verb: "memiliki"
+    },
+    file: {
+      unit: "byte",
+      verb: "memiliki"
+    },
+    array: {
+      unit: "item",
+      verb: "memiliki"
+    },
+    set: {
+      unit: "item",
+      verb: "memiliki"
+    }
   };
   function i(t) {
     return e[t] ?? null;
@@ -10029,14 +11189,28 @@ var Cd = () => {
   };
 };
 function zl() {
-  return { localeError: Cd() };
+  return {
+    localeError: Cd()
+  };
 }
 var Zd = () => {
   let e = {
-    string: { unit: "caratteri", verb: "avere" },
-    file: { unit: "byte", verb: "avere" },
-    array: { unit: "elementi", verb: "avere" },
-    set: { unit: "elementi", verb: "avere" }
+    string: {
+      unit: "caratteri",
+      verb: "avere"
+    },
+    file: {
+      unit: "byte",
+      verb: "avere"
+    },
+    array: {
+      unit: "elementi",
+      verb: "avere"
+    },
+    set: {
+      unit: "elementi",
+      verb: "avere"
+    }
   };
   function i(t) {
     return e[t] ?? null;
@@ -10118,14 +11292,28 @@ var Zd = () => {
   };
 };
 function xl() {
-  return { localeError: Zd() };
+  return {
+    localeError: Zd()
+  };
 }
 var Ld = () => {
   let e = {
-    string: { unit: "\u6587\u5B57", verb: "\u3067\u3042\u308B" },
-    file: { unit: "\u30D0\u30A4\u30C8", verb: "\u3067\u3042\u308B" },
-    array: { unit: "\u8981\u7D20", verb: "\u3067\u3042\u308B" },
-    set: { unit: "\u8981\u7D20", verb: "\u3067\u3042\u308B" }
+    string: {
+      unit: "\u6587\u5B57",
+      verb: "\u3067\u3042\u308B"
+    },
+    file: {
+      unit: "\u30D0\u30A4\u30C8",
+      verb: "\u3067\u3042\u308B"
+    },
+    array: {
+      unit: "\u8981\u7D20",
+      verb: "\u3067\u3042\u308B"
+    },
+    set: {
+      unit: "\u8981\u7D20",
+      verb: "\u3067\u3042\u308B"
+    }
   };
   function i(t) {
     return e[t] ?? null;
@@ -10207,7 +11395,9 @@ var Ld = () => {
   };
 };
 function Sl() {
-  return { localeError: Ld() };
+  return {
+    localeError: Ld()
+  };
 }
 var Hd = () => {
   let e = {
@@ -10309,14 +11499,28 @@ var Hd = () => {
   };
 };
 function $l() {
-  return { localeError: Hd() };
+  return {
+    localeError: Hd()
+  };
 }
 var Fd = () => {
   let e = {
-    string: { unit: "\uBB38\uC790", verb: "to have" },
-    file: { unit: "\uBC14\uC774\uD2B8", verb: "to have" },
-    array: { unit: "\uAC1C", verb: "to have" },
-    set: { unit: "\uAC1C", verb: "to have" }
+    string: {
+      unit: "\uBB38\uC790",
+      verb: "to have"
+    },
+    file: {
+      unit: "\uBC14\uC774\uD2B8",
+      verb: "to have"
+    },
+    array: {
+      unit: "\uAC1C",
+      verb: "to have"
+    },
+    set: {
+      unit: "\uAC1C",
+      verb: "to have"
+    }
   };
   function i(t) {
     return e[t] ?? null;
@@ -10398,7 +11602,9 @@ var Fd = () => {
   };
 };
 function Dl() {
-  return { localeError: Fd() };
+  return {
+    localeError: Fd()
+  };
 }
 var Wd = () => {
   let e = {
@@ -10499,14 +11705,28 @@ var Wd = () => {
   };
 };
 function Pl() {
-  return { localeError: Wd() };
+  return {
+    localeError: Wd()
+  };
 }
 var Bd = () => {
   let e = {
-    string: { unit: "aksara", verb: "mempunyai" },
-    file: { unit: "bait", verb: "mempunyai" },
-    array: { unit: "elemen", verb: "mempunyai" },
-    set: { unit: "elemen", verb: "mempunyai" }
+    string: {
+      unit: "aksara",
+      verb: "mempunyai"
+    },
+    file: {
+      unit: "bait",
+      verb: "mempunyai"
+    },
+    array: {
+      unit: "elemen",
+      verb: "mempunyai"
+    },
+    set: {
+      unit: "elemen",
+      verb: "mempunyai"
+    }
   };
   function i(t) {
     return e[t] ?? null;
@@ -10588,14 +11808,24 @@ var Bd = () => {
   };
 };
 function Il() {
-  return { localeError: Bd() };
+  return {
+    localeError: Bd()
+  };
 }
 var Kd = () => {
   let e = {
-    string: { unit: "tekens" },
-    file: { unit: "bytes" },
-    array: { unit: "elementen" },
-    set: { unit: "elementen" }
+    string: {
+      unit: "tekens"
+    },
+    file: {
+      unit: "bytes"
+    },
+    array: {
+      unit: "elementen"
+    },
+    set: {
+      unit: "elementen"
+    }
   };
   function i(t) {
     return e[t] ?? null;
@@ -10677,14 +11907,28 @@ var Kd = () => {
   };
 };
 function jl() {
-  return { localeError: Kd() };
+  return {
+    localeError: Kd()
+  };
 }
 var Gd = () => {
   let e = {
-    string: { unit: "tegn", verb: "\xE5 ha" },
-    file: { unit: "bytes", verb: "\xE5 ha" },
-    array: { unit: "elementer", verb: "\xE5 inneholde" },
-    set: { unit: "elementer", verb: "\xE5 inneholde" }
+    string: {
+      unit: "tegn",
+      verb: "\xE5 ha"
+    },
+    file: {
+      unit: "bytes",
+      verb: "\xE5 ha"
+    },
+    array: {
+      unit: "elementer",
+      verb: "\xE5 inneholde"
+    },
+    set: {
+      unit: "elementer",
+      verb: "\xE5 inneholde"
+    }
   };
   function i(t) {
     return e[t] ?? null;
@@ -10766,14 +12010,28 @@ var Gd = () => {
   };
 };
 function Al() {
-  return { localeError: Gd() };
+  return {
+    localeError: Gd()
+  };
 }
 var Yd = () => {
   let e = {
-    string: { unit: "harf", verb: "olmal\u0131d\u0131r" },
-    file: { unit: "bayt", verb: "olmal\u0131d\u0131r" },
-    array: { unit: "unsur", verb: "olmal\u0131d\u0131r" },
-    set: { unit: "unsur", verb: "olmal\u0131d\u0131r" }
+    string: {
+      unit: "harf",
+      verb: "olmal\u0131d\u0131r"
+    },
+    file: {
+      unit: "bayt",
+      verb: "olmal\u0131d\u0131r"
+    },
+    array: {
+      unit: "unsur",
+      verb: "olmal\u0131d\u0131r"
+    },
+    set: {
+      unit: "unsur",
+      verb: "olmal\u0131d\u0131r"
+    }
   };
   function i(t) {
     return e[t] ?? null;
@@ -10855,14 +12113,28 @@ var Yd = () => {
   };
 };
 function Tl() {
-  return { localeError: Yd() };
+  return {
+    localeError: Yd()
+  };
 }
 var Jd = () => {
   let e = {
-    string: { unit: "znak\xF3w", verb: "mie\u0107" },
-    file: { unit: "bajt\xF3w", verb: "mie\u0107" },
-    array: { unit: "element\xF3w", verb: "mie\u0107" },
-    set: { unit: "element\xF3w", verb: "mie\u0107" }
+    string: {
+      unit: "znak\xF3w",
+      verb: "mie\u0107"
+    },
+    file: {
+      unit: "bajt\xF3w",
+      verb: "mie\u0107"
+    },
+    array: {
+      unit: "element\xF3w",
+      verb: "mie\u0107"
+    },
+    set: {
+      unit: "element\xF3w",
+      verb: "mie\u0107"
+    }
   };
   function i(t) {
     return e[t] ?? null;
@@ -10944,14 +12216,28 @@ var Jd = () => {
   };
 };
 function ql() {
-  return { localeError: Jd() };
+  return {
+    localeError: Jd()
+  };
 }
 var Xd = () => {
   let e = {
-    string: { unit: "caracteres", verb: "ter" },
-    file: { unit: "bytes", verb: "ter" },
-    array: { unit: "itens", verb: "ter" },
-    set: { unit: "itens", verb: "ter" }
+    string: {
+      unit: "caracteres",
+      verb: "ter"
+    },
+    file: {
+      unit: "bytes",
+      verb: "ter"
+    },
+    array: {
+      unit: "itens",
+      verb: "ter"
+    },
+    set: {
+      unit: "itens",
+      verb: "ter"
+    }
   };
   function i(t) {
     return e[t] ?? null;
@@ -11033,7 +12319,9 @@ var Xd = () => {
   };
 };
 function El() {
-  return { localeError: Xd() };
+  return {
+    localeError: Xd()
+  };
 }
 function Ol(e, i, r, o) {
   let t = Math.abs(e), n = t % 10, a = t % 100;
@@ -11162,14 +12450,28 @@ var Qd = () => {
   };
 };
 function Nl() {
-  return { localeError: Qd() };
+  return {
+    localeError: Qd()
+  };
 }
 var ec = () => {
   let e = {
-    string: { unit: "znakov", verb: "imeti" },
-    file: { unit: "bajtov", verb: "imeti" },
-    array: { unit: "elementov", verb: "imeti" },
-    set: { unit: "elementov", verb: "imeti" }
+    string: {
+      unit: "znakov",
+      verb: "imeti"
+    },
+    file: {
+      unit: "bajtov",
+      verb: "imeti"
+    },
+    array: {
+      unit: "elementov",
+      verb: "imeti"
+    },
+    set: {
+      unit: "elementov",
+      verb: "imeti"
+    }
   };
   function i(t) {
     return e[t] ?? null;
@@ -11251,14 +12553,28 @@ var ec = () => {
   };
 };
 function Vl() {
-  return { localeError: ec() };
+  return {
+    localeError: ec()
+  };
 }
 var tc = () => {
   let e = {
-    string: { unit: "tecken", verb: "att ha" },
-    file: { unit: "bytes", verb: "att ha" },
-    array: { unit: "objekt", verb: "att inneh\xE5lla" },
-    set: { unit: "objekt", verb: "att inneh\xE5lla" }
+    string: {
+      unit: "tecken",
+      verb: "att ha"
+    },
+    file: {
+      unit: "bytes",
+      verb: "att ha"
+    },
+    array: {
+      unit: "objekt",
+      verb: "att inneh\xE5lla"
+    },
+    set: {
+      unit: "objekt",
+      verb: "att inneh\xE5lla"
+    }
   };
   function i(t) {
     return e[t] ?? null;
@@ -11340,7 +12656,9 @@ var tc = () => {
   };
 };
 function Ul() {
-  return { localeError: tc() };
+  return {
+    localeError: tc()
+  };
 }
 var ic = () => {
   let e = {
@@ -11441,7 +12759,9 @@ var ic = () => {
   };
 };
 function Rl() {
-  return { localeError: ic() };
+  return {
+    localeError: ic()
+  };
 }
 var rc = () => {
   let e = {
@@ -11544,7 +12864,9 @@ var rc = () => {
   };
 };
 function Ml() {
-  return { localeError: rc() };
+  return {
+    localeError: rc()
+  };
 }
 var nc = (e) => {
   let i = typeof e;
@@ -11561,10 +12883,22 @@ var nc = (e) => {
   return i;
 }, oc = () => {
   let e = {
-    string: { unit: "karakter", verb: "olmal\u0131" },
-    file: { unit: "bayt", verb: "olmal\u0131" },
-    array: { unit: "\xF6\u011Fe", verb: "olmal\u0131" },
-    set: { unit: "\xF6\u011Fe", verb: "olmal\u0131" }
+    string: {
+      unit: "karakter",
+      verb: "olmal\u0131"
+    },
+    file: {
+      unit: "bayt",
+      verb: "olmal\u0131"
+    },
+    array: {
+      unit: "\xF6\u011Fe",
+      verb: "olmal\u0131"
+    },
+    set: {
+      unit: "\xF6\u011Fe",
+      verb: "olmal\u0131"
+    }
   };
   function i(o) {
     return e[o] ?? null;
@@ -11633,7 +12967,9 @@ var nc = (e) => {
   };
 };
 function Cl() {
-  return { localeError: oc() };
+  return {
+    localeError: oc()
+  };
 }
 var ac = () => {
   let e = {
@@ -11734,7 +13070,9 @@ var ac = () => {
   };
 };
 function Zl() {
-  return { localeError: ac() };
+  return {
+    localeError: ac()
+  };
 }
 var sc = () => {
   let e = {
@@ -11835,14 +13173,28 @@ var sc = () => {
   };
 };
 function Ll() {
-  return { localeError: sc() };
+  return {
+    localeError: sc()
+  };
 }
 var lc = () => {
   let e = {
-    string: { unit: "k\xFD t\u1EF1", verb: "c\xF3" },
-    file: { unit: "byte", verb: "c\xF3" },
-    array: { unit: "ph\u1EA7n t\u1EED", verb: "c\xF3" },
-    set: { unit: "ph\u1EA7n t\u1EED", verb: "c\xF3" }
+    string: {
+      unit: "k\xFD t\u1EF1",
+      verb: "c\xF3"
+    },
+    file: {
+      unit: "byte",
+      verb: "c\xF3"
+    },
+    array: {
+      unit: "ph\u1EA7n t\u1EED",
+      verb: "c\xF3"
+    },
+    set: {
+      unit: "ph\u1EA7n t\u1EED",
+      verb: "c\xF3"
+    }
   };
   function i(t) {
     return e[t] ?? null;
@@ -11924,14 +13276,28 @@ var lc = () => {
   };
 };
 function Hl() {
-  return { localeError: lc() };
+  return {
+    localeError: lc()
+  };
 }
 var uc = () => {
   let e = {
-    string: { unit: "\u5B57\u7B26", verb: "\u5305\u542B" },
-    file: { unit: "\u5B57\u8282", verb: "\u5305\u542B" },
-    array: { unit: "\u9879", verb: "\u5305\u542B" },
-    set: { unit: "\u9879", verb: "\u5305\u542B" }
+    string: {
+      unit: "\u5B57\u7B26",
+      verb: "\u5305\u542B"
+    },
+    file: {
+      unit: "\u5B57\u8282",
+      verb: "\u5305\u542B"
+    },
+    array: {
+      unit: "\u9879",
+      verb: "\u5305\u542B"
+    },
+    set: {
+      unit: "\u9879",
+      verb: "\u5305\u542B"
+    }
   };
   function i(t) {
     return e[t] ?? null;
@@ -12013,14 +13379,28 @@ var uc = () => {
   };
 };
 function Fl() {
-  return { localeError: uc() };
+  return {
+    localeError: uc()
+  };
 }
 var _c = () => {
   let e = {
-    string: { unit: "\u5B57\u5143", verb: "\u64C1\u6709" },
-    file: { unit: "\u4F4D\u5143\u7D44", verb: "\u64C1\u6709" },
-    array: { unit: "\u9805\u76EE", verb: "\u64C1\u6709" },
-    set: { unit: "\u9805\u76EE", verb: "\u64C1\u6709" }
+    string: {
+      unit: "\u5B57\u5143",
+      verb: "\u64C1\u6709"
+    },
+    file: {
+      unit: "\u4F4D\u5143\u7D44",
+      verb: "\u64C1\u6709"
+    },
+    array: {
+      unit: "\u9805\u76EE",
+      verb: "\u64C1\u6709"
+    },
+    set: {
+      unit: "\u9805\u76EE",
+      verb: "\u64C1\u6709"
+    }
   };
   function i(t) {
     return e[t] ?? null;
@@ -12102,7 +13482,9 @@ var _c = () => {
   };
 };
 function Wl() {
-  return { localeError: _c() };
+  return {
+    localeError: _c()
+  };
 }
 var pi = Symbol("ZodOutput"), gi = Symbol("ZodInput"), Ue = class {
   constructor() {
@@ -12123,8 +13505,13 @@ var pi = Symbol("ZodOutput"), gi = Symbol("ZodInput"), Ue = class {
   get(i) {
     let r = i._zod.parent;
     if (r) {
-      let o = { ...this.get(r) ?? {} };
-      return delete o.id, { ...o, ...this._map.get(i) };
+      let o = {
+        ...this.get(r) ?? {}
+      };
+      return delete o.id, {
+        ...o,
+        ...this._map.get(i)
+      };
     }
     return this._map.get(i);
   }
@@ -12137,10 +13524,17 @@ function zt() {
 }
 var Q = zt();
 function Xo(e, i) {
-  return new e({ type: "string", ...h(i) });
+  return new e({
+    type: "string",
+    ...h(i)
+  });
 }
 function Qo(e, i) {
-  return new e({ type: "string", coerce: true, ...h(i) });
+  return new e({
+    type: "string",
+    coerce: true,
+    ...h(i)
+  });
 }
 function fi(e, i) {
   return new e({
@@ -12380,10 +13774,19 @@ function ra(e, i) {
   });
 }
 function na(e, i) {
-  return new e({ type: "number", checks: [], ...h(i) });
+  return new e({
+    type: "number",
+    checks: [],
+    ...h(i)
+  });
 }
 function oa(e, i) {
-  return new e({ type: "number", coerce: true, checks: [], ...h(i) });
+  return new e({
+    type: "number",
+    coerce: true,
+    checks: [],
+    ...h(i)
+  });
 }
 function aa(e, i) {
   return new e({
@@ -12431,16 +13834,30 @@ function _a(e, i) {
   });
 }
 function da(e, i) {
-  return new e({ type: "boolean", ...h(i) });
+  return new e({
+    type: "boolean",
+    ...h(i)
+  });
 }
 function ca(e, i) {
-  return new e({ type: "boolean", coerce: true, ...h(i) });
+  return new e({
+    type: "boolean",
+    coerce: true,
+    ...h(i)
+  });
 }
 function ma(e, i) {
-  return new e({ type: "bigint", ...h(i) });
+  return new e({
+    type: "bigint",
+    ...h(i)
+  });
 }
 function pa(e, i) {
-  return new e({ type: "bigint", coerce: true, ...h(i) });
+  return new e({
+    type: "bigint",
+    coerce: true,
+    ...h(i)
+  });
 }
 function ga(e, i) {
   return new e({
@@ -12461,46 +13878,95 @@ function fa(e, i) {
   });
 }
 function ha(e, i) {
-  return new e({ type: "symbol", ...h(i) });
+  return new e({
+    type: "symbol",
+    ...h(i)
+  });
 }
 function va(e, i) {
-  return new e({ type: "undefined", ...h(i) });
+  return new e({
+    type: "undefined",
+    ...h(i)
+  });
 }
 function ba(e, i) {
-  return new e({ type: "null", ...h(i) });
+  return new e({
+    type: "null",
+    ...h(i)
+  });
 }
 function ya(e) {
-  return new e({ type: "any" });
+  return new e({
+    type: "any"
+  });
 }
 function Re(e) {
-  return new e({ type: "unknown" });
+  return new e({
+    type: "unknown"
+  });
 }
 function wa(e, i) {
-  return new e({ type: "never", ...h(i) });
+  return new e({
+    type: "never",
+    ...h(i)
+  });
 }
 function ka(e, i) {
-  return new e({ type: "void", ...h(i) });
+  return new e({
+    type: "void",
+    ...h(i)
+  });
 }
 function za(e, i) {
-  return new e({ type: "date", ...h(i) });
+  return new e({
+    type: "date",
+    ...h(i)
+  });
 }
 function xa(e, i) {
-  return new e({ type: "date", coerce: true, ...h(i) });
+  return new e({
+    type: "date",
+    coerce: true,
+    ...h(i)
+  });
 }
 function Sa(e, i) {
-  return new e({ type: "nan", ...h(i) });
+  return new e({
+    type: "nan",
+    ...h(i)
+  });
 }
 function ne(e, i) {
-  return new ai({ check: "less_than", ...h(i), value: e, inclusive: false });
+  return new ai({
+    check: "less_than",
+    ...h(i),
+    value: e,
+    inclusive: false
+  });
 }
 function Y(e, i) {
-  return new ai({ check: "less_than", ...h(i), value: e, inclusive: true });
+  return new ai({
+    check: "less_than",
+    ...h(i),
+    value: e,
+    inclusive: true
+  });
 }
 function oe(e, i) {
-  return new si({ check: "greater_than", ...h(i), value: e, inclusive: false });
+  return new si({
+    check: "greater_than",
+    ...h(i),
+    value: e,
+    inclusive: false
+  });
 }
 function F(e, i) {
-  return new si({ check: "greater_than", ...h(i), value: e, inclusive: true });
+  return new si({
+    check: "greater_than",
+    ...h(i),
+    value: e,
+    inclusive: true
+  });
 }
 function Vi(e) {
   return oe(0, e);
@@ -12515,25 +13981,53 @@ function Mi(e) {
   return F(0, e);
 }
 function fe(e, i) {
-  return new In({ check: "multiple_of", ...h(i), value: e });
+  return new In({
+    check: "multiple_of",
+    ...h(i),
+    value: e
+  });
 }
 function ze(e, i) {
-  return new Tn({ check: "max_size", ...h(i), maximum: e });
+  return new Tn({
+    check: "max_size",
+    ...h(i),
+    maximum: e
+  });
 }
 function he(e, i) {
-  return new qn({ check: "min_size", ...h(i), minimum: e });
+  return new qn({
+    check: "min_size",
+    ...h(i),
+    minimum: e
+  });
 }
 function Me(e, i) {
-  return new En({ check: "size_equals", ...h(i), size: e });
+  return new En({
+    check: "size_equals",
+    ...h(i),
+    size: e
+  });
 }
 function xe(e, i) {
-  return new On({ check: "max_length", ...h(i), maximum: e });
+  return new On({
+    check: "max_length",
+    ...h(i),
+    maximum: e
+  });
 }
 function _e(e, i) {
-  return new Nn({ check: "min_length", ...h(i), minimum: e });
+  return new Nn({
+    check: "min_length",
+    ...h(i),
+    minimum: e
+  });
 }
 function Se(e, i) {
-  return new Vn({ check: "length_equals", ...h(i), length: e });
+  return new Vn({
+    check: "length_equals",
+    ...h(i),
+    length: e
+  });
 }
 function Ce(e, i) {
   return new Un({
@@ -12544,10 +14038,18 @@ function Ce(e, i) {
   });
 }
 function Ze(e) {
-  return new Rn({ check: "string_format", format: "lowercase", ...h(e) });
+  return new Rn({
+    check: "string_format",
+    format: "lowercase",
+    ...h(e)
+  });
 }
 function Le(e) {
-  return new Mn({ check: "string_format", format: "uppercase", ...h(e) });
+  return new Mn({
+    check: "string_format",
+    format: "uppercase",
+    ...h(e)
+  });
 }
 function He(e, i) {
   return new Cn({
@@ -12574,13 +14076,25 @@ function We(e, i) {
   });
 }
 function Ci(e, i, r) {
-  return new Hn({ check: "property", property: e, schema: i, ...h(r) });
+  return new Hn({
+    check: "property",
+    property: e,
+    schema: i,
+    ...h(r)
+  });
 }
 function Be(e, i) {
-  return new Fn({ check: "mime_type", mime: e, ...h(i) });
+  return new Fn({
+    check: "mime_type",
+    mime: e,
+    ...h(i)
+  });
 }
 function ae(e) {
-  return new Wn({ check: "overwrite", tx: e });
+  return new Wn({
+    check: "overwrite",
+    tx: e
+  });
 }
 function Ke(e) {
   return ae((i) => i.normalize(e));
@@ -12595,36 +14109,80 @@ function Je() {
   return ae((e) => e.toUpperCase());
 }
 function St(e, i, r) {
-  return new e({ type: "array", element: i, ...h(r) });
+  return new e({
+    type: "array",
+    element: i,
+    ...h(r)
+  });
 }
 function dc(e, i, r) {
-  return new e({ type: "union", options: i, ...h(r) });
+  return new e({
+    type: "union",
+    options: i,
+    ...h(r)
+  });
 }
 function cc(e, i, r, o) {
-  return new e({ type: "union", options: r, discriminator: i, ...h(o) });
+  return new e({
+    type: "union",
+    options: r,
+    discriminator: i,
+    ...h(o)
+  });
 }
 function mc(e, i, r) {
-  return new e({ type: "intersection", left: i, right: r });
+  return new e({
+    type: "intersection",
+    left: i,
+    right: r
+  });
 }
 function $a(e, i, r, o) {
   let t = r instanceof x, n = t ? o : r, a = t ? r : null;
-  return new e({ type: "tuple", items: i, rest: a, ...h(n) });
+  return new e({
+    type: "tuple",
+    items: i,
+    rest: a,
+    ...h(n)
+  });
 }
 function pc(e, i, r, o) {
-  return new e({ type: "record", keyType: i, valueType: r, ...h(o) });
+  return new e({
+    type: "record",
+    keyType: i,
+    valueType: r,
+    ...h(o)
+  });
 }
 function gc(e, i, r, o) {
-  return new e({ type: "map", keyType: i, valueType: r, ...h(o) });
+  return new e({
+    type: "map",
+    keyType: i,
+    valueType: r,
+    ...h(o)
+  });
 }
 function fc(e, i, r) {
-  return new e({ type: "set", valueType: i, ...h(r) });
+  return new e({
+    type: "set",
+    valueType: i,
+    ...h(r)
+  });
 }
 function hc(e, i, r) {
   let o = Array.isArray(i) ? Object.fromEntries(i.map((t) => [t, t])) : i;
-  return new e({ type: "enum", entries: o, ...h(r) });
+  return new e({
+    type: "enum",
+    entries: o,
+    ...h(r)
+  });
 }
 function vc(e, i, r) {
-  return new e({ type: "enum", entries: i, ...h(r) });
+  return new e({
+    type: "enum",
+    entries: i,
+    ...h(r)
+  });
 }
 function bc(e, i, r) {
   return new e({
@@ -12634,16 +14192,28 @@ function bc(e, i, r) {
   });
 }
 function Da(e, i) {
-  return new e({ type: "file", ...h(i) });
+  return new e({
+    type: "file",
+    ...h(i)
+  });
 }
 function yc(e, i) {
-  return new e({ type: "transform", transform: i });
+  return new e({
+    type: "transform",
+    transform: i
+  });
 }
 function wc(e, i) {
-  return new e({ type: "optional", innerType: i });
+  return new e({
+    type: "optional",
+    innerType: i
+  });
 }
 function kc(e, i) {
-  return new e({ type: "nullable", innerType: i });
+  return new e({
+    type: "nullable",
+    innerType: i
+  });
 }
 function zc(e, i, r) {
   return new e({
@@ -12655,10 +14225,17 @@ function zc(e, i, r) {
   });
 }
 function xc(e, i, r) {
-  return new e({ type: "nonoptional", innerType: i, ...h(r) });
+  return new e({
+    type: "nonoptional",
+    innerType: i,
+    ...h(r)
+  });
 }
 function Sc(e, i) {
-  return new e({ type: "success", innerType: i });
+  return new e({
+    type: "success",
+    innerType: i
+  });
 }
 function $c(e, i, r) {
   return new e({
@@ -12668,26 +14245,53 @@ function $c(e, i, r) {
   });
 }
 function Dc(e, i, r) {
-  return new e({ type: "pipe", in: i, out: r });
+  return new e({
+    type: "pipe",
+    in: i,
+    out: r
+  });
 }
 function Pc(e, i) {
-  return new e({ type: "readonly", innerType: i });
+  return new e({
+    type: "readonly",
+    innerType: i
+  });
 }
 function Ic(e, i, r) {
-  return new e({ type: "template_literal", parts: i, ...h(r) });
+  return new e({
+    type: "template_literal",
+    parts: i,
+    ...h(r)
+  });
 }
 function jc(e, i) {
-  return new e({ type: "lazy", getter: i });
+  return new e({
+    type: "lazy",
+    getter: i
+  });
 }
 function Ac(e, i) {
-  return new e({ type: "promise", innerType: i });
+  return new e({
+    type: "promise",
+    innerType: i
+  });
 }
 function Pa(e, i, r) {
   let o = h(r);
-  return o.abort ?? (o.abort = true), new e({ type: "custom", check: "custom", fn: i, ...o });
+  return o.abort ?? (o.abort = true), new e({
+    type: "custom",
+    check: "custom",
+    fn: i,
+    ...o
+  });
 }
 function Ia(e, i, r) {
-  return new e({ type: "custom", check: "custom", fn: i, ...h(r) });
+  return new e({
+    type: "custom",
+    check: "custom",
+    fn: i,
+    ...h(r)
+  });
 }
 function ja(e, i) {
   let { case: r, error: o, truthy: t, falsy: n } = h(i), a = new Set(t ?? ["true", "1", "yes", "on", "y", "enabled"]), s = new Set(n ?? ["false", "0", "no", "off", "n", "disabled"]), u = e.Pipe ?? kt, l = e.Boolean ?? yt, p = e.Unknown ?? ge, g = new p({
@@ -12712,7 +14316,9 @@ function ja(e, i) {
                 input: f.value
               });
           },
-          def: { check: "custom" },
+          def: {
+            check: "custom"
+          },
           onattach: []
         }
       }
@@ -12722,7 +14328,10 @@ function ja(e, i) {
   return new u({
     type: "pipe",
     in: g,
-    out: new l({ type: "boolean", error: o }),
+    out: new l({
+      type: "boolean",
+      error: o
+    }),
     error: o
   });
 }
@@ -12734,13 +14343,17 @@ var Zi = class {
     if (typeof i != "function")
       throw new Error("implement() must be called with a function");
     let r = (...o) => {
-      let t = this._def.input ? ei(this._def.input, o, void 0, { callee: r }) : o;
+      let t = this._def.input ? ei(this._def.input, o, void 0, {
+        callee: r
+      }) : o;
       if (!Array.isArray(t))
         throw new Error(
           "Invalid arguments schema: not an array or tuple schema."
         );
       let n = i(...t);
-      return this._def.output ? ei(this._def.output, n, void 0, { callee: r }) : n;
+      return this._def.output ? ei(this._def.output, n, void 0, {
+        callee: r
+      }) : n;
     };
     return r;
   }
@@ -12748,13 +14361,17 @@ var Zi = class {
     if (typeof i != "function")
       throw new Error("implement() must be called with a function");
     let r = async (...o) => {
-      let t = this._def.input ? await ii(this._def.input, o, void 0, { callee: r }) : o;
+      let t = this._def.input ? await ii(this._def.input, o, void 0, {
+        callee: r
+      }) : o;
       if (!Array.isArray(t))
         throw new Error(
           "Invalid arguments schema: not an array or tuple schema."
         );
       let n = await i(...t);
-      return this._def.output ? ii(this._def.output, n, void 0, { callee: r }) : n;
+      return this._def.output ? ii(this._def.output, n, void 0, {
+        callee: r
+      }) : n;
     };
     return r;
   }
@@ -12762,13 +14379,25 @@ var Zi = class {
     let r = this.constructor;
     return Array.isArray(i[0]) ? new r({
       type: "function",
-      input: new ke({ type: "tuple", items: i[0], rest: i[1] }),
+      input: new ke({
+        type: "tuple",
+        items: i[0],
+        rest: i[1]
+      }),
       output: this._def.output
-    }) : new r({ type: "function", input: i[0], output: this._def.output });
+    }) : new r({
+      type: "function",
+      input: i[0],
+      output: this._def.output
+    });
   }
   output(i) {
     let r = this.constructor;
-    return new r({ type: "function", input: this._def.input, output: i });
+    return new r({
+      type: "function",
+      input: this._def.input,
+      output: i
+    });
   }
 };
 function Li(e) {
@@ -12783,7 +14412,10 @@ var $t = class {
     this.counter = 0, this.metadataRegistry = i?.metadata ?? Q, this.target = i?.target ?? "draft-2020-12", this.unrepresentable = i?.unrepresentable ?? "throw", this.override = i?.override ?? (() => {
     }), this.io = i?.io ?? "output", this.seen = /* @__PURE__ */ new Map();
   }
-  process(i, r = { path: [], schemaPath: [] }) {
+  process(i, r = {
+    path: [],
+    schemaPath: []
+  }) {
     var o;
     let t = i._zod.def, n = {
       guid: "uuid",
@@ -12794,9 +14426,17 @@ var $t = class {
     }, a = this.seen.get(i);
     if (a)
       return a.count++, r.schemaPath.includes(i) && (a.cycle = r.path), a.schema;
-    let s = { schema: {}, count: 1, cycle: void 0 };
+    let s = {
+      schema: {},
+      count: 1,
+      cycle: void 0
+    };
     this.seen.set(i, s), i._zod.toJSONSchema && (s.schema = i._zod.toJSONSchema());
-    let u = { ...r, schemaPath: [...r.schemaPath, i], path: r.path }, l = i._zod.parent;
+    let u = {
+      ...r,
+      schemaPath: [...r.schemaPath, i],
+      path: r.path
+    }, l = i._zod.parent;
     if (l) s.ref = l, this.process(l, u), this.seen.get(l).isParent = true;
     else {
       let f = s.schema;
@@ -12815,7 +14455,9 @@ var $t = class {
             let $ = [...A];
             $.length === 1 ? d.pattern = $[0].source : $.length > 1 && (s.schema.allOf = [
               ...$.map((w) => ({
-                ...this.target === "draft-7" ? { type: "string" } : {},
+                ...this.target === "draft-7" ? {
+                  type: "string"
+                } : {},
                 pattern: w.source
               }))
             ]);
@@ -12908,12 +14550,21 @@ var $t = class {
         case "union": {
           let d = f;
           d.anyOf = t.options.map(
-            (v, k) => this.process(v, { ...u, path: [...u.path, "anyOf", k] })
+            (v, k) => this.process(v, {
+              ...u,
+              path: [...u.path, "anyOf", k]
+            })
           );
           break;
         }
         case "intersection": {
-          let d = f, v = this.process(t.left, { ...u, path: [...u.path, "allOf", 0] }), k = this.process(t.right, { ...u, path: [...u.path, "allOf", 1] }), j = (D) => "allOf" in D && Object.keys(D).length === 1, A = [...j(v) ? v.allOf : [v], ...j(k) ? k.allOf : [k]];
+          let d = f, v = this.process(t.left, {
+            ...u,
+            path: [...u.path, "allOf", 0]
+          }), k = this.process(t.right, {
+            ...u,
+            path: [...u.path, "allOf", 1]
+          }), j = (D) => "allOf" in D && Object.keys(D).length === 1, A = [...j(v) ? v.allOf : [v], ...j(k) ? k.allOf : [k]];
           d.allOf = A;
           break;
         }
@@ -12921,10 +14572,16 @@ var $t = class {
           let d = f;
           d.type = "array";
           let v = t.items.map(
-            (A, D) => this.process(A, { ...u, path: [...u.path, "prefixItems", D] })
+            (A, D) => this.process(A, {
+              ...u,
+              path: [...u.path, "prefixItems", D]
+            })
           );
           if (this.target === "draft-2020-12" ? d.prefixItems = v : d.items = v, t.rest) {
-            let A = this.process(t.rest, { ...u, path: [...u.path, "items"] });
+            let A = this.process(t.rest, {
+              ...u,
+              path: [...u.path, "items"]
+            });
             this.target === "draft-2020-12" ? d.items = A : d.additionalItems = A;
           }
           t.rest && (d.items = this.process(t.rest, {
@@ -12985,8 +14642,15 @@ var $t = class {
           break;
         }
         case "file": {
-          let d = f, v = { type: "string", format: "binary", contentEncoding: "binary" }, { minimum: k, maximum: j, mime: A } = i._zod.bag;
-          k !== void 0 && (v.minLength = k), j !== void 0 && (v.maxLength = j), A ? A.length === 1 ? (v.contentMediaType = A[0], Object.assign(d, v)) : d.anyOf = A.map((D) => ({ ...v, contentMediaType: D })) : Object.assign(d, v);
+          let d = f, v = {
+            type: "string",
+            format: "binary",
+            contentEncoding: "binary"
+          }, { minimum: k, maximum: j, mime: A } = i._zod.bag;
+          k !== void 0 && (v.minLength = k), j !== void 0 && (v.maxLength = j), A ? A.length === 1 ? (v.contentMediaType = A[0], Object.assign(d, v)) : d.anyOf = A.map((D) => ({
+            ...v,
+            contentMediaType: D
+          })) : Object.assign(d, v);
           break;
         }
         case "transform": {
@@ -12996,7 +14660,12 @@ var $t = class {
         }
         case "nullable": {
           let d = this.process(t.innerType, u);
-          f.anyOf = [d, { type: "null" }];
+          f.anyOf = [
+            d,
+            {
+              type: "null"
+            }
+          ];
           break;
         }
         case "nonoptional": {
@@ -13086,17 +14755,31 @@ var $t = class {
       let g = this.target === "draft-2020-12" ? "$defs" : "definitions";
       if (o.external) {
         let k = o.external.registry.get(p[0])?.id;
-        if (k) return { ref: o.external.uri(k) };
+        if (k)
+          return {
+            ref: o.external.uri(k)
+          };
         let j = p[1].defId ?? p[1].schema.id ?? `schema${this.counter++}`;
-        return p[1].defId = j, { defId: j, ref: `${o.external.uri("__shared")}#/${g}/${j}` };
+        return p[1].defId = j, {
+          defId: j,
+          ref: `${o.external.uri("__shared")}#/${g}/${j}`
+        };
       }
-      if (p[1] === t) return { ref: "#" };
+      if (p[1] === t)
+        return {
+          ref: "#"
+        };
       let d = `#/${g}/`, v = p[1].schema.id ?? `__schema${this.counter++}`;
-      return { defId: v, ref: d + v };
+      return {
+        defId: v,
+        ref: d + v
+      };
     }, a = (p) => {
       if (p[1].schema.$ref) return;
       let g = p[1], { ref: f, defId: d } = n(p);
-      g.def = { ...g.schema }, d && (g.defId = d);
+      g.def = {
+        ...g.schema
+      }, d && (g.defId = d);
       let v = g.schema;
       for (let k in v) delete v[k];
       v.$ref = f;
@@ -13132,7 +14815,9 @@ Set the \`cycles\` parameter to \`"ref"\` to resolve cyclical schemas with defs.
       }
     }
     let s = (p, g) => {
-      let f = this.seen.get(p), d = f.def ?? f.schema, v = { ...d };
+      let f = this.seen.get(p), d = f.def ?? f.schema, v = {
+        ...d
+      };
       if (f.ref === null) return;
       let k = f.ref;
       if (f.ref = null, k) {
@@ -13140,10 +14825,15 @@ Set the \`cycles\` parameter to \`"ref"\` to resolve cyclical schemas with defs.
         let j = this.seen.get(k).schema;
         j.$ref && g.target === "draft-7" ? (d.allOf = d.allOf ?? [], d.allOf.push(j)) : (Object.assign(d, j), Object.assign(d, v));
       }
-      f.isParent || this.override({ zodSchema: p, jsonSchema: d });
+      f.isParent || this.override({
+        zodSchema: p,
+        jsonSchema: d
+      });
     };
     for (let p of [...this.seen.entries()].reverse())
-      s(p[0], { target: this.target });
+      s(p[0], {
+        target: this.target
+      });
     let u = {};
     this.target === "draft-2020-12" ? u.$schema = "https://json-schema.org/draft/2020-12/schema" : this.target === "draft-7" ? u.$schema = "http://json-schema.org/draft-07/schema#" : console.warn(`Invalid target: ${this.target}`), Object.assign(u, t.def);
     let l = o.external?.defs ?? {};
@@ -13166,22 +14856,35 @@ function Hi(e, i) {
       let [u, l] = s;
       o.process(l);
     }
-    let n = {}, a = { registry: e, uri: i?.uri || ((s) => s), defs: t };
+    let n = {}, a = {
+      registry: e,
+      uri: i?.uri || ((s) => s),
+      defs: t
+    };
     for (let s of e._idmap.entries()) {
       let [u, l] = s;
-      n[u] = o.emit(l, { ...i, external: a });
+      n[u] = o.emit(l, {
+        ...i,
+        external: a
+      });
     }
     if (Object.keys(t).length > 0) {
       let s = o.target === "draft-2020-12" ? "$defs" : "definitions";
-      n.__shared = { [s]: t };
+      n.__shared = {
+        [s]: t
+      };
     }
-    return { schemas: n };
+    return {
+      schemas: n
+    };
   }
   let r = new $t(i);
   return r.process(e), r.emit(e, i);
 }
 function R(e, i) {
-  let r = i ?? { seen: /* @__PURE__ */ new Set() };
+  let r = i ?? {
+    seen: /* @__PURE__ */ new Set()
+  };
   if (r.seen.has(e)) return false;
   r.seen.add(e);
   let t = e._zod.def;
@@ -13290,31 +14993,57 @@ function Ea(e) {
 }
 var Gl = (e, i) => {
   ht.init(e, i), e.name = "ZodError", Object.defineProperties(e, {
-    format: { value: (r) => Oe(e, r) },
-    flatten: { value: (r) => Ee(e, r) },
-    addIssue: { value: (r) => e.issues.push(r) },
-    addIssues: { value: (r) => e.issues.push(...r) },
+    format: {
+      value: (r) => Oe(e, r)
+    },
+    flatten: {
+      value: (r) => Ee(e, r)
+    },
+    addIssue: {
+      value: (r) => e.issues.push(r)
+    },
+    addIssues: {
+      value: (r) => e.issues.push(...r)
+    },
     isEmpty: {
       get() {
         return e.issues.length === 0;
       }
     }
   });
-}, Yl = _("ZodError", Gl), $e = _("ZodError", Gl, { Parent: Error });
+}, Yl = _("ZodError", Gl), $e = _("ZodError", Gl, {
+  Parent: Error
+});
 var Fi = Qt($e), Wi = ti($e), Bi = ri($e), Ki = ni($e);
 var S = _(
   "ZodType",
-  (e, i) => (x.init(e, i), e.def = i, Object.defineProperty(e, "_def", { value: i }), e.check = (...r) => e.clone({
+  (e, i) => (x.init(e, i), e.def = i, Object.defineProperty(e, "_def", {
+    value: i
+  }), e.check = (...r) => e.clone({
     ...i,
     checks: [
       ...i.checks ?? [],
       ...r.map(
-        (o) => typeof o == "function" ? { _zod: { check: o, def: { check: "custom" }, onattach: [] } } : o
+        (o) => typeof o == "function" ? {
+          _zod: {
+            check: o,
+            def: {
+              check: "custom"
+            },
+            onattach: []
+          }
+        } : o
       )
     ]
-  }), e.clone = (r, o) => W(e, r, o), e.brand = () => e, e.register = (r, o) => (r.add(e, o), e), e.parse = (r, o) => Fi(e, r, o, { callee: e.parse }), e.safeParse = (r, o) => Bi(e, r, o), e.parseAsync = async (r, o) => Wi(e, r, o, { callee: e.parseAsync }), e.safeParseAsync = async (r, o) => Ki(e, r, o), e.spa = e.safeParseAsync, e.refine = (r, o) => e.check(ys(r, o)), e.superRefine = (r) => e.check(ws(r)), e.overwrite = (r) => e.check(ae(r)), e.optional = () => Et(e), e.nullable = () => Ot(e), e.nullish = () => Et(Ot(e)), e.nonoptional = (r) => ls(e, r), e.array = () => hr(e), e.or = (r) => Ct([e, r]), e.and = (r) => Ba(e, r), e.transform = (r) => Nt(e, yr(r)), e.default = (r) => os(e, r), e.prefault = (r) => ss(e, r), e.catch = (r) => ds(e, r), e.pipe = (r) => Nt(e, r), e.readonly = () => ps(e), e.describe = (r) => {
+  }), e.clone = (r, o) => W(e, r, o), e.brand = () => e, e.register = (r, o) => (r.add(e, o), e), e.parse = (r, o) => Fi(e, r, o, {
+    callee: e.parse
+  }), e.safeParse = (r, o) => Bi(e, r, o), e.parseAsync = async (r, o) => Wi(e, r, o, {
+    callee: e.parseAsync
+  }), e.safeParseAsync = async (r, o) => Ki(e, r, o), e.spa = e.safeParseAsync, e.refine = (r, o) => e.check(ys(r, o)), e.superRefine = (r) => e.check(ws(r)), e.overwrite = (r) => e.check(ae(r)), e.optional = () => Et(e), e.nullable = () => Ot(e), e.nullish = () => Et(Ot(e)), e.nonoptional = (r) => ls(e, r), e.array = () => hr(e), e.or = (r) => Ct([e, r]), e.and = (r) => Ba(e, r), e.transform = (r) => Nt(e, yr(r)), e.default = (r) => os(e, r), e.prefault = (r) => ss(e, r), e.catch = (r) => ds(e, r), e.pipe = (r) => Nt(e, r), e.readonly = () => ps(e), e.describe = (r) => {
     let o = e.clone();
-    return Q.add(o, { description: r }), o;
+    return Q.add(o, {
+      description: r
+    }), o;
   }, Object.defineProperty(e, "description", {
     get() {
       return Q.get(e)?.description;
@@ -13580,13 +15309,30 @@ var Mt = _("ZodObject", (e, i) => {
     e,
     "shape",
     () => Object.fromEntries(Object.entries(e._zod.def.shape))
-  ), e.keyof = () => Xa(Object.keys(e._zod.def.shape)), e.catchall = (r) => e.clone({ ...e._zod.def, catchall: r }), e.passthrough = () => e.clone({ ...e._zod.def, catchall: qt() }), e.loose = () => e.clone({ ...e._zod.def, catchall: qt() }), e.strict = () => e.clone({ ...e._zod.def, catchall: Ut() }), e.strip = () => e.clone({ ...e._zod.def, catchall: void 0 }), e.extend = (r) => b.extend(e, r), e.merge = (r) => b.merge(e, r), e.pick = (r) => b.pick(e, r), e.omit = (r) => b.omit(e, r), e.partial = (...r) => b.partial(wr, e, r[0]), e.required = (...r) => b.required(kr, e, r[0]);
+  ), e.keyof = () => Xa(Object.keys(e._zod.def.shape)), e.catchall = (r) => e.clone({
+    ...e._zod.def,
+    catchall: r
+  }), e.passthrough = () => e.clone({
+    ...e._zod.def,
+    catchall: qt()
+  }), e.loose = () => e.clone({
+    ...e._zod.def,
+    catchall: qt()
+  }), e.strict = () => e.clone({
+    ...e._zod.def,
+    catchall: Ut()
+  }), e.strip = () => e.clone({
+    ...e._zod.def,
+    catchall: void 0
+  }), e.extend = (r) => b.extend(e, r), e.merge = (r) => b.merge(e, r), e.pick = (r) => b.pick(e, r), e.omit = (r) => b.omit(e, r), e.partial = (...r) => b.partial(wr, e, r[0]), e.required = (...r) => b.required(kr, e, r[0]);
 });
 function Tu(e, i) {
   let r = {
     type: "object",
     get shape() {
-      return b.assignProp(this, "shape", { ...e }), this.shape;
+      return b.assignProp(this, "shape", {
+        ...e
+      }), this.shape;
     },
     ...b.normalizeParams(i)
   };
@@ -13596,7 +15342,9 @@ function qu(e, i) {
   return new Mt({
     type: "object",
     get shape() {
-      return b.assignProp(this, "shape", { ...e }), this.shape;
+      return b.assignProp(this, "shape", {
+        ...e
+      }), this.shape;
     },
     catchall: Ut(),
     ...b.normalizeParams(i)
@@ -13606,7 +15354,9 @@ function Eu(e, i) {
   return new Mt({
     type: "object",
     get shape() {
-      return b.assignProp(this, "shape", { ...e }), this.shape;
+      return b.assignProp(this, "shape", {
+        ...e
+      }), this.shape;
     },
     catchall: qt(),
     ...b.normalizeParams(i)
@@ -13616,7 +15366,11 @@ var vr = _("ZodUnion", (e, i) => {
   ci.init(e, i), S.init(e, i), e.options = i.options;
 });
 function Ct(e, i) {
-  return new vr({ type: "union", options: e, ...b.normalizeParams(i) });
+  return new vr({
+    type: "union",
+    options: e,
+    ...b.normalizeParams(i)
+  });
 }
 var Fa = _("ZodDiscriminatedUnion", (e, i) => {
   vr.init(e, i), jo.init(e, i);
@@ -13633,14 +15387,26 @@ var Wa = _("ZodIntersection", (e, i) => {
   Ao.init(e, i), S.init(e, i);
 });
 function Ba(e, i) {
-  return new Wa({ type: "intersection", left: e, right: i });
+  return new Wa({
+    type: "intersection",
+    left: e,
+    right: i
+  });
 }
 var Ka = _("ZodTuple", (e, i) => {
-  ke.init(e, i), S.init(e, i), e.rest = (r) => e.clone({ ...e._zod.def, rest: r });
+  ke.init(e, i), S.init(e, i), e.rest = (r) => e.clone({
+    ...e._zod.def,
+    rest: r
+  });
 });
 function Nu(e, i, r) {
   let o = i instanceof x, t = o ? r : i, n = o ? i : null;
-  return new Ka({ type: "tuple", items: e, rest: n, ...b.normalizeParams(t) });
+  return new Ka({
+    type: "tuple",
+    items: e,
+    rest: n,
+    ...b.normalizeParams(t)
+  });
 }
 var br = _("ZodRecord", (e, i) => {
   To.init(e, i), S.init(e, i), e.keyType = i.keyType, e.valueType = i.valueType;
@@ -13676,7 +15442,11 @@ var Ja = _("ZodSet", (e, i) => {
   Eo.init(e, i), S.init(e, i), e.min = (...r) => e.check(he(...r)), e.nonempty = (r) => e.check(he(1, r)), e.max = (...r) => e.check(ze(...r)), e.size = (...r) => e.check(Me(...r));
 });
 function Ru(e, i) {
-  return new Ja({ type: "set", valueType: e, ...b.normalizeParams(i) });
+  return new Ja({
+    type: "set",
+    valueType: e,
+    ...b.normalizeParams(i)
+  });
 }
 var Xe = _("ZodEnum", (e, i) => {
   Oo.init(e, i), S.init(e, i), e.enum = i.entries, e.options = Object.values(i.entries);
@@ -13686,21 +15456,41 @@ var Xe = _("ZodEnum", (e, i) => {
     for (let a of o)
       if (r.has(a)) n[a] = i.entries[a];
       else throw new Error(`Key ${a} not found in enum`);
-    return new Xe({ ...i, checks: [], ...b.normalizeParams(t), entries: n });
+    return new Xe({
+      ...i,
+      checks: [],
+      ...b.normalizeParams(t),
+      entries: n
+    });
   }, e.exclude = (o, t) => {
-    let n = { ...i.entries };
+    let n = {
+      ...i.entries
+    };
     for (let a of o)
       if (r.has(a)) delete n[a];
       else throw new Error(`Key ${a} not found in enum`);
-    return new Xe({ ...i, checks: [], ...b.normalizeParams(t), entries: n });
+    return new Xe({
+      ...i,
+      checks: [],
+      ...b.normalizeParams(t),
+      entries: n
+    });
   };
 });
 function Xa(e, i) {
   let r = Array.isArray(e) ? Object.fromEntries(e.map((o) => [o, o])) : e;
-  return new Xe({ type: "enum", entries: r, ...b.normalizeParams(i) });
+  return new Xe({
+    type: "enum",
+    entries: r,
+    ...b.normalizeParams(i)
+  });
 }
 function Mu(e, i) {
-  return new Xe({ type: "enum", entries: e, ...b.normalizeParams(i) });
+  return new Xe({
+    type: "enum",
+    entries: e,
+    ...b.normalizeParams(i)
+  });
 }
 var Qa = _("ZodLiteral", (e, i) => {
   No.init(e, i), S.init(e, i), e.values = new Set(i.values), Object.defineProperty(e, "value", {
@@ -13740,19 +15530,28 @@ var is = _("ZodTransform", (e, i) => {
   };
 });
 function yr(e) {
-  return new is({ type: "transform", transform: e });
+  return new is({
+    type: "transform",
+    transform: e
+  });
 }
 var wr = _("ZodOptional", (e, i) => {
   Ro.init(e, i), S.init(e, i), e.unwrap = () => e._zod.def.innerType;
 });
 function Et(e) {
-  return new wr({ type: "optional", innerType: e });
+  return new wr({
+    type: "optional",
+    innerType: e
+  });
 }
 var rs = _("ZodNullable", (e, i) => {
   Mo.init(e, i), S.init(e, i), e.unwrap = () => e._zod.def.innerType;
 });
 function Ot(e) {
-  return new rs({ type: "nullable", innerType: e });
+  return new rs({
+    type: "nullable",
+    innerType: e
+  });
 }
 function Zu(e) {
   return Et(Ot(e));
@@ -13785,13 +15584,20 @@ var kr = _("ZodNonOptional", (e, i) => {
   Lo.init(e, i), S.init(e, i), e.unwrap = () => e._zod.def.innerType;
 });
 function ls(e, i) {
-  return new kr({ type: "nonoptional", innerType: e, ...b.normalizeParams(i) });
+  return new kr({
+    type: "nonoptional",
+    innerType: e,
+    ...b.normalizeParams(i)
+  });
 }
 var us = _("ZodSuccess", (e, i) => {
   Ho.init(e, i), S.init(e, i), e.unwrap = () => e._zod.def.innerType;
 });
 function Lu(e) {
-  return new us({ type: "success", innerType: e });
+  return new us({
+    type: "success",
+    innerType: e
+  });
 }
 var _s = _("ZodCatch", (e, i) => {
   Fo.init(e, i), S.init(e, i), e.unwrap = () => e._zod.def.innerType, e.removeCatch = e.unwrap;
@@ -13813,13 +15619,20 @@ var zr = _("ZodPipe", (e, i) => {
   kt.init(e, i), S.init(e, i), e.in = i.in, e.out = i.out;
 });
 function Nt(e, i) {
-  return new zr({ type: "pipe", in: e, out: i });
+  return new zr({
+    type: "pipe",
+    in: e,
+    out: i
+  });
 }
 var ms = _("ZodReadonly", (e, i) => {
   Bo.init(e, i), S.init(e, i);
 });
 function ps(e) {
-  return new ms({ type: "readonly", innerType: e });
+  return new ms({
+    type: "readonly",
+    innerType: e
+  });
 }
 var gs = _("ZodTemplateLiteral", (e, i) => {
   Ko.init(e, i), S.init(e, i);
@@ -13835,19 +15648,28 @@ var fs = _("ZodLazy", (e, i) => {
   Yo.init(e, i), S.init(e, i), e.unwrap = () => e._zod.def.getter();
 });
 function hs(e) {
-  return new fs({ type: "lazy", getter: e });
+  return new fs({
+    type: "lazy",
+    getter: e
+  });
 }
 var vs = _("ZodPromise", (e, i) => {
   Go.init(e, i), S.init(e, i), e.unwrap = () => e._zod.def.innerType;
 });
 function Wu(e) {
-  return new vs({ type: "promise", innerType: e });
+  return new vs({
+    type: "promise",
+    innerType: e
+  });
 }
 var Zt = _("ZodCustom", (e, i) => {
   Jo.init(e, i), S.init(e, i);
 });
 function bs(e, i) {
-  let r = new V({ check: "custom", ...b.normalizeParams(i) });
+  let r = new V({
+    check: "custom",
+    ...b.normalizeParams(i)
+  });
   return r._zod.check = e, r;
 }
 function Bu(e, i) {
@@ -13870,7 +15692,9 @@ function ws(e, i) {
   );
   return r;
 }
-function Ku(e, i = { error: `Input not instance of ${e.name}` }) {
+function Ku(e, i = {
+  error: `Input not instance of ${e.name}`
+}) {
   let r = new Zt({
     type: "custom",
     check: "custom",
@@ -13880,7 +15704,14 @@ function Ku(e, i = { error: `Input not instance of ${e.name}` }) {
   });
   return r._zod.bag.Class = e, r;
 }
-var Gu = (...e) => ja({ Pipe: zr, Boolean: et, Unknown: fr }, ...e);
+var Gu = (...e) => ja(
+  {
+    Pipe: zr,
+    Boolean: et,
+    Unknown: fr
+  },
+  ...e
+);
 function Yu(e) {
   let i = hs(() => Ct([Gi(e), Oa(), Na(), Ma(), hr(i), Ga(Gi(), i)]));
   return i;
@@ -13900,9 +15731,13 @@ var Xu = {
   invalid_element: "invalid_element",
   invalid_value: "invalid_value",
   custom: "custom"
-}, Ec = Object.freeze({ status: "aborted" }), Qu = Ec;
+}, Ec = Object.freeze({
+  status: "aborted"
+}), Qu = Ec;
 function e_(e) {
-  N({ customError: e });
+  N({
+    customError: e
+  });
 }
 function t_() {
   return N().customError;
@@ -13933,7 +15768,9 @@ function Rc(e) {
 N(mi());
 var i_ = Sr;
 var Mc = i_;
-Rr && N({ jitless: true });
+Rr && N({
+  jitless: true
+});
 var Cc = new Set(Rs), Zc = c.enum(ve), Lc = c.enum(Ae), r_ = c.map(Zc, c.string()), n_ = c.map(Lc, c.string()), Vf = new Set(ve);
 function ks(e) {
   return Cc.has(e);
@@ -13941,7 +15778,13 @@ function ks(e) {
 var Jc = Wt(nt(), 1);
 var xs = "";
 function s_() {
-  return { default_: { max_length: 64, template: "%title" }, rules: [] };
+  return {
+    default_: {
+      max_length: 64,
+      template: "%title"
+    },
+    rules: []
+  };
 }
 function Ss(e) {
   return e.templateLiteral(["behaviour_hash_", e.number()]);
@@ -13950,7 +15793,9 @@ function $s(e) {
   return e.templateLiteral(["domain_hash_", e.number()]);
 }
 function l_(e) {
-  return e.strictObject({ ALLOW_BRAVE_YT_DL: e.boolean() });
+  return e.strictObject({
+    ALLOW_BRAVE_YT_DL: e.boolean()
+  });
 }
 function Ds(e) {
   return e.templateLiteral(["experiment_hash_", e.number()]);
@@ -14274,7 +16119,10 @@ var Eh = (() => {
     }
   };
   return new Map(
-    Ft.map((i) => ({ code: i, native_name: e(i) })).sort((i, r) => i.native_name.localeCompare(r.native_name)).map((i) => [i.code, i])
+    Ft.map((i) => ({
+      code: i,
+      native_name: e(i)
+    })).sort((i, r) => i.native_name.localeCompare(r.native_name)).map((i) => [i.code, i])
   );
 })();
 function z_(e, i) {
@@ -14298,13 +16146,34 @@ var D_ = {
     gyt_scanner: {
       player_id: "",
       media_scan_configuration: [
-        { client: "VISIONOS", implementation: "no_cookies_no_vdata" },
-        { client: "ANDROID_VR", implementation: "no_cookies_no_vdata" },
-        { client: "IOS", implementation: "no_cookies_no_vdata" },
-        { client: "WEB", implementation: "no_cookies_vdata" },
-        { client: "WEB_EMBEDDED", implementation: "no_cookies_vdata" },
-        { client: "WEB", implementation: "cookies" },
-        { client: "WEB_EMBEDDED", implementation: "cookies" }
+        {
+          client: "VISIONOS",
+          implementation: "no_cookies_no_vdata"
+        },
+        {
+          client: "ANDROID_VR",
+          implementation: "no_cookies_no_vdata"
+        },
+        {
+          client: "IOS",
+          implementation: "no_cookies_no_vdata"
+        },
+        {
+          client: "WEB",
+          implementation: "no_cookies_vdata"
+        },
+        {
+          client: "WEB_EMBEDDED",
+          implementation: "no_cookies_vdata"
+        },
+        {
+          client: "WEB",
+          implementation: "cookies"
+        },
+        {
+          client: "WEB_EMBEDDED",
+          implementation: "cookies"
+        }
       ]
     },
     websites: [
@@ -14360,7 +16229,9 @@ var D_ = {
       }
     ]
   },
-  experiments: { experiment_hash_1986546207779496: true },
+  experiments: {
+    experiment_hash_1986546207779496: true
+  },
   rules_revision: "10.5.49.2"
 };
 function P_() {
@@ -14369,7 +16240,9 @@ function P_() {
     schema_version: Ht,
     behaviours: {
       advertize_premium: false,
-      gyt_scanner: { media_scan_configuration: [] },
+      gyt_scanner: {
+        media_scan_configuration: []
+      },
       websites: []
     },
     remote_notifications: [],
@@ -14413,7 +16286,9 @@ var T_ = c.templateLiteral(["ded_", c.string()]), _m = c.templateLiteral(["media
   exp: c.number(),
   developer: c.boolean().optional(),
   entitlement_type: mm.optional()
-}), gm = pm.extend({ raw: c.string() }), fm = c.enum(["original", "user_language"]), hm = c.enum(["none", "video", "image"]), vm = c.enum(["system", "light", "dark"]), bm = c.enum(["big", "medium", "small"]), ym = c.enum(["verylarge", "large", "default"]), wm = c.strictObject({
+}), gm = pm.extend({
+  raw: c.string()
+}), fm = c.enum(["original", "user_language"]), hm = c.enum(["none", "video", "image"]), vm = c.enum(["system", "light", "dark"]), bm = c.enum(["big", "medium", "small"]), ym = c.enum(["verylarge", "large", "default"]), wm = c.strictObject({
   max_length: c.number(),
   template: c.string(),
   force_doc_title: c.optional(c.boolean())
@@ -14425,7 +16300,12 @@ var T_ = c.templateLiteral(["ded_", c.string()]), _m = c.templateLiteral(["media
   subdir: c.optional(Ts),
   force_doc_title: c.optional(c.boolean()),
   replace: c.optional(
-    c.array(c.strictObject({ from: c.string(), to: c.string() }))
+    c.array(
+      c.strictObject({
+        from: c.string(),
+        to: c.string()
+      })
+    )
   )
 }), zm = c.enum(["SMART", "OLDEST", "NEWEST"]), As = c.strictObject({
   version: c.number(),
@@ -14456,11 +16336,17 @@ var T_ = c.templateLiteral(["ded_", c.string()]), _m = c.templateLiteral(["media
   preferred_discovered_media_order: zm,
   smartnaming: c.strictObject({
     source: c.nullable(c.string()),
-    compiled: c.strictObject({ default_: wm, rules: c.array(km) })
+    compiled: c.strictObject({
+      default_: wm,
+      rules: c.array(km)
+    })
   }),
   preview_mode: hm,
   last_migration_request: c.number(),
-  custom_strings: c.strictObject({ web: n_, addon: r_ }),
+  custom_strings: c.strictObject({
+    web: n_,
+    addon: r_
+  }),
   remote_ruleset_revision: c.string(),
   remote_notifications: c.map(y_, w_),
   remote_behaviours: c.strictObject({
@@ -14524,10 +16410,16 @@ function qs() {
     font_size: "default",
     preferred_discovered_media_order: "SMART",
     successful_downloads_count: 0,
-    smartnaming: { source: null, compiled: s_() },
+    smartnaming: {
+      source: null,
+      compiled: s_()
+    },
     preview_mode: "video",
     last_migration_request: 0,
-    custom_strings: { addon: /* @__PURE__ */ new Map(), web: /* @__PURE__ */ new Map() },
+    custom_strings: {
+      addon: /* @__PURE__ */ new Map(),
+      web: /* @__PURE__ */ new Map()
+    },
     remote_ruleset_revision: e.rules_revision,
     remote_notifications: I_(e),
     remote_behaviours: {
@@ -14541,7 +16433,7 @@ function qs() {
   };
 }
 var Es = "global_persistent_state";
-async function Dr() {
+async function readPersistentState() {
   let e = await E_.storage.local.get(Es);
   if (Es in e) {
     let i = e[Es];
@@ -14572,9 +16464,12 @@ var Os = {
   FromServiceToService: 8
 };
 async function Dm(e, i) {
-  await U_.default.runtime.sendMessage({ msg: e, channel: i });
+  await U_.default.runtime.sendMessage({
+    msg: e,
+    channel: i
+  });
 }
-async function Pr(e) {
+async function sendContentMessage(e) {
   let i = Os.FromContentToService;
   try {
     return await Dm(e, i), true;
@@ -14582,28 +16477,31 @@ async function Pr(e) {
     return false;
   }
 }
-var Ns = (await Dr()).custom_strings, M_ = document.querySelector("#checkbox_hide_translated"), Vs = document.querySelector("#input_filter"), it, jr = document.querySelector("#strings_container"), Im = document.querySelector("#button_export"), jm = document.querySelector("#entry");
-function Am() {
+var customStrings = (await readPersistentState()).custom_strings, hideTranslatedCheckbox = document.querySelector("#checkbox_hide_translated"), filterInput = document.querySelector("#input_filter"), it, stringsContainer = document.querySelector("#strings_container"), exportButton = document.querySelector("#button_export"), entryTemplate = document.querySelector("#entry");
+function determineEditorLocale() {
   let [e, i] = Ar.default.i18n.getUILanguage().split("-");
   e || (e = "en");
   let r = `${e}-${i}`;
   return ks(r) ? C(r) : ks(e) ? C(e) : L;
 }
 {
-  let e = Am();
+  let e = determineEditorLocale();
   if (e.isNone())
     throw window.alert("Your locale is not supported. Sorry."), window.close(), "";
   it = e.value;
 }
-C_();
-function C_() {
+initializeTranslationControls();
+function initializeTranslationControls() {
   let e = document.querySelector("#button_reset");
   e.onclick = () => {
     window.confirm(
       "Are you sure? You will lose all your existing translation."
-    ) && ([...jr.childNodes].forEach((i) => i.remove()), Vs.value = "", Pr({ name: "rm-custom-strings", data: null }), Ns.addon.clear(), Ns.web.clear(), Ir());
-  }, M_.onclick = () => Ir(), Vs.oninput = () => Ir(), Im.onclick = async () => {
-    let i = (await Dr()).custom_strings, r = `# ${it}.toml - v${Ar.default.runtime.getManifest().version}
+    ) && ([...stringsContainer.childNodes].forEach((i) => i.remove()), filterInput.value = "", sendContentMessage({
+      name: "rm-custom-strings",
+      data: null
+    }), customStrings.addon.clear(), customStrings.web.clear(), renderTranslationEntries());
+  }, hideTranslatedCheckbox.onclick = () => renderTranslationEntries(), filterInput.oninput = () => renderTranslationEntries(), exportButton.onclick = async () => {
+    let i = (await readPersistentState()).custom_strings, r = `# ${it}.toml - v${Ar.default.runtime.getManifest().version}
 `;
     r += `[addon]
 `;
@@ -14622,51 +16520,59 @@ function C_() {
 ` : a && (r += `${n} = '''${a}'''
 `);
     }
-    let o = new Blob([r], { type: "text/plain;charset=utf-8" }), t = URL.createObjectURL(o);
+    let o = new Blob([r], {
+      type: "text/plain;charset=utf-8"
+    }), t = URL.createObjectURL(o);
     await Ar.default.downloads.download({
       url: t,
       filename: `${it}.txt`,
       saveAs: true,
       conflictAction: "uniquify"
     }), URL.revokeObjectURL(t);
-  }, Ir();
+  }, renderTranslationEntries();
 }
-C_();
-function R_(e, i) {
-  let r = jm.content.cloneNode(true), o = r.querySelector(".p_vbox");
+initializeTranslationControls();
+function createTranslationEntry(e, i) {
+  let r = entryTemplate.content.cloneNode(true), o = r.querySelector(".p_vbox");
   o.dataset.key = e, o.dataset.ref = je.en[i][e];
   let t = o.querySelector(".p_key"), n = o.querySelector(".p_english"), a = o.querySelector(".span_status"), s = o.querySelector("input"), u = o.querySelector(".button_reset");
   t.textContent = e;
-  let l = je[it]?.[i]?.[e], p = Ns[i].get(e), g = () => {
+  let l = je[it]?.[i]?.[e], p = customStrings[i].get(e), g = () => {
     s.value.length == 0 ? a.setAttribute("status", "not_translated") : s.value != l ? a.setAttribute("status", "changed") : a.setAttribute("status", "translated");
   };
   return p ? (s.value = p, l || (o.dataset.isTranslated = "no")) : l ? (s.value = l, o.dataset.isTranslated = "yes") : (s.value = "", o.dataset.isTranslated = "no"), g(), u.onclick = () => {
     l ? s.value = l : s.value = "", g();
   }, s.oninput = () => {
-    i == "addon" ? Pr({
+    i == "addon" ? sendContentMessage({
       name: "update-custom-addon-string",
-      data: { value: s.value, key: e }
-    }) : Pr({
+      data: {
+        value: s.value,
+        key: e
+      }
+    }) : sendContentMessage({
       name: "update-custom-web-string",
-      data: { value: s.value, key: e }
+      data: {
+        value: s.value,
+        key: e
+      }
     }), g();
   }, n.textContent = `English: ${je.en[i][e]}`, r;
 }
-function Ir() {
-  if (jr.childNodes.length == 0) {
+function renderTranslationEntries() {
+  if (stringsContainer.childNodes.length == 0) {
     let r = new DocumentFragment();
     for (let o of ve) {
-      let t = R_(o, "addon");
+      let t = createTranslationEntry(o, "addon");
       r.appendChild(t);
     }
     for (let o of Ae) {
-      let t = R_(o, "web");
+      let t = createTranslationEntry(o, "web");
       r.appendChild(t);
     }
-    jr.append(r);
+    stringsContainer.append(r);
   }
-  let e = M_.checked, i = Vs.value.toLowerCase();
-  for (let r of [...jr.querySelectorAll("vbox")]) {
+  let e = hideTranslatedCheckbox.checked, i = filterInput.value.toLowerCase();
+  for (let r of [...stringsContainer.querySelectorAll("vbox")]) {
     let o = r, t = o.querySelector("input"), n = (o.dataset.key + o.dataset.ref + o.textContent + t.value).toLowerCase(), a = i.length > 0 && !n.includes(i), s = e && o.dataset.isTranslated == "yes";
     V_(o, !(a || s));
   }
