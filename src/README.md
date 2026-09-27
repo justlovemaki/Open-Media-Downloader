@@ -28,7 +28,8 @@ src/
 │  ├─ osmosis/       # Reversed playlist decoding
 │  ├─ taiav/         # Page metadata normalization
 │  ├─ twitcasting/   # Live HLS discovery
-│  └─ vimeo/         # Player config and language-aware HLS extraction
+│  ├─ vimeo/         # Player config and language-aware HLS extraction
+│  └─ vk/            # Standard video and VK Live extraction
 ├─ media/
 │  ├─ m3u8.js        # Lightweight media-playlist inspection
 │  ├─ master-playlist.js

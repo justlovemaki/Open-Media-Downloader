@@ -18,6 +18,7 @@ const entryPoints = [
   ["src/injected/twitcasting/content.js", "injected/twitcasting.js"],
   ["src/injected/vimeo/content.js", "injected/vimeo.js"],
   ["src/injected/vimeo/main.js", "injected/vimeo_untrusted.js"],
+  ["src/injected/vk/content.js", "injected/vk.js"],
 ];
 
 for (const [entryPoint, outfile] of entryPoints) {
