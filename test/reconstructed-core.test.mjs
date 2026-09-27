@@ -3,6 +3,10 @@ import test from "node:test";
 
 import { deserialize } from "../src/shared/deserialize.js";
 import { createDefaultPersistentState } from "../src/content/persistent-state.js";
+import {
+  parseSmartNamingRules,
+  stringifySmartNamingRules,
+} from "../src/content/smartnaming-rules.js";
 import { hashString } from "../src/shared/hash.js";
 import { inspectMediaPlaylist } from "../src/media/m3u8.js";
 import { parseMasterPlaylist } from "../src/media/master-playlist.js";
@@ -15,6 +19,24 @@ test("default persistent state uses typed collections", () => {
   assert.ok(state.downloaded instanceof Map);
   assert.ok(state.preferred_audio_languages instanceof Set);
   assert.equal(state.preferred_quality, 1080);
+});
+
+test("smart naming rules round-trip through TOML", () => {
+  const source = stringifySmartNamingRules(
+    { max_length: 64, template: "%title" },
+    [
+      {
+        url: "example.com",
+        template: "%title-%hostname",
+        max_length: 80,
+        selector: "h1",
+        subdir: "videos/",
+      },
+    ],
+  );
+  const parsed = parseSmartNamingRules(source);
+  assert.equal(parsed.rules[0].url, "example.com");
+  assert.equal(parsed.rules[0].subdir, "videos/");
 });
 
 test("hashString remains deterministic", () => {

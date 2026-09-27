@@ -1,6 +1,13 @@
 import { MessageChannel } from "./channels.js";
 import { serialize } from "./serialize.js";
 
+export async function sendContentMessage(name, data) {
+  await chrome.runtime.sendMessage({
+    msg: { name, data },
+    channel: MessageChannel.FROM_CONTENT_TO_SERVICE,
+  });
+}
+
 export async function sendInjectedMessage(name, data) {
   await chrome.runtime.sendMessage({
     msg: { name, data },

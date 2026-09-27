@@ -16,7 +16,9 @@ They are not claimed to be the publisher's original source files or original sym
 ```text
 src/
 ├─ content/
-│  └─ persistent-state.js
+│  ├─ persistent-state.js
+│  ├─ smartnaming-editor.js
+│  └─ smartnaming-rules.js
 ├─ factory/
 │  └─ main.js        # Offscreen download-worker bootstrap
 ├─ injected/

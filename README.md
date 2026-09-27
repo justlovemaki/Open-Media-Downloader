@@ -103,7 +103,7 @@
 
 ## 开发与构建
 
-仓库正在将压缩构建产物逐步迁移为 `src/` 下的可维护源码。当前激活桥接、哔哩哔哩、爱奇艺、Canva、Chaturbate、Facebook、JavRank、Kick、OK.ru、Osmosis、Taiav、TwitCasting、Vimeo、VK、XGPlayer Crypto 和 YouTube 适配器已经完成语义重构，拥有有意义的变量名、模块边界和 Source Map。重构名称基于运行行为推断，不代表原始发布者使用的名称。
+仓库正在将压缩构建产物逐步迁移为 `src/` 下的可维护源码。当前持久化状态、智能命名编辑器、激活桥接、哔哩哔哩、爱奇艺、Canva、Chaturbate、Facebook、JavRank、Kick、OK.ru、Osmosis、Taiav、TwitCasting、Vimeo、VK、XGPlayer Crypto 和 YouTube 适配器已经完成语义重构，拥有有意义的变量名、模块边界和 Source Map。重构名称基于运行行为推断，不代表原始发布者使用的名称。
 
 ```bash
 npm install

@@ -41,15 +41,22 @@ for (const [entryPoint, outfile] of entryPoints) {
   });
 }
 
-await build({
-  entryPoints: ["src/content/persistent-state.js"],
-  outfile: "content/global_persistent.js",
-  bundle: true,
-  format: "esm",
-  platform: "browser",
-  target: "chrome120",
-  minify: false,
-  sourcemap: true,
-  legalComments: "inline",
-  logLevel: "info",
-});
+const moduleEntryPoints = [
+  ["src/content/persistent-state.js", "content/global_persistent.js"],
+  ["src/content/smartnaming-editor.js", "content/smartnaming.js"],
+];
+
+for (const [entryPoint, outfile] of moduleEntryPoints) {
+  await build({
+    entryPoints: [entryPoint],
+    outfile,
+    bundle: true,
+    format: "esm",
+    platform: "browser",
+    target: "chrome120",
+    minify: false,
+    sourcemap: true,
+    legalComments: "inline",
+    logLevel: "info",
+  });
+}
