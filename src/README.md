@@ -30,7 +30,8 @@ src/
 │  ├─ twitcasting/   # Live HLS discovery
 │  ├─ vimeo/         # Player config and language-aware HLS extraction
 │  ├─ vk/            # Standard video and VK Live extraction
-│  └─ xgplayer/      # Encoded playlist interception and AES/XOR decoding
+│  ├─ xgplayer/      # Encoded playlist interception and AES/XOR decoding
+│  └─ youtube/       # InnerTube scanning, deciphering and format pairing
 ├─ media/
 │  ├─ m3u8.js        # Lightweight media-playlist inspection
 │  ├─ master-playlist.js
