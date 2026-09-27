@@ -20,6 +20,7 @@ src/
 │  ├─ bilibili/      # API requests, DASH pairing and page-state bridge
 │  ├─ canva/         # Embedded HLS manifest extraction
 │  ├─ chaturbate/    # Live HLS discovery and health monitoring
+│  ├─ facebook/      # Embedded DASH manifest extraction
 │  ├─ iqiyi/         # DASH response handling and quality monitoring
 │  ├─ javrank/       # XHR manifest interception
 │  ├─ kick/          # Live, VOD and clip API extraction
@@ -29,7 +30,8 @@ src/
 │  └─ vimeo/         # Player config and language-aware HLS extraction
 ├─ media/
 │  ├─ m3u8.js        # Lightweight media-playlist inspection
-│  └─ master-playlist.js
+│  ├─ master-playlist.js
+│  └─ mpd.js         # MPEG-DASH parsing and media normalization
 └─ shared/
    ├─ channels.js
    ├─ deserialize.js

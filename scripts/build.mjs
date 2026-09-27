@@ -8,6 +8,7 @@ const entryPoints = [
   ["src/injected/bilibili/main.js", "injected/bilibili_untrusted.js"],
   ["src/injected/canva/content.js", "injected/canva.js"],
   ["src/injected/chaturbate/content.js", "injected/chaturbate.js"],
+  ["src/injected/facebook/content.js", "injected/facebook.js"],
   ["src/injected/javrank/content.js", "injected/javrank.js"],
   ["src/injected/javrank/main.js", "injected/javrank_untrusted.js"],
   ["src/injected/kick/content.js", "injected/kick.js"],

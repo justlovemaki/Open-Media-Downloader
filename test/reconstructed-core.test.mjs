@@ -5,6 +5,7 @@ import { deserialize } from "../src/shared/deserialize.js";
 import { hashString } from "../src/shared/hash.js";
 import { inspectMediaPlaylist } from "../src/media/m3u8.js";
 import { parseMasterPlaylist } from "../src/media/master-playlist.js";
+import { parseMpdPlaylist } from "../src/media/mpd.js";
 import { NONE, some } from "../src/shared/option.js";
 import { serialize } from "../src/shared/serialize.js";
 
@@ -50,6 +51,27 @@ test("parseMasterPlaylist returns sorted video renditions", () => {
   assert.equal(playlist[0].quality.size.value.height, 720);
   assert.equal(playlist[0].av.video.href, "https://cdn.example/720.m3u8");
   assert.equal(playlist[0].av.audio.href, "https://cdn.example/audio.m3u8");
+});
+
+test("parseMpdPlaylist normalizes DASH representations", () => {
+  const manifest = `<?xml version="1.0"?>
+    <MPD xmlns="urn:mpeg:dash:schema:mpd:2011" type="static" mediaPresentationDuration="PT10S">
+      <Period>
+        <AdaptationSet mimeType="video/mp4" codecs="avc1.4d401f">
+          <Representation id="video-720" bandwidth="1000000" width="1280" height="720">
+            <BaseURL>video.mp4</BaseURL>
+            <SegmentBase indexRange="0-100"><Initialization range="0-50"/></SegmentBase>
+          </Representation>
+        </AdaptationSet>
+      </Period>
+    </MPD>`;
+
+  const parsed = parseMpdPlaylist(manifest, {
+    manifestUri: "https://cdn.example/master.mpd",
+  });
+  assert.equal(parsed.duration, 10);
+  assert.equal(parsed.playlist[0].quality.size.value.height, 720);
+  assert.equal(parsed.playlist[0].demuxer, "mp4");
 });
 
 test("inspectMediaPlaylist calculates VOD duration", () => {
