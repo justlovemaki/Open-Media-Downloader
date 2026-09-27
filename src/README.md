@@ -29,7 +29,8 @@ src/
 │  ├─ taiav/         # Page metadata normalization
 │  ├─ twitcasting/   # Live HLS discovery
 │  ├─ vimeo/         # Player config and language-aware HLS extraction
-│  └─ vk/            # Standard video and VK Live extraction
+│  ├─ vk/            # Standard video and VK Live extraction
+│  └─ xgplayer/      # Encoded playlist interception and AES/XOR decoding
 ├─ media/
 │  ├─ m3u8.js        # Lightweight media-playlist inspection
 │  ├─ master-playlist.js

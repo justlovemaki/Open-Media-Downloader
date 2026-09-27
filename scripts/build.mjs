@@ -19,6 +19,8 @@ const entryPoints = [
   ["src/injected/vimeo/content.js", "injected/vimeo.js"],
   ["src/injected/vimeo/main.js", "injected/vimeo_untrusted.js"],
   ["src/injected/vk/content.js", "injected/vk.js"],
+  ["src/injected/xgplayer/content.js", "injected/xgplayer_crypto.js"],
+  ["src/injected/xgplayer/main.js", "injected/xgplayer_crypto_untrusted.js"],
 ];
 
 for (const [entryPoint, outfile] of entryPoints) {
