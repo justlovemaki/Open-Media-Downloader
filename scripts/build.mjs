@@ -40,3 +40,16 @@ for (const [entryPoint, outfile] of entryPoints) {
     logLevel: "info",
   });
 }
+
+await build({
+  entryPoints: ["src/content/persistent-state.js"],
+  outfile: "content/global_persistent.js",
+  bundle: true,
+  format: "esm",
+  platform: "browser",
+  target: "chrome120",
+  minify: false,
+  sourcemap: true,
+  legalComments: "inline",
+  logLevel: "info",
+});

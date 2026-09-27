@@ -2,12 +2,20 @@ import assert from "node:assert/strict";
 import test from "node:test";
 
 import { deserialize } from "../src/shared/deserialize.js";
+import { createDefaultPersistentState } from "../src/content/persistent-state.js";
 import { hashString } from "../src/shared/hash.js";
 import { inspectMediaPlaylist } from "../src/media/m3u8.js";
 import { parseMasterPlaylist } from "../src/media/master-playlist.js";
 import { parseMpdPlaylist } from "../src/media/mpd.js";
 import { NONE, some } from "../src/shared/option.js";
 import { serialize } from "../src/shared/serialize.js";
+
+test("default persistent state uses typed collections", () => {
+  const state = createDefaultPersistentState();
+  assert.ok(state.downloaded instanceof Map);
+  assert.ok(state.preferred_audio_languages instanceof Set);
+  assert.equal(state.preferred_quality, 1080);
+});
 
 test("hashString remains deterministic", () => {
   const url = "https://www.iq.com/play/example";

@@ -1,65 +1,10 @@
-// src/shared/option.js
-var OPTION_MARKER = Symbol("OpenMediaDownloaderOption");
-var NONE = Object.freeze({
-  [OPTION_MARKER]: true,
-  kind: "none"
-});
-function some(value) {
-  return {
-    [OPTION_MARKER]: true,
-    kind: "some",
-    value
-  };
-}
+import { deserialize } from "../shared/deserialize.js";
 
-// src/shared/deserialize.js
-function deserialize(value) {
-  if (!value || typeof value !== "object") return value;
-  switch (value.__serde_tag) {
-    case "primitive":
-      return value.__serde_val;
-    case "array":
-      return value.__serde_val.map(deserialize);
-    case "object":
-      return Object.fromEntries(
-        Object.entries(value.__serde_val).map(([key, entryValue]) => [
-          key,
-          deserialize(entryValue)
-        ])
-      );
-    case "map":
-      return new Map(
-        value.__serde_val.map(([key, entryValue]) => [
-          deserialize(key),
-          deserialize(entryValue)
-        ])
-      );
-    case "set":
-      return new Set(value.__serde_val.map(deserialize));
-    case "url":
-      return new URL(value.__serde_val);
-    case "headers":
-      return new Headers(value.__serde_val);
-    case "regex":
-      return new RegExp(value.__serde_val[0], value.__serde_val[1]);
-    case "some":
-      return some(deserialize(value.__serde_val));
-    case "none":
-      return NONE;
-    case "ok":
-      return { ok: true, value: deserialize(value.__serde_val) };
-    case "err":
-      return { ok: false, error: deserialize(value.__serde_val) };
-    default:
-      throw new Error(`Unknown serialized value tag: ${value.__serde_tag}`);
-  }
-}
+const PERSISTENT_STATE_KEY = "global_persistent_state";
+const DEFAULT_RULES_REVISION = "10.5.49.2";
+const DEFAULT_LAST_SUCCESSFUL_DOWNLOAD = 1_710_169_438_000;
 
-// src/content/persistent-state.js
-var PERSISTENT_STATE_KEY = "global_persistent_state";
-var DEFAULT_RULES_REVISION = "10.5.49.2";
-var DEFAULT_LAST_SUCCESSFUL_DOWNLOAD = 1710169438e3;
-var SUPPORTED_LANGUAGES = /* @__PURE__ */ new Set([
+const SUPPORTED_LANGUAGES = new Set([
   "am",
   "ar",
   "de",
@@ -89,19 +34,21 @@ var SUPPORTED_LANGUAGES = /* @__PURE__ */ new Set([
   "zh",
   "zh-CN",
   "zh-HK",
-  "zh-TW"
+  "zh-TW",
 ]);
-var DEFAULT_MEDIA_SCAN_CONFIGURATION = [
+
+const DEFAULT_MEDIA_SCAN_CONFIGURATION = [
   { client: "VISIONOS", implementation: "no_cookies_no_vdata" },
   { client: "ANDROID_VR", implementation: "no_cookies_no_vdata" },
   { client: "IOS", implementation: "no_cookies_no_vdata" },
   { client: "WEB", implementation: "no_cookies_vdata" },
   { client: "WEB_EMBEDDED", implementation: "no_cookies_vdata" },
   { client: "WEB", implementation: "cookies" },
-  { client: "WEB_EMBEDDED", implementation: "cookies" }
+  { client: "WEB_EMBEDDED", implementation: "cookies" },
 ];
+
 function preferredBrowserLanguages() {
-  const languages = /* @__PURE__ */ new Set();
+  const languages = new Set();
   for (let language of navigator.languages) {
     if (language === "tl" || language.startsWith("tl-")) language = "fil";
     if (SUPPORTED_LANGUAGES.has(language)) {
@@ -114,12 +61,13 @@ function preferredBrowserLanguages() {
   languages.add("en");
   return languages;
 }
-function createDefaultPersistentState() {
+
+export function createDefaultPersistentState() {
   const languages = preferredBrowserLanguages();
   return {
     version: 1,
-    default_action_per_hostname: /* @__PURE__ */ new Map(),
-    downloaded: /* @__PURE__ */ new Map(),
+    default_action_per_hostname: new Map(),
+    downloaded: new Map(),
     jwt: null,
     lsd: DEFAULT_LAST_SUCCESSFUL_DOWNLOAD,
     default_action: "download",
@@ -145,29 +93,31 @@ function createDefaultPersistentState() {
     successful_downloads_count: 0,
     smartnaming: {
       source: null,
-      compiled: { default_: { max_length: 64, template: "%title" }, rules: [] }
+      compiled: { default_: { max_length: 64, template: "%title" }, rules: [] },
     },
     preview_mode: "video",
     last_migration_request: 0,
-    custom_strings: { addon: /* @__PURE__ */ new Map(), web: /* @__PURE__ */ new Map() },
+    custom_strings: { addon: new Map(), web: new Map() },
     remote_ruleset_revision: DEFAULT_RULES_REVISION,
-    remote_notifications: /* @__PURE__ */ new Map(),
+    remote_notifications: new Map(),
     remote_behaviours: {
       advertize_premium: true,
       gyt_scanner: {
         player_id: "",
-        media_scan_configuration: DEFAULT_MEDIA_SCAN_CONFIGURATION
+        media_scan_configuration: DEFAULT_MEDIA_SCAN_CONFIGURATION,
       },
-      websites: /* @__PURE__ */ new Map()
+      websites: new Map(),
     },
     experiments: { experiment_hash_1986546207779496: true },
     ruleset_last_refresh_ms: 0,
-    subtitle_languages: new Set(languages)
+    subtitle_languages: new Set(languages),
   };
 }
+
 function normalizePersistentState(value) {
   const defaults = createDefaultPersistentState();
   if (!value || typeof value !== "object") return defaults;
+
   return {
     ...defaults,
     ...value,
@@ -176,58 +126,61 @@ function normalizePersistentState(value) {
       ...value.smartnaming,
       compiled: {
         ...defaults.smartnaming.compiled,
-        ...value.smartnaming?.compiled
-      }
+        ...value.smartnaming?.compiled,
+      },
     },
     custom_strings: {
       ...defaults.custom_strings,
-      ...value.custom_strings
+      ...value.custom_strings,
     },
     remote_behaviours: {
       ...defaults.remote_behaviours,
       ...value.remote_behaviours,
       gyt_scanner: {
         ...defaults.remote_behaviours.gyt_scanner,
-        ...value.remote_behaviours?.gyt_scanner
-      }
-    }
+        ...value.remote_behaviours?.gyt_scanner,
+      },
+    },
   };
 }
-async function readPersistentState() {
+
+export async function readPersistentState() {
   const stored = await chrome.storage.local.get(PERSISTENT_STATE_KEY);
-  return PERSISTENT_STATE_KEY in stored ? normalizePersistentState(deserialize(stored[PERSISTENT_STATE_KEY])) : createDefaultPersistentState();
+  return PERSISTENT_STATE_KEY in stored
+    ? normalizePersistentState(deserialize(stored[PERSISTENT_STATE_KEY]))
+    : createDefaultPersistentState();
 }
-function onPersistentStateChanged(listener) {
+
+export function onPersistentStateChanged(listener) {
   const storageListener = (changes) => {
     const change = changes[PERSISTENT_STATE_KEY];
     if (!change) return;
     listener(
-      change.newValue === void 0 ? createDefaultPersistentState() : normalizePersistentState(deserialize(change.newValue))
+      change.newValue === undefined
+        ? createDefaultPersistentState()
+        : normalizePersistentState(deserialize(change.newValue)),
     );
   };
   chrome.storage.local.onChanged.addListener(storageListener);
   return () => chrome.storage.local.onChanged.removeListener(storageListener);
 }
+
 function dispatchPersistentChanged() {
   document.documentElement.dispatchEvent(
-    new CustomEvent("persistent-changed", { composed: true })
+    new CustomEvent("persistent-changed", { composed: true }),
   );
 }
-function RegisterPersistentToDom() {
+
+export function RegisterPersistentToDom() {
   globalThis.persistent_state = createDefaultPersistentState();
+
   onPersistentStateChanged((state) => {
     globalThis.persistent_state = state;
     dispatchPersistentChanged();
   });
+
   readPersistentState().then((state) => {
     globalThis.persistent_state = state;
     dispatchPersistentChanged();
   });
 }
-export {
-  RegisterPersistentToDom,
-  createDefaultPersistentState,
-  onPersistentStateChanged,
-  readPersistentState
-};
-//# sourceMappingURL=global_persistent.js.map
