@@ -16,6 +16,7 @@ They are not claimed to be the publisher's original source files or original sym
 ```text
 src/
 ├─ content/
+│  ├─ details-page.js
 │  ├─ persistent-state.js
 │  ├─ smartnaming-editor.js
 │  └─ smartnaming-rules.js
