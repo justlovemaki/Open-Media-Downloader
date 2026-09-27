@@ -31,15 +31,10 @@ export const bundledModuleEntries = [
   ["src/content/smartnaming-editor.js", "content/smartnaming.js"],
 ];
 
-export const legacyModuleEntries = [
-  ["src/content/legacy/panel.js", "content/panel.js"],
-  [
-    "src/content/legacy/register-components.js",
-    "content/register_components.js",
-  ],
-  ["src/content/legacy/translate.js", "content/translate.js"],
-  ["src/service/legacy/main.js", "service/main.js"],
-  ["src/download-worker/legacy/main.js", "download_worker/main.js"],
+export const recoveredModuleEntries = [
+  ["src/content/panel.js", "content/panel.js"],
+  ["src/service/main.js", "service/main.js"],
+  ["src/download-worker/main.js", "download_worker/main.js"],
   [
     "src/vendor/libav/libav-6.5.7.1-h264-aac-mp3.wasm.mjs",
     "download_worker/libav-6.5.7.1-h264-aac-mp3.wasm.mjs",
@@ -49,5 +44,5 @@ export const legacyModuleEntries = [
 export const allBuildEntries = [
   ...bundledClassicEntries,
   ...bundledModuleEntries,
-  ...legacyModuleEntries,
+  ...recoveredModuleEntries,
 ];

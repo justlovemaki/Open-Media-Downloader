@@ -3,7 +3,7 @@ import { build } from "esbuild";
 import {
   bundledClassicEntries,
   bundledModuleEntries,
-  legacyModuleEntries,
+  recoveredModuleEntries,
 } from "./build-entries.mjs";
 
 const commonOptions = {
@@ -35,7 +35,7 @@ for (const [entryPoint, outfile] of bundledModuleEntries) {
   });
 }
 
-for (const [entryPoint, outfile] of legacyModuleEntries) {
+for (const [entryPoint, outfile] of recoveredModuleEntries) {
   await build({
     ...commonOptions,
     entryPoints: [entryPoint],

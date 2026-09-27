@@ -8,7 +8,7 @@ const generate = generateModule.default ?? generateModule;
 const traverse = traverseModule.default ?? traverseModule;
 
 const renamePlans = {
-  "src/service/legacy/main.js": {
+  "src/service/main.js": {
     GD: "startServiceWorker",
     Gy: "handleDownloadRequest",
     VD: "updatePremiumBannerState",
@@ -53,7 +53,7 @@ const renamePlans = {
     vdhSameGenericVideo: "isSameGenericVideoLegacy",
     vdhMediaQualityScore: "mediaQualityScoreLegacy",
   },
-  "src/download-worker/legacy/main.js": {
+  "src/download-worker/main.js": {
     Mo: "executeDownloadStrategyLegacy",
     U: "runFfmpeg",
     Br: "downloadHlsPreview",
@@ -82,7 +82,7 @@ const renamePlans = {
     Bo: "convertTimedTextToVtt",
     No: "startDownloadWorkerMessaging",
   },
-  "src/content/legacy/panel.js": {
+  "src/content/panel.js": {
     Ag: "requestSiteDataReset",
     Tc: "clearSiteCookiesAndReload",
     Eg: "componentRegistry",
@@ -113,7 +113,7 @@ const renamePlans = {
     ee: "MainPanel",
     we: "PremiumBanner",
   },
-  "src/content/legacy/register-components.js": {
+  "src/content/archive/register-components.js": {
     bg: "componentRegistry",
     wx: "RegisterAllComponents",
     Ee: "ReportButton",
@@ -136,7 +136,7 @@ const renamePlans = {
     X: "MainPanel",
     be: "PremiumBanner",
   },
-  "src/content/legacy/translate.js": {
+  "src/content/archive/translate.js": {
     Dr: "readPersistentState",
     Pr: "sendContentMessage",
     Am: "determineEditorLocale",

@@ -16,14 +16,15 @@ They are not claimed to be the publisher's original source files or original sym
 ```text
 src/
 ├─ content/
-│  ├─ legacy/        # Vendor-inclusive recovered UI entry bundles
+│  ├─ archive/       # Complete inactive UI sources retained for reference
+│  ├─ panel.js       # Canonical recovered popup/sidebar entry
 │  ├─ details-page.js
 │  ├─ history-page.js
 │  ├─ persistent-state.js
 │  ├─ smartnaming-editor.js
 │  └─ smartnaming-rules.js
 ├─ download-worker/
-│  ├─ legacy/        # Complete recovered worker entry
+│  ├─ main.js        # Canonical recovered worker entry
 │  ├─ errors.js
 │  ├─ ffmpeg-commands.js
 │  └─ strategy-router.js
@@ -51,7 +52,7 @@ src/
 │  ├─ master-playlist.js
 │  └─ mpd.js         # MPEG-DASH parsing and media normalization
 ├─ service/
-│  ├─ legacy/        # Complete recovered Service Worker entry
+│  ├─ main.js        # Canonical recovered Service Worker entry
 │  ├─ download-arguments.js
 │  ├─ download-queue.js
 │  ├─ media-deduplication.js
@@ -77,6 +78,6 @@ npm run check
 npm run format
 ```
 
-The build graph now covers every runtime JavaScript file. See
-[`RECOVERY_STATUS.md`](RECOVERY_STATUS.md) for the distinction between semantically reconstructed
-modules and complete vendor-inclusive recovered entries.
+The build graph covers every active runtime JavaScript file. See
+[`RECOVERY_STATUS.md`](RECOVERY_STATUS.md) for canonical recovered entries, extracted modules and
+archived inactive code.
