@@ -112,7 +112,7 @@ npm test
 npm run check
 ```
 
-`npm run build` 会生成 `manifest.json` 当前引用的 `injected/*.js` 文件。尚未迁移的模块继续使用已经格式化的构建产物，迁移进度和约定见 [`src/README.md`](src/README.md)。
+`npm run build` 现在可以从 `src/` 重新生成全部运行时 JavaScript，并为所有入口生成 Source Map；`npm run check` 会检查是否有文件遗漏在构建图之外。语义重构范围和少数包含第三方代码的完整恢复入口见 [`src/RECOVERY_STATUS.md`](src/RECOVERY_STATUS.md)。
 
 ## 故障排查
 

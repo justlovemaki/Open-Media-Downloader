@@ -16,12 +16,14 @@ They are not claimed to be the publisher's original source files or original sym
 ```text
 src/
 ├─ content/
+│  ├─ legacy/        # Vendor-inclusive recovered UI entry bundles
 │  ├─ details-page.js
 │  ├─ history-page.js
 │  ├─ persistent-state.js
 │  ├─ smartnaming-editor.js
 │  └─ smartnaming-rules.js
 ├─ download-worker/
+│  ├─ legacy/        # Complete recovered worker entry
 │  ├─ errors.js
 │  ├─ ffmpeg-commands.js
 │  └─ strategy-router.js
@@ -49,6 +51,7 @@ src/
 │  ├─ master-playlist.js
 │  └─ mpd.js         # MPEG-DASH parsing and media normalization
 ├─ service/
+│  ├─ legacy/        # Complete recovered Service Worker entry
 │  ├─ download-arguments.js
 │  ├─ download-queue.js
 │  ├─ media-deduplication.js
@@ -74,5 +77,6 @@ npm run check
 npm run format
 ```
 
-Further bundles can be migrated into `src/` incrementally. Until a bundle has a corresponding
-source entry point, its formatted root-level JavaScript remains the canonical implementation.
+The build graph now covers every runtime JavaScript file. See
+[`RECOVERY_STATUS.md`](RECOVERY_STATUS.md) for the distinction between semantically reconstructed
+modules and complete vendor-inclusive recovered entries.
