@@ -7,12 +7,61 @@ import {
   parseSmartNamingRules,
   stringifySmartNamingRules,
 } from "../src/content/smartnaming-rules.js";
+import { DownloadQueue } from "../src/service/download-queue.js";
+import {
+  mediaQualityScore,
+  upsertDiscoveredMedia,
+} from "../src/service/media-deduplication.js";
+import { parseExtensionVersion } from "../src/service/version.js";
 import { hashString } from "../src/shared/hash.js";
 import { inspectMediaPlaylist } from "../src/media/m3u8.js";
 import { parseMasterPlaylist } from "../src/media/master-playlist.js";
 import { parseMpdPlaylist } from "../src/media/mpd.js";
 import { NONE, some } from "../src/shared/option.js";
 import { serialize } from "../src/shared/serialize.js";
+
+test("extension version parser accepts three and four components", () => {
+  assert.deepEqual(parseExtensionVersion("1.0.0"), {
+    major: 1,
+    minor: 0,
+    patch: 0,
+    build: 0,
+  });
+  assert.equal(parseExtensionVersion("1.0"), null);
+});
+
+test("download queue honors total concurrency", async () => {
+  const queue = new DownloadQueue(1, 1, 0);
+  const order = [];
+  const first = queue.queueTask(async () => {
+    order.push("first-start");
+    await new Promise((resolve) => setTimeout(resolve, 5));
+    order.push("first-end");
+  }, "first");
+  const second = queue.queueTask(async () => order.push("second"), "second");
+  await Promise.all([first, second]);
+  assert.deepEqual(order, ["first-start", "first-end", "second"]);
+});
+
+test("media deduplication replaces lower iQIYI quality", () => {
+  const initiator = some(new URL("https://www.iq.com/play/example"));
+  const makeMedia = (hash, bid) => ({
+    hash,
+    type: "m3u8",
+    demuxer: "mp4",
+    initiator,
+    discovery_timestamp_ms: 1,
+    url: new URL(
+      `data:text/plain,${encodeURIComponent(`https://cdn.example/shared-token-12345678.ts?bid=${bid}&x=1`)}`,
+    ),
+  });
+  const low = makeMedia("low", 300);
+  const high = makeMedia("high", 500);
+  assert.ok(mediaQualityScore(high) > mediaQualityScore(low));
+  const media = new Map([[low.hash, low]]);
+  assert.equal(upsertDiscoveredMedia(media, high), true);
+  assert.deepEqual([...media.keys()], ["high"]);
+});
 
 test("default persistent state uses typed collections", () => {
   const state = createDefaultPersistentState();

@@ -44,6 +44,10 @@ src/
 │  ├─ m3u8.js        # Lightweight media-playlist inspection
 │  ├─ master-playlist.js
 │  └─ mpd.js         # MPEG-DASH parsing and media normalization
+├─ service/
+│  ├─ download-queue.js
+│  ├─ media-deduplication.js
+│  └─ version.js
 └─ shared/
    ├─ channels.js
    ├─ deserialize.js
