@@ -1,12 +1,21 @@
+var __require = /* @__PURE__ */ ((x) => typeof require !== "undefined" ? require : typeof Proxy !== "undefined" ? new Proxy(x, {
+  get: (a, b2) => (typeof require !== "undefined" ? require : a)[b2]
+}) : x)(function(x) {
+  if (typeof require !== "undefined") return require.apply(this, arguments);
+  throw Error('Dynamic require of "' + x + '" is not supported');
+});
+
+// src/download-worker/worker-runtime.js
 var Ri = Object.create;
 var tr = Object.defineProperty;
 var Vi = Object.getOwnPropertyDescriptor;
 var Mi = Object.getOwnPropertyNames;
-var Ni = Object.getPrototypeOf, Pi = Object.prototype.hasOwnProperty;
-var rr = ((t) => typeof require < "u" ? require : typeof Proxy < "u" ? new Proxy(t, {
-  get: (e, r) => (typeof require < "u" ? require : e)[r]
+var Ni = Object.getPrototypeOf;
+var Pi = Object.prototype.hasOwnProperty;
+var rr = ((t) => typeof __require < "u" ? __require : typeof Proxy < "u" ? new Proxy(t, {
+  get: (e, r) => (typeof __require < "u" ? __require : e)[r]
 }) : t)(function(t) {
-  if (typeof require < "u") return require.apply(this, arguments);
+  if (typeof __require < "u") return __require.apply(this, arguments);
   throw Error('Dynamic require of "' + t + '" is not supported');
 });
 var ki = (t, e) => () => (e || t(
@@ -1030,7 +1039,8 @@ var {
   ENOENT: VA,
   AVERROR_EOF: MA,
   LibAV: ir
-} = D, we = D;
+} = D;
+var we = D;
 function N(t) {
   throw t;
 }
@@ -1108,7 +1118,8 @@ var Ui = (function() {
   }, t.prototype.toAsyncOption = function() {
     return new Ne(B);
   }, t;
-})(), B = new Ui();
+})();
+var B = new Ui();
 Object.freeze(B);
 var Gi = (function() {
   function t(e) {
@@ -1156,7 +1167,9 @@ var Gi = (function() {
   }, t.prototype.toString = function() {
     return "Some(".concat(se(this.value), ")");
   }, t.EMPTY = new t(void 0), t;
-})(), P = Gi, ft;
+})();
+var P = Gi;
+var ft;
 (function(t) {
   function e() {
     for (var n = [], o = 0; o < arguments.length; o++) n[o] = arguments[o];
@@ -1187,7 +1200,8 @@ var be = function(t, e, r) {
     for (var i = 0, n = e.length, o; i < n; i++)
       (o || !(i in e)) && (o || (o = Array.prototype.slice.call(e, 0, i)), o[i] = e[i]);
   return t.concat(o || Array.prototype.slice.call(e));
-}, Yi = (function() {
+};
+var Yi = (function() {
   function t(e) {
     if (!(this instanceof t)) return new t(e);
     this.error = e;
@@ -1273,7 +1287,8 @@ var be = function(t, e, r) {
     return new Pe(this);
   }, t.EMPTY = new t(void 0), t;
 })();
-var v = Yi, Qi = (function() {
+var v = Yi;
+var Qi = (function() {
   function t(e) {
     if (!(this instanceof t)) return new t(e);
     this.value = e;
@@ -1330,7 +1345,8 @@ var v = Yi, Qi = (function() {
     return new Pe(this);
   }, t.EMPTY = new t(void 0), t;
 })();
-var C = Qi, pt;
+var C = Qi;
+var pt;
 (function(t) {
   function e(s) {
     for (var l = [], A = 1; A < arguments.length; A++) l[A - 1] = arguments[A];
@@ -1413,7 +1429,8 @@ var Xe = function(t, e, r, i) {
     }
     A((i = i.apply(t, e || [])).next());
   });
-}, Je = function(t, e) {
+};
+var Je = function(t, e) {
   var r = {
     label: 0,
     sent: function() {
@@ -1489,7 +1506,8 @@ var Xe = function(t, e, r, i) {
       done: true
     };
   }
-}, Pe = (function() {
+};
+var Pe = (function() {
   function t(e) {
     this.promise = Promise.resolve(e);
   }
@@ -1583,7 +1601,8 @@ var _t = function(t, e, r, i) {
     }
     A((i = i.apply(t, e || [])).next());
   });
-}, mt = function(t, e) {
+};
+var mt = function(t, e) {
   var r = {
     label: 0,
     sent: function() {
@@ -1659,7 +1678,8 @@ var _t = function(t, e, r, i) {
       done: true
     };
   }
-}, Ne = (function() {
+};
+var Ne = (function() {
   function t(e) {
     this.promise = Promise.resolve(e);
   }
@@ -1904,7 +1924,8 @@ var q = class {
       output_duration_s: 0
     }), this.schedulePost();
   }
-}, ke = class extends q {
+};
+var ke = class extends q {
   constructor(e) {
     super(e);
   }
@@ -2012,7 +2033,9 @@ function Ze(t) {
     status: t
   };
 }
-var Ar, lr, ur;
+var Ar;
+var lr;
+var ur;
 function cr(t) {
   return t == 255 || t == -1415072069;
 }
@@ -2340,7 +2363,9 @@ var dr = [
   "nv",
   "qu",
   "mul"
-], Dl = new Set(dr), Ji = /* @__PURE__ */ new Map([
+];
+var Dl = new Set(dr);
+var Ji = /* @__PURE__ */ new Map([
   ["af", "afr"],
   ["ak", "aka"],
   ["am", "amh"],
@@ -2670,7 +2695,8 @@ function fe() {
     return t;
   }, fe.apply(null, arguments);
 }
-var It = Li(hr()), ji = function(e) {
+var It = Li(hr());
+var ji = function(e) {
   return It.default.atob ? It.default.atob(e) : Buffer.from(e, "base64").toString("binary");
 };
 function vt(t) {
@@ -2689,23 +2715,29 @@ var Tt = class extends je {
 `))
       this.trigger("data", this.buffer.substring(0, r)), this.buffer = this.buffer.substring(r + 1);
   }
-}, zi = "	", Ct = function(t) {
+};
+var zi = "	";
+var Ct = function(t) {
   let e = /([0-9.]*)?@?([0-9.]*)?/.exec(t || ""), r = {};
   return e[1] && (r.length = parseInt(e[1], 10)), e[2] && (r.offset = parseInt(e[2], 10)), r;
-}, qi = function() {
+};
+var qi = function() {
   let r = '(?:[^=]*)=(?:"[^"]*"|[^,]*)';
   return new RegExp("(?:^|,)(" + r + ")");
-}, G = function(t) {
+};
+var G = function(t) {
   let e = {};
   if (!t) return e;
   let r = t.split(qi()), i = r.length, n;
   for (; i--; )
     r[i] !== "" && (n = /([^=]*)=(.*)/.exec(r[i]).slice(1), n[0] = n[0].replace(/^\s+|\s+$/g, ""), n[1] = n[1].replace(/^\s+|\s+$/g, ""), n[1] = n[1].replace(/^['"](.*)['"]$/g, "$1"), e[n[0]] = n[1]);
   return e;
-}, gr = (t) => {
+};
+var gr = (t) => {
   let e = t.split("x"), r = {};
   return e[0] && (r.width = parseInt(e[0], 10)), e[1] && (r.height = parseInt(e[1], 10)), r;
-}, Dt = class extends je {
+};
+var Dt = class extends je {
   constructor() {
     super(), this.customParsers = [], this.tagMappers = [];
   }
@@ -3039,12 +3071,15 @@ var Tt = class extends je {
     let i = (n) => e.test(n) ? r(n) : n;
     this.tagMappers.push(i);
   }
-}, $i = (t) => t.toLowerCase().replace(/-(\w)/g, (e) => e[1].toUpperCase()), Ae = function(t) {
+};
+var $i = (t) => t.toLowerCase().replace(/-(\w)/g, (e) => e[1].toUpperCase());
+var Ae = function(t) {
   let e = {};
   return Object.keys(t).forEach(function(r) {
     e[$i(r)] = t[r];
   }), e;
-}, St = function(t) {
+};
+var St = function(t) {
   let { serverControl: e, targetDuration: r, partTargetDuration: i } = t;
   if (!e) return;
   let n = "#EXT-X-SERVER-CONTROL", o = "holdBack", a = "partHoldBack", s = r && r * 3, l = i && i * 2;
@@ -3057,7 +3092,8 @@ var Tt = class extends je {
   })), i && e[a] < l && (this.trigger("warn", {
     message: `${n} clamping PART-HOLD-BACK (${e[a]}) to partTargetDuration * 2 (${l}).`
   }), e[a] = l);
-}, Le = class extends je {
+};
+var Le = class extends je {
   constructor(e = {}) {
     super(), this.lineStream = new Tt(), this.parseStream = new Dt(), this.lineStream.pipe(this.parseStream), this.mainDefinitions = e.mainDefinitions || {}, this.params = new URL(e.uri, "https://a.com").searchParams, this.lastProgramDateTime = null;
     let r = this, i = [], n = {}, o, a, s = false, l = function() {
@@ -3517,7 +3553,10 @@ var Tt = class extends je {
     this.parseStream.addTagMapper(e);
   }
 };
-var Gl = new Error("timeout while waiting for mutex to become available"), Yl = new Error("mutex already locked"), en = new Error("request for lock canceled"), tn = function(t, e, r, i) {
+var Gl = new Error("timeout while waiting for mutex to become available");
+var Yl = new Error("mutex already locked");
+var en = new Error("request for lock canceled");
+var tn = function(t, e, r, i) {
   function n(o) {
     return o instanceof r ? o : new r(function(a) {
       a(o);
@@ -3543,7 +3582,8 @@ var Gl = new Error("timeout while waiting for mutex to become available"), Yl = 
     }
     A((i = i.apply(t, e || [])).next());
   });
-}, ze = class {
+};
+var ze = class {
   constructor(e, r = en) {
     this._value = e, this._cancelError = r, this._queue = [], this._weightedWaiters = [];
   }
@@ -3784,12 +3824,21 @@ var j = {
   Audio: 0,
   Video: 1
 };
-var on = ["mp4", "webm", "mkv"], an = ["mp3", "m4a", "ogg"], sn = [...on, ...an];
+var on = ["mp4", "webm", "mkv"];
+var an = ["mp3", "m4a", "ogg"];
+var sn = [...on, ...an];
 function Sr(t) {
   let e = new Date((/* @__PURE__ */ new Date()).getTime() - 6e5);
   return !t.dateTimeObject && !t.programDateTime ? false : typeof t.dateTimeObject == "object" ? t.dateTimeObject > e : typeof t.programDateTime == "number" ? t.programDateTime > e.getTime() : false;
 }
-var un = 0.35, tt = 5, cn = 1500, dn = 500, fn = 4, xr = 5, ce = new L(), b = await we.LibAV({
+var un = 0.35;
+var tt = 5;
+var cn = 1500;
+var dn = 500;
+var fn = 4;
+var xr = 5;
+var ce = new L();
+var b = await we.LibAV({
   noworker: true
 });
 b.onwrite = ce.onwrite.bind(ce);
@@ -4594,7 +4643,10 @@ async function downloadHttpDirect(t, e) {
   let n = new q(t.download_id), o = await streamHttpToStorage(i, r, n, t.url, e, t);
   return await i.close(r), o.aborted_no_partial ? i.remove(r) : o.internal_bloburl = await createInternalBlobUrl(t, r), o;
 }
-var Gr = ":A-Za-z_\\u00C0-\\u00D6\\u00D8-\\u00F6\\u00F8-\\u02FF\\u0370-\\u037D\\u037F-\\u1FFF\\u200C-\\u200D\\u2070-\\u218F\\u2C00-\\u2FEF\\u3001-\\uD7FF\\uF900-\\uFDCF\\uFDF0-\\uFFFD", yn = Gr + "\\-.\\d\\u00B7\\u0300-\\u036F\\u203F-\\u2040", wn = "[" + Gr + "][" + yn + "]*", bn = new RegExp("^" + wn + "$");
+var Gr = ":A-Za-z_\\u00C0-\\u00D6\\u00D8-\\u00F6\\u00F8-\\u02FF\\u0370-\\u037D\\u037F-\\u1FFF\\u200C-\\u200D\\u2070-\\u218F\\u2C00-\\u2FEF\\u3001-\\uD7FF\\uF900-\\uFDCF\\uFDF0-\\uFFFD";
+var yn = Gr + "\\-.\\d\\u00B7\\u0300-\\u036F\\u203F-\\u2040";
+var wn = "[" + Gr + "][" + yn + "]*";
+var bn = new RegExp("^" + wn + "$");
 function it(t, e) {
   let r = [], i = e.exec(t);
   for (; i; ) {
@@ -4621,7 +4673,8 @@ var Ue = [
   "__defineSetter__",
   "__lookupGetter__",
   "__lookupSetter__"
-], nt = ["__proto__", "constructor", "prototype"];
+];
+var nt = ["__proto__", "constructor", "prototype"];
 var En = {
   allowBooleanAttributes: false,
   unpairedTags: []
@@ -4797,7 +4850,8 @@ function Wr(t, e) {
   }
   return e;
 }
-var In = '"', vn = "'";
+var In = '"';
+var vn = "'";
 function Cn(t, e) {
   let r = "", i = "", n = false;
   for (; e < t.length; e++) {
@@ -4976,7 +5030,8 @@ var Jr = {
   times: "\xD7",
   div: "\xF7",
   divide: "\xF7"
-}, Zr = {
+};
+var Zr = {
   Agrave: "\xC0",
   agrave: "\xE0",
   Aacute: "\xC1",
@@ -5040,7 +5095,8 @@ var Jr = {
   szlig: "\xDF",
   yuml: "\xFF",
   Yuml: "\u0178"
-}, jr = {
+};
+var jr = {
   Amacr: "\u0100",
   amacr: "\u0101",
   Abreve: "\u0102",
@@ -5158,7 +5214,8 @@ var Jr = {
   zdot: "\u017C",
   Zcaron: "\u017D",
   zcaron: "\u017E"
-}, zr = {
+};
+var zr = {
   Alpha: "\u0391",
   alpha: "\u03B1",
   Beta: "\u0392",
@@ -5229,7 +5286,8 @@ var Jr = {
   Gammad: "\u03DC",
   gammad: "\u03DD",
   digamma: "\u03DD"
-}, qr = {
+};
+var qr = {
   Afr: "\u{1D504}",
   afr: "\u{1D51E}",
   Acy: "\u0410",
@@ -5324,7 +5382,8 @@ var Jr = {
   ubrcy: "\u045E",
   DZcy: "\u040F",
   dzcy: "\u045F"
-}, $r = {
+};
+var $r = {
   plus: "+",
   pm: "\xB1",
   times: "\xD7",
@@ -5406,7 +5465,8 @@ var Jr = {
   lesseqqgtr: "\u2A8B",
   greater: ">",
   less: "<"
-}, ei = {
+};
+var ei = {
   alefsym: "\u2135",
   aleph: "\u2135",
   beth: "\u2136",
@@ -5527,7 +5587,8 @@ var Jr = {
   npr: "\u2280",
   nsucc: "\u2281",
   nsc: "\u2281"
-}, ti = {
+};
+var ti = {
   larr: "\u2190",
   leftarrow: "\u2190",
   LeftArrow: "\u2190",
@@ -5678,7 +5739,8 @@ var Jr = {
   LeftArrowBar: "\u21E4",
   rarrb: "\u21E5",
   RightArrowBar: "\u21E5"
-}, ri = {
+};
+var ri = {
   square: "\u25A1",
   Square: "\u25A1",
   squ: "\u25A1",
@@ -5771,7 +5833,8 @@ var Jr = {
   boxvH: "\u256A",
   boxVh: "\u256B",
   boxVH: "\u256C"
-}, ii = {
+};
+var ii = {
   excl: "!",
   iexcl: "\xA1",
   brvbar: "\xA6",
@@ -5822,7 +5885,8 @@ var Jr = {
   DiacriticalDot: "\u02D9",
   DiacriticalDoubleAcute: "\u02DD",
   grave: "`"
-}, ot = {
+};
+var ot = {
   cent: "\xA2",
   pound: "\xA3",
   curren: "\xA4",
@@ -5838,7 +5902,8 @@ var Jr = {
   won: "\u20A9",
   yuan: "\xA5",
   cedil: "\xB8"
-}, ni = {
+};
+var ni = {
   frac12: "\xBD",
   half: "\xBD",
   frac13: "\u2153",
@@ -5856,7 +5921,8 @@ var Jr = {
   frac58: "\u215D",
   frac78: "\u215E",
   frasl: "\u2044"
-}, oi = {
+};
+var oi = {
   trade: "\u2122",
   TRADE: "\u2122",
   telrec: "\u2315",
@@ -5921,7 +5987,8 @@ var Jr = {
   nvDash: "\u22AD",
   nVdash: "\u22AE",
   nVDash: "\u22AF"
-}, Bn = {
+};
+var Bn = {
   ...Jr,
   ...Zr,
   ...jr,
@@ -5935,13 +6002,15 @@ var Jr = {
   ...ot,
   ...ni,
   ...oi
-}, Ye = {
+};
+var Ye = {
   amp: "&",
   apos: "'",
   gt: ">",
   lt: "<",
   quot: '"'
-}, Vt = {
+};
+var Vt = {
   nbsp: "\xA0",
   copy: "\xA9",
   reg: "\xAE",
@@ -5990,7 +6059,9 @@ function Mt(...t) {
       }
   return e;
 }
-var _e = "external", at = "base", Nt = "all";
+var _e = "external";
+var at = "base";
+var Nt = "all";
 function Vn(t) {
   return !t || t === _e ? /* @__PURE__ */ new Set([_e]) : t === Nt ? /* @__PURE__ */ new Set([Nt]) : t === at ? /* @__PURE__ */ new Set([at]) : Array.isArray(t) ? new Set(t) : /* @__PURE__ */ new Set([_e]);
 }
@@ -5999,7 +6070,8 @@ var K = Object.freeze({
   leave: 1,
   remove: 2,
   throw: 3
-}), Mn = /* @__PURE__ */ new Set([9, 10, 13]);
+});
+var Mn = /* @__PURE__ */ new Set([9, 10, 13]);
 function Nn(t) {
   if (!t)
     return {
@@ -6147,7 +6219,8 @@ var Se = class {
     return this._applyNCRAction(o, e, i);
   }
 };
-var si = (t) => Ue.includes(t) ? "__" + t : t, Pn = {
+var si = (t) => Ue.includes(t) ? "__" + t : t;
+var Pn = {
   preserveOrder: false,
   attributeNamePrefix: "@_",
   attributesGroupName: false,
@@ -6279,7 +6352,11 @@ var W = class {
     return st;
   }
 };
-var ui = ":A-Za-z_\xC0-\xD6\xD8-\xF6\xF8-\u02FF\u0370-\u037D\u037F-\u0486\u0488-\u1FFF\u200C-\u200D\u2070-\u218F\u2C00-\u2FEF\u3001-\uD7FF\uF900-\uFDCF\uFDF0-\uFFFD", On = ui + "\\-\\.\\d\xB7\u0300-\u036F\u203F-\u2040", ci = ":A-Za-z_\xC0-\u02FF\u0370-\u037D\u037F-\u0486\u0488-\u1FFF\u200C-\u200D\u2070-\u218F\u2C00-\u2FEF\u3001-\uD7FF\uF900-\uFDCF\uFDF0-\uFFFD\u{10000}-\u{EFFFF}", Ln = ci + "\\-\\.\\d\xB7\u0300-\u036F\u0487\u203F-\u2040", di = (t, e, r = "") => {
+var ui = ":A-Za-z_\xC0-\xD6\xD8-\xF6\xF8-\u02FF\u0370-\u037D\u037F-\u0486\u0488-\u1FFF\u200C-\u200D\u2070-\u218F\u2C00-\u2FEF\u3001-\uD7FF\uF900-\uFDCF\uFDF0-\uFFFD";
+var On = ui + "\\-\\.\\d\xB7\u0300-\u036F\u203F-\u2040";
+var ci = ":A-Za-z_\xC0-\u02FF\u0370-\u037D\u037F-\u0486\u0488-\u1FFF\u200C-\u200D\u2070-\u218F\u2C00-\u2FEF\u3001-\uD7FF\uF900-\uFDCF\uFDF0-\uFFFD\u{10000}-\u{EFFFF}";
+var Ln = ci + "\\-\\.\\d\xB7\u0300-\u036F\u0487\u203F-\u2040";
+var di = (t, e, r = "") => {
   let i = t.replace(":", ""), n = e.replace(":", ""), o = `[${i}][${n}]*`;
   return {
     name: new RegExp(`^[${t}][${e}]*$`, r),
@@ -6288,7 +6365,10 @@ var ui = ":A-Za-z_\xC0-\xD6\xD8-\xF6\xF8-\u02FF\u0370-\u037D\u037F-\u0486\u0488-
     nmToken: new RegExp(`^[${e}]+$`, r),
     nmTokens: new RegExp(`^[${e}]+(?:\\s+[${e}]+)*$`, r)
   };
-}, Un = di(ui, On), Gn = di(ci, Ln, "u"), Yn = (t = "1.0") => t === "1.1" ? Gn : Un;
+};
+var Un = di(ui, On);
+var Gn = di(ci, Ln, "u");
+var Yn = (t = "1.0") => t === "1.1" ? Gn : Un;
 var Pt = (t, { xmlVersion: e = "1.0" } = {}) => Yn(e).qName.test(t);
 var Ke = class {
   constructor(e, r) {
@@ -6490,7 +6570,8 @@ var Ke = class {
       index: r
     };
   }
-}, H = (t, e) => {
+};
+var H = (t, e) => {
   for (; e < t.length && /\s/.test(t[e]); ) e++;
   return e;
 };
@@ -6505,7 +6586,11 @@ function Qe(t, e) {
     return t;
   throw new Error(`Invalid entity name ${t}`);
 }
-var Qn = /^[-+]?0x[a-fA-F0-9]+$/, Kn = /^0b[01]+$/, Wn = /^0o[0-7]+$/, Hn = /^([\-\+])?(0*)([0-9]*(\.[0-9]*)?)$/, Xn = {
+var Qn = /^[-+]?0x[a-fA-F0-9]+$/;
+var Kn = /^0b[01]+$/;
+var Wn = /^0o[0-7]+$/;
+var Hn = /^([\-\+])?(0*)([0-9]*(\.[0-9]*)?)$/;
+var Xn = {
   hex: true,
   binary: false,
   octal: false,
@@ -6757,7 +6842,8 @@ var Ut = class {
   matchesAny(e) {
     return e.matchesAny(this._matcher);
   }
-}, De = class {
+};
+var De = class {
   constructor(e = {}) {
     this.separator = e.separator || ".", this.path = [], this.siblingStacks = [], this._pathStringCache = null, this._view = new Ut(this);
   }
@@ -7331,7 +7417,8 @@ var xe = class {
     return W.getMetaDataSymbol();
   }
 };
-var Ht, ho = /* @__PURE__ */ new Map([
+var Ht;
+var ho = /* @__PURE__ */ new Map([
   [0, 65533],
   [128, 8364],
   [130, 8218],
@@ -7360,7 +7447,8 @@ var Ht, ho = /* @__PURE__ */ new Map([
   [156, 339],
   [158, 382],
   [159, 376]
-]), Xt = (Ht = String.fromCodePoint) !== null && Ht !== void 0 ? Ht : (t) => {
+]);
+var Xt = (Ht = String.fromCodePoint) !== null && Ht !== void 0 ? Ht : (t) => {
   let e = "";
   return t > 65535 && (t -= 65536, e += String.fromCharCode(t >>> 10 & 1023 | 55296), t = 56320 | t & 1023), e += String.fromCharCode(t), e;
 };
@@ -7948,6 +8036,8 @@ async function downloadHlsTwoWithFfmpeg(t, e) {
     r
   ]);
 }
+
+// src/download-worker/main.js
 async function executeDownloadStrategy(t, e) {
   try {
     let r;

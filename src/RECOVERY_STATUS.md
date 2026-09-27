@@ -17,13 +17,14 @@ a runtime file is missing from the build graph.
 The complete panel, Service Worker and download worker implementations now live at canonical source
 paths and directly generate their runtime counterparts:
 
-- `src/content/panel.js` → `content/panel.js`
-- `src/service/main.js` → `service/main.js`
-- `src/download-worker/main.js` → `download_worker/main.js`
+- `src/content/panel.js` + `panel-runtime.js` → `content/panel.js`
+- `src/service/main.js` + `service-runtime.js` → `service/main.js`
+- `src/download-worker/main.js` + `worker-runtime.js` → `download_worker/main.js`
 
-Application-owned top-level symbols in these entries have been semantically renamed with the
-scope-safe Babel script at `scripts/semantic-rename.mjs`. Bundled third-party internals retain their
-generated names to avoid changing vendor behavior or dropping code.
+Application UI/lifecycle/strategy entry code is separated from its recovered runtime dependencies.
+Application-owned symbols have been semantically renamed with the scope-safe Babel script at
+`scripts/semantic-rename.mjs`. Bundled third-party internals retain generated names to avoid
+changing vendor behavior or dropping code.
 
 ## Archived inactive code
 

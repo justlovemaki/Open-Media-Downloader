@@ -1,21 +1,25 @@
+// src/service/service-runtime.js
 var iv = Object.create;
 var As = Object.defineProperty;
 var nv = Object.getOwnPropertyDescriptor;
 var ov = Object.getOwnPropertyNames;
-var av = Object.getPrototypeOf, sv = Object.prototype.hasOwnProperty;
+var av = Object.getPrototypeOf;
+var sv = Object.prototype.hasOwnProperty;
 var ft = (e3, t) => () => (e3 && (t = e3(e3 = 0)), t);
 var Mt = (e3, t) => () => (t || e3(
   (t = {
     exports: {}
   }).exports,
   t
-), t.exports), et = (e3, t) => {
+), t.exports);
+var et = (e3, t) => {
   for (var i in t)
     As(e3, i, {
       get: t[i],
       enumerable: true
     });
-}, uv = (e3, t, i, n) => {
+};
+var uv = (e3, t, i, n) => {
   if (t && typeof t == "object" || typeof t == "function")
     for (let r of ov(t))
       !sv.call(e3, r) && r !== i && As(e3, r, {
@@ -957,7 +961,20 @@ var Ie = Mt((Es, gm) => {
 function vm() {
   return mv;
 }
-var gt, hm, qe, Ue, vi, bm, ym, mv, rt, wm, Sm, xm, g0, $e = ft(() => {
+var gt;
+var hm;
+var qe;
+var Ue;
+var vi;
+var bm;
+var ym;
+var mv;
+var rt;
+var wm;
+var Sm;
+var xm;
+var g0;
+var $e = ft(() => {
   "use strict";
   gt = "google", hm = "stable", qe = gt != "mozilla", Ue = gt == "mozilla", vi = false, bm = false, ym = false, mv = atob(
     "LS0tLS1CRUdJTiBQVUJMSUMgS0VZLS0tLS0KTUZrd0V3WUhLb1pJemowQ0FRWUlLb1pJemowREFRY0RRZ0FFOURtQkJNNitRZ1BDRlhJK2dBTFMreXkvdytBaQplMjdMbXRTWmExWjFWMlV1YWt6UmxzTGgrOFZMdE9KekdwVlcyenQ0bUpSMzVFWFRlYUhOQ0g0bEFBPT0KLS0tLS1FTkQgUFVCTElDIEtFWS0tLS0tCg=="
@@ -976,14 +993,17 @@ var qt = ft(() => {
 function Vn() {
   return true;
 }
-var zm, Ps = ft(() => {
+var zm;
+var Ps = ft(() => {
   "use strict";
   $e();
   qt();
   zm = ve(Ie(), 1);
 });
 var pv = {};
-var Tm, Os, Pm = ft(() => {
+var Tm;
+var Os;
+var Pm = ft(() => {
   "use strict";
   $e();
   Ps();
@@ -4592,7 +4612,12 @@ var df = Mt((zo) => {
   zo.XMLSerializer = lf.XMLSerializer;
   zo.DOMParser = uf().DOMParser;
 });
-var _r, D_, cs, mr, In, _s = ft(() => {
+var _r;
+var D_;
+var cs;
+var mr;
+var In;
+var _s = ft(() => {
   _r = {
     JS_EVAL_TYPE_GLOBAL: 0,
     JS_EVAL_TYPE_MODULE: 1,
@@ -4745,7 +4770,45 @@ function N_(e3, t) {
 function R_(e3, t) {
   t.moduleLoader && e3.setModuleLoader(t.moduleLoader), t.shouldInterrupt && e3.setInterruptHandler(t.shouldInterrupt), t.memoryLimitBytes !== void 0 && e3.setMemoryLimit(t.memoryLimitBytes), t.maxStackSizeBytes !== void 0 && e3.setMaxStackSize(t.maxStackSizeBytes);
 }
-var Jx, Yx, T_, Xx, A_, Fb, E_, Lb, Vb, Bb, eD, tD, Hb, Gb, Zb, P_, Qt, z_, qb, Me, pr, Ub, _t, $_, oD, aD, ci, sD, Jb, u1, l1, _D, mD, pD, fD, gD, O_, Yb, Xb = ft(() => {
+var Jx;
+var Yx;
+var T_;
+var Xx;
+var A_;
+var Fb;
+var E_;
+var Lb;
+var Vb;
+var Bb;
+var eD;
+var tD;
+var Hb;
+var Gb;
+var Zb;
+var P_;
+var Qt;
+var z_;
+var qb;
+var Me;
+var pr;
+var Ub;
+var _t;
+var $_;
+var oD;
+var aD;
+var ci;
+var sD;
+var Jb;
+var u1;
+var l1;
+var _D;
+var mD;
+var pD;
+var fD;
+var gD;
+var O_;
+var Yb;
+var Xb = ft(() => {
   _s();
   _s();
   Jx = Object.defineProperty, Yx = (e3, t) => {
@@ -5990,7 +6053,8 @@ var iy = {};
 et(iy, {
   QuickJSFFI: () => hD
 });
-var hD, ny = ft(() => {
+var hD;
+var ny = ft(() => {
   hD = class {
     constructor(e3) {
       this.module = e3, this.DEBUG = false, this.QTS_Throw = this.module.cwrap("QTS_Throw", "number", [
@@ -6247,7 +6311,9 @@ var oy = {};
 et(oy, {
   default: () => yD
 });
-var bD, yD, ay = ft(() => {
+var bD;
+var yD;
+var ay = ft(() => {
   bD = (() => {
     var e3 = import.meta.url;
     return function(t = {}) {
@@ -6667,7 +6733,8 @@ var lv = (function() {
   }, e3.prototype.toAsyncOption = function() {
     return new bi(A);
   }, e3;
-})(), A = new lv();
+})();
+var A = new lv();
 Object.freeze(A);
 var dv = (function() {
   function e3(t) {
@@ -6715,7 +6782,9 @@ var dv = (function() {
   }, e3.prototype.toString = function() {
     return "Some(".concat(jt(this.value), ")");
   }, e3.EMPTY = new e3(void 0), e3;
-})(), q = dv, qn;
+})();
+var q = dv;
+var qn;
 (function(e3) {
   function t() {
     for (var r = [], o = 0; o < arguments.length; o++) r[o] = arguments[o];
@@ -6746,7 +6815,8 @@ var br = function(e3, t, i) {
     for (var n = 0, r = t.length, o; n < r; n++)
       (o || !(n in t)) && (o || (o = Array.prototype.slice.call(t, 0, n)), o[n] = t[n]);
   return e3.concat(o || Array.prototype.slice.call(t));
-}, cv = (function() {
+};
+var cv = (function() {
   function e3(t) {
     if (!(this instanceof e3)) return new e3(t);
     this.error = t;
@@ -6832,7 +6902,8 @@ var br = function(e3, t, i) {
     return new yi(this);
   }, e3.EMPTY = new e3(void 0), e3;
 })();
-var I = cv, _v = (function() {
+var I = cv;
+var _v = (function() {
   function e3(t) {
     if (!(this instanceof e3)) return new e3(t);
     this.value = t;
@@ -6889,7 +6960,8 @@ var I = cv, _v = (function() {
     return new yi(this);
   }, e3.EMPTY = new e3(void 0), e3;
 })();
-var L = _v, Un;
+var L = _v;
+var Un;
 (function(e3) {
   function t(u) {
     for (var s = [], l = 1; l < arguments.length; l++) s[l - 1] = arguments[l];
@@ -6972,7 +7044,8 @@ var Fn = function(e3, t, i, n) {
     }
     l((n = n.apply(e3, t || [])).next());
   });
-}, Ln = function(e3, t) {
+};
+var Ln = function(e3, t) {
   var i = {
     label: 0,
     sent: function() {
@@ -7048,7 +7121,8 @@ var Fn = function(e3, t, i, n) {
       done: true
     };
   }
-}, yi = (function() {
+};
+var yi = (function() {
   function e3(t) {
     this.promise = Promise.resolve(t);
   }
@@ -7142,7 +7216,8 @@ var zs = function(e3, t, i, n) {
     }
     l((n = n.apply(e3, t || [])).next());
   });
-}, Ts = function(e3, t) {
+};
+var Ts = function(e3, t) {
   var i = {
     label: 0,
     sent: function() {
@@ -7218,7 +7293,8 @@ var zs = function(e3, t, i, n) {
       done: true
     };
   }
-}, bi = (function() {
+};
+var bi = (function() {
   function e3(t) {
     this.promise = Promise.resolve(t);
   }
@@ -7470,7 +7546,9 @@ function Cs(e3, t) {
   let i = Array.from(e3), n = Array.from(t);
   return i.every((r, o) => r === n[o]);
 }
-var $m = ["mp4", "webm", "mkv"], Om = ["mp3", "m4a", "ogg"], Ms = [...$m, ...Om];
+var $m = ["mp4", "webm", "mkv"];
+var Om = ["mp3", "m4a", "ogg"];
+var Ms = [...$m, ...Om];
 function Nm(e3) {
   return Ms.includes(e3);
 }
@@ -7526,7 +7604,8 @@ var hv = [
     demuxer: "webm",
     codec: "VP9"
   }
-], bv = [
+];
+var bv = [
   {
     mime_reg: /(aac|mp4a.40).*/i,
     demuxer: "m4a",
@@ -7642,7 +7721,8 @@ var Cm = [
     audio: "oga",
     video: "ogv"
   }
-], yv = /* @__PURE__ */ new Set([
+];
+var yv = /* @__PURE__ */ new Set([
   "3g2",
   "3gp",
   "aac",
@@ -7791,7 +7871,8 @@ function Xt() {
     return e3;
   }, Xt.apply(null, arguments);
 }
-var qs = ve(Xn()), Sv = function(t) {
+var qs = ve(Xn());
+var Sv = function(t) {
   return qs.default.atob ? qs.default.atob(t) : Buffer.from(t, "base64").toString("binary");
 };
 function xi(e3) {
@@ -7810,23 +7891,29 @@ var Ls = class extends Yn {
 `))
       this.trigger("data", this.buffer.substring(0, i)), this.buffer = this.buffer.substring(i + 1);
   }
-}, xv = "	", Us = function(e3) {
+};
+var xv = "	";
+var Us = function(e3) {
   let t = /([0-9.]*)?@?([0-9.]*)?/.exec(e3 || ""), i = {};
   return t[1] && (i.length = parseInt(t[1], 10)), t[2] && (i.offset = parseInt(t[2], 10)), i;
-}, Dv = function() {
+};
+var Dv = function() {
   let i = '(?:[^=]*)=(?:"[^"]*"|[^,]*)';
   return new RegExp("(?:^|,)(" + i + ")");
-}, Ne = function(e3) {
+};
+var Ne = function(e3) {
   let t = {};
   if (!e3) return t;
   let i = e3.split(Dv()), n = i.length, r;
   for (; n--; )
     i[n] !== "" && (r = /([^=]*)=(.*)/.exec(i[n]).slice(1), r[0] = r[0].replace(/^\s+|\s+$/g, ""), r[1] = r[1].replace(/^\s+|\s+$/g, ""), r[1] = r[1].replace(/^['"](.*)['"]$/g, "$1"), t[r[0]] = r[1]);
   return t;
-}, qm = (e3) => {
+};
+var qm = (e3) => {
   let t = e3.split("x"), i = {};
   return t[0] && (i.width = parseInt(t[0], 10)), t[1] && (i.height = parseInt(t[1], 10)), i;
-}, Vs = class extends Yn {
+};
+var Vs = class extends Yn {
   constructor() {
     super(), this.customParsers = [], this.tagMappers = [];
   }
@@ -8160,12 +8247,15 @@ var Ls = class extends Yn {
     let n = (r) => t.test(r) ? i(r) : r;
     this.tagMappers.push(n);
   }
-}, kv = (e3) => e3.toLowerCase().replace(/-(\w)/g, (t) => t[1].toUpperCase()), Ut = function(e3) {
+};
+var kv = (e3) => e3.toLowerCase().replace(/-(\w)/g, (t) => t[1].toUpperCase());
+var Ut = function(e3) {
   let t = {};
   return Object.keys(e3).forEach(function(i) {
     t[kv(i)] = e3[i];
   }), t;
-}, Fs = function(e3) {
+};
+var Fs = function(e3) {
   let { serverControl: t, targetDuration: i, partTargetDuration: n } = e3;
   if (!t) return;
   let r = "#EXT-X-SERVER-CONTROL", o = "holdBack", a = "partHoldBack", u = i && i * 3, s = n && n * 2;
@@ -8178,7 +8268,8 @@ var Ls = class extends Yn {
   })), n && t[a] < s && (this.trigger("warn", {
     message: `${r} clamping PART-HOLD-BACK (${t[a]}) to partTargetDuration * 2 (${s}).`
   }), t[a] = s);
-}, wr = class extends Yn {
+};
+var wr = class extends Yn {
   constructor(t = {}) {
     super(), this.lineStream = new Ls(), this.parseStream = new Vs(), this.lineStream.pipe(this.parseStream), this.mainDefinitions = t.mainDefinitions || {}, this.params = new URL(t.uri, "https://a.com").searchParams, this.lastProgramDateTime = null;
     let i = this, n = [], r = {}, o, a, u = false, s = function() {
@@ -8833,7 +8924,8 @@ var Di = [
   "nv",
   "qu",
   "mul"
-], Ev = new Set(Di);
+];
+var Ev = new Set(Di);
 function bt(e3) {
   return e3 ? Ev.has(e3) : false;
 }
@@ -9019,7 +9111,9 @@ function Fm(e3, t) {
 function io(e3) {
   return e3.contentProtection ? eo(e3.contentProtection) : false;
 }
-var Hs = ve(Ie(), 1), Lm = [/^Sec-/i, /^Cookie$/i, /^Date$/i, /^Origin$/i, /^Referer$/i], Vm = [
+var Hs = ve(Ie(), 1);
+var Lm = [/^Sec-/i, /^Cookie$/i, /^Date$/i, /^Origin$/i, /^Referer$/i];
+var Vm = [
   /Range/i,
   /^Proxy-/i,
   /^User-Agent$/i,
@@ -9039,7 +9133,8 @@ var Hs = ve(Ie(), 1), Lm = [/^Sec-/i, /^Cookie$/i, /^Date$/i, /^Origin$/i, /^Ref
   /^Upgrade$/i,
   /^Via$/i,
   /^Host/i
-], Tv = 750;
+];
+var Tv = 750;
 function no(e3) {
   return new URL(".", e3).href + "*";
 }
@@ -9320,7 +9415,8 @@ function uo(e3, t) {
   while (t > -1 && i !== "'" && $v(e3, t));
   return t > -1 && (t += n.length, n.length > 1 && (e3[t] === i && t++, e3[t] === i && t++)), t;
 }
-var Ov = /^(\d{4}-\d{2}-\d{2})?[T ]?(?:(\d{2}):\d{2}(?::\d{2}(?:\.\d+)?)?)?(Z|[-+]\d{2}:\d{2})?$/i, ki = class e extends Date {
+var Ov = /^(\d{4}-\d{2}-\d{2})?[T ]?(?:(\d{2}):\d{2}(?::\d{2}(?:\.\d+)?)?)?(Z|[-+]\d{2}:\d{2})?$/i;
+var ki = class e extends Date {
   #t = false;
   #r = false;
   #e = null;
@@ -9373,7 +9469,11 @@ var Ov = /^(\d{4}-\d{2}-\d{2})?[T ]?(?:(\d{2}):\d{2}(?::\d{2}(?:\.\d+)?)?)?(Z|[-
     return i.#t = false, i.#e = null, i;
   }
 };
-var Nv = /^((0x[0-9a-fA-F](_?[0-9a-fA-F])*)|(([+-]|0[ob])?\d(_?\d)*))$/, Rv = /^[+-]?\d(_?\d)*(\.\d(_?\d)*)?([eE][+-]?\d(_?\d)*)?$/, Cv = /^[+-]?0[0-9_]/, Mv = /^[0-9a-f]{2,8}$/i, Qm = {
+var Nv = /^((0x[0-9a-fA-F](_?[0-9a-fA-F])*)|(([+-]|0[ob])?\d(_?\d)*))$/;
+var Rv = /^[+-]?\d(_?\d)*(\.\d(_?\d)*)?([eE][+-]?\d(_?\d)*)?$/;
+var Cv = /^[+-]?0[0-9_]/;
+var Mv = /^[0-9a-f]{2,8}$/i;
+var Qm = {
   b: "\b",
   t: "	",
   n: `
@@ -9948,7 +10048,8 @@ var Bv = [
   "m3u8_audio_only",
   "m3u8_audio_video_one_source",
   "m3u8_audio_video_two_sources"
-], Hv = ["mpd_audio_video_one_source", "mpd_audio_only", "mpd_video_preview"];
+];
+var Hv = ["mpd_audio_video_one_source", "mpd_audio_only", "mpd_video_preview"];
 function lp(e3) {
   return Bv.includes(e3.strategy);
 }
@@ -10468,7 +10569,8 @@ function buildDownloadArguments(e3, t, i, n, r, o, a) {
     throw "Missing playlist_entry";
   } else throw new Error("Unreachable");
 }
-var Jv = chrome.runtime.id, mo = /* @__PURE__ */ new Map();
+var Jv = chrome.runtime.id;
+var mo = /* @__PURE__ */ new Map();
 function Yv() {
   qe && (chrome.downloads.onDeterminingFilename.hasListener(eu) || chrome.downloads.onDeterminingFilename.addListener(eu));
 }
@@ -10743,14 +10845,17 @@ function onContentMessage(e3) {
 }
 var Du = ve(Ie(), 1);
 $e();
-var Er = ve(Xn()), gp = "https://example.com", nw = function(t, i) {
+var Er = ve(Xn());
+var gp = "https://example.com";
+var nw = function(t, i) {
   if (/^[a-z]+:/i.test(i)) return i;
   /^data:/.test(t) && (t = Er.default.location && Er.default.location.href || "");
   var n = /^\/\//.test(t), r = !Er.default.location && !/\/\//i.test(t);
   t = new Er.default.URL(t, Er.default.location || gp);
   var o = new URL(i, t);
   return r ? o.href.slice(gp.length) : n ? o.href.slice(o.protocol.length) : o.href;
-}, go = nw;
+};
+var go = nw;
 var Re = ve(Xn());
 var hp = function(t, i, n) {
   i.forEach(function(r) {
@@ -10762,28 +10867,36 @@ var hp = function(t, i, n) {
   });
 };
 var bf = ve(df());
-var cf = (e3) => !!e3 && typeof e3 == "object", xe = (...e3) => e3.reduce(
+var cf = (e3) => !!e3 && typeof e3 == "object";
+var xe = (...e3) => e3.reduce(
   (t, i) => (typeof i != "object" || Object.keys(i).forEach((n) => {
     Array.isArray(t[n]) && Array.isArray(i[n]) ? t[n] = t[n].concat(i[n]) : cf(t[n]) && cf(i[n]) ? t[n] = xe(t[n], i[n]) : t[n] = i[n];
   }), t),
   {}
-), yf = (e3) => Object.keys(e3).map((t) => e3[t]), Nw = (e3, t) => {
+);
+var yf = (e3) => Object.keys(e3).map((t) => e3[t]);
+var Nw = (e3, t) => {
   let i = [];
   for (let n = e3; n < t; n++) i.push(n);
   return i;
-}, jr = (e3) => e3.reduce((t, i) => t.concat(i), []), vf = (e3) => {
+};
+var jr = (e3) => e3.reduce((t, i) => t.concat(i), []);
+var vf = (e3) => {
   if (!e3.length) return [];
   let t = [];
   for (let i = 0; i < e3.length; i++) t.push(e3[i]);
   return t;
-}, Rw = (e3, t) => e3.reduce((i, n, r) => (n[t] && i.push(r), i), []), Cw = (e3, t) => yf(
+};
+var Rw = (e3, t) => e3.reduce((i, n, r) => (n[t] && i.push(r), i), []);
+var Cw = (e3, t) => yf(
   e3.reduce(
     (i, n) => (n.forEach((r) => {
       i[t(r)] = r;
     }), i),
     {}
   )
-), Li = {
+);
+var Li = {
   INVALID_NUMBER_OF_PERIOD: "INVALID_NUMBER_OF_PERIOD",
   INVALID_NUMBER_OF_CONTENT_STEERING: "INVALID_NUMBER_OF_CONTENT_STEERING",
   DASH_EMPTY_MANIFEST: "DASH_EMPTY_MANIFEST",
@@ -10792,7 +10905,8 @@ var cf = (e3) => !!e3 && typeof e3 == "object", xe = (...e3) => e3.reduce(
   MISSING_SEGMENT_INFORMATION: "MISSING_SEGMENT_INFORMATION",
   SEGMENT_TIME_UNSPECIFIED: "SEGMENT_TIME_UNSPECIFIED",
   UNSUPPORTED_UTC_TIMING_SCHEME: "UNSUPPORTED_UTC_TIMING_SCHEME"
-}, Vi = ({
+};
+var Vi = ({
   baseUrl: e3 = "",
   source: t = "",
   range: i = "",
@@ -10812,10 +10926,13 @@ var cf = (e3) => !!e3 && typeof e3 == "object", xe = (...e3) => e3.reduce(
     };
   }
   return r;
-}, Mw = (e3) => {
+};
+var Mw = (e3) => {
   let t;
   return typeof e3.offset == "bigint" || typeof e3.length == "bigint" ? t = Re.default.BigInt(e3.offset) + Re.default.BigInt(e3.length) - Re.default.BigInt(1) : t = e3.offset + e3.length - 1, `${e3.offset}-${t}`;
-}, _f = (e3) => (e3 && typeof e3 != "number" && (e3 = parseInt(e3, 10)), isNaN(e3) ? null : e3), jw = {
+};
+var _f = (e3) => (e3 && typeof e3 != "number" && (e3 = parseInt(e3, 10)), isNaN(e3) ? null : e3);
+var jw = {
   static(e3) {
     let {
       duration: t,
@@ -10850,7 +10967,8 @@ var cf = (e3) => !!e3 && typeof e3 == "object", xe = (...e3) => e3.reduce(
       end: typeof l == "number" ? l : Math.min(h, x)
     };
   }
-}, qw = (e3) => (t) => {
+};
+var qw = (e3) => (t) => {
   let {
     duration: i,
     timescale: n = 1,
@@ -10863,7 +10981,8 @@ var cf = (e3) => !!e3 && typeof e3 == "object", xe = (...e3) => e3.reduce(
     timeline: r,
     time: t * i
   };
-}, wu = (e3) => {
+};
+var wu = (e3) => {
   let {
     type: t,
     duration: i,
@@ -10876,7 +10995,8 @@ var cf = (e3) => !!e3 && typeof e3 == "object", xe = (...e3) => e3.reduce(
     s[l].duration = d - i / n * l;
   }
   return s;
-}, wf = (e3) => {
+};
+var wf = (e3) => {
   let {
     baseUrl: t,
     initialization: i = {},
@@ -10902,7 +11022,8 @@ var cf = (e3) => !!e3 && typeof e3 == "object", xe = (...e3) => e3.reduce(
     c.length && (d.duration = c[0].duration, d.timeline = c[0].timeline);
   } else n && (d.duration = n, d.timeline = o);
   return d.presentationTime = a || o, d.number = u, [d];
-}, Uw = (e3, t, i) => {
+};
+var Uw = (e3, t, i) => {
   let n = e3.sidx.map ? e3.sidx.map : null, r = e3.sidx.duration, o = e3.timeline || 0, a = e3.sidx.byterange, u = a.offset + a.length, s = t.timescale, l = t.references.filter((x) => x.referenceType !== 1), d = [], c = e3.endList ? "static" : "dynamic", f = e3.sidx.timeline, m = f, h = e3.mediaSequence || 0, _;
   typeof t.firstOffset == "bigint" ? _ = Re.default.BigInt(u) + t.firstOffset : _ = u + t.firstOffset;
   for (let x = 0; x < l.length; x++) {
@@ -10923,22 +11044,29 @@ var cf = (e3) => !!e3 && typeof e3 == "object", xe = (...e3) => e3.reduce(
     n && (j.map = n), d.push(j), typeof _ == "bigint" ? _ += Re.default.BigInt(w) : _ += w, m += y / s, h++;
   }
   return e3.segments = d, e3;
-}, Fw = ["AUDIO", "SUBTITLES"], Lw = 1 / 60, Sf = (e3) => Cw(e3, ({ timeline: t }) => t).sort(
+};
+var Fw = ["AUDIO", "SUBTITLES"];
+var Lw = 1 / 60;
+var Sf = (e3) => Cw(e3, ({ timeline: t }) => t).sort(
   (t, i) => t.timeline > i.timeline ? 1 : -1
-), Vw = (e3, t) => {
+);
+var Vw = (e3, t) => {
   for (let i = 0; i < e3.length; i++)
     if (e3[i].attributes.NAME === t) return e3[i];
   return null;
-}, mf = (e3) => {
+};
+var mf = (e3) => {
   let t = [];
   return hp(e3, Fw, (i, n, r, o) => {
     t = t.concat(i.playlists || []);
   }), t;
-}, pf = ({ playlist: e3, mediaSequence: t }) => {
+};
+var pf = ({ playlist: e3, mediaSequence: t }) => {
   e3.mediaSequence = t, e3.segments.forEach((i, n) => {
     i.number = e3.mediaSequence + n;
   });
-}, Bw = ({ oldPlaylists: e3, newPlaylists: t, timelineStarts: i }) => {
+};
+var Bw = ({ oldPlaylists: e3, newPlaylists: t, timelineStarts: i }) => {
   t.forEach((n) => {
     n.discontinuitySequence = i.findIndex(function({ timeline: s }) {
       return s === n.timeline;
@@ -10960,14 +11088,17 @@ var cf = (e3) => !!e3 && typeof e3 == "object", xe = (...e3) => e3.reduce(
       mediaSequence: r.segments[a].number
     });
   });
-}, Hw = ({ oldManifest: e3, newManifest: t }) => {
+};
+var Hw = ({ oldManifest: e3, newManifest: t }) => {
   let i = e3.playlists.concat(mf(e3)), n = t.playlists.concat(mf(t));
   return t.timelineStarts = Sf([e3.timelineStarts, t.timelineStarts]), Bw({
     oldPlaylists: i,
     newPlaylists: n,
     timelineStarts: t.timelineStarts
   }), t;
-}, Gw = (e3) => e3 && e3.uri + "-" + Mw(e3.byterange), vu = (e3) => {
+};
+var Gw = (e3) => e3 && e3.uri + "-" + Mw(e3.byterange);
+var vu = (e3) => {
   let t = e3.reduce(function(n, r) {
     return n[r.attributes.baseUrl] || (n[r.attributes.baseUrl] = []), n[r.attributes.baseUrl].push(r), n;
   }, {}), i = [];
@@ -10985,14 +11116,17 @@ var cf = (e3) => !!e3 && typeof e3 == "object", xe = (...e3) => e3.reduce(
   }), i.map(
     (n) => (n.discontinuityStarts = Rw(n.segments || [], "discontinuity"), n)
   );
-}, Su = (e3, t) => {
+};
+var Su = (e3, t) => {
   let i = Gw(e3.sidx), n = i && t[i] && t[i].sidx;
   return n && Uw(e3, n, e3.sidx.resolvedUri), e3;
-}, Zw = (e3, t = {}) => {
+};
+var Zw = (e3, t = {}) => {
   if (!Object.keys(t).length) return e3;
   for (let i in e3) e3[i] = Su(e3[i], t);
   return e3;
-}, Ww = ({
+};
+var Ww = ({
   attributes: e3,
   segments: t,
   sidx: i,
@@ -11019,7 +11153,8 @@ var cf = (e3) => !!e3 && typeof e3 == "object", xe = (...e3) => e3.reduce(
     segments: t
   };
   return e3.contentProtection && (u.contentProtection = e3.contentProtection), e3.serviceLocation && (u.attributes.serviceLocation = e3.serviceLocation), i && (u.sidx = i), a && (u.attributes.AUDIO = "audio", u.attributes.SUBTITLES = "subs"), u;
-}, Kw = ({
+};
+var Kw = ({
   attributes: e3,
   segments: t,
   mediaSequence: i,
@@ -11055,7 +11190,8 @@ var cf = (e3) => !!e3 && typeof e3 == "object", xe = (...e3) => e3.reduce(
     segments: t
   };
   return e3.serviceLocation && (a.attributes.serviceLocation = e3.serviceLocation), a;
-}, Qw = (e3, t = {}, i = false) => {
+};
+var Qw = (e3, t = {}, i = false) => {
   let n, r = e3.reduce((o, a) => {
     let u = a.attributes.role && a.attributes.role.value || "", s = a.attributes.lang || "", l = a.attributes.label || "main";
     if (s && !a.attributes.label) {
@@ -11077,7 +11213,8 @@ var cf = (e3) => !!e3 && typeof e3 == "object", xe = (...e3) => e3.reduce(
     r[o].default = true;
   }
   return r;
-}, Jw = (e3, t = {}) => e3.reduce((i, n) => {
+};
+var Jw = (e3, t = {}) => e3.reduce((i, n) => {
   let r = n.attributes.label || n.attributes.lang || "text", o = n.attributes.lang || "und";
   return i[r] || (i[r] = {
     language: o,
@@ -11086,7 +11223,8 @@ var cf = (e3) => !!e3 && typeof e3 == "object", xe = (...e3) => e3.reduce(
     playlists: [],
     uri: ""
   }), i[r].playlists.push(Su(Kw(n), t)), i;
-}, {}), Yw = (e3) => e3.reduce(
+}, {});
+var Yw = (e3) => e3.reduce(
   (t, i) => (i && i.forEach((n) => {
     let { channel: r, language: o } = n;
     t[o] = {
@@ -11097,7 +11235,8 @@ var cf = (e3) => !!e3 && typeof e3 == "object", xe = (...e3) => e3.reduce(
     }, n.hasOwnProperty("aspectRatio") && (t[o].aspectRatio = n.aspectRatio), n.hasOwnProperty("easyReader") && (t[o].easyReader = n.easyReader), n.hasOwnProperty("3D") && (t[o]["3D"] = n["3D"]);
   }), t),
   {}
-), Xw = ({ attributes: e3, segments: t, sidx: i, discontinuityStarts: n }) => {
+);
+var Xw = ({ attributes: e3, segments: t, sidx: i, discontinuityStarts: n }) => {
   let r = {
     attributes: {
       NAME: e3.id,
@@ -11121,7 +11260,11 @@ var cf = (e3) => !!e3 && typeof e3 == "object", xe = (...e3) => e3.reduce(
     segments: t
   };
   return e3.frameRate && (r.attributes["FRAME-RATE"] = e3.frameRate), e3.contentProtection && (r.contentProtection = e3.contentProtection), e3.serviceLocation && (r.attributes.serviceLocation = e3.serviceLocation), i && (r.sidx = i), r;
-}, eS = ({ attributes: e3 }) => e3.mimeType === "video/mp4" || e3.mimeType === "video/webm" || e3.contentType === "video", tS = ({ attributes: e3 }) => e3.mimeType === "audio/mp4" || e3.mimeType === "audio/webm" || e3.contentType === "audio", rS = ({ attributes: e3 }) => e3.mimeType === "text/vtt" || e3.contentType === "text", iS = (e3, t) => {
+};
+var eS = ({ attributes: e3 }) => e3.mimeType === "video/mp4" || e3.mimeType === "video/webm" || e3.contentType === "video";
+var tS = ({ attributes: e3 }) => e3.mimeType === "audio/mp4" || e3.mimeType === "audio/webm" || e3.contentType === "audio";
+var rS = ({ attributes: e3 }) => e3.mimeType === "text/vtt" || e3.contentType === "text";
+var iS = (e3, t) => {
   e3.forEach((i) => {
     i.mediaSequence = 0, i.discontinuitySequence = t.findIndex(function({ timeline: n }) {
       return n === i.timeline;
@@ -11129,10 +11272,12 @@ var cf = (e3) => !!e3 && typeof e3 == "object", xe = (...e3) => e3.reduce(
       n.number = r;
     });
   });
-}, ff = (e3) => e3 ? Object.keys(e3).reduce((t, i) => {
+};
+var ff = (e3) => e3 ? Object.keys(e3).reduce((t, i) => {
   let n = e3[i];
   return t.concat(n.playlists);
-}, []) : [], nS = ({
+}, []) : [];
+var nS = ({
   dashPlaylists: e3,
   locations: t,
   contentSteering: i,
@@ -11167,7 +11312,8 @@ var cf = (e3) => !!e3 && typeof e3 == "object", xe = (...e3) => e3.reduce(
     oldManifest: r,
     newManifest: h
   }) : h;
-}, oS = (e3, t, i) => {
+};
+var oS = (e3, t, i) => {
   let {
     NOW: n,
     clientOffset: r,
@@ -11177,7 +11323,8 @@ var cf = (e3) => !!e3 && typeof e3 == "object", xe = (...e3) => e3.reduce(
     minimumUpdatePeriod: s = 0
   } = e3, l = (n + r) / 1e3, d = o + u, f = l + s - d;
   return Math.ceil((f * a - t) / i);
-}, xf = (e3, t) => {
+};
+var xf = (e3, t) => {
   let {
     type: i,
     minimumUpdatePeriod: n = 0,
@@ -11205,19 +11352,24 @@ var cf = (e3) => !!e3 && typeof e3 == "object", xe = (...e3) => e3.reduce(
       }), d += m, w++;
   }
   return l;
-}, aS = /\$([A-z]*)(?:(%0)([0-9]+)d)?\$/g, sS = (e3) => (t, i, n, r) => {
+};
+var aS = /\$([A-z]*)(?:(%0)([0-9]+)d)?\$/g;
+var sS = (e3) => (t, i, n, r) => {
   if (t === "$$") return "$";
   if (typeof e3[i] > "u") return t;
   let o = "" + e3[i];
   return i === "RepresentationID" || (n ? r = parseInt(r, 10) : r = 1, o.length >= r) ? o : `${new Array(r - o.length + 1).join("0")}${o}`;
-}, gf = (e3, t) => e3.replace(aS, sS(t)), uS = (e3, t) => !e3.duration && !t ? [
+};
+var gf = (e3, t) => e3.replace(aS, sS(t));
+var uS = (e3, t) => !e3.duration && !t ? [
   {
     number: e3.startNumber || 1,
     duration: e3.sourceDuration,
     time: 0,
     timeline: e3.periodStart
   }
-] : e3.duration ? wu(e3) : xf(e3, t), lS = (e3, t) => {
+] : e3.duration ? wu(e3) : xf(e3, t);
+var lS = (e3, t) => {
   let i = {
     RepresentationID: e3.id,
     Bandwidth: e3.bandwidth || 0
@@ -11244,7 +11396,8 @@ var cf = (e3) => !!e3 && typeof e3 == "object", xe = (...e3) => e3.reduce(
       presentationTime: d
     };
   });
-}, dS = (e3, t) => {
+};
+var dS = (e3, t) => {
   let { baseUrl: i, initialization: n = {} } = e3, r = Vi({
     baseUrl: i,
     source: n.sourceURL,
@@ -11255,7 +11408,8 @@ var cf = (e3) => !!e3 && typeof e3 == "object", xe = (...e3) => e3.reduce(
     range: t.mediaRange
   });
   return o.map = r, o;
-}, cS = (e3, t) => {
+};
+var cS = (e3, t) => {
   let { duration: i, segmentUrls: n = [], periodStart: r } = e3;
   if (!i && !t || i && t) throw new Error(Li.SEGMENT_TIME_UNSPECIFIED);
   let o = n.map((s) => dS(e3, s)), a;
@@ -11265,7 +11419,8 @@ var cf = (e3) => !!e3 && typeof e3 == "object", xe = (...e3) => e3.reduce(
       return d.timeline = s.timeline, d.duration = s.duration, d.number = s.number, d.presentationTime = r + (s.time - f) / c, d;
     }
   }).filter((s) => s);
-}, _S = ({ attributes: e3, segmentInfo: t }) => {
+};
+var _S = ({ attributes: e3, segmentInfo: t }) => {
   let i, n;
   t.template ? (n = lS, i = xe(e3, t.template)) : t.base ? (n = wf, i = xe(e3, t.base)) : t.list && (n = cS, i = xe(e3, t.list));
   let r = {
@@ -11282,14 +11437,21 @@ var cf = (e3) => !!e3 && typeof e3 == "object", xe = (...e3) => e3.reduce(
       0
     ) : i.duration = 0;
   return r.attributes = i, r.segments = o, t.base && i.indexRange && (r.sidx = o[0], r.segments = []), r;
-}, mS = (e3) => e3.map(_S), de = (e3, t) => vf(e3.childNodes).filter(({ tagName: i }) => i === t), Bi = (e3) => e3.textContent.trim(), pS = (e3) => parseFloat(e3.split("/").reduce((t, i) => t / i)), Mr = (e3) => {
+};
+var mS = (e3) => e3.map(_S);
+var de = (e3, t) => vf(e3.childNodes).filter(({ tagName: i }) => i === t);
+var Bi = (e3) => e3.textContent.trim();
+var pS = (e3) => parseFloat(e3.split("/").reduce((t, i) => t / i));
+var Mr = (e3) => {
   let u = /P(?:(\d*)Y)?(?:(\d*)M)?(?:(\d*)D)?(?:T(?:(\d*)H)?(?:(\d*)M)?(?:([\d.]*)S)?)?/.exec(
     e3
   );
   if (!u) return 0;
   let [s, l, d, c, f, m] = u.slice(1);
   return parseFloat(s || 0) * 31536e3 + parseFloat(l || 0) * 2592e3 + parseFloat(d || 0) * 86400 + parseFloat(c || 0) * 3600 + parseFloat(f || 0) * 60 + parseFloat(m || 0);
-}, fS = (e3) => (/^\d+-\d+-\d+T\d+:\d+:\d+(\.\d+)?$/.test(e3) && (e3 += "Z"), Date.parse(e3)), hf = {
+};
+var fS = (e3) => (/^\d+-\d+-\d+T\d+:\d+:\d+(\.\d+)?$/.test(e3) && (e3 += "Z"), Date.parse(e3));
+var hf = {
   mediaPresentationDuration(e3) {
     return Mr(e3);
   },
@@ -11351,16 +11513,19 @@ var cf = (e3) => !!e3 && typeof e3 == "object", xe = (...e3) => e3.reduce(
   DEFAULT(e3) {
     return e3;
   }
-}, be = (e3) => e3 && e3.attributes ? vf(e3.attributes).reduce((t, i) => {
+};
+var be = (e3) => e3 && e3.attributes ? vf(e3.attributes).reduce((t, i) => {
   let n = hf[i.name] || hf.DEFAULT;
   return t[i.name] = n(i.value), t;
-}, {}) : {}, gS = {
+}, {}) : {};
+var gS = {
   "urn:uuid:1077efec-c0b2-4d02-ace3-3c1e52e2fb4b": "org.w3.clearkey",
   "urn:uuid:edef8ba9-79d6-4ace-a3c8-27dcd51d21ed": "com.widevine.alpha",
   "urn:uuid:9a04f079-9840-4286-ab92-e65be0885f95": "com.microsoft.playready",
   "urn:uuid:f239e769-efa3-4850-9c16-a903c6932efb": "com.adobe.primetime",
   "urn:mpeg:dash:mp4protection:2011": "mp4protection"
-}, To = (e3, t) => t.length ? jr(
+};
+var To = (e3, t) => t.length ? jr(
   e3.map(function(i) {
     return t.map(function(n) {
       let r = Bi(n), o = go(i.baseUrl, r), a = xe(be(n), {
@@ -11369,7 +11534,8 @@ var cf = (e3) => !!e3 && typeof e3 == "object", xe = (...e3) => e3.reduce(
       return o !== r && !a.serviceLocation && i.serviceLocation && (a.serviceLocation = i.serviceLocation), a;
     });
   })
-) : e3, xu = (e3) => {
+) : e3;
+var xu = (e3) => {
   let t = de(e3, "SegmentTemplate")[0], i = de(e3, "SegmentList")[0], n = i && de(i, "SegmentURL").map(
     (c) => xe(
       {
@@ -11395,13 +11561,15 @@ var cf = (e3) => !!e3 && typeof e3 == "object", xe = (...e3) => e3.reduce(
   return Object.keys(d).forEach((c) => {
     d[c] || delete d[c];
   }), d;
-}, hS = (e3, t, i) => (n) => {
+};
+var hS = (e3, t, i) => (n) => {
   let r = de(n, "BaseURL"), o = To(t, r), a = xe(e3, be(n)), u = xu(n);
   return o.map((s) => ({
     segmentInfo: xe(i, u),
     attributes: xe(a, s)
   }));
-}, bS = (e3) => e3.reduce((t, i) => {
+};
+var bS = (e3) => e3.reduce((t, i) => {
   let n = be(i);
   n.schemeIdUri && (n.schemeIdUri = n.schemeIdUri.toLowerCase());
   let r = gS[n.schemeIdUri];
@@ -11416,7 +11584,8 @@ var cf = (e3) => !!e3 && typeof e3 == "object", xe = (...e3) => e3.reduce(
     }
   }
   return t;
-}, {}), yS = (e3) => {
+}, {});
+var yS = (e3) => {
   if (e3.schemeIdUri === "urn:scte:dash:cc:cea-608:2015")
     return (typeof e3.value != "string" ? [] : e3.value.split(";")).map((i) => {
       let n, r;
@@ -11443,7 +11612,8 @@ var cf = (e3) => !!e3 && typeof e3 == "object", xe = (...e3) => e3.reduce(
       } else n.language = i;
       return n.channel && (n.channel = "SERVICE" + n.channel), n;
     });
-}, vS = (e3) => jr(
+};
+var vS = (e3) => jr(
   de(e3.node, "EventStream").map((t) => {
     let i = be(t), n = i.schemeIdUri;
     return de(t, "Event").map((r) => {
@@ -11460,7 +11630,8 @@ var cf = (e3) => !!e3 && typeof e3 == "object", xe = (...e3) => e3.reduce(
       };
     });
   })
-), wS = (e3, t, i) => (n) => {
+);
+var wS = (e3, t, i) => (n) => {
   let r = be(n), o = To(t, de(n, "BaseURL")), a = de(n, "Role")[0], u = {
     role: be(a)
   }, s = xe(e3, r, u), l = de(n, "Accessibility")[0], d = yS(be(l));
@@ -11480,14 +11651,16 @@ var cf = (e3) => !!e3 && typeof e3 == "object", xe = (...e3) => e3.reduce(
   }));
   let m = xu(n), h = de(n, "Representation"), _ = xe(i, m);
   return jr(h.map(hS(s, o, _)));
-}, SS = (e3, t) => (i, n) => {
+};
+var SS = (e3, t) => (i, n) => {
   let r = To(t, de(i.node, "BaseURL")), o = xe(e3, {
     periodStart: i.attributes.start
   });
   typeof i.attributes.duration == "number" && (o.periodDuration = i.attributes.duration);
   let a = de(i.node, "AdaptationSet"), u = xu(i.node);
   return jr(a.map(wS(o, r, u)));
-}, xS = (e3, t) => {
+};
+var xS = (e3, t) => {
   if (e3.length > 1 && t({
     type: "warn",
     message: "The MPD manifest should contain no more than one ContentSteering tag"
@@ -11500,7 +11673,9 @@ var cf = (e3) => !!e3 && typeof e3 == "object", xe = (...e3) => e3.reduce(
     be(e3[0])
   );
   return i.queryBeforeStart = i.queryBeforeStart === "true", i;
-}, DS = ({ attributes: e3, priorPeriodAttributes: t, mpdType: i }) => typeof e3.start == "number" ? e3.start : t && typeof t.start == "number" && typeof t.duration == "number" ? t.start + t.duration : !t && i === "static" ? 0 : null, kS = (e3, t = {}) => {
+};
+var DS = ({ attributes: e3, priorPeriodAttributes: t, mpdType: i }) => typeof e3.start == "number" ? e3.start : t && typeof t.start == "number" && typeof t.duration == "number" ? t.start + t.duration : !t && i === "static" ? 0 : null;
+var kS = (e3, t = {}) => {
   let {
     manifestUri: i = "",
     NOW: n = Date.now(),
@@ -11535,7 +11710,8 @@ var cf = (e3) => !!e3 && typeof e3 == "object", xe = (...e3) => e3.reduce(
     representationInfo: jr(c.map(SS(s, l))),
     eventStream: jr(c.map(vS))
   };
-}, AS = (e3) => {
+};
+var AS = (e3) => {
   if (e3 === "") throw new Error(Li.DASH_EMPTY_MANIFEST);
   let t = new bf.DOMParser(), i, n;
   try {
@@ -12111,7 +12287,8 @@ function Cf(e3) {
     t(i[0]?.windowId, i[0]?.id);
   });
 }
-var rr = /* @__PURE__ */ new Map(), Au = null;
+var rr = /* @__PURE__ */ new Map();
+var Au = null;
 function registerPreviewHandler(e3, t) {
   onContentMessage(async (i) => {
     if (i.name == "request_preview") {
@@ -12883,13 +13060,15 @@ function b(e3, t, i) {
     value: e3
   }), a;
 }
-var Gi = Symbol("zod_brand"), at = class extends Error {
+var Gi = Symbol("zod_brand");
+var at = class extends Error {
   constructor() {
     super(
       "Encountered Promise during synchronous parse. Use .parseAsync() instead."
     );
   }
-}, Hi = {};
+};
+var Hi = {};
 function se(e3) {
   return e3 && Object.assign(Hi, e3), Hi;
 }
@@ -13080,7 +13259,9 @@ var BS = (e3) => {
     default:
       throw new Error(`Unknown data type: ${t}`);
   }
-}, Yi = /* @__PURE__ */ new Set(["string", "number", "symbol"]), Ou = /* @__PURE__ */ new Set([
+};
+var Yi = /* @__PURE__ */ new Set(["string", "number", "symbol"]);
+var Ou = /* @__PURE__ */ new Set([
   "string",
   "number",
   "bigint",
@@ -13155,7 +13336,8 @@ var Ru = {
   uint32: [0, 4294967295],
   float32: [-34028234663852886e22, 34028234663852886e22],
   float64: [-Number.MAX_VALUE, Number.MAX_VALUE]
-}, Cu = {
+};
+var Cu = {
   int64: [BigInt("-9223372036854775808"), BigInt("9223372036854775807")],
   uint64: [BigInt(0), BigInt("18446744073709551615")]
 };
@@ -13323,7 +13505,9 @@ var qf = (e3, t) => {
     },
     enumerable: true
   });
-}, tn = b("$ZodError", qf), Lr = b("$ZodError", qf, {
+};
+var tn = b("$ZodError", qf);
+var Lr = b("$ZodError", qf, {
   Parent: Error
 });
 function Vr(e3, t = (i) => i.message) {
@@ -13452,7 +13636,9 @@ var Oo = (e3) => (t, i, n, r) => {
     throw Error.captureStackTrace(u, r?.callee), u;
   }
   return a.value;
-}, No = Oo(Lr), Ro = (e3) => async (t, i, n, r) => {
+};
+var No = Oo(Lr);
+var Ro = (e3) => async (t, i, n, r) => {
   let o = n ? Object.assign(n, {
     async: true
   }) : {
@@ -13469,7 +13655,9 @@ var Oo = (e3) => (t, i, n, r) => {
     throw Error.captureStackTrace(u, r?.callee), u;
   }
   return a.value;
-}, Co = Ro(Lr), Mo = (e3) => (t, i, n) => {
+};
+var Co = Ro(Lr);
+var Mo = (e3) => (t, i, n) => {
   let r = n ? {
     ...n,
     async: false
@@ -13490,7 +13678,9 @@ var Oo = (e3) => (t, i, n, r) => {
     success: true,
     data: o.value
   };
-}, ju = Mo(Lr), jo = (e3) => async (t, i, n) => {
+};
+var ju = Mo(Lr);
+var jo = (e3) => async (t, i, n) => {
   let r = n ? Object.assign(n, {
     async: true
   }) : {
@@ -13509,7 +13699,8 @@ var Oo = (e3) => (t, i, n, r) => {
     success: true,
     data: o.value
   };
-}, qu = jo(Lr);
+};
+var qu = jo(Lr);
 var Ht = {};
 et(Ht, {
   _emoji: () => Ff,
@@ -13554,13 +13745,41 @@ et(Ht, {
   uuid7: () => i2,
   xid: () => Vu
 });
-var Uu = /^[cC][^\s-]{8,}$/, Fu = /^[0-9a-z]+$/, Lu = /^[0-9A-HJKMNP-TV-Za-hjkmnp-tv-z]{26}$/, Vu = /^[0-9a-vA-V]{20}$/, Bu = /^[A-Za-z0-9]{27}$/, Hu = /^[a-zA-Z0-9_-]{21}$/, Gu = /^P(?:(\d+W)|(?!.*W)(?=\d|T\d)(\d+Y)?(\d+M)?(\d+D)?(T(?=\d)(\d+H)?(\d+M)?(\d+([.,]\d+)?S)?)?)$/, e2 = /^[-+]?P(?!$)(?:(?:[-+]?\d+Y)|(?:[-+]?\d+[.,]\d+Y$))?(?:(?:[-+]?\d+M)|(?:[-+]?\d+[.,]\d+M$))?(?:(?:[-+]?\d+W)|(?:[-+]?\d+[.,]\d+W$))?(?:(?:[-+]?\d+D)|(?:[-+]?\d+[.,]\d+D$))?(?:T(?=[\d+-])(?:(?:[-+]?\d+H)|(?:[-+]?\d+[.,]\d+H$))?(?:(?:[-+]?\d+M)|(?:[-+]?\d+[.,]\d+M$))?(?:[-+]?\d+(?:[.,]\d+)?S)?)??$/, Zu = /^([0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12})$/, or = (e3) => e3 ? new RegExp(
+var Uu = /^[cC][^\s-]{8,}$/;
+var Fu = /^[0-9a-z]+$/;
+var Lu = /^[0-9A-HJKMNP-TV-Za-hjkmnp-tv-z]{26}$/;
+var Vu = /^[0-9a-vA-V]{20}$/;
+var Bu = /^[A-Za-z0-9]{27}$/;
+var Hu = /^[a-zA-Z0-9_-]{21}$/;
+var Gu = /^P(?:(\d+W)|(?!.*W)(?=\d|T\d)(\d+Y)?(\d+M)?(\d+D)?(T(?=\d)(\d+H)?(\d+M)?(\d+([.,]\d+)?S)?)?)$/;
+var e2 = /^[-+]?P(?!$)(?:(?:[-+]?\d+Y)|(?:[-+]?\d+[.,]\d+Y$))?(?:(?:[-+]?\d+M)|(?:[-+]?\d+[.,]\d+M$))?(?:(?:[-+]?\d+W)|(?:[-+]?\d+[.,]\d+W$))?(?:(?:[-+]?\d+D)|(?:[-+]?\d+[.,]\d+D$))?(?:T(?=[\d+-])(?:(?:[-+]?\d+H)|(?:[-+]?\d+[.,]\d+H$))?(?:(?:[-+]?\d+M)|(?:[-+]?\d+[.,]\d+M$))?(?:[-+]?\d+(?:[.,]\d+)?S)?)??$/;
+var Zu = /^([0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12})$/;
+var or = (e3) => e3 ? new RegExp(
   `^([0-9a-fA-F]{8}-[0-9a-fA-F]{4}-${e3}[0-9a-fA-F]{3}-[89abAB][0-9a-fA-F]{3}-[0-9a-fA-F]{12})$`
-) : /^([0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[1-8][0-9a-fA-F]{3}-[89abAB][0-9a-fA-F]{3}-[0-9a-fA-F]{12}|00000000-0000-0000-0000-000000000000)$/, t2 = or(4), r2 = or(6), i2 = or(7), Wu = /^(?!\.)(?!.*\.\.)([A-Za-z0-9_'+\-\.]*)[A-Za-z0-9_+-]@([A-Za-z0-9][A-Za-z0-9\-]*\.)+[A-Za-z]{2,}$/, n2 = /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)*$/, o2 = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/, a2 = /^[^\s@"]{1,64}@[^\s@]{1,255}$/u, s2 = /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)*$/, Ff = "^(\\p{Extended_Pictographic}|\\p{Emoji_Component})+$";
+) : /^([0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[1-8][0-9a-fA-F]{3}-[89abAB][0-9a-fA-F]{3}-[0-9a-fA-F]{12}|00000000-0000-0000-0000-000000000000)$/;
+var t2 = or(4);
+var r2 = or(6);
+var i2 = or(7);
+var Wu = /^(?!\.)(?!.*\.\.)([A-Za-z0-9_'+\-\.]*)[A-Za-z0-9_+-]@([A-Za-z0-9][A-Za-z0-9\-]*\.)+[A-Za-z]{2,}$/;
+var n2 = /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)*$/;
+var o2 = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+var a2 = /^[^\s@"]{1,64}@[^\s@]{1,255}$/u;
+var s2 = /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)*$/;
+var Ff = "^(\\p{Extended_Pictographic}|\\p{Emoji_Component})+$";
 function Ku() {
   return new RegExp(Ff, "u");
 }
-var Qu = /^(?:(?:25[0-5]|2[0-4][0-9]|1[0-9][0-9]|[1-9][0-9]|[0-9])\.){3}(?:25[0-5]|2[0-4][0-9]|1[0-9][0-9]|[1-9][0-9]|[0-9])$/, Ju = /^(([0-9a-fA-F]{1,4}:){7}[0-9a-fA-F]{1,4}|::|([0-9a-fA-F]{1,4})?::([0-9a-fA-F]{1,4}:?){0,6})$/, Yu = /^((25[0-5]|2[0-4][0-9]|1[0-9][0-9]|[1-9][0-9]|[0-9])\.){3}(25[0-5]|2[0-4][0-9]|1[0-9][0-9]|[1-9][0-9]|[0-9])\/([0-9]|[1-2][0-9]|3[0-2])$/, Xu = /^(([0-9a-fA-F]{1,4}:){7}[0-9a-fA-F]{1,4}|::|([0-9a-fA-F]{1,4})?::([0-9a-fA-F]{1,4}:?){0,6})\/(12[0-8]|1[01][0-9]|[1-9]?[0-9])$/, el = /^$|^(?:[0-9a-zA-Z+/]{4})*(?:(?:[0-9a-zA-Z+/]{2}==)|(?:[0-9a-zA-Z+/]{3}=))?$/, qo = /^[A-Za-z0-9_-]*$/, tl = /^([a-zA-Z0-9-]+\.)*[a-zA-Z0-9-]+$/, u2 = /^([a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?\.)+[a-zA-Z]{2,}$/, rl = /^\+(?:[0-9]){6,14}[0-9]$/, Lf = "((\\d\\d[2468][048]|\\d\\d[13579][26]|\\d\\d0[48]|[02468][048]00|[13579][26]00)-02-29|\\d{4}-((0[13578]|1[02])-(0[1-9]|[12]\\d|3[01])|(0[469]|11)-(0[1-9]|[12]\\d|30)|(02)-(0[1-9]|1\\d|2[0-8])))", il = new RegExp(`^${Lf}$`);
+var Qu = /^(?:(?:25[0-5]|2[0-4][0-9]|1[0-9][0-9]|[1-9][0-9]|[0-9])\.){3}(?:25[0-5]|2[0-4][0-9]|1[0-9][0-9]|[1-9][0-9]|[0-9])$/;
+var Ju = /^(([0-9a-fA-F]{1,4}:){7}[0-9a-fA-F]{1,4}|::|([0-9a-fA-F]{1,4})?::([0-9a-fA-F]{1,4}:?){0,6})$/;
+var Yu = /^((25[0-5]|2[0-4][0-9]|1[0-9][0-9]|[1-9][0-9]|[0-9])\.){3}(25[0-5]|2[0-4][0-9]|1[0-9][0-9]|[1-9][0-9]|[0-9])\/([0-9]|[1-2][0-9]|3[0-2])$/;
+var Xu = /^(([0-9a-fA-F]{1,4}:){7}[0-9a-fA-F]{1,4}|::|([0-9a-fA-F]{1,4})?::([0-9a-fA-F]{1,4}:?){0,6})\/(12[0-8]|1[01][0-9]|[1-9]?[0-9])$/;
+var el = /^$|^(?:[0-9a-zA-Z+/]{4})*(?:(?:[0-9a-zA-Z+/]{2}==)|(?:[0-9a-zA-Z+/]{3}=))?$/;
+var qo = /^[A-Za-z0-9_-]*$/;
+var tl = /^([a-zA-Z0-9-]+\.)*[a-zA-Z0-9-]+$/;
+var u2 = /^([a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?\.)+[a-zA-Z]{2,}$/;
+var rl = /^\+(?:[0-9]){6,14}[0-9]$/;
+var Lf = "((\\d\\d[2468][048]|\\d\\d[13579][26]|\\d\\d0[48]|[02468][048]00|[13579][26]00)-02-29|\\d{4}-((0[13578]|1[02])-(0[1-9]|[12]\\d|3[01])|(0[469]|11)-(0[1-9]|[12]\\d|30)|(02)-(0[1-9]|1\\d|2[0-8])))";
+var il = new RegExp(`^${Lf}$`);
 function Vf(e3) {
   let t = "([01]\\d|2[0-3]):[0-5]\\d:[0-5]\\d";
   return e3.precision ? t = `${t}\\.\\d{${e3.precision}}` : e3.precision == null && (t = `${t}(\\.\\d+)?`), t;
@@ -13575,17 +13794,25 @@ function ol(e3) {
 var al = (e3) => {
   let t = e3 ? `[\\s\\S]{${e3?.minimum ?? 0},${e3?.maximum ?? ""}}` : "[\\s\\S]*";
   return new RegExp(`^${t}$`);
-}, sl = /^\d+n?$/, ul = /^\d+$/, ll = /^-?\d+(?:\.\d+)?/i, dl = /true|false/i, cl = /null/i;
+};
+var sl = /^\d+n?$/;
+var ul = /^\d+$/;
+var ll = /^-?\d+(?:\.\d+)?/i;
+var dl = /true|false/i;
+var cl = /null/i;
 var _l = /undefined/i;
-var ml = /^[^A-Z]*$/, pl = /^[^a-z]*$/;
+var ml = /^[^A-Z]*$/;
+var pl = /^[^a-z]*$/;
 var ce = b("$ZodCheck", (e3, t) => {
   var i;
   e3._zod ?? (e3._zod = {}), e3._zod.def = t, (i = e3._zod).onattach ?? (i.onattach = []);
-}), Hf = {
+});
+var Hf = {
   number: "number",
   bigint: "bigint",
   object: "date"
-}, Uo = b("$ZodCheckLessThan", (e3, t) => {
+};
+var Uo = b("$ZodCheckLessThan", (e3, t) => {
   ce.init(e3, t);
   let i = Hf[typeof t.value];
   e3._zod.onattach.push((n) => {
@@ -13602,7 +13829,8 @@ var ce = b("$ZodCheck", (e3, t) => {
       continue: !t.abort
     });
   };
-}), Fo = b("$ZodCheckGreaterThan", (e3, t) => {
+});
+var Fo = b("$ZodCheckGreaterThan", (e3, t) => {
   ce.init(e3, t);
   let i = Hf[typeof t.value];
   e3._zod.onattach.push((n) => {
@@ -13619,7 +13847,8 @@ var ce = b("$ZodCheck", (e3, t) => {
       continue: !t.abort
     });
   };
-}), fl = b("$ZodCheckMultipleOf", (e3, t) => {
+});
+var fl = b("$ZodCheckMultipleOf", (e3, t) => {
   ce.init(e3, t), e3._zod.onattach.push((i) => {
     var n;
     (n = i._zod.bag).multipleOf ?? (n.multipleOf = t.value);
@@ -13635,7 +13864,8 @@ var ce = b("$ZodCheck", (e3, t) => {
       continue: !t.abort
     });
   };
-}), gl = b("$ZodCheckNumberFormat", (e3, t) => {
+});
+var gl = b("$ZodCheckNumberFormat", (e3, t) => {
   ce.init(e3, t), t.format = t.format || "float64";
   let i = t.format?.includes("int"), n = i ? "int" : "number", [r, o] = Ru[t.format];
   e3._zod.onattach.push((a) => {
@@ -13691,7 +13921,8 @@ var ce = b("$ZodCheck", (e3, t) => {
       inst: e3
     });
   };
-}), hl = b("$ZodCheckBigIntFormat", (e3, t) => {
+});
+var hl = b("$ZodCheckBigIntFormat", (e3, t) => {
   ce.init(e3, t);
   let [i, n] = Cu[t.format];
   e3._zod.onattach.push((r) => {
@@ -13715,7 +13946,8 @@ var ce = b("$ZodCheck", (e3, t) => {
       inst: e3
     });
   };
-}), bl = b("$ZodCheckMaxSize", (e3, t) => {
+});
+var bl = b("$ZodCheckMaxSize", (e3, t) => {
   ce.init(e3, t), e3._zod.when = (i) => {
     let n = i.value;
     return !Bt(n) && n.size !== void 0;
@@ -13733,7 +13965,8 @@ var ce = b("$ZodCheck", (e3, t) => {
       continue: !t.abort
     });
   };
-}), yl = b("$ZodCheckMinSize", (e3, t) => {
+});
+var yl = b("$ZodCheckMinSize", (e3, t) => {
   ce.init(e3, t), e3._zod.when = (i) => {
     let n = i.value;
     return !Bt(n) && n.size !== void 0;
@@ -13751,7 +13984,8 @@ var ce = b("$ZodCheck", (e3, t) => {
       continue: !t.abort
     });
   };
-}), vl = b("$ZodCheckSizeEquals", (e3, t) => {
+});
+var vl = b("$ZodCheckSizeEquals", (e3, t) => {
   ce.init(e3, t), e3._zod.when = (i) => {
     let n = i.value;
     return !Bt(n) && n.size !== void 0;
@@ -13776,7 +14010,8 @@ var ce = b("$ZodCheck", (e3, t) => {
       continue: !t.abort
     });
   };
-}), wl = b("$ZodCheckMaxLength", (e3, t) => {
+});
+var wl = b("$ZodCheckMaxLength", (e3, t) => {
   ce.init(e3, t), e3._zod.when = (i) => {
     let n = i.value;
     return !Bt(n) && n.length !== void 0;
@@ -13797,7 +14032,8 @@ var ce = b("$ZodCheck", (e3, t) => {
       continue: !t.abort
     });
   };
-}), Sl = b("$ZodCheckMinLength", (e3, t) => {
+});
+var Sl = b("$ZodCheckMinLength", (e3, t) => {
   ce.init(e3, t), e3._zod.when = (i) => {
     let n = i.value;
     return !Bt(n) && n.length !== void 0;
@@ -13818,7 +14054,8 @@ var ce = b("$ZodCheck", (e3, t) => {
       continue: !t.abort
     });
   };
-}), xl = b("$ZodCheckLengthEquals", (e3, t) => {
+});
+var xl = b("$ZodCheckLengthEquals", (e3, t) => {
   ce.init(e3, t), e3._zod.when = (i) => {
     let n = i.value;
     return !Bt(n) && n.length !== void 0;
@@ -13843,7 +14080,8 @@ var ce = b("$ZodCheck", (e3, t) => {
       continue: !t.abort
     });
   };
-}), Hr = b("$ZodCheckStringFormat", (e3, t) => {
+});
+var Hr = b("$ZodCheckStringFormat", (e3, t) => {
   var i;
   ce.init(e3, t), e3._zod.onattach.push((n) => {
     let r = n._zod.bag;
@@ -13862,7 +14100,8 @@ var ce = b("$ZodCheck", (e3, t) => {
       continue: !t.abort
     });
   });
-}), Dl = b("$ZodCheckRegex", (e3, t) => {
+});
+var Dl = b("$ZodCheckRegex", (e3, t) => {
   Hr.init(e3, t), e3._zod.check = (i) => {
     t.pattern.lastIndex = 0, !t.pattern.test(i.value) && i.issues.push({
       origin: "string",
@@ -13874,11 +14113,14 @@ var ce = b("$ZodCheck", (e3, t) => {
       continue: !t.abort
     });
   };
-}), kl = b("$ZodCheckLowerCase", (e3, t) => {
+});
+var kl = b("$ZodCheckLowerCase", (e3, t) => {
   t.pattern ?? (t.pattern = ml), Hr.init(e3, t);
-}), Al = b("$ZodCheckUpperCase", (e3, t) => {
+});
+var Al = b("$ZodCheckUpperCase", (e3, t) => {
   t.pattern ?? (t.pattern = pl), Hr.init(e3, t);
-}), El = b("$ZodCheckIncludes", (e3, t) => {
+});
+var El = b("$ZodCheckIncludes", (e3, t) => {
   ce.init(e3, t);
   let i = It(t.includes), n = new RegExp(
     typeof t.position == "number" ? `^.{${t.position}}${i}` : i
@@ -13897,7 +14139,8 @@ var ce = b("$ZodCheck", (e3, t) => {
       continue: !t.abort
     });
   };
-}), zl = b("$ZodCheckStartsWith", (e3, t) => {
+});
+var zl = b("$ZodCheckStartsWith", (e3, t) => {
   ce.init(e3, t);
   let i = new RegExp(`^${It(t.prefix)}.*`);
   t.pattern ?? (t.pattern = i), e3._zod.onattach.push((n) => {
@@ -13914,7 +14157,8 @@ var ce = b("$ZodCheck", (e3, t) => {
       continue: !t.abort
     });
   };
-}), Tl = b("$ZodCheckEndsWith", (e3, t) => {
+});
+var Tl = b("$ZodCheckEndsWith", (e3, t) => {
   ce.init(e3, t);
   let i = new RegExp(`.*${It(t.suffix)}$`);
   t.pattern ?? (t.pattern = i), e3._zod.onattach.push((n) => {
@@ -13947,7 +14191,8 @@ var Pl = b("$ZodCheckProperty", (e3, t) => {
     if (n instanceof Promise) return n.then((r) => Bf(r, i, t.property));
     Bf(n, i, t.property);
   };
-}), Il = b("$ZodCheckMimeType", (e3, t) => {
+});
+var Il = b("$ZodCheckMimeType", (e3, t) => {
   ce.init(e3, t);
   let i = new Set(t.mime);
   e3._zod.onattach.push((n) => {
@@ -13961,7 +14206,8 @@ var Pl = b("$ZodCheckProperty", (e3, t) => {
       inst: e3
     });
   };
-}), $l = b("$ZodCheckOverwrite", (e3, t) => {
+});
+var $l = b("$ZodCheckOverwrite", (e3, t) => {
   ce.init(e3, t), e3._zod.check = (i) => {
     i.value = t.tx(i.value);
   };
@@ -14063,7 +14309,8 @@ var V = b("$ZodType", (e3, t) => {
     vendor: "zod",
     version: 1
   };
-}), nn = b("$ZodString", (e3, t) => {
+});
+var nn = b("$ZodString", (e3, t) => {
   V.init(e3, t), e3._zod.pattern = [...e3?._zod.bag?.patterns ?? []].pop() ?? al(e3._zod.bag), e3._zod.parse = (i, n) => {
     if (t.coerce)
       try {
@@ -14077,11 +14324,14 @@ var V = b("$ZodType", (e3, t) => {
       inst: e3
     }), i;
   };
-}), ie = b("$ZodStringFormat", (e3, t) => {
+});
+var ie = b("$ZodStringFormat", (e3, t) => {
   Hr.init(e3, t), nn.init(e3, t);
-}), Rl = b("$ZodGUID", (e3, t) => {
+});
+var Rl = b("$ZodGUID", (e3, t) => {
   t.pattern ?? (t.pattern = Zu), ie.init(e3, t);
-}), Cl = b("$ZodUUID", (e3, t) => {
+});
+var Cl = b("$ZodUUID", (e3, t) => {
   if (t.version) {
     let n = {
       v1: 1,
@@ -14097,9 +14347,11 @@ var V = b("$ZodType", (e3, t) => {
     t.pattern ?? (t.pattern = or(n));
   } else t.pattern ?? (t.pattern = or());
   ie.init(e3, t);
-}), Ml = b("$ZodEmail", (e3, t) => {
+});
+var Ml = b("$ZodEmail", (e3, t) => {
   t.pattern ?? (t.pattern = Wu), ie.init(e3, t);
-}), jl = b("$ZodURL", (e3, t) => {
+});
+var jl = b("$ZodURL", (e3, t) => {
   ie.init(e3, t), e3._zod.check = (i) => {
     try {
       let n = new URL(i.value);
@@ -14133,34 +14385,47 @@ var V = b("$ZodType", (e3, t) => {
       });
     }
   };
-}), ql = b("$ZodEmoji", (e3, t) => {
+});
+var ql = b("$ZodEmoji", (e3, t) => {
   t.pattern ?? (t.pattern = Ku()), ie.init(e3, t);
-}), Ul = b("$ZodNanoID", (e3, t) => {
+});
+var Ul = b("$ZodNanoID", (e3, t) => {
   t.pattern ?? (t.pattern = Hu), ie.init(e3, t);
-}), Fl = b("$ZodCUID", (e3, t) => {
+});
+var Fl = b("$ZodCUID", (e3, t) => {
   t.pattern ?? (t.pattern = Uu), ie.init(e3, t);
-}), Ll = b("$ZodCUID2", (e3, t) => {
+});
+var Ll = b("$ZodCUID2", (e3, t) => {
   t.pattern ?? (t.pattern = Fu), ie.init(e3, t);
-}), Vl = b("$ZodULID", (e3, t) => {
+});
+var Vl = b("$ZodULID", (e3, t) => {
   t.pattern ?? (t.pattern = Lu), ie.init(e3, t);
-}), Bl = b("$ZodXID", (e3, t) => {
+});
+var Bl = b("$ZodXID", (e3, t) => {
   t.pattern ?? (t.pattern = Vu), ie.init(e3, t);
-}), Hl = b("$ZodKSUID", (e3, t) => {
+});
+var Hl = b("$ZodKSUID", (e3, t) => {
   t.pattern ?? (t.pattern = Bu), ie.init(e3, t);
-}), Gl = b("$ZodISODateTime", (e3, t) => {
+});
+var Gl = b("$ZodISODateTime", (e3, t) => {
   t.pattern ?? (t.pattern = ol(t)), ie.init(e3, t);
-}), Zl = b("$ZodISODate", (e3, t) => {
+});
+var Zl = b("$ZodISODate", (e3, t) => {
   t.pattern ?? (t.pattern = il), ie.init(e3, t);
-}), Wl = b("$ZodISOTime", (e3, t) => {
+});
+var Wl = b("$ZodISOTime", (e3, t) => {
   t.pattern ?? (t.pattern = nl(t)), ie.init(e3, t);
-}), Kl = b("$ZodISODuration", (e3, t) => {
+});
+var Kl = b("$ZodISODuration", (e3, t) => {
   t.pattern ?? (t.pattern = Gu), ie.init(e3, t);
-}), Ql = b("$ZodIPv4", (e3, t) => {
+});
+var Ql = b("$ZodIPv4", (e3, t) => {
   t.pattern ?? (t.pattern = Qu), ie.init(e3, t), e3._zod.onattach.push((i) => {
     let n = i._zod.bag;
     n.format = "ipv4";
   });
-}), Jl = b("$ZodIPv6", (e3, t) => {
+});
+var Jl = b("$ZodIPv6", (e3, t) => {
   t.pattern ?? (t.pattern = Ju), ie.init(e3, t), e3._zod.onattach.push((i) => {
     let n = i._zod.bag;
     n.format = "ipv6";
@@ -14177,9 +14442,11 @@ var V = b("$ZodType", (e3, t) => {
       });
     }
   };
-}), Yl = b("$ZodCIDRv4", (e3, t) => {
+});
+var Yl = b("$ZodCIDRv4", (e3, t) => {
   t.pattern ?? (t.pattern = Yu), ie.init(e3, t);
-}), Xl = b("$ZodCIDRv6", (e3, t) => {
+});
+var Xl = b("$ZodCIDRv6", (e3, t) => {
   t.pattern ?? (t.pattern = Xu), ie.init(e3, t), e3._zod.check = (i) => {
     let [n, r] = i.value.split("/");
     try {
@@ -14238,7 +14505,8 @@ var rd = b("$ZodBase64URL", (e3, t) => {
       continue: !t.abort
     });
   };
-}), id = b("$ZodE164", (e3, t) => {
+});
+var id = b("$ZodE164", (e3, t) => {
   t.pattern ?? (t.pattern = rl), ie.init(e3, t);
 });
 function og(e3, t = null) {
@@ -14261,7 +14529,8 @@ var nd = b("$ZodJWT", (e3, t) => {
       continue: !t.abort
     });
   };
-}), Bo = b("$ZodNumber", (e3, t) => {
+});
+var Bo = b("$ZodNumber", (e3, t) => {
   V.init(e3, t), e3._zod.pattern = e3._zod.bag.pattern ?? ll, e3._zod.parse = (i, n) => {
     if (t.coerce)
       try {
@@ -14282,9 +14551,11 @@ var nd = b("$ZodJWT", (e3, t) => {
       } : {}
     }), i;
   };
-}), od = b("$ZodNumber", (e3, t) => {
+});
+var od = b("$ZodNumber", (e3, t) => {
   gl.init(e3, t), Bo.init(e3, t);
-}), on = b("$ZodBoolean", (e3, t) => {
+});
+var on = b("$ZodBoolean", (e3, t) => {
   V.init(e3, t), e3._zod.pattern = dl, e3._zod.parse = (i, n) => {
     if (t.coerce)
       try {
@@ -14299,7 +14570,8 @@ var nd = b("$ZodJWT", (e3, t) => {
       inst: e3
     }), i;
   };
-}), Ho = b("$ZodBigInt", (e3, t) => {
+});
+var Ho = b("$ZodBigInt", (e3, t) => {
   V.init(e3, t), e3._zod.pattern = sl, e3._zod.parse = (i, n) => {
     if (t.coerce)
       try {
@@ -14314,9 +14586,11 @@ var nd = b("$ZodJWT", (e3, t) => {
       inst: e3
     }), i;
   };
-}), ad = b("$ZodBigInt", (e3, t) => {
+});
+var ad = b("$ZodBigInt", (e3, t) => {
   hl.init(e3, t), Ho.init(e3, t);
-}), sd = b("$ZodSymbol", (e3, t) => {
+});
+var sd = b("$ZodSymbol", (e3, t) => {
   V.init(e3, t), e3._zod.parse = (i, n) => {
     let { value: r } = i;
     return typeof r == "symbol" || i.issues.push({
@@ -14326,7 +14600,8 @@ var nd = b("$ZodJWT", (e3, t) => {
       inst: e3
     }), i;
   };
-}), ud = b("$ZodUndefined", (e3, t) => {
+});
+var ud = b("$ZodUndefined", (e3, t) => {
   V.init(e3, t), e3._zod.pattern = _l, e3._zod.values = /* @__PURE__ */ new Set([void 0]), e3._zod.parse = (i, n) => {
     let { value: r } = i;
     return typeof r > "u" || i.issues.push({
@@ -14336,7 +14611,8 @@ var nd = b("$ZodJWT", (e3, t) => {
       inst: e3
     }), i;
   };
-}), ld = b("$ZodNull", (e3, t) => {
+});
+var ld = b("$ZodNull", (e3, t) => {
   V.init(e3, t), e3._zod.pattern = cl, e3._zod.values = /* @__PURE__ */ new Set([null]), e3._zod.parse = (i, n) => {
     let { value: r } = i;
     return r === null || i.issues.push({
@@ -14346,18 +14622,22 @@ var nd = b("$ZodJWT", (e3, t) => {
       inst: e3
     }), i;
   };
-}), dd = b("$ZodAny", (e3, t) => {
+});
+var dd = b("$ZodAny", (e3, t) => {
   V.init(e3, t), e3._zod.parse = (i) => i;
-}), Gt = b("$ZodUnknown", (e3, t) => {
+});
+var Gt = b("$ZodUnknown", (e3, t) => {
   V.init(e3, t), e3._zod.parse = (i) => i;
-}), cd = b("$ZodNever", (e3, t) => {
+});
+var cd = b("$ZodNever", (e3, t) => {
   V.init(e3, t), e3._zod.parse = (i, n) => (i.issues.push({
     expected: "never",
     code: "invalid_type",
     input: i.value,
     inst: e3
   }), i);
-}), _d = b("$ZodVoid", (e3, t) => {
+});
+var _d = b("$ZodVoid", (e3, t) => {
   V.init(e3, t), e3._zod.parse = (i, n) => {
     let { value: r } = i;
     return typeof r > "u" || i.issues.push({
@@ -14367,7 +14647,8 @@ var nd = b("$ZodJWT", (e3, t) => {
       inst: e3
     }), i;
   };
-}), md = b("$ZodDate", (e3, t) => {
+});
+var md = b("$ZodDate", (e3, t) => {
   V.init(e3, t), e3._zod.parse = (i, n) => {
     if (t.coerce)
       try {
@@ -14581,7 +14862,8 @@ var Go = b("$ZodUnion", (e3, t) => {
     }
     return r ? Promise.all(o).then((a) => Kf(a, i, e3, n)) : Kf(o, i, e3, n);
   };
-}), fd = b("$ZodDiscriminatedUnion", (e3, t) => {
+});
+var fd = b("$ZodDiscriminatedUnion", (e3, t) => {
   Go.init(e3, t);
   let i = e3._zod.parse;
   te(e3._zod, "propValues", () => {
@@ -14634,7 +14916,8 @@ var Go = b("$ZodUnion", (e3, t) => {
       inst: e3
     }), r);
   };
-}), gd = b("$ZodIntersection", (e3, t) => {
+});
+var gd = b("$ZodIntersection", (e3, t) => {
   V.init(e3, t), e3._zod.parse = (i, n) => {
     let { value: r } = i, o = t.left._zod.run(
       {
@@ -14859,7 +15142,8 @@ var hd = b("$ZodRecord", (e3, t) => {
     }
     return o.length ? Promise.all(o).then(() => i) : i;
   };
-}), bd = b("$ZodMap", (e3, t) => {
+});
+var bd = b("$ZodMap", (e3, t) => {
   V.init(e3, t), e3._zod.parse = (i, n) => {
     let r = i.value;
     if (!(r instanceof Map))
@@ -14952,7 +15236,8 @@ var vd = b("$ZodEnum", (e3, t) => {
       inst: e3
     }), n;
   };
-}), wd = b("$ZodLiteral", (e3, t) => {
+});
+var wd = b("$ZodLiteral", (e3, t) => {
   V.init(e3, t), e3._zod.values = new Set(t.values), e3._zod.pattern = new RegExp(
     `^(${t.values.map((i) => typeof i == "string" ? It(i) : i ? i.toString() : String(i)).join("|")})$`
   ), e3._zod.parse = (i, n) => {
@@ -14964,7 +15249,8 @@ var vd = b("$ZodEnum", (e3, t) => {
       inst: e3
     }), i;
   };
-}), Sd = b("$ZodFile", (e3, t) => {
+});
+var Sd = b("$ZodFile", (e3, t) => {
   V.init(e3, t), e3._zod.parse = (i, n) => {
     let r = i.value;
     return r instanceof File || i.issues.push({
@@ -14974,7 +15260,8 @@ var vd = b("$ZodEnum", (e3, t) => {
       inst: e3
     }), i;
   };
-}), xd = b("$ZodTransform", (e3, t) => {
+});
+var xd = b("$ZodTransform", (e3, t) => {
   V.init(e3, t), e3._zod.parse = (i, n) => {
     let r = t.transform(i.value, i);
     if (n.async)
@@ -14984,7 +15271,8 @@ var vd = b("$ZodEnum", (e3, t) => {
     if (r instanceof Promise) throw new at();
     return i.value = r, i;
   };
-}), Dd = b("$ZodOptional", (e3, t) => {
+});
+var Dd = b("$ZodOptional", (e3, t) => {
   V.init(e3, t), e3._zod.optin = "optional", e3._zod.optout = "optional", te(
     e3._zod,
     "values",
@@ -14993,7 +15281,8 @@ var vd = b("$ZodEnum", (e3, t) => {
     let i = t.innerType._zod.pattern;
     return i ? new RegExp(`^(${Qi(i.source)})?$`) : void 0;
   }), e3._zod.parse = (i, n) => i.value === void 0 ? i : t.innerType._zod.run(i, n);
-}), kd = b("$ZodNullable", (e3, t) => {
+});
+var kd = b("$ZodNullable", (e3, t) => {
   V.init(e3, t), te(e3._zod, "optin", () => t.innerType._zod.optin), te(e3._zod, "optout", () => t.innerType._zod.optout), te(e3._zod, "pattern", () => {
     let i = t.innerType._zod.pattern;
     return i ? new RegExp(`^(${Qi(i.source)}|null)$`) : void 0;
@@ -15002,7 +15291,8 @@ var vd = b("$ZodEnum", (e3, t) => {
     "values",
     () => t.innerType._zod.values ? /* @__PURE__ */ new Set([...t.innerType._zod.values, null]) : void 0
   ), e3._zod.parse = (i, n) => i.value === null ? i : t.innerType._zod.run(i, n);
-}), Ad = b("$ZodDefault", (e3, t) => {
+});
+var Ad = b("$ZodDefault", (e3, t) => {
   V.init(e3, t), e3._zod.optin = "optional", te(e3._zod, "values", () => t.innerType._zod.values), e3._zod.parse = (i, n) => {
     if (i.value === void 0) return i.value = t.defaultValue, i;
     let r = t.innerType._zod.run(i, n);
@@ -15014,7 +15304,8 @@ function Xf(e3, t) {
 }
 var Ed = b("$ZodPrefault", (e3, t) => {
   V.init(e3, t), e3._zod.optin = "optional", te(e3._zod, "values", () => t.innerType._zod.values), e3._zod.parse = (i, n) => (i.value === void 0 && (i.value = t.defaultValue), t.innerType._zod.run(i, n));
-}), zd = b("$ZodNonOptional", (e3, t) => {
+});
+var zd = b("$ZodNonOptional", (e3, t) => {
   V.init(e3, t), te(e3._zod, "values", () => {
     let i = t.innerType._zod.values;
     return i ? new Set([...i].filter((n) => n !== void 0)) : void 0;
@@ -15036,7 +15327,8 @@ var Td = b("$ZodSuccess", (e3, t) => {
     let r = t.innerType._zod.run(i, n);
     return r instanceof Promise ? r.then((o) => (i.value = o.issues.length === 0, i)) : (i.value = r.issues.length === 0, i);
   };
-}), Pd = b("$ZodCatch", (e3, t) => {
+});
+var Pd = b("$ZodCatch", (e3, t) => {
   V.init(e3, t), te(e3._zod, "optin", () => t.innerType._zod.optin), te(e3._zod, "optout", () => t.innerType._zod.optout), te(e3._zod, "values", () => t.innerType._zod.values), e3._zod.parse = (i, n) => {
     let r = t.innerType._zod.run(i, n);
     return r instanceof Promise ? r.then(
@@ -15055,14 +15347,16 @@ var Td = b("$ZodSuccess", (e3, t) => {
       input: i.value
     }), i.issues = []), i);
   };
-}), Id = b("$ZodNaN", (e3, t) => {
+});
+var Id = b("$ZodNaN", (e3, t) => {
   V.init(e3, t), e3._zod.parse = (i, n) => ((typeof i.value != "number" || !Number.isNaN(i.value)) && i.issues.push({
     input: i.value,
     inst: e3,
     expected: "nan",
     code: "invalid_type"
   }), i);
-}), sn = b("$ZodPipe", (e3, t) => {
+});
+var sn = b("$ZodPipe", (e3, t) => {
   V.init(e3, t), te(e3._zod, "values", () => t.in._zod.values), te(e3._zod, "optin", () => t.in._zod.optin), te(e3._zod, "optout", () => t.out._zod.optout), e3._zod.parse = (i, n) => {
     let r = t.in._zod.run(i, n);
     return r instanceof Promise ? r.then((o) => tg(o, t, n)) : tg(r, t, n);
@@ -15114,7 +15408,8 @@ var Od = b("$ZodTemplateLiteral", (e3, t) => {
     format: "template_literal",
     pattern: e3._zod.pattern.source
   }), n);
-}), Nd = b("$ZodPromise", (e3, t) => {
+});
+var Nd = b("$ZodPromise", (e3, t) => {
   V.init(e3, t), e3._zod.parse = (i, n) => Promise.resolve(i.value).then(
     (r) => t.innerType._zod.run(
       {
@@ -15124,9 +15419,11 @@ var Od = b("$ZodTemplateLiteral", (e3, t) => {
       n
     )
   );
-}), Rd = b("$ZodLazy", (e3, t) => {
+});
+var Rd = b("$ZodLazy", (e3, t) => {
   V.init(e3, t), te(e3._zod, "innerType", () => t.getter()), te(e3._zod, "pattern", () => e3._zod.innerType._zod.pattern), te(e3._zod, "propValues", () => e3._zod.innerType._zod.propValues), te(e3._zod, "optin", () => e3._zod.innerType._zod.optin), te(e3._zod, "optout", () => e3._zod.innerType._zod.optout), e3._zod.parse = (i, n) => e3._zod.innerType._zod.run(i, n);
-}), Cd = b("$ZodCustom", (e3, t) => {
+});
+var Cd = b("$ZodCustom", (e3, t) => {
   ce.init(e3, t), V.init(e3, t), e3._zod.parse = (i, n) => i, e3._zod.check = (i) => {
     let n = i.value, r = t.fn(n);
     if (r instanceof Promise) return r.then((o) => ig(o, i, n, e3));
@@ -15856,7 +16153,8 @@ var f2 = (e3) => {
     }
   }
   return t;
-}, g2 = () => {
+};
+var g2 = () => {
   let e3 = {
     string: {
       unit: "characters",
@@ -18474,7 +18772,8 @@ var F2 = (e3) => {
     }
   }
   return t;
-}, L2 = () => {
+};
+var L2 = () => {
   let e3 = {
     string: {
       unit: "karakter",
@@ -19079,7 +19378,9 @@ function Bg() {
     localeError: Z2()
   };
 }
-var Wo = Symbol("ZodOutput"), Ko = Symbol("ZodInput"), Zr = class {
+var Wo = Symbol("ZodOutput");
+var Ko = Symbol("ZodInput");
+var Zr = class {
   constructor() {
     this._map = /* @__PURE__ */ new WeakMap(), this._idmap = /* @__PURE__ */ new Map();
   }
@@ -20604,10 +20905,15 @@ var Zg = (e3, t) => {
       }
     }
   });
-}, Wg = b("ZodError", Zg), dr = b("ZodError", Zg, {
+};
+var Wg = b("ZodError", Zg);
+var dr = b("ZodError", Zg, {
   Parent: Error
 });
-var ka = Oo(dr), Aa = Ro(dr), Ea = Mo(dr), za = jo(dr);
+var ka = Oo(dr);
+var Aa = Ro(dr);
+var Ea = Mo(dr);
+var za = jo(dr);
 var Q = b(
   "ZodType",
   (e3, t) => (V.init(e3, t), e3.def = t, Object.defineProperty(e3, "_def", {
@@ -20647,11 +20953,13 @@ var Q = b(
     let n = e3.clone();
     return tt.add(n, i[0]), n;
   }, e3.isOptional = () => e3.safeParse(void 0).success, e3.isNullable = () => e3.safeParse(null).success, e3)
-), Ia = b("_ZodString", (e3, t) => {
+);
+var Ia = b("_ZodString", (e3, t) => {
   nn.init(e3, t), Q.init(e3, t);
   let i = e3._zod.bag;
   e3.format = i.format ?? null, e3.minLength = i.minimum ?? null, e3.maxLength = i.maximum ?? null, e3.regex = (...n) => e3.check(Qr(...n)), e3.includes = (...n) => e3.check(Xr(...n)), e3.startsWith = (...n) => e3.check(ei(...n)), e3.endsWith = (...n) => e3.check(ti(...n)), e3.min = (...n) => e3.check($t(...n)), e3.max = (...n) => e3.check(ur(...n)), e3.length = (...n) => e3.check(lr(...n)), e3.nonempty = (...n) => e3.check($t(1, ...n)), e3.lowercase = (n) => e3.check(Jr(n)), e3.uppercase = (n) => e3.check(Yr(n)), e3.trim = () => e3.check(ni()), e3.normalize = (...n) => e3.check(ii(...n)), e3.toLowerCase = () => e3.check(oi()), e3.toUpperCase = () => e3.check(ai());
-}), Sn = b("ZodString", (e3, t) => {
+});
+var Sn = b("ZodString", (e3, t) => {
   nn.init(e3, t), Ia.init(e3, t), e3.email = (i) => e3.check(Qo($a, i)), e3.url = (i) => e3.check(ta(Oa, i)), e3.jwt = (i) => e3.check(ga(Wa, i)), e3.emoji = (i) => e3.check(ra(Na, i)), e3.guid = (i) => e3.check(ln(hn, i)), e3.uuid = (i) => e3.check(Jo(ct, i)), e3.uuidv4 = (i) => e3.check(Yo(ct, i)), e3.uuidv6 = (i) => e3.check(Xo(ct, i)), e3.uuidv7 = (i) => e3.check(ea(ct, i)), e3.nanoid = (i) => e3.check(ia(Ra, i)), e3.guid = (i) => e3.check(ln(hn, i)), e3.cuid = (i) => e3.check(na(Ca, i)), e3.cuid2 = (i) => e3.check(oa(Ma, i)), e3.ulid = (i) => e3.check(aa(ja, i)), e3.base64 = (i) => e3.check(ma(Ha, i)), e3.base64url = (i) => e3.check(pa(Ga, i)), e3.xid = (i) => e3.check(sa(qa, i)), e3.ksuid = (i) => e3.check(ua(Ua, i)), e3.ipv4 = (i) => e3.check(la(Fa, i)), e3.ipv6 = (i) => e3.check(da(La, i)), e3.cidrv4 = (i) => e3.check(ca(Va, i)), e3.cidrv6 = (i) => e3.check(_a(Ba, i)), e3.e164 = (i) => e3.check(fa(Za, i)), e3.datetime = (i) => e3.check(gc(i)), e3.date = (i) => e3.check(hc(i)), e3.time = (i) => e3.check(bc(i)), e3.duration = (i) => e3.check(yc(i));
 });
 function Ta(e3) {
@@ -20659,7 +20967,8 @@ function Ta(e3) {
 }
 var ne = b("ZodStringFormat", (e3, t) => {
   ie.init(e3, t), Ia.init(e3, t);
-}), $a = b("ZodEmail", (e3, t) => {
+});
+var $a = b("ZodEmail", (e3, t) => {
   Ml.init(e3, t), ne.init(e3, t);
 });
 function Kg(e3) {
@@ -21324,9 +21633,11 @@ var Qh = {
   invalid_element: "invalid_element",
   invalid_value: "invalid_value",
   custom: "custom"
-}, hx = Object.freeze({
+};
+var hx = Object.freeze({
   status: "aborted"
-}), Jh = hx;
+});
+var Jh = hx;
 function Yh(e3) {
   se({
     customError: e3
@@ -21399,7 +21710,8 @@ var tb = [
   "uk",
   "zh-CN",
   "zh-TW"
-], as = [
+];
+var as = [
   "appDesc",
   "restore_purchase_button",
   "get_premium_button",
@@ -21538,7 +21850,8 @@ var tb = [
   "move_lang_down",
   "remove_lang",
   "add_lang"
-], s_ = [
+];
+var s_ = [
   "add_to_chrome",
   "add_to_firefox",
   "add_to_browser",
@@ -21679,7 +21992,12 @@ var tb = [
   "goodbye_form_cta",
   "goodbye_thank_you"
 ];
-var cP = new Set(tb), Dx = S.enum(as), kx = S.enum(s_), rb = S.map(Dx, S.string()), ib = S.map(kx, S.string()), _P = new Set(as);
+var cP = new Set(tb);
+var Dx = S.enum(as);
+var kx = S.enum(s_);
+var rb = S.map(Dx, S.string());
+var ib = S.map(kx, S.string());
+var _P = new Set(as);
 function u_(e3) {
   return e3.templateLiteral(["behaviour_hash_", e3.number()]);
 }
@@ -21790,8 +22108,20 @@ function ub(e3) {
   });
 }
 $e();
-var $x = zn, lb = `https://files.openmediadownloader.net/${$x}/ruleset-${hm}-${gt}.json`, db = u_(S), cb = l_(S), m_ = ub(S), _b = c_(S), mb = ss(S), gP = __(S), hP = ab(S), pb = d_(S), bP = sb(S);
-var gb = S.templateLiteral(["notification_", S.string()]), Ox = S.instanceof(URL), hb = S.object({
+var $x = zn;
+var lb = `https://files.openmediadownloader.net/${$x}/ruleset-${hm}-${gt}.json`;
+var db = u_(S);
+var cb = l_(S);
+var m_ = ub(S);
+var _b = c_(S);
+var mb = ss(S);
+var gP = __(S);
+var hP = ab(S);
+var pb = d_(S);
+var bP = sb(S);
+var gb = S.templateLiteral(["notification_", S.string()]);
+var Ox = S.instanceof(URL);
+var hb = S.object({
   type: S.literal("remote"),
   title: S.string(),
   details: S.string(),
@@ -21957,7 +22287,12 @@ function wb(e3, t) {
   let i = `experiment_hash_${he(t)}`;
   return i in e3.experiments ? e3.experiments[i] : false;
 }
-var xb = S.templateLiteral(["ded_", S.string()]), Cx = S.templateLiteral(["media_hash_", S.number()]), Sb = S.enum(["download", "download_as", "download_audio", "copy"]), Mx = S.enum(["popup", "sidebar"]), h_ = S.string().brand("directorypath"), jx = S.strictObject({
+var xb = S.templateLiteral(["ded_", S.string()]);
+var Cx = S.templateLiteral(["media_hash_", S.number()]);
+var Sb = S.enum(["download", "download_as", "download_audio", "copy"]);
+var Mx = S.enum(["popup", "sidebar"]);
+var h_ = S.string().brand("directorypath");
+var jx = S.strictObject({
   downloaded_id: xb,
   media_hash: Cx,
   path: S.string(),
@@ -21967,7 +22302,9 @@ var xb = S.templateLiteral(["ded_", S.string()]), Cx = S.templateLiteral(["media
   origin_favicon_url: S.nullable(S.url()),
   has_drm: S.boolean(),
   subdir: S.optional(h_)
-}), qx = S.enum(["SUBSCRIPTION", "LIFETIME", "GOLDEN"]), b_ = S.object({
+});
+var qx = S.enum(["SUBSCRIPTION", "LIFETIME", "GOLDEN"]);
+var b_ = S.object({
   iat: S.optional(S.number()),
   user_id: S.number(),
   store: S.string().max(256),
@@ -21976,13 +22313,21 @@ var xb = S.templateLiteral(["ded_", S.string()]), Cx = S.templateLiteral(["media
   exp: S.number(),
   developer: S.boolean().optional(),
   entitlement_type: qx.optional()
-}), Ux = b_.extend({
+});
+var Ux = b_.extend({
   raw: S.string()
-}), Fx = S.enum(["original", "user_language"]), Lx = S.enum(["none", "video", "image"]), Vx = S.enum(["system", "light", "dark"]), Bx = S.enum(["big", "medium", "small"]), Hx = S.enum(["verylarge", "large", "default"]), Gx = S.strictObject({
+});
+var Fx = S.enum(["original", "user_language"]);
+var Lx = S.enum(["none", "video", "image"]);
+var Vx = S.enum(["system", "light", "dark"]);
+var Bx = S.enum(["big", "medium", "small"]);
+var Hx = S.enum(["verylarge", "large", "default"]);
+var Gx = S.strictObject({
   max_length: S.number(),
   template: S.string(),
   force_doc_title: S.optional(S.boolean())
-}), Zx = S.strictObject({
+});
+var Zx = S.strictObject({
   template: S.string(),
   url: S.string(),
   max_length: S.nullable(S.number()),
@@ -21997,7 +22342,9 @@ var xb = S.templateLiteral(["ded_", S.string()]), Cx = S.templateLiteral(["media
       })
     )
   )
-}), Wx = S.enum(["SMART", "OLDEST", "NEWEST"]), g_ = S.strictObject({
+});
+var Wx = S.enum(["SMART", "OLDEST", "NEWEST"]);
+var g_ = S.strictObject({
   version: S.number(),
   default_action: Sb,
   default_action_per_hostname: S.map(S.string(), Sb),
@@ -22047,7 +22394,8 @@ var xb = S.templateLiteral(["ded_", S.string()]), Cx = S.templateLiteral(["media
   experiments: S.record(pb, S.boolean()),
   ruleset_last_refresh_ms: S.number(),
   subtitle_languages: S.set(S.enum(Di))
-}), qP = g_.readonly();
+});
+var qP = g_.readonly();
 function normalizePersistentState(e3) {
   let t = createDefaultPersistentState();
   if (e3 && typeof e3 == "object") {
@@ -22122,7 +22470,9 @@ function createDefaultPersistentState() {
     subtitle_languages: Bs()
   };
 }
-var ls = "global_session_state", ds = "global_persistent_state", Ab = "session";
+var ls = "global_session_state";
+var ds = "global_persistent_state";
+var Ab = "session";
 function w_(e3) {
   let t = ae(e3);
   return Tn.storage[Ab].set({
@@ -22406,7 +22756,8 @@ var vD = {
   type: "sync",
   importFFI: () => Promise.resolve().then(() => (ny(), iy)).then((e3) => e3.QuickJSFFI),
   importModuleLoader: () => Promise.resolve().then(() => (ay(), oy)).then((e3) => e3.default)
-}, On = vD;
+};
+var On = vD;
 async function M_(e3 = On) {
   return ry(e3);
 }
@@ -22434,7 +22785,9 @@ async function isBraveBrowser() {
 }
 $e();
 $e();
-var _i = new TextEncoder(), Ot = new TextDecoder(), rI = 2 ** 32;
+var _i = new TextEncoder();
+var Ot = new TextDecoder();
+var rI = 2 ** 32;
 function ly(...e3) {
   let t = e3.reduce((r, { length: o }) => r + o, 0), i = new Uint8Array(t), n = 0;
   for (let r of e3) i.set(r, n), n += r.length;
@@ -22465,7 +22818,8 @@ var Nt = class extends Error {
   constructor(t, i) {
     super(t, i), this.name = this.constructor.name, Error.captureStackTrace?.(this, this.constructor);
   }
-}, Ke = class extends Nt {
+};
+var Ke = class extends Nt {
   static code = "ERR_JWT_CLAIM_VALIDATION_FAILED";
   code = "ERR_JWT_CLAIM_VALIDATION_FAILED";
   claim;
@@ -22480,7 +22834,8 @@ var Nt = class extends Error {
       }
     }), this.claim = n, this.reason = r, this.payload = i;
   }
-}, Nn = class extends Nt {
+};
+var Nn = class extends Nt {
   static code = "ERR_JWT_EXPIRED";
   code = "ERR_JWT_EXPIRED";
   claim;
@@ -22495,17 +22850,20 @@ var Nt = class extends Error {
       }
     }), this.claim = n, this.reason = r, this.payload = i;
   }
-}, fs = class extends Nt {
+};
+var fs = class extends Nt {
   static code = "ERR_JOSE_ALG_NOT_ALLOWED";
   code = "ERR_JOSE_ALG_NOT_ALLOWED";
-}, Qe = class extends Nt {
+};
+var Qe = class extends Nt {
   static code = "ERR_JOSE_NOT_SUPPORTED";
   code = "ERR_JOSE_NOT_SUPPORTED";
 };
 var ge = class extends Nt {
   static code = "ERR_JWS_INVALID";
   code = "ERR_JWS_INVALID";
-}, pi = class extends Nt {
+};
+var pi = class extends Nt {
   static code = "ERR_JWT_INVALID";
   code = "ERR_JWT_INVALID";
 };
@@ -22651,7 +23009,8 @@ var hs = (e3, t, i = 0) => {
   if (n === -1) return false;
   let r = e3.subarray(n, n + t.length);
   return r.length !== t.length ? false : r.every((o, a) => o === t[a]) || hs(e3, t, n + 1);
-}, ED = (e3) => {
+};
+var ED = (e3) => {
   switch (true) {
     case hs(e3, [42, 134, 72, 206, 61, 3, 1, 7]):
       return "P-256";
@@ -22662,7 +23021,8 @@ var hs = (e3, t, i = 0) => {
     default:
       return;
   }
-}, zD = async (e3, t, i, n, r) => {
+};
+var zD = async (e3, t, i, n, r) => {
   let o, a, u = new Uint8Array(
     atob(i.replace(e3, "")).split("").map((l) => l.charCodeAt(0))
   ), s = t === "spki";
@@ -22897,7 +23257,8 @@ function wy(e3) {
 function Sy(e3) {
   return e3.kty === "oct" && typeof e3.k == "string";
 }
-var fi, xy = async (e3, t, i, n = false) => {
+var fi;
+var xy = async (e3, t, i, n = false) => {
   fi ||= /* @__PURE__ */ new WeakMap();
   let r = fi.get(e3);
   if (r?.[i]) return r[i];
@@ -22908,7 +23269,8 @@ var fi, xy = async (e3, t, i, n = false) => {
   return n && Object.freeze(e3), r ? r[i] = o : fi.set(e3, {
     [i]: o
   }), o;
-}, ID = (e3, t) => {
+};
+var ID = (e3, t) => {
   fi ||= /* @__PURE__ */ new WeakMap();
   let i = fi.get(e3);
   if (i?.[t]) return i[t];
@@ -23025,7 +23387,8 @@ var fi, xy = async (e3, t, i, n = false) => {
   return i ? i[t] = o : fi.set(e3, {
     [t]: o
   }), o;
-}, Dy = async (e3, t) => {
+};
+var Dy = async (e3, t) => {
   if (e3 instanceof Uint8Array || L_(e3)) return e3;
   if (V_(e3)) {
     if (e3.type === "secret") return e3.export();
@@ -23043,7 +23406,8 @@ var fi, xy = async (e3, t, i, n = false) => {
   if (Cn(e3)) return e3.k ? mi(e3.k) : xy(e3, e3, t, true);
   throw new Error("unreachable");
 };
-var gi = (e3) => e3?.[Symbol.toStringTag], G_ = (e3, t, i) => {
+var gi = (e3) => e3?.[Symbol.toStringTag];
+var G_ = (e3, t, i) => {
   if (t.use !== void 0) {
     let n;
     switch (i) {
@@ -23092,7 +23456,8 @@ var gi = (e3) => e3?.[Symbol.toStringTag], G_ = (e3, t, i) => {
       );
   }
   return true;
-}, $D = (e3, t, i) => {
+};
+var $D = (e3, t, i) => {
   if (!(t instanceof Uint8Array)) {
     if (Cn(t)) {
       if (Sy(t) && G_(e3, t, i)) return;
@@ -23109,7 +23474,8 @@ var gi = (e3) => e3?.[Symbol.toStringTag], G_ = (e3, t, i) => {
         `${gi(t)} instances for symmetric algorithms must be of type "secret"`
       );
   }
-}, OD = (e3, t, i) => {
+};
+var OD = (e3, t, i) => {
   if (Cn(t))
     switch (i) {
       case "decrypt":
@@ -23157,7 +23523,8 @@ var gi = (e3) => e3?.[Symbol.toStringTag], G_ = (e3, t, i) => {
       default:
         break;
     }
-}, ky = (e3, t, i) => {
+};
+var ky = (e3, t, i) => {
   e3.startsWith("HS") || e3 === "dir" || e3.startsWith("PBES2") || /^A(?:128|192|256)(?:GCM)?(?:KW)?$/.test(e3) || /^A(?:128|192|256)CBC-HS(?:256|384|512)$/.test(e3) ? $D(e3, t, i) : OD(e3, t, i);
 };
 var Ay = (e3, t) => {
@@ -23329,7 +23696,8 @@ async function Py(e3, t, i) {
   } : s;
 }
 var Iy = (e3) => Math.floor(e3.getTime() / 1e3);
-var ND = /^(\+|\-)? ?(\d+|\d+\.\d+) ?(seconds?|secs?|s|minutes?|mins?|m|hours?|hrs?|h|days?|d|weeks?|w|years?|yrs?|y)(?: (ago|from now))?$/i, Z_ = (e3) => {
+var ND = /^(\+|\-)? ?(\d+|\d+\.\d+) ?(seconds?|secs?|s|minutes?|mins?|m|hours?|hrs?|h|days?|d|weeks?|w|years?|yrs?|y)(?: (ago|from now))?$/i;
+var Z_ = (e3) => {
   let t = ND.exec(e3);
   if (!t || t[4] && t[1]) throw new TypeError("Invalid time period format");
   let i = parseFloat(t[2]), n = t[3].toLowerCase(), r;
@@ -23371,7 +23739,8 @@ var ND = /^(\+|\-)? ?(\d+|\d+\.\d+) ?(seconds?|secs?|s|minutes?|mins?|m|hours?|h
   }
   return t[1] === "-" || t[4] === "ago" ? -r : r;
 };
-var $y = (e3) => e3.toLowerCase().replace(/^application\//, ""), RD = (e3, t) => typeof e3 == "string" ? t.includes(e3) : Array.isArray(e3) ? t.some(Set.prototype.has.bind(new Set(e3))) : false;
+var $y = (e3) => e3.toLowerCase().replace(/^application\//, "");
+var RD = (e3, t) => typeof e3 == "string" ? t.includes(e3) : Array.isArray(e3) ? t.some(Set.prototype.has.bind(new Set(e3))) : false;
 function Oy(e3, t, i = {}) {
   let n;
   try {
@@ -23470,7 +23839,11 @@ async function W_(e3, t, i) {
     key: n.key
   } : o;
 }
-var Ny = 3, MD = [1e3, 3e3, 5e3], jD = 14400 * 60 * 1e3, qD = 4320 * 60 * 1e3, Cy = gt.toUpperCase();
+var Ny = 3;
+var MD = [1e3, 3e3, 5e3];
+var jD = 14400 * 60 * 1e3;
+var qD = 4320 * 60 * 1e3;
+var Cy = gt.toUpperCase();
 async function activateEntitlement(e3) {
   if (!e3 || !e3.value)
     return I(
@@ -23606,6 +23979,8 @@ async function fetchEntitlementApi(e3, t) {
     reactivateRequired: false
   });
 }
+
+// src/service/main.js
 var mt = ve(Ie(), 1);
 var Y_ = 12;
 function J_(e3) {
@@ -23995,7 +24370,6 @@ async function handleDetectedMedia(e3, t) {
       });
   });
 }
-var Hy;
 async function handleDownloadRequest(e3, t, i) {
   let n = Te(e3.data.download_args), r = Te(e3.data.media), o = Te(e3.data.meta);
   {

@@ -17,14 +17,16 @@ They are not claimed to be the publisher's original source files or original sym
 src/
 ├─ content/
 │  ├─ archive/       # Complete inactive UI sources retained for reference
-│  ├─ panel.js       # Canonical recovered popup/sidebar entry
+│  ├─ panel.js       # Popup/sidebar application entry
+│  ├─ panel-runtime.js
 │  ├─ details-page.js
 │  ├─ history-page.js
 │  ├─ persistent-state.js
 │  ├─ smartnaming-editor.js
 │  └─ smartnaming-rules.js
 ├─ download-worker/
-│  ├─ main.js        # Canonical recovered worker entry
+│  ├─ main.js        # Download strategy/message entry
+│  ├─ worker-runtime.js
 │  ├─ errors.js
 │  ├─ ffmpeg-commands.js
 │  └─ strategy-router.js
@@ -52,7 +54,8 @@ src/
 │  ├─ master-playlist.js
 │  └─ mpd.js         # MPEG-DASH parsing and media normalization
 ├─ service/
-│  ├─ main.js        # Canonical recovered Service Worker entry
+│  ├─ main.js        # Service lifecycle entry
+│  ├─ service-runtime.js
 │  ├─ download-arguments.js
 │  ├─ download-queue.js
 │  ├─ media-deduplication.js

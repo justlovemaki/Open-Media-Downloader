@@ -25,16 +25,16 @@ export const bundledClassicEntries = [
 ];
 
 export const bundledModuleEntries = [
+  ["src/content/panel.js", "content/panel.js"],
   ["src/content/details-page.js", "content/details.js"],
   ["src/content/history-page.js", "content/history.js"],
   ["src/content/persistent-state.js", "content/global_persistent.js"],
   ["src/content/smartnaming-editor.js", "content/smartnaming.js"],
+  ["src/service/main.js", "service/main.js"],
+  ["src/download-worker/main.js", "download_worker/main.js"],
 ];
 
 export const recoveredModuleEntries = [
-  ["src/content/panel.js", "content/panel.js"],
-  ["src/service/main.js", "service/main.js"],
-  ["src/download-worker/main.js", "download_worker/main.js"],
   [
     "src/vendor/libav/libav-6.5.7.1-h264-aac-mp3.wasm.mjs",
     "download_worker/libav-6.5.7.1-h264-aac-mp3.wasm.mjs",
