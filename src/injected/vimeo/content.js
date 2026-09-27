@@ -1,6 +1,5 @@
 import { inspectMediaPlaylist } from "../../media/m3u8.js";
 import { parseMasterPlaylist } from "../../media/master-playlist.js";
-import { deserialize } from "../../shared/deserialize.js";
 import {
   onServiceMessage,
   reportMedia,
@@ -8,24 +7,10 @@ import {
 import { hashString } from "../../shared/hash.js";
 import { NONE, some } from "../../shared/option.js";
 import { createPageBridge } from "../../shared/page-bridge.js";
+import { loadPreferredAudioLanguages } from "../../shared/preferences.js";
 import { optionalUrl } from "../../shared/url.js";
 
-const PERSISTENT_STATE_KEY = "global_persistent_state";
 const pageBridge = createPageBridge();
-
-async function loadPreferredAudioLanguages() {
-  try {
-    const stored = await chrome.storage.local.get(PERSISTENT_STATE_KEY);
-    if (!(PERSISTENT_STATE_KEY in stored)) return new Set();
-
-    const state = deserialize(stored[PERSISTENT_STATE_KEY]);
-    return state.preferred_audio_strategy === "user_language"
-      ? state.preferred_audio_languages
-      : new Set();
-  } catch {
-    return new Set();
-  }
-}
 
 function collectSubtitles(config) {
   const subtitles = [];

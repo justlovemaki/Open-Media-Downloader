@@ -1,24 +1,9 @@
 import { parseMpdPlaylist } from "../../media/mpd.js";
-import { deserialize } from "../../shared/deserialize.js";
 import { reportMedia } from "../../shared/extension-messaging.js";
 import { hashString } from "../../shared/hash.js";
 import { NONE } from "../../shared/option.js";
+import { loadPreferredAudioLanguages } from "../../shared/preferences.js";
 import { optionalUrl } from "../../shared/url.js";
-
-const PERSISTENT_STATE_KEY = "global_persistent_state";
-
-async function loadPreferredAudioLanguages() {
-  try {
-    const stored = await chrome.storage.local.get(PERSISTENT_STATE_KEY);
-    if (!(PERSISTENT_STATE_KEY in stored)) return new Set();
-    const state = deserialize(stored[PERSISTENT_STATE_KEY]);
-    return state.preferred_audio_strategy === "user_language"
-      ? state.preferred_audio_languages
-      : new Set();
-  } catch {
-    return new Set();
-  }
-}
 
 function parseJson(value) {
   try {

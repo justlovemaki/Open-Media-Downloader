@@ -160,49 +160,6 @@
     return playlist.sort(compareEntries);
   }
 
-  // src/shared/deserialize.js
-  function deserialize(value) {
-    if (!value || typeof value !== "object") return value;
-    switch (value.__serde_tag) {
-      case "primitive":
-        return value.__serde_val;
-      case "array":
-        return value.__serde_val.map(deserialize);
-      case "object":
-        return Object.fromEntries(
-          Object.entries(value.__serde_val).map(([key, entryValue]) => [
-            key,
-            deserialize(entryValue)
-          ])
-        );
-      case "map":
-        return new Map(
-          value.__serde_val.map(([key, entryValue]) => [
-            deserialize(key),
-            deserialize(entryValue)
-          ])
-        );
-      case "set":
-        return new Set(value.__serde_val.map(deserialize));
-      case "url":
-        return new URL(value.__serde_val);
-      case "headers":
-        return new Headers(value.__serde_val);
-      case "regex":
-        return new RegExp(value.__serde_val[0], value.__serde_val[1]);
-      case "some":
-        return some(deserialize(value.__serde_val));
-      case "none":
-        return NONE;
-      case "ok":
-        return { ok: true, value: deserialize(value.__serde_val) };
-      case "err":
-        return { ok: false, error: deserialize(value.__serde_val) };
-      default:
-        throw new Error(`Unknown serialized value tag: ${value.__serde_tag}`);
-    }
-  }
-
   // src/shared/channels.js
   var MessageChannel = Object.freeze({
     FROM_INJECTED_TO_SERVICE: 0,
@@ -346,19 +303,66 @@
     return { postToPage, onMessageFromPage, requestFromPage };
   }
 
-  // src/injected/vimeo/content.js
+  // src/shared/deserialize.js
+  function deserialize(value) {
+    if (!value || typeof value !== "object") return value;
+    switch (value.__serde_tag) {
+      case "primitive":
+        return value.__serde_val;
+      case "array":
+        return value.__serde_val.map(deserialize);
+      case "object":
+        return Object.fromEntries(
+          Object.entries(value.__serde_val).map(([key, entryValue]) => [
+            key,
+            deserialize(entryValue)
+          ])
+        );
+      case "map":
+        return new Map(
+          value.__serde_val.map(([key, entryValue]) => [
+            deserialize(key),
+            deserialize(entryValue)
+          ])
+        );
+      case "set":
+        return new Set(value.__serde_val.map(deserialize));
+      case "url":
+        return new URL(value.__serde_val);
+      case "headers":
+        return new Headers(value.__serde_val);
+      case "regex":
+        return new RegExp(value.__serde_val[0], value.__serde_val[1]);
+      case "some":
+        return some(deserialize(value.__serde_val));
+      case "none":
+        return NONE;
+      case "ok":
+        return { ok: true, value: deserialize(value.__serde_val) };
+      case "err":
+        return { ok: false, error: deserialize(value.__serde_val) };
+      default:
+        throw new Error(`Unknown serialized value tag: ${value.__serde_tag}`);
+    }
+  }
+
+  // src/shared/preferences.js
   var PERSISTENT_STATE_KEY = "global_persistent_state";
-  var pageBridge = createPageBridge();
+  async function loadPersistentState() {
+    const stored = await chrome.storage.local.get(PERSISTENT_STATE_KEY);
+    return PERSISTENT_STATE_KEY in stored ? deserialize(stored[PERSISTENT_STATE_KEY]) : null;
+  }
   async function loadPreferredAudioLanguages() {
     try {
-      const stored = await chrome.storage.local.get(PERSISTENT_STATE_KEY);
-      if (!(PERSISTENT_STATE_KEY in stored)) return /* @__PURE__ */ new Set();
-      const state = deserialize(stored[PERSISTENT_STATE_KEY]);
-      return state.preferred_audio_strategy === "user_language" ? state.preferred_audio_languages : /* @__PURE__ */ new Set();
+      const state = await loadPersistentState();
+      return state?.preferred_audio_strategy === "user_language" ? state.preferred_audio_languages : /* @__PURE__ */ new Set();
     } catch {
       return /* @__PURE__ */ new Set();
     }
   }
+
+  // src/injected/vimeo/content.js
+  var pageBridge = createPageBridge();
   function collectSubtitles(config) {
     const subtitles = [];
     for (const track of config.request?.text_tracks ?? []) {

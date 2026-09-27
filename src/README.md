@@ -24,6 +24,7 @@ src/
 │  ├─ iqiyi/         # DASH response handling and quality monitoring
 │  ├─ javrank/       # XHR manifest interception
 │  ├─ kick/          # Live, VOD and clip API extraction
+│  ├─ ok/            # Embedded HLS/DASH metadata extraction
 │  ├─ osmosis/       # Reversed playlist decoding
 │  ├─ taiav/         # Page metadata normalization
 │  ├─ twitcasting/   # Live HLS discovery
@@ -39,6 +40,7 @@ src/
    ├─ hash.js
    ├─ option.js
    ├─ page-bridge.js
+   ├─ preferences.js
    ├─ serialize.js
    └─ url.js
 ```

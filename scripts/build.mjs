@@ -12,6 +12,7 @@ const entryPoints = [
   ["src/injected/javrank/content.js", "injected/javrank.js"],
   ["src/injected/javrank/main.js", "injected/javrank_untrusted.js"],
   ["src/injected/kick/content.js", "injected/kick.js"],
+  ["src/injected/ok/content.js", "injected/ok.js"],
   ["src/injected/osmosis/content.js", "injected/osmosis.js"],
   ["src/injected/taiav/main.js", "injected/taiav.js"],
   ["src/injected/twitcasting/content.js", "injected/twitcasting.js"],
