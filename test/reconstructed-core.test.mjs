@@ -4,6 +4,14 @@ import test from "node:test";
 import { deserialize } from "../src/shared/deserialize.js";
 import { createDefaultPersistentState } from "../src/content/persistent-state.js";
 import {
+  buildHttpMergeCommand,
+  buildHlsSingleSourceCommand,
+} from "../src/download-worker/ffmpeg-commands.js";
+import {
+  executeDownloadStrategy,
+  handlerNameForStrategy,
+} from "../src/download-worker/strategy-router.js";
+import {
   parseSmartNamingRules,
   stringifySmartNamingRules,
 } from "../src/content/smartnaming-rules.js";
@@ -19,6 +27,44 @@ import { parseMasterPlaylist } from "../src/media/master-playlist.js";
 import { parseMpdPlaylist } from "../src/media/mpd.js";
 import { NONE, some } from "../src/shared/option.js";
 import { serialize } from "../src/shared/serialize.js";
+
+test("download strategy router resolves readable handlers", async () => {
+  assert.equal(
+    handlerNameForStrategy("http_strip_audio_jsfetch"),
+    "extractHttpAudio",
+  );
+  const result = await executeDownloadStrategy(
+    { strategy: "http_audio_video_one_source", value: 7 },
+    null,
+    { downloadHttpDirect: (args) => args.value },
+  );
+  assert.equal(result, 7);
+});
+
+test("FFmpeg command builders preserve stream mapping", () => {
+  const merged = buildHttpMergeCommand({
+    download_id: "download-1",
+    muxer: "mp4",
+    url: new URL("https://cdn.example/video.mp4"),
+    url_audio: new URL("https://cdn.example/audio.m4a"),
+  });
+  assert.deepEqual(merged.slice(merged.indexOf("-map"), -4), [
+    "-map",
+    "0:v:0",
+    "-map",
+    "1:a:0?",
+  ]);
+
+  const hls = buildHlsSingleSourceCommand({
+    download_id: "download-2",
+    muxer: "mp4",
+    url: new URL("https://cdn.example/master.m3u8"),
+    subtitles: NONE,
+    audio_language: NONE,
+  });
+  assert.ok(hls.includes("0:v:0?"));
+  assert.ok(hls.includes("0:a:0?"));
+});
 
 test("extension version parser accepts three and four components", () => {
   assert.deepEqual(parseExtensionVersion("1.0.0"), {

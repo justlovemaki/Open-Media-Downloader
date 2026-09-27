@@ -21,6 +21,10 @@ src/
 │  ├─ persistent-state.js
 │  ├─ smartnaming-editor.js
 │  └─ smartnaming-rules.js
+├─ download-worker/
+│  ├─ errors.js
+│  ├─ ffmpeg-commands.js
+│  └─ strategy-router.js
 ├─ factory/
 │  └─ main.js        # Offscreen download-worker bootstrap
 ├─ injected/
