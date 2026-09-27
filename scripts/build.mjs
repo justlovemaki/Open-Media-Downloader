@@ -43,6 +43,7 @@ for (const [entryPoint, outfile] of entryPoints) {
 
 const moduleEntryPoints = [
   ["src/content/details-page.js", "content/details.js"],
+  ["src/content/history-page.js", "content/history.js"],
   ["src/content/persistent-state.js", "content/global_persistent.js"],
   ["src/content/smartnaming-editor.js", "content/smartnaming.js"],
 ];
