@@ -110,7 +110,7 @@
     const rightBitrate = right.quality.bitrate.kind === "some" ? right.quality.bitrate.value : 0;
     return rightBitrate - leftBitrate;
   }
-  function parseMasterPlaylist(source, masterUrl) {
+  function parseMasterPlaylist(source, masterUrl, options = {}) {
     const lines = source.split(/\r?\n/).map((line) => line.trim());
     const audioGroups = /* @__PURE__ */ new Map();
     for (const line of lines) {
@@ -139,7 +139,10 @@
       const videoUrl = asUrl(uri, masterUrl);
       if (!videoUrl) continue;
       const audioTracks = audioGroups.get(attributes.AUDIO) ?? [];
-      const audioTrack = audioTracks.find((track) => track.isDefault) ?? audioTracks[0];
+      const preferredLanguages = options.preferredAudioLanguages ?? /* @__PURE__ */ new Set();
+      const audioTrack = audioTracks.find(
+        (track) => track.language && preferredLanguages.has(track.language)
+      ) ?? audioTracks.find((track) => track.isDefault) ?? audioTracks[0];
       const bandwidth = Number(attributes.BANDWIDTH);
       playlist.push({
         demuxer: classifyVideoContainer(attributes.CODECS),

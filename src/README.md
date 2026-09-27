@@ -25,12 +25,14 @@ src/
 │  ├─ kick/          # Live, VOD and clip API extraction
 │  ├─ osmosis/       # Reversed playlist decoding
 │  ├─ taiav/         # Page metadata normalization
-│  └─ twitcasting/   # Live HLS discovery
+│  ├─ twitcasting/   # Live HLS discovery
+│  └─ vimeo/         # Player config and language-aware HLS extraction
 ├─ media/
 │  ├─ m3u8.js        # Lightweight media-playlist inspection
 │  └─ master-playlist.js
 └─ shared/
    ├─ channels.js
+   ├─ deserialize.js
    ├─ extension-messaging.js
    ├─ hash.js
    ├─ option.js

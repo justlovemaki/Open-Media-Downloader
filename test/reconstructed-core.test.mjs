@@ -1,6 +1,7 @@
 import assert from "node:assert/strict";
 import test from "node:test";
 
+import { deserialize } from "../src/shared/deserialize.js";
 import { hashString } from "../src/shared/hash.js";
 import { inspectMediaPlaylist } from "../src/media/m3u8.js";
 import { parseMasterPlaylist } from "../src/media/master-playlist.js";
@@ -11,6 +12,13 @@ test("hashString remains deterministic", () => {
   const url = "https://www.iq.com/play/example";
   assert.equal(hashString(url), hashString(url));
   assert.notEqual(hashString(url), hashString(`${url}?quality=720`));
+});
+
+test("serialize and deserialize preserve tagged options", () => {
+  const serialized = serialize(some(new URL("https://example.com/video.mp4")));
+  const restored = deserialize(serialized);
+  assert.equal(restored.kind, "some");
+  assert.equal(restored.value.href, "https://example.com/video.mp4");
 });
 
 test("serialize emits the service worker tagged format", () => {

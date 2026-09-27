@@ -51,7 +51,7 @@ function compareEntries(left, right) {
   return rightBitrate - leftBitrate;
 }
 
-export function parseMasterPlaylist(source, masterUrl) {
+export function parseMasterPlaylist(source, masterUrl, options = {}) {
   const lines = source.split(/\r?\n/).map((line) => line.trim());
   const audioGroups = new Map();
 
@@ -92,8 +92,13 @@ export function parseMasterPlaylist(source, masterUrl) {
     if (!videoUrl) continue;
 
     const audioTracks = audioGroups.get(attributes.AUDIO) ?? [];
+    const preferredLanguages = options.preferredAudioLanguages ?? new Set();
     const audioTrack =
-      audioTracks.find((track) => track.isDefault) ?? audioTracks[0];
+      audioTracks.find(
+        (track) => track.language && preferredLanguages.has(track.language),
+      ) ??
+      audioTracks.find((track) => track.isDefault) ??
+      audioTracks[0];
     const bandwidth = Number(attributes.BANDWIDTH);
 
     playlist.push({

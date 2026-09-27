@@ -14,6 +14,8 @@ const entryPoints = [
   ["src/injected/osmosis/content.js", "injected/osmosis.js"],
   ["src/injected/taiav/main.js", "injected/taiav.js"],
   ["src/injected/twitcasting/content.js", "injected/twitcasting.js"],
+  ["src/injected/vimeo/content.js", "injected/vimeo.js"],
+  ["src/injected/vimeo/main.js", "injected/vimeo_untrusted.js"],
 ];
 
 for (const [entryPoint, outfile] of entryPoints) {
