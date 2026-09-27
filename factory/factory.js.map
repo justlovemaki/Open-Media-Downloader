@@ -1,0 +1,7 @@
+{
+  "version": 3,
+  "sources": ["../src/factory/main.js"],
+  "sourcesContent": ["const DOWNLOAD_WORKER_PATH = \"/download_worker/main.js\";\nconst workerUrl = chrome.runtime.getURL(DOWNLOAD_WORKER_PATH);\n\n// Chromium MV3 service workers cannot reliably create nested workers, so an\n// offscreen extension page owns the long-lived download worker instead.\nnew Worker(workerUrl, { type: \"module\" });\n"],
+  "mappings": ";;AAAA,MAAM,uBAAuB;AAC7B,MAAM,YAAY,OAAO,QAAQ,OAAO,oBAAoB;AAI5D,MAAI,OAAO,WAAW,EAAE,MAAM,SAAS,CAAC;",
+  "names": []
+}

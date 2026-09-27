@@ -1,6 +1,7 @@
 import { build } from "esbuild";
 
 const entryPoints = [
+  ["src/factory/main.js", "factory/factory.js"],
   ["src/injected/activate/content.js", "injected/activate.js"],
   ["src/injected/iqiyi/content.js", "injected/iq.js"],
   ["src/injected/iqiyi/main.js", "injected/iq_untrusted.js"],

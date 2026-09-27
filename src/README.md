@@ -15,6 +15,8 @@ They are not claimed to be the publisher's original source files or original sym
 
 ```text
 src/
+├─ factory/
+│  └─ main.js        # Offscreen download-worker bootstrap
 ├─ injected/
 │  ├─ activate/       # Website-to-extension activation bridge
 │  ├─ bilibili/      # API requests, DASH pairing and page-state bridge
