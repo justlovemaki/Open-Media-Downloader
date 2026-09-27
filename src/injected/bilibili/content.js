@@ -132,11 +132,51 @@ async function fetchWbiMixinKey() {
   return WBI_MIXIN_KEY_ORDER.map((index) => source[index]).join("");
 }
 
-async function requestBilibiliComPlayData() {
-  const identity = await pageBridge.requestFromPage(
+async function resolveBilibiliComIdentity() {
+  const bvid = window.location.pathname.match(
+    /\/video\/(BV[0-9A-Za-z]+)/i,
+  )?.[1];
+  if (bvid) {
+    try {
+      const response = await fetch(
+        `https://api.bilibili.com/x/player/pagelist?bvid=${encodeURIComponent(bvid)}`,
+        { credentials: "include" },
+      );
+      if (response.ok) {
+        const payload = await response.json();
+        const pages = payload?.data;
+        const requestedPage = Math.max(
+          1,
+          Number.parseInt(
+            new URL(window.location.href).searchParams.get("p") ?? "1",
+            10,
+          ) || 1,
+        );
+        const page = Array.isArray(pages)
+          ? (pages[requestedPage - 1] ?? pages[0])
+          : null;
+        if (page?.cid) return { bvid, cid: page.cid };
+      }
+    } catch (error) {
+      console.warn(
+        "Bilibili pagelist lookup failed; falling back to page state",
+        error,
+      );
+    }
+  }
+
+  return pageBridge.requestFromPage(
     { name: "bilibili_com_request_id", data: null },
     "bilibili_com_on_id",
+    15_000,
   );
+}
+
+async function requestBilibiliComPlayData() {
+  const identity = await resolveBilibiliComIdentity();
+  if (!identity?.bvid || !identity?.cid) {
+    throw new Error("Bilibili page did not expose a usable bvid/cid pair");
+  }
 
   const search = new URLSearchParams({
     bvid: String(identity.bvid),
