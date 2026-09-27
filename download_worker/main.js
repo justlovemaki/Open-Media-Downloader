@@ -1959,7 +1959,7 @@ var L = class {
     await (await navigator.storage.getDirectory()).removeEntry(e);
   }
 };
-async function Q(t, e) {
+async function createInternalBlobUrl(t, e) {
   let n = await (await (await navigator.storage.getDirectory()).getFileHandle(e)).getFile();
   switch (t.extension) {
     case "mkv":
@@ -2075,7 +2075,7 @@ async function runFfmpeg(t, e, r, i, n) {
     }) : {
       internal_filename: r,
       aborted_no_partial: false,
-      internal_bloburl: await Q(t, r),
+      internal_bloburl: await createInternalBlobUrl(t, r),
       download_id: t.download_id,
       ending_reason: wt()
     };
@@ -2110,7 +2110,7 @@ async function runFfmpeg(t, e, r, i, n) {
     return {
       internal_filename: r,
       aborted_no_partial: false,
-      internal_bloburl: await Q(t, r),
+      internal_bloburl: await createInternalBlobUrl(t, r),
       download_id: t.download_id,
       ending_reason: de()
     };
@@ -2119,7 +2119,7 @@ async function runFfmpeg(t, e, r, i, n) {
     return {
       internal_filename: r,
       aborted_no_partial: false,
-      internal_bloburl: await Q(t, r),
+      internal_bloburl: await createInternalBlobUrl(t, r),
       download_id: t.download_id,
       ending_reason: y
     };
@@ -2128,7 +2128,7 @@ async function runFfmpeg(t, e, r, i, n) {
     return {
       internal_filename: r,
       aborted_no_partial: false,
-      internal_bloburl: await Q(t, r),
+      internal_bloburl: await createInternalBlobUrl(t, r),
       download_id: t.download_id,
       ending_reason: "end_of_file"
     };
@@ -3866,7 +3866,11 @@ async function pn(t, e) {
   return C(C(n));
 }
 function et(t, e, r, i) {
-  return t.semaphore.runExclusive(() => ve(e, t, i, false), 1, r);
+  return t.semaphore.runExclusive(
+    () => fetchSegmentWithRetries(e, t, i, false),
+    1,
+    r
+  );
 }
 async function Dr(t, e, r) {
   try {
@@ -4023,7 +4027,7 @@ async function oe(t, e, r, i, n) {
   });
   return C(A);
 }
-async function xt(t, e, r) {
+async function finalizeMuxer(t, e, r) {
   let i = await b.av_write_trailer(t);
   if (i != 0) {
     let n = await b.strerror(i);
@@ -4031,12 +4035,12 @@ async function xt(t, e, r) {
   }
   return await b.ff_free_muxer(t, e), await ce.close(r), await b.unlink(r), C(r);
 }
-async function Bt(t, e, r, i) {
+async function shouldContinueLiveDownload(t, e, r, i) {
   if (t.isErr() || t.value == "skip" || !t.value.is_live) return false;
   let n = await i();
   return n.isErr() ? false : n.value == true ? (e.progress_tracker?.dont_trust_percent(), r.value = tt, true) : r.value > 0 ? (r.value--, await new Promise((o) => setTimeout(o, cn)), true) : false;
 }
-async function ve(t, e, r, i) {
+async function fetchSegmentWithRetries(t, e, r, i) {
   let n = await Dr(t, e, r);
   for (let a = 0; a < xr - 1 && !(n.isOk() || n.error.user_abort); a++)
     await new Promise((s) => setTimeout(s, dn * a)), n = await Dr(t, e, r);
@@ -4059,11 +4063,11 @@ async function downloadHlsPreview(t, e) {
     };
   let i = r.value, n = i[0];
   n || N("Video Media Manifest does not contain video URLs");
-  let o = rt(t, e, i.length, false);
+  let o = createHlsDownloadContext(t, e, i.length, false);
   await ce.open(o.output_filename);
   let a = n.is_live, s;
   a ? s = i.length - 1 : s = Math.floor(i.length / 2);
-  let l = await ve(i[s], o, j.Video, true);
+  let l = await fetchSegmentWithRetries(i[s], o, j.Video, true);
   if (l.isErr())
     return {
       aborted_no_partial: true,
@@ -4089,7 +4093,7 @@ async function downloadHlsPreview(t, e) {
     device: true
   }, [f, , m] = await b.ff_init_muxer(d, u), h = await b.av_opt_set(f, "avoid_negative_ts", "make_zero", 0);
   Me(b, h), h = await b.avformat_write_header(f, 0), Ve(b, h), await b.ff_write_multi(f, A.pkt, A.av.video.packets), A.av.audio && await b.ff_write_multi(f, A.pkt, A.av.audio.packets), await ue(A);
-  let c = await xt(f, m, o.output_filename);
+  let c = await finalizeMuxer(f, m, o.output_filename);
   return c.isErr() && N(c.error), {
     aborted_no_partial: false,
     internal_filename: c.value,
@@ -4098,7 +4102,7 @@ async function downloadHlsPreview(t, e) {
     ending_reason: "end_of_file"
   };
 }
-function rt(t, e, r, i) {
+function createHlsDownloadContext(t, e, r, i) {
   let n = t.throttle ? 1 : fn;
   return {
     semaphore: new ze(n),
@@ -4140,9 +4144,9 @@ async function downloadHlsTwoSources(t, e) {
     };
   let o = n.value;
   o.length == 0 && N("Media Manifest does not contain audio URLs");
-  let a = rt(t, e, i.length + o.length, true);
+  let a = createHlsDownloadContext(t, e, i.length + o.length, true);
   await ce.open(a.output_filename);
-  let s = await ve(i[0], a, j.Video, true), l = await ve(o[0], a, j.Audio, true);
+  let s = await fetchSegmentWithRetries(i[0], a, j.Video, true), l = await fetchSegmentWithRetries(o[0], a, j.Audio, true);
   if (s.isErr())
     return {
       aborted_no_partial: true,
@@ -4215,7 +4219,7 @@ async function downloadHlsTwoSources(t, e) {
         100 * ($ / a.total_segments)
       ), await ue(x);
     }
-    if (E = await Bt(w, a.fetch_args, S, async () => {
+    if (E = await shouldContinueLiveDownload(w, a.fetch_args, S, async () => {
       let M = await oe(t.url, t.headers, e, t.cache, t.carry_get_params);
       if (M.isErr()) return M;
       let x = await oe(
@@ -4236,11 +4240,11 @@ async function downloadHlsTwoSources(t, e) {
     }), !E)
       break;
   }
-  let T = await xt(h, c, a.output_filename);
+  let T = await finalizeMuxer(h, c, a.output_filename);
   return T.isErr() && N(T.error), {
     aborted_no_partial: false,
     internal_filename: T.value,
-    internal_bloburl: await Q(t, T.value),
+    internal_bloburl: await createInternalBlobUrl(t, T.value),
     download_id: t.download_id,
     ending_reason: w.isOk() ? "end_of_file" : w.error
   };
@@ -4255,9 +4259,9 @@ async function downloadHlsSingleSource(t, e) {
     };
   let i = r.value;
   i.length == 0 && N("Video Media Manifest does not contain video URLs");
-  let n = rt(t, e, i.length, false);
+  let n = createHlsDownloadContext(t, e, i.length, false);
   await ce.open(n.output_filename);
-  let o = await ve(i[0], n, j.Video, true);
+  let o = await fetchSegmentWithRetries(i[0], n, j.Video, true);
   if (o.isErr())
     return {
       aborted_no_partial: true,
@@ -4310,7 +4314,7 @@ async function downloadHlsSingleSource(t, e) {
         100 * (S / n.total_segments)
       ), await ue(T);
     }
-    if (!g || (p = await Bt(g, n.fetch_args, y, async () => {
+    if (!g || (p = await shouldContinueLiveDownload(g, n.fetch_args, y, async () => {
       let E = await oe(t.url, t.headers, e, t.cache, t.carry_get_params);
       return E.isErr() ? E : (i = E.value.filter(
         ({ url: T }) => !n.fetch_args.known_segments_url.has(T)
@@ -4318,11 +4322,11 @@ async function downloadHlsSingleSource(t, e) {
     }), !p))
       break;
   }
-  let _ = await xt(u, d, n.output_filename);
+  let _ = await finalizeMuxer(u, d, n.output_filename);
   return _.isErr() && N(_.error), {
     aborted_no_partial: false,
     internal_filename: _.value,
-    internal_bloburl: await Q(t, _.value),
+    internal_bloburl: await createInternalBlobUrl(t, _.value),
     download_id: t.download_id,
     ending_reason: g.isOk() ? "end_of_file" : g.error
   };
@@ -4337,7 +4341,7 @@ async function downloadHlsAudio(t, e) {
     };
   let a = o.value;
   a.length == 0 && N("Audio Media Manifest does not contain audio URLs");
-  let s = rt(t, e, a.length, false), l = await ve(a[0], s, j.Audio, true);
+  let s = createHlsDownloadContext(t, e, a.length, false), l = await fetchSegmentWithRetries(a[0], s, j.Audio, true);
   if (l.isErr())
     return {
       aborted_no_partial: true,
@@ -4413,12 +4417,17 @@ async function downloadHlsAudio(t, e) {
       ), await ue(re);
     }
     if (!ae) break;
-    if (er = await Bt(ae, s.fetch_args, Fi, async () => {
-      let z = await oe(n, t.headers, e, t.cache, t.carry_get_params);
-      return z.isErr() ? z : (a = z.value.filter(
-        ({ url: re }) => !s.fetch_args.known_segments_url.has(re)
-      ), C(a.length > 0));
-    }), !er) {
+    if (er = await shouldContinueLiveDownload(
+      ae,
+      s.fetch_args,
+      Fi,
+      async () => {
+        let z = await oe(n, t.headers, e, t.cache, t.carry_get_params);
+        return z.isErr() ? z : (a = z.value.filter(
+          ({ url: re }) => !s.fetch_args.known_segments_url.has(re)
+        ), C(a.length > 0));
+      }
+    ), !er) {
       let z = await b.ff_encode_multi(E, T, I, [], true);
       await b.ff_write_multi(x, 0, z);
       break;
@@ -4431,12 +4440,12 @@ async function downloadHlsAudio(t, e) {
   return await b.ff_free_decoder(f, m, h), await b.avfilter_graph_free_js(y), await b.ff_free_encoder(E, T, I), await b.ff_free_muxer(x, Be), await ce.close(s.output_filename), await b.unlink(s.output_filename), {
     internal_filename: s.output_filename,
     aborted_no_partial: false,
-    internal_bloburl: await Q(t, s.output_filename),
+    internal_bloburl: await createInternalBlobUrl(t, s.output_filename),
     download_id: t.download_id,
     ending_reason: ae.isOk() ? "end_of_file" : ae.error
   };
 }
-function Nr(t) {
+function readContentLength(t) {
   if (!t.headers.get("content-length")) return B;
   let e = t.headers.get("content-length"), r = parseInt(e);
   return r <= 0 ? B : P(r);
@@ -4541,7 +4550,7 @@ async function streamHttpToStorage(t, e, r, i, n, { headers: o, download_id: a, 
       download_id: a,
       ending_reason: l.error
     };
-  let A = l.value.body.getReader(), u = Nr(l.value), d;
+  let A = l.value.body.getReader(), u = readContentLength(l.value), d;
   u.isSome() && (d = u.value);
   let f = 0;
   for (; ; ) {
@@ -4583,7 +4592,7 @@ async function downloadHttpDirect(t, e) {
   let r = `${t.download_id}.${t.extension}`, i = new L();
   await i.open(r);
   let n = new q(t.download_id), o = await streamHttpToStorage(i, r, n, t.url, e, t);
-  return await i.close(r), o.aborted_no_partial ? i.remove(r) : o.internal_bloburl = await Q(t, r), o;
+  return await i.close(r), o.aborted_no_partial ? i.remove(r) : o.internal_bloburl = await createInternalBlobUrl(t, r), o;
 }
 var Gr = ":A-Za-z_\\u00C0-\\u00D6\\u00D8-\\u00F6\\u00F8-\\u02FF\\u0370-\\u037D\\u037F-\\u1FFF\\u200C-\\u200D\\u2070-\\u218F\\u2C00-\\u2FEF\\u3001-\\uD7FF\\uF900-\\uFDCF\\uFDF0-\\uFFFD", yn = Gr + "\\-.\\d\\u00B7\\u0300-\\u036F\\u203F-\\u2040", wn = "[" + Gr + "][" + yn + "]*", bn = new RegExp("^" + wn + "$");
 function it(t, e) {
@@ -7746,7 +7755,7 @@ async function muxYoutubeTracks(t, e, r, i, n) {
     return await o.close(y), URL.revokeObjectURL(u), await s.removeEntry(e), r.isSome() && (URL.revokeObjectURL(m), await s.removeEntry(r.value)), i.isSome() && (URL.revokeObjectURL(g), await s.removeEntry(i.value)), S == 0 ? {
       aborted_no_partial: false,
       internal_filename: y,
-      internal_bloburl: await Q(t, y),
+      internal_bloburl: await createInternalBlobUrl(t, y),
       download_id: t.download_id,
       ending_reason: "end_of_file"
     } : {
@@ -7781,7 +7790,7 @@ async function downloadYoutubeAudio(t, e) {
   ) : o = await streamHttpToStorage(n, i, r, t.url, e, t), await n.close(i), o.aborted_no_partial)
     return n.remove(i), o;
   r.nextStream();
-  let a = await Q(t, i), s = `${t.download_id}.mp3`, l = await runFfmpeg(t, e, s, r, [
+  let a = await createInternalBlobUrl(t, i), s = `${t.download_id}.mp3`, l = await runFfmpeg(t, e, s, r, [
     "-analyzeduration",
     "10M",
     "-i",
@@ -7795,7 +7804,7 @@ async function downloadYoutubeAudio(t, e) {
   ]);
   return URL.revokeObjectURL(a), l;
 }
-function yi(t, e, r, i) {
+function renderWebVttCues(t, e, r, i) {
   let n = (l) => {
     if (!l) return 0;
     let A = Number(l);
@@ -7827,10 +7836,15 @@ function convertTimedTextToVtt(t) {
   }).parse(t);
   if (r.timedtext?.body?.p) {
     let i = r.timedtext?.body?.p, n = [];
-    return Array.isArray(i) ? n = i : i != null && (n = [i]), yi(n, "@_t", "@_d", (a) => new Date(a).toISOString().slice(11, 23));
+    return Array.isArray(i) ? n = i : i != null && (n = [i]), renderWebVttCues(
+      n,
+      "@_t",
+      "@_d",
+      (a) => new Date(a).toISOString().slice(11, 23)
+    );
   } else if (r.transcript) {
     let i = r.transcript, n = [];
-    return Array.isArray(i.text) && (n = i.text), yi(
+    return Array.isArray(i.text) && (n = i.text), renderWebVttCues(
       n,
       "@_start",
       "@_dur",
@@ -7934,7 +7948,7 @@ async function downloadHlsTwoWithFfmpeg(t, e) {
     r
   ]);
 }
-async function executeDownloadStrategyLegacy(t, e) {
+async function executeDownloadStrategy(t, e) {
   try {
     let r;
     if (t.strategy == "m3u8_audio_only")
@@ -7993,7 +8007,7 @@ function startDownloadWorkerMessaging() {
       r && r.abort();
     } else if (e.name == "download") {
       let r = ee(e.data.download_args), i = new AbortController();
-      t.set(r.download_id, i), await executeDownloadStrategyLegacy(r, i.signal), t.delete(r.download_id), i.abort(), ie({
+      t.set(r.download_id, i), await executeDownloadStrategy(r, i.signal), t.delete(r.download_id), i.abort(), ie({
         name: "download_progress",
         data: {
           download_id: r.download_id,
@@ -8019,6 +8033,6 @@ m3u8-parser/dist/m3u8-parser.es.js:
   (*! @name m3u8-parser @version 7.2.0 @license Apache-2.0 *)
 */
 export {
-  executeDownloadStrategyLegacy as Download
+  executeDownloadStrategy as Download
 };
 //# sourceMappingURL=main.js.map

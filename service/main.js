@@ -10060,7 +10060,7 @@ function cp(e3, t) {
     return q(o);
   } else throw new Error("Unreachable");
 }
-function buildMpdArgumentsLegacy(e3, t, i, n, r, o, a) {
+function buildMpdDownloadArguments(e3, t, i, n, r, o, a) {
   n = St(n);
   let u = `download_${crypto.randomUUID()}`, s = je(e3.sent_headers), l = e3.playlist[o], d = e3.playlist[o].index, c = zi(a, e3);
   if (t || Yt(e3.playlist[o].demuxer))
@@ -10111,7 +10111,7 @@ function buildMpdArgumentsLegacy(e3, t, i, n, r, o, a) {
     };
   }
 }
-function buildYoutubeArgumentsLegacy(e3, t, i, n, r, o, a) {
+function buildYoutubeDownloadArguments(e3, t, i, n, r, o, a) {
   n = St(n);
   let u = `download_${crypto.randomUUID()}`, s = e3.playlist[o], l = je(e3.sent_headers), d = zi(a, e3);
   if (s.av.video == false)
@@ -10217,7 +10217,7 @@ function buildYoutubeArgumentsLegacy(e3, t, i, n, r, o, a) {
     };
   }
 }
-function buildHlsPlaylistArgumentsLegacy(e3, t, i, n, r, o, a) {
+function buildHlsPlaylistDownloadArguments(e3, t, i, n, r, o, a) {
   n = St(n);
   let u = `download_${crypto.randomUUID()}`, s = e3.playlist[o], l = je(e3.sent_headers), d = e3.duration, c = zi(a, e3);
   if (s.av.video == false)
@@ -10319,7 +10319,7 @@ function buildHlsPlaylistArgumentsLegacy(e3, t, i, n, r, o, a) {
     };
   }
 }
-function buildDirectHlsArgumentsLegacy(e3, t, i, n, r, o) {
+function buildDirectHlsDownloadArguments(e3, t, i, n, r, o) {
   n = St(n);
   let a = `download_${crypto.randomUUID()}`, u = je(e3.sent_headers), s = e3.url, l = e3.duration, d = zi(o, e3);
   if (t || Yt(e3.demuxer))
@@ -10366,7 +10366,7 @@ function buildDirectHlsArgumentsLegacy(e3, t, i, n, r, o) {
     };
   }
 }
-function buildHttpDownloadArgumentsLegacy(e3, t, i, n, r, o, a) {
+function buildHttpDownloadArguments(e3, t, i, n, r, o, a) {
   n = St(n);
   let u = `download_${crypto.randomUUID()}`, s = e3.playlist[o], l = e3.extension == "flv" && s.size.isNone(), d = e3.libav_demuxer.isSome() && wi(e3.libav_demuxer.value) && e3.supports_byte_ranges || l, c = zi(a, e3);
   if (t) {
@@ -10451,19 +10451,20 @@ function buildHttpDownloadArgumentsLegacy(e3, t, i, n, r, o, a) {
 function zi(e3, t) {
   return t.is_youtube && e3.youtube_throttle;
 }
-function buildDownloadArgumentsLegacy(e3, t, i, n, r, o, a) {
+function buildDownloadArguments(e3, t, i, n, r, o, a) {
   if (e3.type == "http_playlist")
-    return buildHttpDownloadArgumentsLegacy(e3, t, i, n, r, o, a);
-  if (e3.type == "m3u8") return buildDirectHlsArgumentsLegacy(e3, t, i, n, r, a);
+    return buildHttpDownloadArguments(e3, t, i, n, r, o, a);
+  if (e3.type == "m3u8")
+    return buildDirectHlsDownloadArguments(e3, t, i, n, r, a);
   if (e3.type == "m3u8_playlist")
-    return buildHlsPlaylistArgumentsLegacy(e3, t, i, n, r, o, a);
+    return buildHlsPlaylistDownloadArguments(e3, t, i, n, r, o, a);
   if (e3.type == "youtube_format") {
     if (typeof o == "number")
-      return buildYoutubeArgumentsLegacy(e3, t, i, n, r, o, a);
+      return buildYoutubeDownloadArguments(e3, t, i, n, r, o, a);
     throw "Missing playlist_entry";
   } else if (e3.type == "mpd_playlist") {
     if (typeof o == "number")
-      return buildMpdArgumentsLegacy(e3, t, i, n, r, o, a);
+      return buildMpdDownloadArguments(e3, t, i, n, r, o, a);
     throw "Missing playlist_entry";
   } else throw new Error("Unreachable");
 }
@@ -21937,14 +21938,14 @@ function f_(e3) {
   return t;
 }
 async function vb() {
-  let t = U().ruleset_last_refresh_ms;
+  let t = getPersistentState().ruleset_last_refresh_ms;
   if (Math.floor((Date.now() - t) / 864e5) < 1) {
     console.log("Sync not needed");
     return;
   }
-  _e((r) => r.ruleset_last_refresh_ms = Date.now());
+  mutatePersistentState((r) => r.ruleset_last_refresh_ms = Date.now());
   let n = await Rx(lb);
-  n.isOk() ? n.value.rules_revision != U().remote_ruleset_revision && _e((r) => {
+  n.isOk() ? n.value.rules_revision != getPersistentState().remote_ruleset_revision && mutatePersistentState((r) => {
     r.remote_ruleset_revision = n.value.rules_revision, r.remote_notifications = p_(n.value), r.remote_behaviours = {
       advertize_premium: n.value.behaviours.advertize_premium,
       gyt_scanner: n.value.behaviours.gyt_scanner,
@@ -22047,8 +22048,8 @@ var xb = S.templateLiteral(["ded_", S.string()]), Cx = S.templateLiteral(["media
   ruleset_last_refresh_ms: S.number(),
   subtitle_languages: S.set(S.enum(Di))
 }), qP = g_.readonly();
-function normalizePersistentStateLegacy(e3) {
-  let t = createDefaultPersistentStateLegacy();
+function normalizePersistentState(e3) {
+  let t = createDefaultPersistentState();
   if (e3 && typeof e3 == "object") {
     "audio_strategy" in t && "youtube_audio_strategy" in e3 && (t.preferred_audio_strategy = e3.youtube_audio_strategy);
     for (let i of Object.keys(g_.shape)) {
@@ -22070,7 +22071,7 @@ function normalizePersistentStateLegacy(e3) {
   return t;
 }
 var y_ = 1710169438e3;
-function createDefaultPersistentStateLegacy() {
+function createDefaultPersistentState() {
   let e3 = yb();
   return {
     version: 1,
@@ -22134,40 +22135,42 @@ function S_(e3) {
     [ds]: t
   });
 }
-async function Eb() {
+async function readSessionState() {
   let e3 = await Tn.storage[Ab].get(ls);
   if (ls in e3) {
     let t = e3[ls];
     return Te(t);
   } else return createInitialSessionState();
 }
-async function zb() {
+async function readPersistentState() {
   let e3 = await Tn.storage.local.get(ds);
   if (ds in e3) {
     let t = e3[ds];
-    return normalizePersistentStateLegacy(Te(t));
+    return normalizePersistentState(Te(t));
   }
-  return createDefaultPersistentStateLegacy();
+  return createDefaultPersistentState();
 }
-async function Tb(e3) {
-  globalThis._session_state = await Eb(), globalThis._session_state_write_timeout = A, globalThis._session_state_write_callback = e3;
+async function initializeSessionState(e3) {
+  globalThis._session_state = await readSessionState(), globalThis._session_state_write_timeout = A, globalThis._session_state_write_callback = e3;
 }
-async function Pb(e3) {
-  globalThis._persistent_state = await zb(), await S_(globalThis._persistent_state), globalThis._persistent_state_write_timeout = A, globalThis._persistent_state_write_callback = e3;
+async function initializePersistentState(e3) {
+  globalThis._persistent_state = await readPersistentState(), await S_(globalThis._persistent_state), globalThis._persistent_state_write_timeout = A, globalThis._persistent_state_write_callback = e3;
 }
-function De(e3) {
+function mutateSessionState(e3) {
   let t = e3(globalThis._session_state);
-  return globalThis._session_state_write_timeout.isNone() && (globalThis._session_state_write_timeout = q(setTimeout(Ib, 500))), t;
+  return globalThis._session_state_write_timeout.isNone() && (globalThis._session_state_write_timeout = q(
+    setTimeout(flushSessionState, 500)
+  )), t;
 }
-function ke(e3) {
+function mutateSessionStateImmediately(e3) {
   let t = e3(globalThis._session_state);
-  return Ib(), t;
+  return flushSessionState(), t;
 }
-function fe() {
+function getSessionState() {
   return globalThis._session_state;
 }
-function Ib() {
-  w_(fe()).catch((e3) => {
+function flushSessionState() {
+  w_(getSessionState()).catch((e3) => {
     console.error(e3), (e3.message?.includes("QuotaExceededError") || e3.message?.includes("Session storage quota bytes exceeded")) && (console.error(`Storage quota exceeded, state not saved: ${e3}`), console.warn("Purging session state"), globalThis._session_state = {
       ...createInitialSessionState(),
       current_win_tab: globalThis._session_state.current_win_tab,
@@ -22181,19 +22184,21 @@ function Ib() {
   }
   globalThis._session_state_write_timeout.isSome() && (clearTimeout(globalThis._session_state_write_timeout.value), globalThis._session_state_write_timeout = A);
 }
-function _e(e3) {
+function mutatePersistentState(e3) {
   let t = e3(globalThis._persistent_state);
-  return globalThis._persistent_state_write_timeout.isNone() && (globalThis._persistent_state_write_timeout = q(setTimeout($b, 500))), t;
+  return globalThis._persistent_state_write_timeout.isNone() && (globalThis._persistent_state_write_timeout = q(
+    setTimeout(flushPersistentState, 500)
+  )), t;
 }
-function me(e3) {
+function mutatePersistentStateImmediately(e3) {
   let t = e3(globalThis._persistent_state);
-  return $b(), t;
+  return flushPersistentState(), t;
 }
-function U() {
+function getPersistentState() {
   return globalThis._persistent_state;
 }
-function $b() {
-  S_(U());
+function flushPersistentState() {
+  S_(getPersistentState());
   try {
     globalThis._persistent_state_write_callback();
   } catch (e3) {
@@ -22204,8 +22209,8 @@ function $b() {
 function x_() {
   Kt.default.sidebarAction.toggle();
 }
-function Qx(e3, t) {
-  if (Ob(e3), _e((i) => i.dockmode = e3), !Ue)
+function switchDockMode(e3, t) {
+  if (configureDockMode(e3), mutatePersistentState((i) => i.dockmode = e3), !Ue)
     if (e3 == "popup")
       try {
         t.isSome() ? chrome.action.openPopup({
@@ -22218,7 +22223,7 @@ function Qx(e3, t) {
         windowId: t.value
       });
 }
-function Ob(e3) {
+function configureDockMode(e3) {
   Ue ? e3 == "sidebar" ? (Kt.default.action.onClicked.addListener(x_), Kt.default.action.setPopup({
     popup: null
   })) : e3 == "popup" ? (Kt.default.action.onClicked.removeListener(x_), Kt.default.action.setPopup({
@@ -22241,17 +22246,17 @@ function Ob(e3) {
     popup: chrome.runtime.getURL("/content/popup.html")
   });
 }
-function Nb() {
-  Ob(U().dockmode), onContentMessage((e3) => {
+function registerDockingHandlers() {
+  configureDockMode(getPersistentState().dockmode), onContentMessage((e3) => {
     if (e3.name == "redock") {
-      let t = fe().current_win_tab.win_id;
-      Qx(e3.data.mode, t);
+      let t = getSessionState().current_win_tab.win_id;
+      switchDockMode(e3.data.mode, t);
     }
     return Promise.resolve();
   });
 }
 var Rb = ve(Ie(), 1);
-async function Cb(e3, t) {
+async function detectMediaDrm(e3, t) {
   return t.has_drm ? true : (await Rb.default.scripting.executeScript({
     target: {
       tabId: e3
@@ -22264,7 +22269,7 @@ async function Cb(e3, t) {
   }))[0]?.result ?? false;
 }
 $e();
-function Mb(e3, t) {
+function executeDefaultMediaAction(e3, t) {
   if (e3.current_win_tab.tab_id.isSome()) {
     let i = e3.current_win_tab.tab_id.value, n = e3.discovered.get(i);
     if (n && n.meta.isSome()) {
@@ -22273,8 +22278,8 @@ function Mb(e3, t) {
         let a = r.default_action == "download_as", u = r.default_action == "download_audio", { basename: s, subdir: l } = kr(o, r), d;
         if ("playlist" in o) {
           let c = Wn(o, t.preferred_quality);
-          d = buildDownloadArgumentsLegacy(o, u, a, s, l, c, t);
-        } else d = buildDownloadArgumentsLegacy(o, u, a, s, l, void 0, t);
+          d = buildDownloadArguments(o, u, a, s, l, c, t);
+        } else d = buildDownloadArguments(o, u, a, s, l, void 0, t);
         r.default_action == "copy" ? Ue ? navigator.clipboard.writeText(d.url.href) : browser.scripting.executeScript({
           target: {
             tabId: r.tab_id
@@ -22293,7 +22298,7 @@ function Mb(e3, t) {
     }
   }
 }
-var DownloadQueueLegacy = class {
+var DownloadQueue = class {
   constructor(t, i, n) {
     this._running = 0;
     this._ytRunning = 0;
@@ -22405,7 +22410,7 @@ var vD = {
 async function M_(e3 = On) {
   return ry(e3);
 }
-function j_(e3) {
+function parseExtensionVersion(e3) {
   let t = e3.split(".").map((i) => parseInt(i));
   return t.length != 3 && t.length != 4 ? A : t.some(isNaN) ? A : (t.length == 3 && t.push(0), q({
     a: t[0],
@@ -22417,13 +22422,13 @@ function j_(e3) {
 $e();
 var sy = ve(Ie(), 1);
 $e();
-async function q_() {
+async function isPremiumFeatureAvailable() {
   return Promise.resolve(true);
   if (bm) return false;
   let e3 = await sy.default.runtime.getPlatformInfo();
   return e3.os == "linux" || e3.os == "openbsd";
 }
-async function uy() {
+async function isBraveBrowser() {
   let e3 = navigator;
   return "brave" in navigator && typeof e3.brave?.isBrave == "function" ? await e3.brave.isBrave() : false;
 }
@@ -23466,13 +23471,13 @@ async function W_(e3, t, i) {
   } : o;
 }
 var Ny = 3, MD = [1e3, 3e3, 5e3], jD = 14400 * 60 * 1e3, qD = 4320 * 60 * 1e3, Cy = gt.toUpperCase();
-async function My(e3) {
+async function activateEntitlement(e3) {
   if (!e3 || !e3.value)
     return I(
       "Activation failed. No token, v9 key, or checkout session id present."
     );
   try {
-    let t = e3.method == "key" ? xm : Sm, i = await qy(t, {
+    let t = e3.method == "key" ? xm : Sm, i = await fetchEntitlementApi(t, {
       method: "POST",
       headers: {
         "Content-Type": "application/json"
@@ -23489,26 +23494,27 @@ async function My(e3) {
       return I(
         "Activation failed for an unknown reason (No JWT in activation response)."
       );
-    let o = await Q_(r.jwt);
+    let o = await verifyEntitlementToken(r.jwt);
     if (!o.valid)
       return I("Activation failed for an unknown reason (not valid).");
     if (!o.jwt || !o.jwt.raw)
       return I("Activation failed for an unknown reason (not jwt).");
     let a = o.jwt;
-    return _e((u) => u.jwt = a), L.EMPTY;
+    return mutatePersistentState((u) => u.jwt = a), L.EMPTY;
   } catch (t) {
     return I(`Activation failed: ${t}.`);
   }
 }
-async function jy(e3) {
+async function validateStoredEntitlement(e3) {
   return true;
   if (vi) return true;
   if (!e3) return false;
-  let t = await Q_(e3);
-  if (!t.valid && t.can_refresh && t.jwt) return (await Ry(t.jwt)).valid;
+  let t = await verifyEntitlementToken(e3);
+  if (!t.valid && t.can_refresh && t.jwt)
+    return (await refreshEntitlementToken(t.jwt)).valid;
   if (!t.valid || !t.jwt) return false;
   let i = t.jwt, n = /* @__PURE__ */ new Date(), r = new Date(i.exp * 1e3), o = new Date(i.valid_until * 1e3), a = Math.abs(o.getTime() - n.getTime()), u = Math.abs(r.getTime() - n.getTime());
-  return (a <= qD || u <= jD) && await Ry(i), true;
+  return (a <= qD || u <= jD) && await refreshEntitlementToken(i), true;
 }
 function UD(e3) {
   let t = /* @__PURE__ */ new Date();
@@ -23518,7 +23524,7 @@ function K_(e3) {
   let t = /* @__PURE__ */ new Date();
   return new Date(e3.exp * 1e3) > t;
 }
-async function Q_(e3) {
+async function verifyEntitlementToken(e3) {
   try {
     let t = await H_(vm(), "ES256"), i = (await W_(e3, t)).payload, n = b_.safeParse(i);
     if (!n.success)
@@ -23542,9 +23548,9 @@ async function Q_(e3) {
     };
   }
 }
-async function Ry(e3) {
+async function refreshEntitlementToken(e3) {
   try {
-    let t = await qy(wm, {
+    let t = await fetchEntitlementApi(wm, {
       method: "POST",
       headers: {
         "Content-Type": "application/json"
@@ -23555,15 +23561,15 @@ async function Ry(e3) {
       signal: AbortSignal.timeout(15e3)
     });
     if (t.isErr())
-      return t.error.reactivateRequired ? (_e((a) => a.jwt = null), {
+      return t.error.reactivateRequired ? (mutatePersistentState((a) => a.jwt = null), {
         valid: false,
         can_refresh: false
       }) : {
         valid: false,
         can_refresh: K_(e3)
       };
-    let n = await t.value.json(), r = await Q_(n.jwt), o = r.jwt;
-    return r.valid && o && _e((a) => a.jwt = o), r;
+    let n = await t.value.json(), r = await verifyEntitlementToken(n.jwt), o = r.jwt;
+    return r.valid && o && mutatePersistentState((a) => a.jwt = o), r;
   } catch (t) {
     return console.error("Refresh request failed:", t), {
       valid: false,
@@ -23571,7 +23577,7 @@ async function Ry(e3) {
     };
   }
 }
-async function qy(e3, t) {
+async function fetchEntitlementApi(e3, t) {
   let i = `Unknown error fetching ${e3}`;
   for (let n = 0; n < Ny + 1; ++n) {
     try {
@@ -23605,7 +23611,7 @@ var Y_ = 12;
 function J_(e3) {
   return new Promise((t) => mt.default.contextMenus.create(e3, t));
 }
-async function Uy() {
+async function initializeContextMenu() {
   let e3 = mt.default.runtime.getManifest();
   await mt.default.contextMenus.removeAll(), await J_({
     contexts: ["all"],
@@ -23633,13 +23639,13 @@ async function Uy() {
     r && r.isSome() && kt(r.value);
   }), t;
 }
-function Fy(e3) {
+function updateContextMenuVisibility(e3) {
   let t = e3.use_context_menu;
   return mt.default.contextMenus.update("omd-top", {
     visible: t
   });
 }
-function Ly(e3, t, i) {
+function updateContextMenuEntries(e3, t, i) {
   let n = [];
   if (e3.current_win_tab.tab_id.isSome()) {
     let r = e3.current_win_tab.tab_id.value, o = e3.discovered.get(r);
@@ -23650,8 +23656,8 @@ function Ly(e3, t, i) {
         let { basename: l, subdir: d } = kr(s, a), c;
         if ("playlist" in s) {
           let h = Wn(s, t.preferred_quality);
-          c = buildDownloadArgumentsLegacy(s, false, false, l, d, h, t);
-        } else c = buildDownloadArgumentsLegacy(s, false, false, l, d, void 0, t);
+          c = buildDownloadArguments(s, false, false, l, d, h, t);
+        } else c = buildDownloadArguments(s, false, false, l, d, void 0, t);
         let f = {
           name: "do_download",
           data: {
@@ -23698,20 +23704,20 @@ var bs = class extends Map {
     return this;
   }
 };
-function X_(e3, t) {
-  ke((i) => i.notifications.set(e3, t));
+function setNotification(e3, t) {
+  mutateSessionStateImmediately((i) => i.notifications.set(e3, t));
 }
-var Zy = q_();
+var Zy = isPremiumFeatureAvailable();
 async function updatePremiumBannerState() {
-  let e3 = await Zy, t = 7200 * 1e3, i = Date.now(), n = U().lsd, o = i - n > t, a = !!U().jwt, u = U().remote_behaviours.advertize_premium, s = fe().advertize_premium;
+  let e3 = await Zy, t = 7200 * 1e3, i = Date.now(), n = getPersistentState().lsd, o = i - n > t, a = !!getPersistentState().jwt, u = getPersistentState().remote_behaviours.advertize_premium, s = getSessionState().advertize_premium;
   if (e3 || a || !u)
-    s.advertize && De(
+    s.advertize && mutateSessionState(
       (l) => l.advertize_premium = {
         advertize: false
       }
     );
   else if (o)
-    (!s.advertize || s.blocked) && De(
+    (!s.advertize || s.blocked) && mutateSessionState(
       (l) => l.advertize_premium = {
         advertize: false,
         blocked: false
@@ -23723,7 +23729,7 @@ async function updatePremiumBannerState() {
       blocked: false,
       snooze: false
     };
-    De((d) => d.advertize_premium = l);
+    mutateSessionState((d) => d.advertize_premium = l);
   }
 }
 function updateToolbarIndicator(e3, t) {
@@ -23768,11 +23774,11 @@ function updateToolbarIndicator(e3, t) {
   }
 }
 function resolveDefaultAction(e3) {
-  let t, i = U();
+  let t, i = getPersistentState();
   return e3.isSome() && (t = i.default_action_per_hostname.get(e3.value.hostname)), t || (t = i.default_action), (t == "download_as" || t == "copy") && (t = "download"), t;
 }
 async function createTabMetadata(e3) {
-  if (!fe().discovered.get(e3)) return;
+  if (!getSessionState().discovered.get(e3)) return;
   let t;
   try {
     t = await H.default.tabs.get(e3);
@@ -23780,10 +23786,10 @@ async function createTabMetadata(e3) {
     console.warn("CreateMetaForTab: couldn't find the tab");
     return;
   }
-  if (!fe().discovered.get(e3)) return;
+  if (!getSessionState().discovered.get(e3)) return;
   let n = le(t.favIconUrl), r = le(t.url);
   if (r.isSome() && r.value.protocol === "chrome") return;
-  let o = resolveDefaultAction(r), { download_directory: a } = U(), { default_: u, rules: s } = U().smartnaming.compiled, l = await rp(u, s, r, a, e3), d = await Nf(e3, l.force_doc_title), c = {
+  let o = resolveDefaultAction(r), { download_directory: a } = getPersistentState(), { default_: u, rules: s } = getPersistentState().smartnaming.compiled, l = await rp(u, s, r, a, e3), d = await Nf(e3, l.force_doc_title), c = {
     incognito: t.incognito,
     tab_id: e3,
     title: d.title,
@@ -23793,17 +23799,18 @@ async function createTabMetadata(e3) {
     default_action: o,
     smartnaming_rule: l
   };
-  De((f) => {
+  mutateSessionState((f) => {
     let m = f.discovered.get(e3);
     m && (m.meta = q(c));
   });
 }
 function shouldAcceptDiscoveredMedia(e3, t) {
-  if (e3.initiator.isSome() && _o(U(), e3.initiator.value)) return false;
-  let i = e3.type != "http_playlist" && e3.type != "m3u8", n = e3.initiator.isSome() && Xs(U(), e3.initiator.value);
+  if (e3.initiator.isSome() && _o(getPersistentState(), e3.initiator.value))
+    return false;
+  let i = e3.type != "http_playlist" && e3.type != "m3u8", n = e3.initiator.isSome() && Xs(getPersistentState(), e3.initiator.value);
   if (!i && !n && ([...t.values()].some(
     (o) => o.type === "m3u8_playlist" || o.type === "mpd_playlist" || o.type === "youtube_format"
-  ) && e3.initiator.isSome() && op(U(), e3.initiator.value) || [...t.values()].filter((o) => o.type == e3.type).length > 10))
+  ) && e3.initiator.isSome() && op(getPersistentState(), e3.initiator.value) || [...t.values()].filter((o) => o.type == e3.type).length > 10))
     return false;
   if (e3.type == "m3u8")
     for (let r of [...t.values()].filter((o) => o.type == "m3u8_playlist"))
@@ -23814,15 +23821,15 @@ function shouldAcceptDiscoveredMedia(e3, t) {
       }
   return true;
 }
-function primaryMediaUrlLegacy(e3) {
+function primaryMediaUrl(e3) {
   try {
     return e3.type == "http_playlist" ? e3.playlist?.[0]?.av?.video : e3.type == "m3u8" ? e3.url : null;
   } catch {
     return null;
   }
 }
-function mediaTokensLegacy(e3) {
-  let t = primaryMediaUrlLegacy(e3);
+function mediaTokens(e3) {
+  let t = primaryMediaUrl(e3);
   if (!t) return /* @__PURE__ */ new Set();
   let i;
   try {
@@ -23836,7 +23843,7 @@ function mediaTokensLegacy(e3) {
     )
   );
 }
-function isSameGenericVideoLegacy(e3, t) {
+function isSameGenericVideo(e3, t) {
   if (!e3.initiator?.isSome?.() || !t.initiator?.isSome?.() || e3.initiator.value.href != t.initiator.value.href)
     return false;
   if (!((e3.type == "http_playlist" || e3.type == "m3u8") && (t.type == "http_playlist" || t.type == "m3u8")))
@@ -23848,16 +23855,16 @@ function isSameGenericVideoLegacy(e3, t) {
     (e3.discovery_timestamp_ms || 0) - (t.discovery_timestamp_ms || 0)
   ) > 6e4)
     return false;
-  let i = primaryMediaUrlLegacy(e3), n = primaryMediaUrlLegacy(t);
+  let i = primaryMediaUrl(e3), n = primaryMediaUrl(t);
   if (!i || !n) return false;
   if (i.pathname == n.pathname) return true;
-  let r = mediaTokensLegacy(e3), o = mediaTokensLegacy(t);
+  let r = mediaTokens(e3), o = mediaTokens(t);
   for (let a3 of r) if (o.has(a3)) return true;
   let a = e3.title?.isSome?.() && t.title?.isSome?.() && e3.title.value == t.title.value, u = typeof e3.duration == "number" && typeof t.duration == "number" && Math.abs(e3.duration - t.duration) < 1;
   return !!(a && u);
 }
-function mediaQualityScoreLegacy(e3) {
-  let t = primaryMediaUrlLegacy(e3), i = 0;
+function mediaQualityScore(e3) {
+  let t = primaryMediaUrl(e3), i = 0;
   if (t) {
     let n = t.href.match(/(?:2160|1440|1080|720|480|360)p?/gi);
     n && (i = Math.max(...n.map((e4) => parseInt(e4) || 0)) * 1e12);
@@ -23892,13 +23899,16 @@ function mediaQualityScoreLegacy(e3) {
   }
   return i;
 }
-function upsertDiscoveredMediaLegacy(e3, t) {
+function upsertDiscoveredMedia(e3, t) {
   if (e3.type == "http_playlist" || e3.type == "m3u8") {
     for (let [i, n] of [...t.entries()])
-      if (isSameGenericVideoLegacy(e3, n)) {
-        let r = [...fe().downloading.values()].some((e4) => e4.media.hash == n.hash) || fe().transient_history.some((e4) => e4.media_hash == n.hash);
-        if (r || mediaQualityScoreLegacy(n) >= mediaQualityScoreLegacy(e3))
-          return;
+      if (isSameGenericVideo(e3, n)) {
+        let r = [...getSessionState().downloading.values()].some(
+          (e4) => e4.media.hash == n.hash
+        ) || getSessionState().transient_history.some(
+          (e4) => e4.media_hash == n.hash
+        );
+        if (r || mediaQualityScore(n) >= mediaQualityScore(e3)) return;
         t.delete(i);
       }
   }
@@ -23917,13 +23927,13 @@ function upsertDiscoveredMediaLegacy(e3, t) {
     }
 }
 function removeDiscoveredMedia(e3, t) {
-  De((i) => {
+  mutateSessionState((i) => {
     i.discovered.get(t).media.delete(e3);
   });
 }
 function pruneDownloadHistory(e3) {
-  let t = Date.now(), i = e3 * 24 * 60 * 60 * 1e3, n = [...U().downloaded.entries()], r = n.filter(([, a]) => t - a.download_timestamp < i), o = n.filter(([, a]) => t - a.download_timestamp >= i).map(([, a]) => a);
-  _e((a) => {
+  let t = Date.now(), i = e3 * 24 * 60 * 60 * 1e3, n = [...getPersistentState().downloaded.entries()], r = n.filter(([, a]) => t - a.download_timestamp < i), o = n.filter(([, a]) => t - a.download_timestamp >= i).map(([, a]) => a);
+  mutatePersistentState((a) => {
     a.downloaded = new Map(
       r.sort(([u, s], [l, d]) => d.download_timestamp - s.download_timestamp)
     );
@@ -23939,14 +23949,14 @@ function removeMatchingDownloads(e3, t) {
     "browser_download_id" in t && n.browser_download_id == t.browser_download_id && e3.delete(i), "media_hash" in t && n.media_hash == t.media_hash && e3.delete(i);
 }
 async function handleDetectedMedia(e3, t) {
-  let i = fe().discovered.get(t), n = await Zy;
-  !(!!U().jwt || vi || n) && "subtitles" in e3 && !e3.is_youtube && (e3.subtitles = A), i ? i.media.has(e3.hash) || shouldAcceptDiscoveredMedia(e3, i.media) && De((o) => {
+  let i = getSessionState().discovered.get(t), n = await Zy;
+  !(!!getPersistentState().jwt || vi || n) && "subtitles" in e3 && !e3.is_youtube && (e3.subtitles = A), i ? i.media.has(e3.hash) || shouldAcceptDiscoveredMedia(e3, i.media) && mutateSessionState((o) => {
     let a = o.discovered.get(t);
-    upsertDiscoveredMediaLegacy(e3, a.media);
-  }) : shouldAcceptDiscoveredMedia(e3, /* @__PURE__ */ new Map()) && De(
+    upsertDiscoveredMedia(e3, a.media);
+  }) : shouldAcceptDiscoveredMedia(e3, /* @__PURE__ */ new Map()) && mutateSessionState(
     (o) => o.discovered.set(t, {
       meta: A,
-      media: e3.initiator.isSome() && Xs(U(), e3.initiator.value) ? new bs(30, [[e3.hash, e3]]) : /* @__PURE__ */ new Map([[e3.hash, e3]])
+      media: e3.initiator.isSome() && Xs(getPersistentState(), e3.initiator.value) ? new bs(30, [[e3.hash, e3]]) : /* @__PURE__ */ new Map([[e3.hash, e3]])
     })
   ), createTabMetadata(t);
 }
@@ -23974,7 +23984,7 @@ async function handleDetectedMedia(e3, t) {
     });
   }
   H.default.runtime.onInstalled.addListener((e3) => {
-    let t = e3.reason == "install", i = e3.reason == "update", n = H.default.runtime.getManifest(), r = j_(n.version);
+    let t = e3.reason == "install", i = e3.reason == "update", n = H.default.runtime.getManifest(), r = parseExtensionVersion(n.version);
     if (r.isNone()) {
       console.error("Can't parse version");
       return;
@@ -23989,23 +23999,25 @@ var Hy;
 async function handleDownloadRequest(e3, t, i) {
   let n = Te(e3.data.download_args), r = Te(e3.data.media), o = Te(e3.data.meta);
   {
-    for (let C of fe().downloading.values()) if (C.media.hash == r.hash) return;
-    for (let C of fe().transient_history) if (C.media_hash == r.hash) return;
+    for (let C of getSessionState().downloading.values())
+      if (C.media.hash == r.hash) return;
+    for (let C of getSessionState().transient_history)
+      if (C.media_hash == r.hash) return;
   }
-  let a = 7200 * 1e3, u = Date.now(), s = r.type == "http_playlist", l = r.is_youtube, d = U().lsd, c = u - d, f = await uy(), m = wb(U(), "ALLOW_BRAVE_YT_DL") && f;
+  let a = 7200 * 1e3, u = Date.now(), s = r.type == "http_playlist", l = r.is_youtube, d = getPersistentState().lsd, c = u - d, f = await isBraveBrowser(), m = wb(getPersistentState(), "ALLOW_BRAVE_YT_DL") && f;
   if (false) {
   }
-  let h = await q_(), _ = c > a;
+  let h = await isPremiumFeatureAvailable(), _ = c > a;
   if (false) {
     if (qe && !s) {
-      ke(
+      mutateSessionStateImmediately(
         (C) => C.advertize_premium = {
           advertize: false,
           blocked: false,
           snooze: true
         }
       ), clearTimeout(Hy), Hy = setTimeout(() => {
-        ke((C) => {
+        mutateSessionStateImmediately((C) => {
           C.advertize_premium.advertize && C.advertize_premium.blocked && C.advertize_premium.snooze && (C.advertize_premium.snooze = false);
         });
       }, 2e3);
@@ -24024,11 +24036,11 @@ async function handleDownloadRequest(e3, t, i) {
       favicon: o.favicon_url.unwrapOr(null),
       details: ""
     };
-    X_(`notification_${crypto.randomUUID()}`, C);
+    setNotification(`notification_${crypto.randomUUID()}`, C);
     return;
   }
-  let x = Cb(o.tab_id, r);
-  ke((C) => {
+  let x = detectMediaDrm(o.tab_id, r);
+  mutateSessionStateImmediately((C) => {
     C.downloading.set(n.download_id, {
       bitrate: 0,
       status: "queuing",
@@ -24040,7 +24052,7 @@ async function handleDownloadRequest(e3, t, i) {
   let E, w = () => clearInterval(E), y = () => {
     let C = Date.now(), B = 0;
     E = setInterval(() => {
-      De((P) => {
+      mutateSessionState((P) => {
         let G = P.downloading.get(n.download_id);
         if (G.status == "downloading") {
           let Y = Date.now(), ue = G.fetched_bytes_count - B, Ae = Y - C;
@@ -24050,17 +24062,17 @@ async function handleDownloadRequest(e3, t, i) {
     }, 2e3);
   }, v = false, z = () => {
     if (!v && (v = true, !Ue || l)) {
-      let C = u, B = U().lsd;
-      C > B && (B < y_ + 2 ? _e((P) => P.lsd++) : _e((P) => P.lsd = C));
+      let C = u, B = getPersistentState().lsd;
+      C > B && (B < y_ + 2 ? mutatePersistentState((P) => P.lsd++) : mutatePersistentState((P) => P.lsd = C));
     }
   }, $ = Jt((C) => {
     if (C.name == "download_progress" && C.data.download_id == n.download_id) {
       E || y();
       let B = C.data.progress;
-      B.status == "finalizing" ? ke((P) => {
+      B.status == "finalizing" ? mutateSessionStateImmediately((P) => {
         let G = P.downloading.get(n.download_id);
         G.status = B.status;
-      }) : De((P) => {
+      }) : mutateSessionState((P) => {
         let G = P.downloading.get(n.download_id);
         G.status != "finalizing" && (G.status = B.status, G.status == "downloading" && B.status == "downloading" && (G.percent = B.percent, G.fetched_bytes_count = B.fetched_bytes_count, G.output_duration_s = B.output_duration_s)), !s && G.status == "downloading" && G.fetched_bytes_count > 0 && z();
       });
@@ -24068,10 +24080,10 @@ async function handleDownloadRequest(e3, t, i) {
   }), j = await executeDownloadAndSave(n, i, o.incognito);
   $(), w();
   let K = await x;
-  ke((C) => {
+  mutateSessionStateImmediately((C) => {
     C.downloading.delete(n.download_id);
     let B = {
-      max_concurrent_download: U().max_concurrent_downloads,
+      max_concurrent_download: getPersistentState().max_concurrent_downloads,
       strategy: n.strategy,
       download_args_url: n.url.href,
       jsf: n.will_use_jsfetch
@@ -24079,7 +24091,7 @@ async function handleDownloadRequest(e3, t, i) {
     if (j.isOk() && !j.value.aborted_no_partial) {
       qe && !n.save_as && j.value.browser_downloads_duration_ms && j.value.browser_downloads_duration_ms > 5e3 && (C.suspecting_saveas = true), s || z();
       let { path: P, browser_download_id: G, ending_reason: Y } = j.value;
-      U().show_desktop_notifications && (!o.incognito || U().show_desktop_notifications_private) && H.default.notifications.create(n.download_id, {
+      getPersistentState().show_desktop_notifications && (!o.incognito || getPersistentState().show_desktop_notifications_private) && H.default.notifications.create(n.download_id, {
         type: "basic",
         title: "Download complete",
         iconUrl: H.default.runtime.getURL("/bitmaps/logo-128-color.png"),
@@ -24096,7 +24108,7 @@ async function handleDownloadRequest(e3, t, i) {
         origin_favicon_url: o.favicon_url.isSome() ? o.favicon_url.value.href : null,
         subdir: n.save_as ? void 0 : n.subdir
       };
-      U().history_days > 0 && _e((Je) => {
+      getPersistentState().history_days > 0 && mutatePersistentState((Je) => {
         removeMatchingDownloads(Je.downloaded, {
           media_hash: r.hash
         }), Je.downloaded.set(ue, Ae);
@@ -24121,7 +24133,7 @@ async function handleDownloadRequest(e3, t, i) {
           };
           C.notifications.set(`notification_${crypto.randomUUID()}`, Je);
         }
-      _e((Je) => Je.successful_downloads_count++);
+      mutatePersistentState((Je) => Je.successful_downloads_count++);
     } else if (j.isOk()) {
       let { ending_reason: P } = j.value;
       if (P != "end_of_file" && !P.user_abort)
@@ -24169,31 +24181,31 @@ var startServiceWorker = async () => {
   } catch (i) {
     console.error("main::purging failed", i);
   }
-  let e3 = await Uy();
-  await Tb(() => {
-    updateToolbarIndicator(fe(), U()), Ly(fe(), U(), e3);
-  }), await Pb(() => {
-    updatePremiumBannerState(), updateToolbarIndicator(fe(), U()), Fy(U());
-  }), vb(), ke((i) => {
+  let e3 = await initializeContextMenu();
+  await initializeSessionState(() => {
+    updateToolbarIndicator(getSessionState(), getPersistentState()), updateContextMenuEntries(getSessionState(), getPersistentState(), e3);
+  }), await initializePersistentState(() => {
+    updatePremiumBannerState(), updateToolbarIndicator(getSessionState(), getPersistentState()), updateContextMenuVisibility(getPersistentState());
+  }), vb(), mutateSessionStateImmediately((i) => {
     i.downloading.size > 0 && console.warn("Downloadings during startup."), i.downloading.clear();
   });
   let t;
   {
-    let i = U().jwt;
-    i != null ? t = jy(i.raw) : vi && (t = Promise.resolve(true));
+    let i = getPersistentState().jwt;
+    i != null ? t = validateStoredEntitlement(i.raw) : vi && (t = Promise.resolve(true));
   }
-  Nb();
+  registerDockingHandlers();
   {
     let i = await Rf();
-    De((n) => n.current_win_tab = i), Cf((n) => {
-      ke((r) => r.current_win_tab = n);
+    mutateSessionState((n) => n.current_win_tab = i), Cf((n) => {
+      mutateSessionStateImmediately((r) => r.current_win_tab = n);
     });
   }
   {
     {
       let i = (n) => {
         let r = Oe(n.tabId);
-        n.frameId == 0 && r.isSome() && fe().discovered.has(r.value) && De((o) => o.discovered.delete(r.value));
+        n.frameId == 0 && r.isSome() && getSessionState().discovered.has(r.value) && mutateSessionState((o) => o.discovered.delete(r.value));
       };
       H.default.webNavigation.onBeforeNavigate.addListener(i), H.default.tabs.onRemoved.addListener(
         (n) => i({
@@ -24213,11 +24225,11 @@ var startServiceWorker = async () => {
     });
   }
   H.default.downloads.onErased.addListener((i) => {
-    _e((n) => {
+    mutatePersistentState((n) => {
       removeMatchingDownloads(n.downloaded, {
         browser_download_id: i
       });
-    }), De((n) => {
+    }), mutateSessionState((n) => {
       n.transient_history = n.transient_history.filter(
         (r) => r.browser_download_id != i
       );
@@ -24236,11 +24248,11 @@ var startServiceWorker = async () => {
         let d = Te(a.data.media);
         handleDetectedMedia(d, l);
       } else if (a.name == "on_activate_addon") {
-        let d = await t, c = a.data.key, f = await My(c);
+        let d = await t, c = a.data.key, f = await activateEntitlement(c);
         t = Promise.resolve(d || f.isOk()), d || f.isOk() ? (sendToInjected(l, {
           name: "on_activate_addon_success",
           data: null
-        }), ke((m) => {
+        }), mutateSessionStateImmediately((m) => {
           m.notifications.delete("notification_limit");
         })) : sendToInjected(l, {
           name: "on_activate_addon_failure",
@@ -24317,7 +24329,7 @@ var startServiceWorker = async () => {
           });
       } else a.name == "remove_media" && removeDiscoveredMedia(a.data.hash, l);
     });
-    let n = U().max_concurrent_downloads, r = U().youtube_throttle ? 1 : n, o = new DownloadQueueLegacy(n, r, 6e3);
+    let n = getPersistentState().max_concurrent_downloads, r = getPersistentState().youtube_throttle ? 1 : n, o = new DownloadQueue(n, r, 6e3);
     mp(async (a) => {
       if (a.name == "do_download") await handleDownloadRequest(a, await t, o);
       else if (a.name == "on_media") {
@@ -24338,19 +24350,25 @@ var startServiceWorker = async () => {
       }
     }), onContentMessage(async (a, u) => {
       if (a.name == "abort_download")
-        ke((s) => {
+        mutateSessionStateImmediately((s) => {
           let l = s.downloading.get(a.data.download_id);
           l.status = "finalizing";
         }), o.cancelPendingTask(a.data.download_id) || abortWorkerDownload(a.data.download_id);
       else if (a.name == "rm_notification")
-        ke((s) => s.notifications.delete(a.data.notification_id)), me((s) => s.remote_notifications.delete(a.data.notification_id));
+        mutateSessionStateImmediately(
+          (s) => s.notifications.delete(a.data.notification_id)
+        ), mutatePersistentStateImmediately(
+          (s) => s.remote_notifications.delete(a.data.notification_id)
+        );
       else if (a.name == "rm_notifications_all")
-        ke((s) => s.notifications.clear()), me((s) => s.remote_notifications.clear());
+        mutateSessionStateImmediately((s) => s.notifications.clear()), mutatePersistentStateImmediately(
+          (s) => s.remote_notifications.clear()
+        );
       else if (a.name == "set_default_action")
-        _e((s) => {
+        mutatePersistentState((s) => {
           let l = a.data.hostname, d = a.data.action;
           d == "download_audio" || d == "download" ? s.default_action_per_hostname.set(l, d) : (s.default_action_per_hostname.delete(l), s.default_action = d);
-        }), De((s) => {
+        }), mutateSessionState((s) => {
           for (let l of s.discovered.values())
             if (l.meta.isSome()) {
               let d = l.meta.value;
@@ -24361,13 +24379,13 @@ var startServiceWorker = async () => {
             }
         });
       else if (a.name == "dismiss_banner")
-        U().remote_behaviours.advertize_premium || ke(
+        getPersistentState().remote_behaviours.advertize_premium || mutateSessionStateImmediately(
           (s) => s.advertize_premium = {
             advertize: false
           }
         );
       else if (a.name == "dismiss_media")
-        ke((s) => {
+        mutateSessionStateImmediately((s) => {
           let l = s.discovered.get(a.data.tab_id);
           l && l.media.delete(a.data.media_hash);
         });
@@ -24382,18 +24400,18 @@ var startServiceWorker = async () => {
           });
         } catch {
         }
-        _e((s) => {
+        mutatePersistentState((s) => {
           removeMatchingDownloads(s.downloaded, {
             browser_download_id: a.data.browser_download_id
           });
-        }), De((s) => {
+        }), mutateSessionState((s) => {
           s.transient_history = s.transient_history.filter(
             (l) => l.browser_download_id != a.data.browser_download_id
           );
         });
       } else if (a.name == "retry_download") {
         let s = `media_hash_${he(crypto.randomUUID())}`;
-        ke((l) => {
+        mutateSessionStateImmediately((l) => {
           let d = l.discovered.get(a.data.tab_id)?.media.get(a.data.media_hash);
           d && l.discovered.get(a.data.tab_id)?.media.set(s, {
             ...d,
@@ -24402,7 +24420,7 @@ var startServiceWorker = async () => {
           });
         });
       } else if (a.name == "update_media_preferred_entry")
-        De((s) => {
+        mutateSessionState((s) => {
           if (s.current_win_tab.tab_id.isSome()) {
             let l = s.discovered.get(s.current_win_tab.tab_id.value)?.media.get(a.data.media_hash);
             l && "playlist" in l && (l.preferred_entry = q(a.data.playlist_index));
@@ -24413,87 +24431,115 @@ var startServiceWorker = async () => {
       else if (a.name == "mut-settings") {
         if ("preferred_audio_strategy" in a.data) {
           let s = a.data.preferred_audio_strategy;
-          U().preferred_audio_strategy != s && me((l) => l.preferred_audio_strategy = s);
+          getPersistentState().preferred_audio_strategy != s && mutatePersistentStateImmediately(
+            (l) => l.preferred_audio_strategy = s
+          );
         } else if ("preferred_audio_languages" in a.data) {
           let s = new Set(a.data.preferred_audio_languages);
-          s.size > 0 && !Cs(s, U().preferred_audio_languages) && me((l) => l.preferred_audio_languages = s);
+          s.size > 0 && !Cs(s, getPersistentState().preferred_audio_languages) && mutatePersistentStateImmediately(
+            (l) => l.preferred_audio_languages = s
+          );
         } else if ("hide_nomedia_box" in a.data) {
           let s = a.data.hide_nomedia_box;
-          U().hide_nomedia_box != s && me((l) => l.hide_nomedia_box = s);
+          getPersistentState().hide_nomedia_box != s && mutatePersistentStateImmediately((l) => l.hide_nomedia_box = s);
         } else if ("max_concurrent_downloads" in a.data) {
           let s = a.data.max_concurrent_downloads;
-          U().max_concurrent_downloads != s && (o.setTotalCapacity(s), U().youtube_throttle ? o.setYoutubeCapacity(1) : o.setYoutubeCapacity(s), me((l) => l.max_concurrent_downloads = s));
+          getPersistentState().max_concurrent_downloads != s && (o.setTotalCapacity(s), getPersistentState().youtube_throttle ? o.setYoutubeCapacity(1) : o.setYoutubeCapacity(s), mutatePersistentStateImmediately(
+            (l) => l.max_concurrent_downloads = s
+          ));
         } else if ("show_desktop_notifications" in a.data) {
           let s = a.data.show_desktop_notifications;
-          U().show_desktop_notifications != s && me((l) => l.show_desktop_notifications = s);
+          getPersistentState().show_desktop_notifications != s && mutatePersistentStateImmediately(
+            (l) => l.show_desktop_notifications = s
+          );
         } else if ("preferred_quality" in a.data) {
           let s = a.data.preferred_quality;
-          U().preferred_quality != s && me((l) => l.preferred_quality = s);
+          getPersistentState().preferred_quality != s && mutatePersistentStateImmediately(
+            (l) => l.preferred_quality = s
+          );
         } else if ("always_download_as_mkv" in a.data)
-          a.data.always_download_as_mkv ? me((l) => l.preferred_av_muxer = "mkv") : me((l) => l.preferred_av_muxer = "mp4");
+          a.data.always_download_as_mkv ? mutatePersistentStateImmediately(
+            (l) => l.preferred_av_muxer = "mkv"
+          ) : mutatePersistentStateImmediately(
+            (l) => l.preferred_av_muxer = "mp4"
+          );
         else if ("preview_mode" in a.data) {
           let s = a.data.preview_mode;
-          U().preview_mode != s && me((l) => l.preview_mode = s);
+          getPersistentState().preview_mode != s && mutatePersistentStateImmediately((l) => l.preview_mode = s);
         } else if ("show_desktop_notifications_private" in a.data) {
           let s = a.data.show_desktop_notifications_private;
-          U().show_desktop_notifications_private != s && me((l) => l.show_desktop_notifications_private = s);
+          getPersistentState().show_desktop_notifications_private != s && mutatePersistentStateImmediately(
+            (l) => l.show_desktop_notifications_private = s
+          );
         } else if ("show_transient_history" in a.data) {
           let s = a.data.show_transient_history;
-          U().show_transient_history != s && me((l) => l.show_transient_history = s), pruneDownloadHistory(U().history_days);
+          getPersistentState().show_transient_history != s && mutatePersistentStateImmediately(
+            (l) => l.show_transient_history = s
+          ), pruneDownloadHistory(getPersistentState().history_days);
         } else if ("history_days" in a.data) {
           let s = a.data.history_days;
-          U().history_days != s && me((l) => l.history_days = s), pruneDownloadHistory(U().history_days);
+          getPersistentState().history_days != s && mutatePersistentStateImmediately((l) => l.history_days = s), pruneDownloadHistory(getPersistentState().history_days);
         } else if ("ui_theme" in a.data) {
           let s = a.data.ui_theme;
-          U().ui_theme != s && me((l) => l.ui_theme = s);
+          getPersistentState().ui_theme != s && mutatePersistentStateImmediately((l) => l.ui_theme = s);
         } else if ("popup_size" in a.data) {
           let s = a.data.popup_size;
-          U().popup_size != s && me((l) => l.popup_size = s);
+          getPersistentState().popup_size != s && mutatePersistentStateImmediately((l) => l.popup_size = s);
         } else if ("font_size" in a.data) {
           let s = a.data.font_size;
-          U().font_size != s && me((l) => l.font_size = s);
+          getPersistentState().font_size != s && mutatePersistentStateImmediately((l) => l.font_size = s);
         } else if ("youtube_throttle" in a.data) {
           let s = a.data.youtube_throttle;
-          U().youtube_throttle != s && (s ? o.setYoutubeCapacity(1) : o.setYoutubeCapacity(U().max_concurrent_downloads), me((l) => l.youtube_throttle = s));
+          getPersistentState().youtube_throttle != s && (s ? o.setYoutubeCapacity(1) : o.setYoutubeCapacity(
+            getPersistentState().max_concurrent_downloads
+          ), mutatePersistentStateImmediately(
+            (l) => l.youtube_throttle = s
+          ));
         } else if ("use_context_menu" in a.data) {
           let s = a.data.use_context_menu;
-          U().use_context_menu != s && me((l) => l.use_context_menu = s);
+          getPersistentState().use_context_menu != s && mutatePersistentStateImmediately((l) => l.use_context_menu = s);
         } else if ("download_directory" in a.data) {
           let s = a.data.download_directory;
-          U().download_directory != s && me((d) => d.download_directory = s);
-          let l = fe().current_win_tab.tab_id;
+          getPersistentState().download_directory != s && mutatePersistentStateImmediately(
+            (d) => d.download_directory = s
+          );
+          let l = getSessionState().current_win_tab.tab_id;
           l.isSome() && createTabMetadata(l.value);
         } else if ("preferred_discovered_order" in a.data) {
           let s = a.data.preferred_discovered_order;
-          U().preferred_discovered_media_order != s && me((l) => l.preferred_discovered_media_order = s);
+          getPersistentState().preferred_discovered_media_order != s && mutatePersistentStateImmediately(
+            (l) => l.preferred_discovered_media_order = s
+          );
         } else if ("subtitles_language" in a.data) {
           let s = new Set(a.data.subtitles_language);
-          s.size > 0 && !Cs(s, U().subtitle_languages) && me((l) => l.subtitle_languages = s);
+          s.size > 0 && !Cs(s, getPersistentState().subtitle_languages) && mutatePersistentStateImmediately(
+            (l) => l.subtitle_languages = s
+          );
         } else a.data;
       } else if (a.name == "show-review-page")
-        _e((s) => s.dont_ask_for_user_review = true), ke(
+        mutatePersistentState((s) => s.dont_ask_for_user_review = true), mutateSessionStateImmediately(
           (s) => s.notifications.delete("notification_one_hundred_downloads")
         );
       else if (a.name != "request_preview")
         if (a.name == "rm-custom-strings")
-          _e((s) => {
+          mutatePersistentState((s) => {
             s.custom_strings.web.clear(), s.custom_strings.addon.clear();
           });
         else if (a.name == "update-custom-web-string")
-          _e((s) => {
+          mutatePersistentState((s) => {
             s.custom_strings.web.set(a.data.key, a.data.value);
           });
         else if (a.name == "update-custom-addon-string")
-          _e((s) => {
+          mutatePersistentState((s) => {
             s.custom_strings.addon.set(a.data.key, a.data.value);
           });
         else if (a.name == "reset-suspicious-saveas")
-          De((s) => {
+          mutateSessionState((s) => {
             s.suspecting_saveas = false;
           });
         else if (a.name == "update-smartnaming") {
           let s = a.data;
-          _e((d) => {
+          mutatePersistentState((d) => {
             if (d.smartnaming.source = s, !s)
               d.smartnaming.compiled = Ei();
             else {
@@ -24501,10 +24547,10 @@ var startServiceWorker = async () => {
               c.isOk() ? d.smartnaming.compiled = c.value : d.smartnaming.compiled = Ei();
             }
           });
-          let l = fe().current_win_tab.tab_id;
+          let l = getSessionState().current_win_tab.tab_id;
           l.isSome() && createTabMetadata(l.value);
         } else
-          a.name == "redock" || a.name == "clear-completed" && ke((s) => {
+          a.name == "redock" || a.name == "clear-completed" && mutateSessionStateImmediately((s) => {
             for (let l of s.transient_history)
               for (let d of s.discovered.values())
                 d.media.delete(l.media_hash);
@@ -24512,8 +24558,8 @@ var startServiceWorker = async () => {
           });
     });
   }
-  registerWebRequestDetection(U), registerPreviewHandler(fe, U), pruneDownloadHistory(U().history_days), H.default.commands.onCommand.addListener((i) => {
-    i == "default-action" && Mb(fe(), U());
+  registerWebRequestDetection(getPersistentState), registerPreviewHandler(getSessionState, getPersistentState), pruneDownloadHistory(getPersistentState().history_days), H.default.commands.onCommand.addListener((i) => {
+    i == "default-action" && executeDefaultMediaAction(getSessionState(), getPersistentState());
   }), console.log("service::end");
 };
 startServiceWorker();

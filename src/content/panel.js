@@ -15975,45 +15975,45 @@ var ou = se(ne(), 1);
 var kc = ["mp4", "webm", "mkv"],
   xc = ["mp3", "m4a", "ogg"],
   zc = [...kc, ...xc];
-function eu(e) {
+function isVideoContainer(e) {
   return kc.includes(e);
 }
-function tu(e) {
+function isAudioContainer(e) {
   return xc.includes(e);
 }
-function Sc(e, i) {
-  return eu(e) ? ti(e, i) : vg(e);
+function resolveOutputMuxer(e, i) {
+  return isVideoContainer(e) ? resolveVideoMuxer(e, i) : resolveAudioMuxer(e);
 }
-function vg(e) {
+function resolveAudioMuxer(e) {
   if (e == "mp3") return "mp3";
   if (e == "m4a") return "mp3";
   if (e == "ogg") return "mp3";
   throw new Error("Unreachable");
 }
-function ti(e, i) {
+function resolveVideoMuxer(e, i) {
   if (e == "mp4") return i;
   if (e == "webm") return "mkv";
   if (e == "mkv") return "mkv";
   throw new Error("Unreachable");
 }
-function yg(e, i) {
-  let n = $c(e.size, i.size);
+function compareMediaQuality(e, i) {
+  let n = compareResolution(e.size, i.size);
   if (n != 0) return n;
   let a = e.bitrate.unwrapOr(0),
     s = i.bitrate.unwrapOr(0);
   return a > s ? -1 : a < s ? 1 : 0;
 }
-function $c(e, i) {
+function compareResolution(e, i) {
   let n = e.map((s) => s.height).unwrapOr(0),
     a = i.map((s) => s.height).unwrapOr(0);
   return n > a ? -1 : n < a ? 1 : 0;
 }
-function Dc(e, i, o) {
+function compareDiscoveredMedia(e, i, o) {
   if (e.is_youtube && i.is_youtube)
     if (e.type != i.type && e.type != "m3u8" && i.type != "m3u8") {
       let a = e.playlist[0].quality,
         s = i.playlist[0].quality,
-        l = $c(a.size, s.size);
+        l = compareResolution(a.size, s.size);
       return l == 0 ? (e.type == "youtube_format" ? -1 : 1) : l;
     } else return e.discovery_timestamp_ms > i.discovery_timestamp_ms ? -1 : 1;
   if (e.is_youtube && !i.is_youtube) return -1;
@@ -16055,7 +16055,7 @@ function Dc(e, i, o) {
     }
     let a = e.playlist[0].quality,
       s = i.playlist[0].quality;
-    return yg(a, s);
+    return compareMediaQuality(a, s);
   }
   if (e.type == "http_playlist" && i.type == "http_playlist") {
     let a = e.playlist[0].size,
@@ -16069,7 +16069,7 @@ function Dc(e, i, o) {
   }
   return 0;
 }
-function Jn(e, i) {
+function choosePlaylistEntry(e, i) {
   if (e.preferred_entry.isSome() && e.playlist[e.preferred_entry.value])
     return e.preferred_entry.value;
   if (i)
@@ -16083,7 +16083,7 @@ function Jn(e, i) {
   else return 0;
   return 0;
 }
-function wg(e) {
+function formatPlaylistEntry(e) {
   let i = [];
   if ((i.push(e.demuxer.toUpperCase()), e.quality.size.isSome())) {
     let { width: o, height: r } = e.quality.size.value;
@@ -16110,7 +16110,7 @@ var ii = class ii extends L {
   onStateChanged(o) {
     let r = !this.media;
     this.media = o;
-    let t = Jn(o, this.persistent().preferred_quality);
+    let t = choosePlaylistEntry(o, this.persistent().preferred_quality);
     if (((this.selected_entry = t), r)) {
       let n = o.playlist,
         a = [];
@@ -16118,7 +16118,7 @@ var ii = class ii extends L {
         let l = n[s];
         a.push({
           id: `menu_${s}`,
-          text: wg(l),
+          text: formatPlaylistEntry(l),
           enabled: !0,
           onclick: () => {
             ((this.selected_entry = s), this.renderSelectedEntry());
@@ -16191,15 +16191,15 @@ var MediaTags = class extends L {
   _([d(HTMLSpanElement)], MediaTags.prototype, "tag_yt", 2),
   _([d(HTMLSpanElement)], MediaTags.prototype, "tag_mpd", 2),
   _([d(HTMLSpanElement)], MediaTags.prototype, "tag_free", 2));
-function kg(e, i, o) {
+function matchesRemoteBehaviour(e, i, o) {
   let r = o.split(".").slice(-2).join("."),
     t = `behaviour_hash_${Jt(i)}`,
     n = `domain_hash_${Jt(r)}`,
     a = e.remote_behaviours.websites;
   return a.has(t) && a.get(t).has(n);
 }
-function Q(e, i) {
-  return kg(e, "CARRY_GET_PARAM_WEBSITES", i.hostname);
+function shouldCarryQueryParameters(e, i) {
+  return matchesRemoteBehaviour(e, "CARRY_GET_PARAM_WEBSITES", i.hostname);
 }
 var xg = [
   "youtube_video_preview",
@@ -16207,17 +16207,17 @@ var xg = [
   "youtube_audio_video_one_source",
   "youtube_audio_video_two_sources",
 ];
-function Pc(e) {
+function isYoutubeDownloadStrategy(e) {
   return xg.includes(e.strategy);
 }
-function zg(e, i, o, r, t, n, a) {
+function buildMpdArgumentsPanel(e, i, o, r, t, n, a) {
   r = ze(r);
   let s = `download_${crypto.randomUUID()}`,
     l = Be(e.sent_headers),
     u = e.playlist[n],
     g = e.playlist[n].index,
-    p = Qi(a, e);
-  if (i || tu(e.playlist[n].demuxer))
+    p = shouldThrottleDownload(a, e);
+  if (i || isAudioContainer(e.playlist[n].demuxer))
     return {
       download_id: s,
       headers: l,
@@ -16228,7 +16228,7 @@ function zg(e, i, o, r, t, n, a) {
       muxer: "mp3",
       strategy: "mpd_audio_only",
       url: e.master_url,
-      carry_get_params: Q(a, e.master_url),
+      carry_get_params: shouldCarryQueryParameters(a, e.master_url),
       entry: g,
       duration: e.duration,
       extension: "mp3",
@@ -16252,7 +16252,7 @@ function zg(e, i, o, r, t, n, a) {
       muxer: a.preferred_av_muxer,
       strategy: "mpd_audio_video_one_source",
       url: e.master_url,
-      carry_get_params: Q(a, e.master_url),
+      carry_get_params: shouldCarryQueryParameters(a, e.master_url),
       entry: g,
       duration: e.duration,
       extension: a.preferred_av_muxer,
@@ -16265,12 +16265,12 @@ function zg(e, i, o, r, t, n, a) {
     };
   }
 }
-function Sg(e, i, o, r, t, n, a) {
+function buildYoutubeArgumentsPanel(e, i, o, r, t, n, a) {
   r = ze(r);
   let s = `download_${crypto.randomUUID()}`,
     l = e.playlist[n],
     u = Be(e.sent_headers),
-    g = Qi(a, e);
+    g = shouldThrottleDownload(a, e);
   if (l.av.video == !1)
     return {
       download_id: s,
@@ -16282,7 +16282,7 @@ function Sg(e, i, o, r, t, n, a) {
       strategy: "youtube_audio_only",
       muxer: "mp3",
       url: l.av.audio.url,
-      carry_get_params: Q(a, l.av.audio.url),
+      carry_get_params: shouldCarryQueryParameters(a, l.av.audio.url),
       content_length: l.av.audio.content_length,
       extension: "mp3",
       is_youtube: e.is_youtube,
@@ -16303,7 +16303,7 @@ function Sg(e, i, o, r, t, n, a) {
           strategy: "youtube_audio_only",
           muxer: "mp3",
           url: l.av.audio.url,
-          carry_get_params: Q(a, l.av.audio.url),
+          carry_get_params: shouldCarryQueryParameters(a, l.av.audio.url),
           content_length: l.av.audio.content_length,
           extension: "mp3",
           is_youtube: e.is_youtube,
@@ -16322,7 +16322,7 @@ function Sg(e, i, o, r, t, n, a) {
           strategy: "youtube_audio_only",
           muxer: "mp3",
           url: l.av.video.url,
-          carry_get_params: Q(a, l.av.video.url),
+          carry_get_params: shouldCarryQueryParameters(a, l.av.video.url),
           content_length: l.av.video.content_length,
           extension: "mp3",
           is_youtube: e.is_youtube,
@@ -16333,7 +16333,7 @@ function Sg(e, i, o, r, t, n, a) {
         };
   {
     let p = l.demuxer,
-      h = ti(p, a.preferred_av_muxer),
+      h = resolveVideoMuxer(p, a.preferred_av_muxer),
       c = e.subtitles.andThen((b) =>
         Gi(b, a.subtitle_languages, (z) => z.language),
       );
@@ -16348,7 +16348,7 @@ function Sg(e, i, o, r, t, n, a) {
           will_use_jsfetch: !1,
           strategy: "youtube_audio_video_two_sources",
           url: l.av.video.url,
-          carry_get_params: Q(a, l.av.video.url),
+          carry_get_params: shouldCarryQueryParameters(a, l.av.video.url),
           content_length: l.av.video.content_length,
           url_audio: l.av.audio.url,
           audio_content_length: l.av.audio.content_length,
@@ -16369,7 +16369,7 @@ function Sg(e, i, o, r, t, n, a) {
           will_use_jsfetch: !1,
           strategy: "youtube_audio_video_one_source",
           url: l.av.video.url,
-          carry_get_params: Q(a, l.av.video.url),
+          carry_get_params: shouldCarryQueryParameters(a, l.av.video.url),
           content_length: l.av.video.content_length,
           extension: h,
           is_youtube: e.is_youtube,
@@ -16380,13 +16380,13 @@ function Sg(e, i, o, r, t, n, a) {
         };
   }
 }
-function $g(e, i, o, r, t, n, a) {
+function buildHlsPlaylistArgumentsPanel(e, i, o, r, t, n, a) {
   r = ze(r);
   let s = `download_${crypto.randomUUID()}`,
     l = e.playlist[n],
     u = Be(e.sent_headers),
     g = e.duration,
-    p = Qi(a, e);
+    p = shouldThrottleDownload(a, e);
   if (l.av.video == !1)
     return {
       download_id: s,
@@ -16399,7 +16399,7 @@ function $g(e, i, o, r, t, n, a) {
       strategy: "m3u8_audio_only",
       muxer: "mp3",
       url: l.av.audio,
-      carry_get_params: Q(a, l.av.audio),
+      carry_get_params: shouldCarryQueryParameters(a, l.av.audio),
       extension: "mp3",
       is_youtube: e.is_youtube,
       throttle: p,
@@ -16419,7 +16419,7 @@ function $g(e, i, o, r, t, n, a) {
           strategy: "m3u8_audio_only",
           muxer: "mp3",
           url: l.av.audio,
-          carry_get_params: Q(a, l.av.audio),
+          carry_get_params: shouldCarryQueryParameters(a, l.av.audio),
           extension: "mp3",
           is_youtube: e.is_youtube,
           throttle: p,
@@ -16437,7 +16437,7 @@ function $g(e, i, o, r, t, n, a) {
           strategy: "m3u8_audio_only",
           muxer: "mp3",
           url: l.av.video,
-          carry_get_params: Q(a, l.av.video),
+          carry_get_params: shouldCarryQueryParameters(a, l.av.video),
           extension: "mp3",
           is_youtube: e.is_youtube,
           throttle: p,
@@ -16446,7 +16446,7 @@ function $g(e, i, o, r, t, n, a) {
         };
   {
     let h = l.demuxer,
-      c = ti(h, a.preferred_av_muxer),
+      c = resolveVideoMuxer(h, a.preferred_av_muxer),
       b = e.subtitles.andThen((z) =>
         Gi(z, a.subtitle_languages, (q) => q.language),
       );
@@ -16463,7 +16463,7 @@ function $g(e, i, o, r, t, n, a) {
           strategy: "m3u8_audio_video_two_sources",
           url: l.av.video,
           url_audio: l.av.audio,
-          carry_get_params: Q(a, l.av.video),
+          carry_get_params: shouldCarryQueryParameters(a, l.av.video),
           extension: c,
           is_youtube: e.is_youtube,
           throttle: p,
@@ -16482,7 +16482,7 @@ function $g(e, i, o, r, t, n, a) {
           will_use_jsfetch: !1,
           strategy: "m3u8_audio_video_one_source",
           url: l.av.video,
-          carry_get_params: Q(a, l.av.video),
+          carry_get_params: shouldCarryQueryParameters(a, l.av.video),
           extension: c,
           is_youtube: e.is_youtube,
           throttle: p,
@@ -16492,14 +16492,14 @@ function $g(e, i, o, r, t, n, a) {
         };
   }
 }
-function Dg(e, i, o, r, t, n) {
+function buildDirectHlsArgumentsPanel(e, i, o, r, t, n) {
   r = ze(r);
   let a = `download_${crypto.randomUUID()}`,
     s = Be(e.sent_headers),
     l = e.url,
     u = e.duration,
-    g = Qi(n, e);
-  if (i || tu(e.demuxer))
+    g = shouldThrottleDownload(n, e);
+  if (i || isAudioContainer(e.demuxer))
     return {
       save_as: o,
       subdir: t,
@@ -16510,7 +16510,7 @@ function Dg(e, i, o, r, t, n) {
       strategy: "m3u8_audio_only",
       muxer: "mp3",
       url: l,
-      carry_get_params: Q(n, l),
+      carry_get_params: shouldCarryQueryParameters(n, l),
       good_basename: r,
       extension: "mp3",
       is_youtube: e.is_youtube,
@@ -16519,7 +16519,7 @@ function Dg(e, i, o, r, t, n) {
       audio_language: W,
     };
   {
-    let p = ti(e.demuxer, n.preferred_av_muxer),
+    let p = resolveVideoMuxer(e.demuxer, n.preferred_av_muxer),
       h = e.subtitles.andThen((c) =>
         Gi(c, n.subtitle_languages, (b) => b.language),
       );
@@ -16533,7 +16533,7 @@ function Dg(e, i, o, r, t, n) {
       strategy: "m3u8_audio_video_one_source",
       muxer: p,
       url: l,
-      carry_get_params: Q(n, l),
+      carry_get_params: shouldCarryQueryParameters(n, l),
       good_basename: r,
       extension: p,
       is_youtube: e.is_youtube,
@@ -16544,17 +16544,17 @@ function Dg(e, i, o, r, t, n) {
     };
   }
 }
-function Pg(e, i, o, r, t, n, a) {
+function buildHttpArgumentsPanel(e, i, o, r, t, n, a) {
   r = ze(r);
   let s = `download_${crypto.randomUUID()}`,
     l = e.playlist[n],
     u = e.extension == "flv" && l.size.isNone(),
     g =
       (e.libav_demuxer.isSome() &&
-        eu(e.libav_demuxer.value) &&
+        isVideoContainer(e.libav_demuxer.value) &&
         e.supports_byte_ranges) ||
       u,
-    p = Qi(a, e);
+    p = shouldThrottleDownload(a, e);
   if (i) {
     let h = l.av.audio || l.av.video;
     return {
@@ -16565,7 +16565,7 @@ function Pg(e, i, o, r, t, n, a) {
       headers: Be(e.sent_headers),
       strategy: "http_strip_audio_jsfetch",
       url: h,
-      carry_get_params: Q(a, h),
+      carry_get_params: shouldCarryQueryParameters(a, h),
       good_basename: r,
       muxer: "mp3",
       extension: "mp3",
@@ -16580,12 +16580,16 @@ function Pg(e, i, o, r, t, n, a) {
       c = "";
     if (
       (e.libav_demuxer.isSome()
-        ? ((h = Sc(e.libav_demuxer.value, a.preferred_av_muxer)), (c = h))
+        ? ((h = resolveOutputMuxer(
+            e.libav_demuxer.value,
+            a.preferred_av_muxer,
+          )),
+          (c = h))
         : ((h = a.preferred_av_muxer), (c = a.preferred_av_muxer)),
       l.av.audio)
     ) {
       let b = l.demuxer,
-        z = ti(b, a.preferred_av_muxer);
+        z = resolveVideoMuxer(b, a.preferred_av_muxer);
       return {
         save_as: o,
         download_id: s,
@@ -16595,7 +16599,7 @@ function Pg(e, i, o, r, t, n, a) {
         strategy: "http_audio_video_two_sources_jsfetch",
         url: l.av.video,
         url_audio: l.av.audio,
-        carry_get_params: Q(a, l.av.video),
+        carry_get_params: shouldCarryQueryParameters(a, l.av.video),
         good_basename: r,
         muxer: z,
         extension: z,
@@ -16614,7 +16618,7 @@ function Pg(e, i, o, r, t, n, a) {
         headers: Be(e.sent_headers),
         strategy: "http_audio_video_one_source_jsfetch",
         url: l.av.video,
-        carry_get_params: Q(a, l.av.video),
+        carry_get_params: shouldCarryQueryParameters(a, l.av.video),
         good_basename: r,
         muxer: h,
         extension: c,
@@ -16632,7 +16636,7 @@ function Pg(e, i, o, r, t, n, a) {
       headers: Be(e.sent_headers),
       strategy: "http_audio_video_one_source",
       url: l.av.video,
-      carry_get_params: Q(a, l.av.video),
+      carry_get_params: shouldCarryQueryParameters(a, l.av.video),
       good_basename: r,
       size: l.size,
       extension: e.extension,
@@ -16641,18 +16645,22 @@ function Pg(e, i, o, r, t, n, a) {
       cache: e.cache,
     };
 }
-function Qi(e, i) {
+function shouldThrottleDownload(e, i) {
   return i.is_youtube && e.youtube_throttle;
 }
-function iu(e, i, o, r, t, n, a) {
-  if (e.type == "http_playlist") return Pg(e, i, o, r, t, n, a);
-  if (e.type == "m3u8") return Dg(e, i, o, r, t, a);
-  if (e.type == "m3u8_playlist") return $g(e, i, o, r, t, n, a);
+function buildDownloadArgumentsPanel(e, i, o, r, t, n, a) {
+  if (e.type == "http_playlist")
+    return buildHttpArgumentsPanel(e, i, o, r, t, n, a);
+  if (e.type == "m3u8") return buildDirectHlsArgumentsPanel(e, i, o, r, t, a);
+  if (e.type == "m3u8_playlist")
+    return buildHlsPlaylistArgumentsPanel(e, i, o, r, t, n, a);
   if (e.type == "youtube_format") {
-    if (typeof n == "number") return Sg(e, i, o, r, t, n, a);
+    if (typeof n == "number")
+      return buildYoutubeArgumentsPanel(e, i, o, r, t, n, a);
     throw "Missing playlist_entry";
   } else if (e.type == "mpd_playlist") {
-    if (typeof n == "number") return zg(e, i, o, r, t, n, a);
+    if (typeof n == "number")
+      return buildMpdArgumentsPanel(e, i, o, r, t, n, a);
     throw "Missing playlist_entry";
   } else throw new Error("Unreachable");
 }
@@ -16884,9 +16892,26 @@ var DiscoveredMedia = class extends L {
     if ("playlist" in n) {
       let g = o
         ? this.media_selector.getPlaylistEntry()
-        : Jn(n, this.persistent().preferred_quality);
-      l = iu(n, r, t, s, a.subdir, g, this.persistent());
-    } else l = iu(n, r, t, s, a.subdir, void 0, this.persistent());
+        : choosePlaylistEntry(n, this.persistent().preferred_quality);
+      l = buildDownloadArgumentsPanel(
+        n,
+        r,
+        t,
+        s,
+        a.subdir,
+        g,
+        this.persistent(),
+      );
+    } else
+      l = buildDownloadArgumentsPanel(
+        n,
+        r,
+        t,
+        s,
+        a.subdir,
+        void 0,
+        this.persistent(),
+      );
     return (l.strategy == "m3u8_audio_only" && (l.will_use_jsfetch = !0), l);
   }
 };
@@ -16937,7 +16962,8 @@ var DownloadingMedia = class extends L {
       t = r.subdir + r.good_basename + "." + r.extension;
     if (
       ((this.interruptable =
-        !Pc(r) && r.strategy != "http_audio_video_one_source"),
+        !isYoutubeDownloadStrategy(r) &&
+        r.strategy != "http_audio_video_one_source"),
       this.span_filename.textContent != t &&
         (this.span_filename.textContent = t),
       (this.download_id = o.download_args.download_id),
@@ -17403,7 +17429,7 @@ var MainPanel = class extends L {
         ? (b = [...s.values()].sort(
             (w, P) => w.discovery_timestamp_ms - P.discovery_timestamp_ms,
           ))
-        : (b = [...s.values()].sort((w, P) => Dc(w, P, c)));
+        : (b = [...s.values()].sort((w, P) => compareDiscoveredMedia(w, P, c)));
     let z = 0,
       q = (w, P, k, $) => {
         let E = p.get(w.hash);
