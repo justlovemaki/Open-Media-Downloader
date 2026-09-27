@@ -1,1813 +1,687 @@
-var fe = Object.create;
-var te = Object.defineProperty;
-var ye = Object.getOwnPropertyDescriptor;
-var _e = Object.getOwnPropertyNames;
-var he = Object.getPrototypeOf,
-  ve = Object.prototype.hasOwnProperty;
-var Ae = (e, r) => () => (r || e((r = { exports: {} }).exports, r), r.exports);
-var xe = (e, r, n, s) => {
-  if ((r && typeof r == "object") || typeof r == "function")
-    for (let o of _e(r))
-      !ve.call(e, o) &&
-        o !== n &&
-        te(e, o, {
-          get: () => r[o],
-          enumerable: !(s = ye(r, o)) || s.enumerable,
-        });
-  return e;
-};
-var be = (e, r, n) => (
-  (n = e != null ? fe(he(e)) : {}),
-  xe(
-    r || !e || !e.__esModule
-      ? te(n, "default", { value: e, enumerable: !0 })
-      : n,
-    e,
-  )
-);
-var ie = Ae((Z, ne) => {
-  (function (e, r) {
-    if (typeof define == "function" && define.amd)
-      define("webextension-polyfill", ["module"], r);
-    else if (typeof Z < "u") r(ne);
-    else {
-      var n = { exports: {} };
-      (r(n), (e.browser = n.exports));
-    }
-  })(
-    typeof globalThis < "u" ? globalThis : typeof self < "u" ? self : Z,
-    function (e) {
-      "use strict";
-      if (
-        !(
-          globalThis.chrome &&
-          globalThis.chrome.runtime &&
-          globalThis.chrome.runtime.id
-        )
-      )
-        throw new Error(
-          "This script should only be loaded in a browser extension.",
-        );
-      if (
-        globalThis.browser &&
-        globalThis.browser.runtime &&
-        globalThis.browser.runtime.id
-      )
-        e.exports = globalThis.browser;
-      else {
-        let r = "The message port closed before a response was received.",
-          n = (s) => {
-            let o = {
-              alarms: {
-                clear: { minArgs: 0, maxArgs: 1 },
-                clearAll: { minArgs: 0, maxArgs: 0 },
-                get: { minArgs: 0, maxArgs: 1 },
-                getAll: { minArgs: 0, maxArgs: 0 },
-              },
-              bookmarks: {
-                create: { minArgs: 1, maxArgs: 1 },
-                get: { minArgs: 1, maxArgs: 1 },
-                getChildren: { minArgs: 1, maxArgs: 1 },
-                getRecent: { minArgs: 1, maxArgs: 1 },
-                getSubTree: { minArgs: 1, maxArgs: 1 },
-                getTree: { minArgs: 0, maxArgs: 0 },
-                move: { minArgs: 2, maxArgs: 2 },
-                remove: { minArgs: 1, maxArgs: 1 },
-                removeTree: { minArgs: 1, maxArgs: 1 },
-                search: { minArgs: 1, maxArgs: 1 },
-                update: { minArgs: 2, maxArgs: 2 },
-              },
-              browserAction: {
-                disable: { minArgs: 0, maxArgs: 1, fallbackToNoCallback: !0 },
-                enable: { minArgs: 0, maxArgs: 1, fallbackToNoCallback: !0 },
-                getBadgeBackgroundColor: { minArgs: 1, maxArgs: 1 },
-                getBadgeText: { minArgs: 1, maxArgs: 1 },
-                getPopup: { minArgs: 1, maxArgs: 1 },
-                getTitle: { minArgs: 1, maxArgs: 1 },
-                openPopup: { minArgs: 0, maxArgs: 0 },
-                setBadgeBackgroundColor: {
-                  minArgs: 1,
-                  maxArgs: 1,
-                  fallbackToNoCallback: !0,
-                },
-                setBadgeText: {
-                  minArgs: 1,
-                  maxArgs: 1,
-                  fallbackToNoCallback: !0,
-                },
-                setIcon: { minArgs: 1, maxArgs: 1 },
-                setPopup: { minArgs: 1, maxArgs: 1, fallbackToNoCallback: !0 },
-                setTitle: { minArgs: 1, maxArgs: 1, fallbackToNoCallback: !0 },
-              },
-              browsingData: {
-                remove: { minArgs: 2, maxArgs: 2 },
-                removeCache: { minArgs: 1, maxArgs: 1 },
-                removeCookies: { minArgs: 1, maxArgs: 1 },
-                removeDownloads: { minArgs: 1, maxArgs: 1 },
-                removeFormData: { minArgs: 1, maxArgs: 1 },
-                removeHistory: { minArgs: 1, maxArgs: 1 },
-                removeLocalStorage: { minArgs: 1, maxArgs: 1 },
-                removePasswords: { minArgs: 1, maxArgs: 1 },
-                removePluginData: { minArgs: 1, maxArgs: 1 },
-                settings: { minArgs: 0, maxArgs: 0 },
-              },
-              commands: { getAll: { minArgs: 0, maxArgs: 0 } },
-              contextMenus: {
-                remove: { minArgs: 1, maxArgs: 1 },
-                removeAll: { minArgs: 0, maxArgs: 0 },
-                update: { minArgs: 2, maxArgs: 2 },
-              },
-              cookies: {
-                get: { minArgs: 1, maxArgs: 1 },
-                getAll: { minArgs: 1, maxArgs: 1 },
-                getAllCookieStores: { minArgs: 0, maxArgs: 0 },
-                remove: { minArgs: 1, maxArgs: 1 },
-                set: { minArgs: 1, maxArgs: 1 },
-              },
-              devtools: {
-                inspectedWindow: {
-                  eval: { minArgs: 1, maxArgs: 2, singleCallbackArg: !1 },
-                },
-                panels: {
-                  create: { minArgs: 3, maxArgs: 3, singleCallbackArg: !0 },
-                  elements: { createSidebarPane: { minArgs: 1, maxArgs: 1 } },
-                },
-              },
-              downloads: {
-                cancel: { minArgs: 1, maxArgs: 1 },
-                download: { minArgs: 1, maxArgs: 1 },
-                erase: { minArgs: 1, maxArgs: 1 },
-                getFileIcon: { minArgs: 1, maxArgs: 2 },
-                open: { minArgs: 1, maxArgs: 1, fallbackToNoCallback: !0 },
-                pause: { minArgs: 1, maxArgs: 1 },
-                removeFile: { minArgs: 1, maxArgs: 1 },
-                resume: { minArgs: 1, maxArgs: 1 },
-                search: { minArgs: 1, maxArgs: 1 },
-                show: { minArgs: 1, maxArgs: 1, fallbackToNoCallback: !0 },
-              },
-              extension: {
-                isAllowedFileSchemeAccess: { minArgs: 0, maxArgs: 0 },
-                isAllowedIncognitoAccess: { minArgs: 0, maxArgs: 0 },
-              },
-              history: {
-                addUrl: { minArgs: 1, maxArgs: 1 },
-                deleteAll: { minArgs: 0, maxArgs: 0 },
-                deleteRange: { minArgs: 1, maxArgs: 1 },
-                deleteUrl: { minArgs: 1, maxArgs: 1 },
-                getVisits: { minArgs: 1, maxArgs: 1 },
-                search: { minArgs: 1, maxArgs: 1 },
-              },
-              i18n: {
-                detectLanguage: { minArgs: 1, maxArgs: 1 },
-                getAcceptLanguages: { minArgs: 0, maxArgs: 0 },
-              },
-              identity: { launchWebAuthFlow: { minArgs: 1, maxArgs: 1 } },
-              idle: { queryState: { minArgs: 1, maxArgs: 1 } },
-              management: {
-                get: { minArgs: 1, maxArgs: 1 },
-                getAll: { minArgs: 0, maxArgs: 0 },
-                getSelf: { minArgs: 0, maxArgs: 0 },
-                setEnabled: { minArgs: 2, maxArgs: 2 },
-                uninstallSelf: { minArgs: 0, maxArgs: 1 },
-              },
-              notifications: {
-                clear: { minArgs: 1, maxArgs: 1 },
-                create: { minArgs: 1, maxArgs: 2 },
-                getAll: { minArgs: 0, maxArgs: 0 },
-                getPermissionLevel: { minArgs: 0, maxArgs: 0 },
-                update: { minArgs: 2, maxArgs: 2 },
-              },
-              pageAction: {
-                getPopup: { minArgs: 1, maxArgs: 1 },
-                getTitle: { minArgs: 1, maxArgs: 1 },
-                hide: { minArgs: 1, maxArgs: 1, fallbackToNoCallback: !0 },
-                setIcon: { minArgs: 1, maxArgs: 1 },
-                setPopup: { minArgs: 1, maxArgs: 1, fallbackToNoCallback: !0 },
-                setTitle: { minArgs: 1, maxArgs: 1, fallbackToNoCallback: !0 },
-                show: { minArgs: 1, maxArgs: 1, fallbackToNoCallback: !0 },
-              },
-              permissions: {
-                contains: { minArgs: 1, maxArgs: 1 },
-                getAll: { minArgs: 0, maxArgs: 0 },
-                remove: { minArgs: 1, maxArgs: 1 },
-                request: { minArgs: 1, maxArgs: 1 },
-              },
-              runtime: {
-                getBackgroundPage: { minArgs: 0, maxArgs: 0 },
-                getPlatformInfo: { minArgs: 0, maxArgs: 0 },
-                openOptionsPage: { minArgs: 0, maxArgs: 0 },
-                requestUpdateCheck: { minArgs: 0, maxArgs: 0 },
-                sendMessage: { minArgs: 1, maxArgs: 3 },
-                sendNativeMessage: { minArgs: 2, maxArgs: 2 },
-                setUninstallURL: { minArgs: 1, maxArgs: 1 },
-              },
-              sessions: {
-                getDevices: { minArgs: 0, maxArgs: 1 },
-                getRecentlyClosed: { minArgs: 0, maxArgs: 1 },
-                restore: { minArgs: 0, maxArgs: 1 },
-              },
-              storage: {
-                local: {
-                  clear: { minArgs: 0, maxArgs: 0 },
-                  get: { minArgs: 0, maxArgs: 1 },
-                  getBytesInUse: { minArgs: 0, maxArgs: 1 },
-                  remove: { minArgs: 1, maxArgs: 1 },
-                  set: { minArgs: 1, maxArgs: 1 },
-                },
-                managed: {
-                  get: { minArgs: 0, maxArgs: 1 },
-                  getBytesInUse: { minArgs: 0, maxArgs: 1 },
-                },
-                sync: {
-                  clear: { minArgs: 0, maxArgs: 0 },
-                  get: { minArgs: 0, maxArgs: 1 },
-                  getBytesInUse: { minArgs: 0, maxArgs: 1 },
-                  remove: { minArgs: 1, maxArgs: 1 },
-                  set: { minArgs: 1, maxArgs: 1 },
-                },
-              },
-              tabs: {
-                captureVisibleTab: { minArgs: 0, maxArgs: 2 },
-                create: { minArgs: 1, maxArgs: 1 },
-                detectLanguage: { minArgs: 0, maxArgs: 1 },
-                discard: { minArgs: 0, maxArgs: 1 },
-                duplicate: { minArgs: 1, maxArgs: 1 },
-                executeScript: { minArgs: 1, maxArgs: 2 },
-                get: { minArgs: 1, maxArgs: 1 },
-                getCurrent: { minArgs: 0, maxArgs: 0 },
-                getZoom: { minArgs: 0, maxArgs: 1 },
-                getZoomSettings: { minArgs: 0, maxArgs: 1 },
-                goBack: { minArgs: 0, maxArgs: 1 },
-                goForward: { minArgs: 0, maxArgs: 1 },
-                highlight: { minArgs: 1, maxArgs: 1 },
-                insertCSS: { minArgs: 1, maxArgs: 2 },
-                move: { minArgs: 2, maxArgs: 2 },
-                query: { minArgs: 1, maxArgs: 1 },
-                reload: { minArgs: 0, maxArgs: 2 },
-                remove: { minArgs: 1, maxArgs: 1 },
-                removeCSS: { minArgs: 1, maxArgs: 2 },
-                sendMessage: { minArgs: 2, maxArgs: 3 },
-                setZoom: { minArgs: 1, maxArgs: 2 },
-                setZoomSettings: { minArgs: 1, maxArgs: 2 },
-                update: { minArgs: 1, maxArgs: 2 },
-              },
-              topSites: { get: { minArgs: 0, maxArgs: 0 } },
-              webNavigation: {
-                getAllFrames: { minArgs: 1, maxArgs: 1 },
-                getFrame: { minArgs: 1, maxArgs: 1 },
-              },
-              webRequest: {
-                handlerBehaviorChanged: { minArgs: 0, maxArgs: 0 },
-              },
-              windows: {
-                create: { minArgs: 0, maxArgs: 1 },
-                get: { minArgs: 1, maxArgs: 2 },
-                getAll: { minArgs: 0, maxArgs: 1 },
-                getCurrent: { minArgs: 0, maxArgs: 1 },
-                getLastFocused: { minArgs: 0, maxArgs: 1 },
-                remove: { minArgs: 1, maxArgs: 1 },
-                update: { minArgs: 2, maxArgs: 2 },
-              },
-            };
-            if (Object.keys(o).length === 0)
-              throw new Error(
-                "api-metadata.json has not been included in browser-polyfill",
-              );
-            class i extends WeakMap {
-              constructor(_, v = void 0) {
-                (super(v), (this.createItem = _));
-              }
-              get(_) {
-                return (
-                  this.has(_) || this.set(_, this.createItem(_)),
-                  super.get(_)
-                );
-              }
-            }
-            let f = (y) =>
-                y && typeof y == "object" && typeof y.then == "function",
-              p =
-                (y, _) =>
-                (...v) => {
-                  s.runtime.lastError
-                    ? y.reject(new Error(s.runtime.lastError.message))
-                    : _.singleCallbackArg ||
-                        (v.length <= 1 && _.singleCallbackArg !== !1)
-                      ? y.resolve(v[0])
-                      : y.resolve(v);
-                },
-              l = (y) => (y == 1 ? "argument" : "arguments"),
-              t = (y, _) =>
-                function (x, ...S) {
-                  if (S.length < _.minArgs)
-                    throw new Error(
-                      `Expected at least ${_.minArgs} ${l(_.minArgs)} for ${y}(), got ${S.length}`,
-                    );
-                  if (S.length > _.maxArgs)
-                    throw new Error(
-                      `Expected at most ${_.maxArgs} ${l(_.maxArgs)} for ${y}(), got ${S.length}`,
-                    );
-                  return new Promise((O, k) => {
-                    if (_.fallbackToNoCallback)
-                      try {
-                        x[y](...S, p({ resolve: O, reject: k }, _));
-                      } catch (h) {
-                        (console.warn(
-                          `${y} API method doesn't seem to support the callback parameter, falling back to call it without a callback: `,
-                          h,
-                        ),
-                          x[y](...S),
-                          (_.fallbackToNoCallback = !1),
-                          (_.noCallback = !0),
-                          O());
-                      }
-                    else
-                      _.noCallback
-                        ? (x[y](...S), O())
-                        : x[y](...S, p({ resolve: O, reject: k }, _));
-                  });
-                },
-              a = (y, _, v) =>
-                new Proxy(_, {
-                  apply(x, S, O) {
-                    return v.call(S, y, ...O);
-                  },
-                }),
-              u = Function.call.bind(Object.prototype.hasOwnProperty),
-              m = (y, _ = {}, v = {}) => {
-                let x = Object.create(null),
-                  S = {
-                    has(k, h) {
-                      return h in y || h in x;
-                    },
-                    get(k, h, R) {
-                      if (h in x) return x[h];
-                      if (!(h in y)) return;
-                      let E = y[h];
-                      if (typeof E == "function")
-                        if (typeof _[h] == "function") E = a(y, y[h], _[h]);
-                        else if (u(v, h)) {
-                          let z = t(h, v[h]);
-                          E = a(y, y[h], z);
-                        } else E = E.bind(y);
-                      else if (
-                        typeof E == "object" &&
-                        E !== null &&
-                        (u(_, h) || u(v, h))
-                      )
-                        E = m(E, _[h], v[h]);
-                      else if (u(v, "*")) E = m(E, _[h], v["*"]);
-                      else
-                        return (
-                          Object.defineProperty(x, h, {
-                            configurable: !0,
-                            enumerable: !0,
-                            get() {
-                              return y[h];
-                            },
-                            set(z) {
-                              y[h] = z;
-                            },
-                          }),
-                          E
-                        );
-                      return ((x[h] = E), E);
-                    },
-                    set(k, h, R, E) {
-                      return (h in x ? (x[h] = R) : (y[h] = R), !0);
-                    },
-                    defineProperty(k, h, R) {
-                      return Reflect.defineProperty(x, h, R);
-                    },
-                    deleteProperty(k, h) {
-                      return Reflect.deleteProperty(x, h);
-                    },
-                  },
-                  O = Object.create(y);
-                return new Proxy(O, S);
-              },
-              d = (y) => ({
-                addListener(_, v, ...x) {
-                  _.addListener(y.get(v), ...x);
-                },
-                hasListener(_, v) {
-                  return _.hasListener(y.get(v));
-                },
-                removeListener(_, v) {
-                  _.removeListener(y.get(v));
-                },
-              }),
-              g = new i((y) =>
-                typeof y != "function"
-                  ? y
-                  : function (v) {
-                      let x = m(
-                        v,
-                        {},
-                        { getContent: { minArgs: 0, maxArgs: 0 } },
-                      );
-                      y(x);
-                    },
-              ),
-              B = new i((y) =>
-                typeof y != "function"
-                  ? y
-                  : function (v, x, S) {
-                      let O = !1,
-                        k,
-                        h = new Promise((U) => {
-                          k = function (P) {
-                            ((O = !0), U(P));
-                          };
-                        }),
-                        R;
-                      try {
-                        R = y(v, x, k);
-                      } catch (U) {
-                        R = Promise.reject(U);
-                      }
-                      let E = R !== !0 && f(R);
-                      if (R !== !0 && !E && !O) return !1;
-                      let z = (U) => {
-                        U.then(
-                          (P) => {
-                            S(P);
-                          },
-                          (P) => {
-                            let Y;
-                            (P &&
-                            (P instanceof Error || typeof P.message == "string")
-                              ? (Y = P.message)
-                              : (Y = "An unexpected error occurred"),
-                              S({
-                                __mozWebExtensionPolyfillReject__: !0,
-                                message: Y,
-                              }));
-                          },
-                        ).catch((P) => {
-                          console.error(
-                            "Failed to send onMessage rejected reply",
-                            P,
-                          );
-                        });
-                      };
-                      return (z(E ? R : h), !0);
-                    },
-              ),
-              c = ({ reject: y, resolve: _ }, v) => {
-                s.runtime.lastError
-                  ? s.runtime.lastError.message === r
-                    ? _()
-                    : y(new Error(s.runtime.lastError.message))
-                  : v && v.__mozWebExtensionPolyfillReject__
-                    ? y(new Error(v.message))
-                    : _(v);
-              },
-              w = (y, _, v, ...x) => {
-                if (x.length < _.minArgs)
-                  throw new Error(
-                    `Expected at least ${_.minArgs} ${l(_.minArgs)} for ${y}(), got ${x.length}`,
-                  );
-                if (x.length > _.maxArgs)
-                  throw new Error(
-                    `Expected at most ${_.maxArgs} ${l(_.maxArgs)} for ${y}(), got ${x.length}`,
-                  );
-                return new Promise((S, O) => {
-                  let k = c.bind(null, { resolve: S, reject: O });
-                  (x.push(k), v.sendMessage(...x));
-                });
-              },
-              T = {
-                devtools: { network: { onRequestFinished: d(g) } },
-                runtime: {
-                  onMessage: d(B),
-                  onMessageExternal: d(B),
-                  sendMessage: w.bind(null, "sendMessage", {
-                    minArgs: 1,
-                    maxArgs: 3,
-                  }),
-                },
-                tabs: {
-                  sendMessage: w.bind(null, "sendMessage", {
-                    minArgs: 2,
-                    maxArgs: 3,
-                  }),
-                },
-              },
-              F = {
-                clear: { minArgs: 1, maxArgs: 1 },
-                get: { minArgs: 1, maxArgs: 1 },
-                set: { minArgs: 1, maxArgs: 1 },
-              };
-            return (
-              (o.privacy = {
-                network: { "*": F },
-                services: { "*": F },
-                websites: { "*": F },
-              }),
-              m(s, T, o)
-            );
-          };
-        e.exports = n(chrome);
-      }
-    },
-  );
-});
-var rr = new BroadcastChannel("worker_service");
-var L = {
-  FromInjectedToService: 0,
-  FromContentToService: 1,
-  FromServiceToWorker: 2,
-  FromWorkerToService: 3,
-  FromUntrustedInjectedToTrusted: 4,
-  FromTrustedInjectedToUntrusted: 5,
-  FromServiceToContent: 6,
-  FromServiceToInjected: 7,
-  FromServiceToService: 8,
-};
-function W(e, r = 0) {
-  let n = 3735928559 ^ r,
-    s = 1103547991 ^ r;
-  for (let o = 0, i; o < e.length; o++)
-    ((i = e.charCodeAt(o)),
-      (n = Math.imul(n ^ i, 2654435761)),
-      (s = Math.imul(s ^ i, 1597334677)));
-  return (
-    (n = Math.imul(n ^ (n >>> 16), 2246822507)),
-    (n ^= Math.imul(s ^ (s >>> 13), 3266489909)),
-    (s = Math.imul(s ^ (s >>> 16), 2246822507)),
-    (s ^= Math.imul(n ^ (n >>> 13), 3266489909)),
-    4294967296 * (2097151 & s) + (n >>> 0)
-  );
-}
-var J = new BroadcastChannel(`injected-${W(window.location.href)}`);
-function Q(e) {
-  let r = L.FromTrustedInjectedToUntrusted;
-  J.postMessage({ msg: e, channel: r });
-}
-function X(e) {
-  let r = (n) => {
-    let s = n.data.msg;
-    n.data.channel == L.FromUntrustedInjectedToTrusted && e(s);
+(() => {
+  var __create = Object.create;
+  var __defProp = Object.defineProperty;
+  var __getOwnPropDesc = Object.getOwnPropertyDescriptor;
+  var __getOwnPropNames = Object.getOwnPropertyNames;
+  var __getProtoOf = Object.getPrototypeOf;
+  var __hasOwnProp = Object.prototype.hasOwnProperty;
+  var __commonJS = (cb, mod) => function __require() {
+    return mod || (0, cb[__getOwnPropNames(cb)[0]])((mod = { exports: {} }).exports, mod), mod.exports;
   };
-  return (
-    J.addEventListener("message", r),
-    () => {
-      J.removeEventListener("message", r);
+  var __copyProps = (to, from, except, desc) => {
+    if (from && typeof from === "object" || typeof from === "function") {
+      for (let key of __getOwnPropNames(from))
+        if (!__hasOwnProp.call(to, key) && key !== except)
+          __defProp(to, key, { get: () => from[key], enumerable: !(desc = __getOwnPropDesc(from, key)) || desc.enumerable });
     }
-  );
-}
-var oe = be(ie(), 1);
-async function Se(e, r) {
-  await oe.default.runtime.sendMessage({ msg: e, channel: r });
-}
-function ae(e) {
-  let r = L.FromInjectedToService;
-  Se(e, r);
-}
-function D(e) {
-  var r = String(e);
-  if (r === "[object Object]")
-    try {
-      r = JSON.stringify(e);
-    } catch {}
-  return r;
-}
-var Ee = (function () {
-    function e() {}
-    return (
-      (e.prototype.isSome = function () {
-        return !1;
-      }),
-      (e.prototype.isNone = function () {
-        return !0;
-      }),
-      (e.prototype[Symbol.iterator] = function () {
-        return {
-          next: function () {
-            return { done: !0, value: void 0 };
-          },
-        };
-      }),
-      (e.prototype.unwrapOr = function (r) {
-        return r;
-      }),
-      (e.prototype.expect = function (r) {
-        throw new Error("".concat(r));
-      }),
-      (e.prototype.unwrap = function () {
-        throw new Error("Tried to unwrap None");
-      }),
-      (e.prototype.map = function (r) {
-        return this;
-      }),
-      (e.prototype.mapOr = function (r, n) {
-        return r;
-      }),
-      (e.prototype.mapOrElse = function (r, n) {
-        return r();
-      }),
-      (e.prototype.or = function (r) {
-        return r;
-      }),
-      (e.prototype.orElse = function (r) {
-        return r();
-      }),
-      (e.prototype.andThen = function (r) {
-        return this;
-      }),
-      (e.prototype.toResult = function (r) {
-        return M(r);
-      }),
-      (e.prototype.toString = function () {
-        return "None";
-      }),
-      (e.prototype.toAsyncOption = function () {
-        return new N(A);
-      }),
-      e
-    );
-  })(),
-  A = new Ee();
-Object.freeze(A);
-var Me = (function () {
-    function e(r) {
-      if (!(this instanceof e)) return new e(r);
-      this.value = r;
-    }
-    return (
-      (e.prototype.isSome = function () {
-        return !0;
-      }),
-      (e.prototype.isNone = function () {
-        return !1;
-      }),
-      (e.prototype[Symbol.iterator] = function () {
-        var r = Object(this.value);
-        return Symbol.iterator in r
-          ? r[Symbol.iterator]()
-          : {
-              next: function () {
-                return { done: !0, value: void 0 };
-              },
-            };
-      }),
-      (e.prototype.unwrapOr = function (r) {
-        return this.value;
-      }),
-      (e.prototype.expect = function (r) {
-        return this.value;
-      }),
-      (e.prototype.unwrap = function () {
-        return this.value;
-      }),
-      (e.prototype.map = function (r) {
-        return b(r(this.value));
-      }),
-      (e.prototype.mapOr = function (r, n) {
-        return n(this.value);
-      }),
-      (e.prototype.mapOrElse = function (r, n) {
-        return n(this.value);
-      }),
-      (e.prototype.or = function (r) {
-        return this;
-      }),
-      (e.prototype.orElse = function (r) {
-        return this;
-      }),
-      (e.prototype.andThen = function (r) {
-        return r(this.value);
-      }),
-      (e.prototype.toResult = function (r) {
-        return I(this.value);
-      }),
-      (e.prototype.toAsyncOption = function () {
-        return new N(this);
-      }),
-      (e.prototype.safeUnwrap = function () {
-        return this.value;
-      }),
-      (e.prototype.toString = function () {
-        return "Some(".concat(D(this.value), ")");
-      }),
-      (e.EMPTY = new e(void 0)),
-      e
-    );
-  })(),
-  b = Me,
-  $;
-(function (e) {
-  function r() {
-    for (var o = [], i = 0; i < arguments.length; i++) o[i] = arguments[i];
-    for (var f = [], p = 0, l = o; p < l.length; p++) {
-      var t = l[p];
-      if (t.isSome()) f.push(t.value);
-      else return t;
-    }
-    return b(f);
-  }
-  e.all = r;
-  function n() {
-    for (var o = [], i = 0; i < arguments.length; i++) o[i] = arguments[i];
-    for (var f = 0, p = o; f < p.length; f++) {
-      var l = p[f];
-      if (l.isSome()) return l;
-    }
-    return A;
-  }
-  e.any = n;
-  function s(o) {
-    return o instanceof b || o === A;
-  }
-  e.isOption = s;
-})($ || ($ = {}));
-var V = function (e, r, n) {
-    if (n || arguments.length === 2)
-      for (var s = 0, o = r.length, i; s < o; s++)
-        (i || !(s in r)) &&
-          (i || (i = Array.prototype.slice.call(r, 0, s)), (i[s] = r[s]));
-    return e.concat(i || Array.prototype.slice.call(r));
-  },
-  Ie = (function () {
-    function e(r) {
-      if (!(this instanceof e)) return new e(r);
-      this.error = r;
-      var n = new Error().stack
-        .split(
-          `
-`,
-        )
-        .slice(2);
-      (n && n.length > 0 && n[0].includes("ErrImpl") && n.shift(),
-        (this._stack = n.join(`
-`)));
-    }
-    return (
-      (e.prototype.isOk = function () {
-        return !1;
-      }),
-      (e.prototype.isErr = function () {
-        return !0;
-      }),
-      (e.prototype[Symbol.iterator] = function () {
-        return {
-          next: function () {
-            return { done: !0, value: void 0 };
-          },
-        };
-      }),
-      (e.prototype.else = function (r) {
-        return r;
-      }),
-      (e.prototype.unwrapOr = function (r) {
-        return r;
-      }),
-      (e.prototype.expect = function (r) {
-        throw new Error(
-          ""
-            .concat(r, " - Error: ")
-            .concat(
-              D(this.error),
-              `
-`,
-            )
-            .concat(this._stack),
-          { cause: this.error },
-        );
-      }),
-      (e.prototype.expectErr = function (r) {
-        return this.error;
-      }),
-      (e.prototype.unwrap = function () {
-        throw new Error(
-          "Tried to unwrap Error: "
-            .concat(
-              D(this.error),
-              `
-`,
-            )
-            .concat(this._stack),
-          { cause: this.error },
-        );
-      }),
-      (e.prototype.unwrapErr = function () {
-        return this.error;
-      }),
-      (e.prototype.map = function (r) {
-        return this;
-      }),
-      (e.prototype.andThen = function (r) {
-        return this;
-      }),
-      (e.prototype.mapErr = function (r) {
-        return new M(r(this.error));
-      }),
-      (e.prototype.mapOr = function (r, n) {
-        return r;
-      }),
-      (e.prototype.mapOrElse = function (r, n) {
-        return r(this.error);
-      }),
-      (e.prototype.or = function (r) {
-        return r;
-      }),
-      (e.prototype.orElse = function (r) {
-        return r(this.error);
-      }),
-      (e.prototype.toOption = function () {
-        return A;
-      }),
-      (e.prototype.toString = function () {
-        return "Err(".concat(D(this.error), ")");
-      }),
-      Object.defineProperty(e.prototype, "stack", {
-        get: function () {
-          return ""
-            .concat(
-              this,
-              `
-`,
-            )
-            .concat(this._stack);
-        },
-        enumerable: !1,
-        configurable: !0,
-      }),
-      (e.prototype.toAsyncResult = function () {
-        return new q(this);
-      }),
-      (e.EMPTY = new e(void 0)),
-      e
-    );
-  })();
-var M = Ie,
-  Oe = (function () {
-    function e(r) {
-      if (!(this instanceof e)) return new e(r);
-      this.value = r;
-    }
-    return (
-      (e.prototype.isOk = function () {
-        return !0;
-      }),
-      (e.prototype.isErr = function () {
-        return !1;
-      }),
-      (e.prototype[Symbol.iterator] = function () {
-        var r = Object(this.value);
-        return Symbol.iterator in r
-          ? r[Symbol.iterator]()
-          : {
-              next: function () {
-                return { done: !0, value: void 0 };
-              },
-            };
-      }),
-      (e.prototype.else = function (r) {
-        return this.value;
-      }),
-      (e.prototype.unwrapOr = function (r) {
-        return this.value;
-      }),
-      (e.prototype.expect = function (r) {
-        return this.value;
-      }),
-      (e.prototype.expectErr = function (r) {
-        throw new Error(r);
-      }),
-      (e.prototype.unwrap = function () {
-        return this.value;
-      }),
-      (e.prototype.unwrapErr = function () {
-        throw new Error("Tried to unwrap Ok: ".concat(D(this.value)), {
-          cause: this.value,
-        });
-      }),
-      (e.prototype.map = function (r) {
-        return new I(r(this.value));
-      }),
-      (e.prototype.andThen = function (r) {
-        return r(this.value);
-      }),
-      (e.prototype.mapErr = function (r) {
-        return this;
-      }),
-      (e.prototype.mapOr = function (r, n) {
-        return n(this.value);
-      }),
-      (e.prototype.mapOrElse = function (r, n) {
-        return n(this.value);
-      }),
-      (e.prototype.or = function (r) {
-        return this;
-      }),
-      (e.prototype.orElse = function (r) {
-        return this;
-      }),
-      (e.prototype.toOption = function () {
-        return b(this.value);
-      }),
-      (e.prototype.safeUnwrap = function () {
-        return this.value;
-      }),
-      (e.prototype.toString = function () {
-        return "Ok(".concat(D(this.value), ")");
-      }),
-      (e.prototype.toAsyncResult = function () {
-        return new q(this);
-      }),
-      (e.EMPTY = new e(void 0)),
-      e
-    );
-  })();
-var I = Oe,
-  H;
-(function (e) {
-  function r(p) {
-    for (var l = [], t = 1; t < arguments.length; t++) l[t - 1] = arguments[t];
-    for (
-      var a = p === void 0 ? [] : Array.isArray(p) ? p : V([p], l, !0),
-        u = [],
-        m = 0,
-        d = a;
-      m < d.length;
-      m++
-    ) {
-      var g = d[m];
-      if (g.isOk()) u.push(g.value);
-      else return g;
-    }
-    return new I(u);
-  }
-  e.all = r;
-  function n(p) {
-    for (var l = [], t = 1; t < arguments.length; t++) l[t - 1] = arguments[t];
-    for (
-      var a = p === void 0 ? [] : Array.isArray(p) ? p : V([p], l, !0),
-        u = [],
-        m = 0,
-        d = a;
-      m < d.length;
-      m++
-    ) {
-      var g = d[m];
-      if (g.isOk()) return g;
-      u.push(g.error);
-    }
-    return new M(u);
-  }
-  e.any = n;
-  function s(p) {
-    try {
-      return new I(p());
-    } catch (l) {
-      return new M(l);
-    }
-  }
-  e.wrap = s;
-  function o(p) {
-    try {
-      return p()
-        .then(function (l) {
-          return new I(l);
-        })
-        .catch(function (l) {
-          return new M(l);
-        });
-    } catch (l) {
-      return Promise.resolve(new M(l));
-    }
-  }
-  e.wrapAsync = o;
-  function i(p) {
-    return p.reduce(
-      function (l, t) {
-        var a = l[0],
-          u = l[1];
-        return t.isOk()
-          ? [V(V([], a, !0), [t.value], !1), u]
-          : [a, V(V([], u, !0), [t.error], !1)];
-      },
-      [[], []],
-    );
-  }
-  e.partition = i;
-  function f(p) {
-    return p instanceof M || p instanceof I;
-  }
-  e.isResult = f;
-})(H || (H = {}));
-var j = function (e, r, n, s) {
-    function o(i) {
-      return i instanceof n
-        ? i
-        : new n(function (f) {
-            f(i);
+    return to;
+  };
+  var __toESM = (mod, isNodeMode, target) => (target = mod != null ? __create(__getProtoOf(mod)) : {}, __copyProps(
+    // If the importer is in node compatibility mode or this is not an ESM
+    // file that has been converted to a CommonJS file using a Babel-
+    // compatible transform (i.e. "__esModule" has not been set), then set
+    // "default" to the CommonJS "module.exports" for node compatibility.
+    isNodeMode || !mod || !mod.__esModule ? __defProp(target, "default", { value: mod, enumerable: true }) : target,
+    mod
+  ));
+
+  // node_modules/blueimp-md5/js/md5.js
+  var require_md5 = __commonJS({
+    "node_modules/blueimp-md5/js/md5.js"(exports, module) {
+      (function($) {
+        "use strict";
+        function safeAdd(x, y) {
+          var lsw = (x & 65535) + (y & 65535);
+          var msw = (x >> 16) + (y >> 16) + (lsw >> 16);
+          return msw << 16 | lsw & 65535;
+        }
+        function bitRotateLeft(num, cnt) {
+          return num << cnt | num >>> 32 - cnt;
+        }
+        function md5cmn(q, a, b, x, s, t) {
+          return safeAdd(bitRotateLeft(safeAdd(safeAdd(a, q), safeAdd(x, t)), s), b);
+        }
+        function md5ff(a, b, c, d, x, s, t) {
+          return md5cmn(b & c | ~b & d, a, b, x, s, t);
+        }
+        function md5gg(a, b, c, d, x, s, t) {
+          return md5cmn(b & d | c & ~d, a, b, x, s, t);
+        }
+        function md5hh(a, b, c, d, x, s, t) {
+          return md5cmn(b ^ c ^ d, a, b, x, s, t);
+        }
+        function md5ii(a, b, c, d, x, s, t) {
+          return md5cmn(c ^ (b | ~d), a, b, x, s, t);
+        }
+        function binlMD5(x, len) {
+          x[len >> 5] |= 128 << len % 32;
+          x[(len + 64 >>> 9 << 4) + 14] = len;
+          var i;
+          var olda;
+          var oldb;
+          var oldc;
+          var oldd;
+          var a = 1732584193;
+          var b = -271733879;
+          var c = -1732584194;
+          var d = 271733878;
+          for (i = 0; i < x.length; i += 16) {
+            olda = a;
+            oldb = b;
+            oldc = c;
+            oldd = d;
+            a = md5ff(a, b, c, d, x[i], 7, -680876936);
+            d = md5ff(d, a, b, c, x[i + 1], 12, -389564586);
+            c = md5ff(c, d, a, b, x[i + 2], 17, 606105819);
+            b = md5ff(b, c, d, a, x[i + 3], 22, -1044525330);
+            a = md5ff(a, b, c, d, x[i + 4], 7, -176418897);
+            d = md5ff(d, a, b, c, x[i + 5], 12, 1200080426);
+            c = md5ff(c, d, a, b, x[i + 6], 17, -1473231341);
+            b = md5ff(b, c, d, a, x[i + 7], 22, -45705983);
+            a = md5ff(a, b, c, d, x[i + 8], 7, 1770035416);
+            d = md5ff(d, a, b, c, x[i + 9], 12, -1958414417);
+            c = md5ff(c, d, a, b, x[i + 10], 17, -42063);
+            b = md5ff(b, c, d, a, x[i + 11], 22, -1990404162);
+            a = md5ff(a, b, c, d, x[i + 12], 7, 1804603682);
+            d = md5ff(d, a, b, c, x[i + 13], 12, -40341101);
+            c = md5ff(c, d, a, b, x[i + 14], 17, -1502002290);
+            b = md5ff(b, c, d, a, x[i + 15], 22, 1236535329);
+            a = md5gg(a, b, c, d, x[i + 1], 5, -165796510);
+            d = md5gg(d, a, b, c, x[i + 6], 9, -1069501632);
+            c = md5gg(c, d, a, b, x[i + 11], 14, 643717713);
+            b = md5gg(b, c, d, a, x[i], 20, -373897302);
+            a = md5gg(a, b, c, d, x[i + 5], 5, -701558691);
+            d = md5gg(d, a, b, c, x[i + 10], 9, 38016083);
+            c = md5gg(c, d, a, b, x[i + 15], 14, -660478335);
+            b = md5gg(b, c, d, a, x[i + 4], 20, -405537848);
+            a = md5gg(a, b, c, d, x[i + 9], 5, 568446438);
+            d = md5gg(d, a, b, c, x[i + 14], 9, -1019803690);
+            c = md5gg(c, d, a, b, x[i + 3], 14, -187363961);
+            b = md5gg(b, c, d, a, x[i + 8], 20, 1163531501);
+            a = md5gg(a, b, c, d, x[i + 13], 5, -1444681467);
+            d = md5gg(d, a, b, c, x[i + 2], 9, -51403784);
+            c = md5gg(c, d, a, b, x[i + 7], 14, 1735328473);
+            b = md5gg(b, c, d, a, x[i + 12], 20, -1926607734);
+            a = md5hh(a, b, c, d, x[i + 5], 4, -378558);
+            d = md5hh(d, a, b, c, x[i + 8], 11, -2022574463);
+            c = md5hh(c, d, a, b, x[i + 11], 16, 1839030562);
+            b = md5hh(b, c, d, a, x[i + 14], 23, -35309556);
+            a = md5hh(a, b, c, d, x[i + 1], 4, -1530992060);
+            d = md5hh(d, a, b, c, x[i + 4], 11, 1272893353);
+            c = md5hh(c, d, a, b, x[i + 7], 16, -155497632);
+            b = md5hh(b, c, d, a, x[i + 10], 23, -1094730640);
+            a = md5hh(a, b, c, d, x[i + 13], 4, 681279174);
+            d = md5hh(d, a, b, c, x[i], 11, -358537222);
+            c = md5hh(c, d, a, b, x[i + 3], 16, -722521979);
+            b = md5hh(b, c, d, a, x[i + 6], 23, 76029189);
+            a = md5hh(a, b, c, d, x[i + 9], 4, -640364487);
+            d = md5hh(d, a, b, c, x[i + 12], 11, -421815835);
+            c = md5hh(c, d, a, b, x[i + 15], 16, 530742520);
+            b = md5hh(b, c, d, a, x[i + 2], 23, -995338651);
+            a = md5ii(a, b, c, d, x[i], 6, -198630844);
+            d = md5ii(d, a, b, c, x[i + 7], 10, 1126891415);
+            c = md5ii(c, d, a, b, x[i + 14], 15, -1416354905);
+            b = md5ii(b, c, d, a, x[i + 5], 21, -57434055);
+            a = md5ii(a, b, c, d, x[i + 12], 6, 1700485571);
+            d = md5ii(d, a, b, c, x[i + 3], 10, -1894986606);
+            c = md5ii(c, d, a, b, x[i + 10], 15, -1051523);
+            b = md5ii(b, c, d, a, x[i + 1], 21, -2054922799);
+            a = md5ii(a, b, c, d, x[i + 8], 6, 1873313359);
+            d = md5ii(d, a, b, c, x[i + 15], 10, -30611744);
+            c = md5ii(c, d, a, b, x[i + 6], 15, -1560198380);
+            b = md5ii(b, c, d, a, x[i + 13], 21, 1309151649);
+            a = md5ii(a, b, c, d, x[i + 4], 6, -145523070);
+            d = md5ii(d, a, b, c, x[i + 11], 10, -1120210379);
+            c = md5ii(c, d, a, b, x[i + 2], 15, 718787259);
+            b = md5ii(b, c, d, a, x[i + 9], 21, -343485551);
+            a = safeAdd(a, olda);
+            b = safeAdd(b, oldb);
+            c = safeAdd(c, oldc);
+            d = safeAdd(d, oldd);
+          }
+          return [a, b, c, d];
+        }
+        function binl2rstr(input) {
+          var i;
+          var output = "";
+          var length32 = input.length * 32;
+          for (i = 0; i < length32; i += 8) {
+            output += String.fromCharCode(input[i >> 5] >>> i % 32 & 255);
+          }
+          return output;
+        }
+        function rstr2binl(input) {
+          var i;
+          var output = [];
+          output[(input.length >> 2) - 1] = void 0;
+          for (i = 0; i < output.length; i += 1) {
+            output[i] = 0;
+          }
+          var length8 = input.length * 8;
+          for (i = 0; i < length8; i += 8) {
+            output[i >> 5] |= (input.charCodeAt(i / 8) & 255) << i % 32;
+          }
+          return output;
+        }
+        function rstrMD5(s) {
+          return binl2rstr(binlMD5(rstr2binl(s), s.length * 8));
+        }
+        function rstrHMACMD5(key, data) {
+          var i;
+          var bkey = rstr2binl(key);
+          var ipad = [];
+          var opad = [];
+          var hash;
+          ipad[15] = opad[15] = void 0;
+          if (bkey.length > 16) {
+            bkey = binlMD5(bkey, key.length * 8);
+          }
+          for (i = 0; i < 16; i += 1) {
+            ipad[i] = bkey[i] ^ 909522486;
+            opad[i] = bkey[i] ^ 1549556828;
+          }
+          hash = binlMD5(ipad.concat(rstr2binl(data)), 512 + data.length * 8);
+          return binl2rstr(binlMD5(opad.concat(hash), 512 + 128));
+        }
+        function rstr2hex(input) {
+          var hexTab = "0123456789abcdef";
+          var output = "";
+          var x;
+          var i;
+          for (i = 0; i < input.length; i += 1) {
+            x = input.charCodeAt(i);
+            output += hexTab.charAt(x >>> 4 & 15) + hexTab.charAt(x & 15);
+          }
+          return output;
+        }
+        function str2rstrUTF8(input) {
+          return unescape(encodeURIComponent(input));
+        }
+        function rawMD5(s) {
+          return rstrMD5(str2rstrUTF8(s));
+        }
+        function hexMD5(s) {
+          return rstr2hex(rawMD5(s));
+        }
+        function rawHMACMD5(k, d) {
+          return rstrHMACMD5(str2rstrUTF8(k), str2rstrUTF8(d));
+        }
+        function hexHMACMD5(k, d) {
+          return rstr2hex(rawHMACMD5(k, d));
+        }
+        function md52(string, key, raw) {
+          if (!key) {
+            if (!raw) {
+              return hexMD5(string);
+            }
+            return rawMD5(string);
+          }
+          if (!raw) {
+            return hexHMACMD5(key, string);
+          }
+          return rawHMACMD5(key, string);
+        }
+        if (typeof define === "function" && define.amd) {
+          define(function() {
+            return md52;
           });
+        } else if (typeof module === "object" && module.exports) {
+          module.exports = md52;
+        } else {
+          $.md5 = md52;
+        }
+      })(exports);
     }
-    return new (n || (n = Promise))(function (i, f) {
-      function p(a) {
-        try {
-          t(s.next(a));
-        } catch (u) {
-          f(u);
-        }
-      }
-      function l(a) {
-        try {
-          t(s.throw(a));
-        } catch (u) {
-          f(u);
-        }
-      }
-      function t(a) {
-        a.done ? i(a.value) : o(a.value).then(p, l);
-      }
-      t((s = s.apply(e, r || [])).next());
-    });
-  },
-  G = function (e, r) {
-    var n = {
-        label: 0,
-        sent: function () {
-          if (i[0] & 1) throw i[1];
-          return i[1];
-        },
-        trys: [],
-        ops: [],
-      },
-      s,
-      o,
-      i,
-      f;
-    return (
-      (f = { next: p(0), throw: p(1), return: p(2) }),
-      typeof Symbol == "function" &&
-        (f[Symbol.iterator] = function () {
-          return this;
-        }),
-      f
-    );
-    function p(t) {
-      return function (a) {
-        return l([t, a]);
+  });
+
+  // src/injected/bilibili/content.js
+  var import_blueimp_md5 = __toESM(require_md5(), 1);
+
+  // src/shared/channels.js
+  var MessageChannel = Object.freeze({
+    FROM_INJECTED_TO_SERVICE: 0,
+    FROM_CONTENT_TO_SERVICE: 1,
+    FROM_SERVICE_TO_WORKER: 2,
+    FROM_WORKER_TO_SERVICE: 3,
+    FROM_PAGE_TO_CONTENT: 4,
+    FROM_CONTENT_TO_PAGE: 5,
+    FROM_SERVICE_TO_CONTENT: 6,
+    FROM_SERVICE_TO_INJECTED: 7,
+    FROM_SERVICE_TO_SERVICE: 8
+  });
+
+  // src/shared/option.js
+  var OPTION_MARKER = Symbol("OpenMediaDownloaderOption");
+  var NONE = Object.freeze({
+    [OPTION_MARKER]: true,
+    kind: "none"
+  });
+  function some(value) {
+    return {
+      [OPTION_MARKER]: true,
+      kind: "some",
+      value
+    };
+  }
+  function isOption(value) {
+    return Boolean(value?.[OPTION_MARKER]);
+  }
+
+  // src/shared/serialize.js
+  function serialize(value) {
+    if (typeof value === "string" || typeof value === "number" || typeof value === "boolean" || typeof value === "undefined" || value === null) {
+      return { __serde_tag: "primitive", __serde_val: value };
+    }
+    if (Array.isArray(value)) {
+      return { __serde_tag: "array", __serde_val: value.map(serialize) };
+    }
+    if (value instanceof URL) {
+      return { __serde_tag: "url", __serde_val: value.href };
+    }
+    if (value instanceof Headers) {
+      return {
+        __serde_tag: "headers",
+        __serde_val: [...value.entries()]
       };
     }
-    function l(t) {
-      if (s) throw new TypeError("Generator is already executing.");
-      for (; f && ((f = 0), t[0] && (n = 0)), n; )
-        try {
-          if (
-            ((s = 1),
-            o &&
-              (i =
-                t[0] & 2
-                  ? o.return
-                  : t[0]
-                    ? o.throw || ((i = o.return) && i.call(o), 0)
-                    : o.next) &&
-              !(i = i.call(o, t[1])).done)
-          )
-            return i;
-          switch (((o = 0), i && (t = [t[0] & 2, i.value]), t[0])) {
-            case 0:
-            case 1:
-              i = t;
-              break;
-            case 4:
-              return (n.label++, { value: t[1], done: !1 });
-            case 5:
-              (n.label++, (o = t[1]), (t = [0]));
-              continue;
-            case 7:
-              ((t = n.ops.pop()), n.trys.pop());
-              continue;
-            default:
-              if (
-                ((i = n.trys),
-                !(i = i.length > 0 && i[i.length - 1]) &&
-                  (t[0] === 6 || t[0] === 2))
-              ) {
-                n = 0;
-                continue;
-              }
-              if (t[0] === 3 && (!i || (t[1] > i[0] && t[1] < i[3]))) {
-                n.label = t[1];
-                break;
-              }
-              if (t[0] === 6 && n.label < i[1]) {
-                ((n.label = i[1]), (i = t));
-                break;
-              }
-              if (i && n.label < i[2]) {
-                ((n.label = i[2]), n.ops.push(t));
-                break;
-              }
-              (i[2] && n.ops.pop(), n.trys.pop());
-              continue;
-          }
-          t = r.call(e, n);
-        } catch (a) {
-          ((t = [6, a]), (o = 0));
-        } finally {
-          s = i = 0;
-        }
-      if (t[0] & 5) throw t[1];
-      return { value: t[0] ? t[1] : void 0, done: !0 };
-    }
-  },
-  q = (function () {
-    function e(r) {
-      this.promise = Promise.resolve(r);
-    }
-    return (
-      (e.prototype.andThen = function (r) {
-        var n = this;
-        return this.thenInternal(function (s) {
-          return j(n, void 0, void 0, function () {
-            var o;
-            return G(this, function (i) {
-              return s.isErr()
-                ? [2, s]
-                : ((o = r(s.value)), [2, o instanceof e ? o.promise : o]);
-            });
-          });
-        });
-      }),
-      (e.prototype.map = function (r) {
-        var n = this;
-        return this.thenInternal(function (s) {
-          return j(n, void 0, void 0, function () {
-            var o;
-            return G(this, function (i) {
-              switch (i.label) {
-                case 0:
-                  return s.isErr() ? [2, s] : ((o = I), [4, r(s.value)]);
-                case 1:
-                  return [2, o.apply(void 0, [i.sent()])];
-              }
-            });
-          });
-        });
-      }),
-      (e.prototype.mapErr = function (r) {
-        var n = this;
-        return this.thenInternal(function (s) {
-          return j(n, void 0, void 0, function () {
-            var o;
-            return G(this, function (i) {
-              switch (i.label) {
-                case 0:
-                  return s.isOk() ? [2, s] : ((o = M), [4, r(s.error)]);
-                case 1:
-                  return [2, o.apply(void 0, [i.sent()])];
-              }
-            });
-          });
-        });
-      }),
-      (e.prototype.or = function (r) {
-        return this.orElse(function () {
-          return r;
-        });
-      }),
-      (e.prototype.orElse = function (r) {
-        var n = this;
-        return this.thenInternal(function (s) {
-          return j(n, void 0, void 0, function () {
-            var o;
-            return G(this, function (i) {
-              return s.isOk()
-                ? [2, s]
-                : ((o = r(s.error)), [2, o instanceof e ? o.promise : o]);
-            });
-          });
-        });
-      }),
-      (e.prototype.toOption = function () {
-        return new N(
-          this.promise.then(function (r) {
-            return r.toOption();
-          }),
-        );
-      }),
-      (e.prototype.thenInternal = function (r) {
-        return new e(this.promise.then(r));
-      }),
-      e
-    );
-  })();
-var ee = function (e, r, n, s) {
-    function o(i) {
-      return i instanceof n
-        ? i
-        : new n(function (f) {
-            f(i);
-          });
-    }
-    return new (n || (n = Promise))(function (i, f) {
-      function p(a) {
-        try {
-          t(s.next(a));
-        } catch (u) {
-          f(u);
-        }
-      }
-      function l(a) {
-        try {
-          t(s.throw(a));
-        } catch (u) {
-          f(u);
-        }
-      }
-      function t(a) {
-        a.done ? i(a.value) : o(a.value).then(p, l);
-      }
-      t((s = s.apply(e, r || [])).next());
-    });
-  },
-  re = function (e, r) {
-    var n = {
-        label: 0,
-        sent: function () {
-          if (i[0] & 1) throw i[1];
-          return i[1];
-        },
-        trys: [],
-        ops: [],
-      },
-      s,
-      o,
-      i,
-      f;
-    return (
-      (f = { next: p(0), throw: p(1), return: p(2) }),
-      typeof Symbol == "function" &&
-        (f[Symbol.iterator] = function () {
-          return this;
-        }),
-      f
-    );
-    function p(t) {
-      return function (a) {
-        return l([t, a]);
+    if (value instanceof Set) {
+      return {
+        __serde_tag: "set",
+        __serde_val: [...value].map(serialize)
       };
     }
-    function l(t) {
-      if (s) throw new TypeError("Generator is already executing.");
-      for (; f && ((f = 0), t[0] && (n = 0)), n; )
-        try {
-          if (
-            ((s = 1),
-            o &&
-              (i =
-                t[0] & 2
-                  ? o.return
-                  : t[0]
-                    ? o.throw || ((i = o.return) && i.call(o), 0)
-                    : o.next) &&
-              !(i = i.call(o, t[1])).done)
-          )
-            return i;
-          switch (((o = 0), i && (t = [t[0] & 2, i.value]), t[0])) {
-            case 0:
-            case 1:
-              i = t;
-              break;
-            case 4:
-              return (n.label++, { value: t[1], done: !1 });
-            case 5:
-              (n.label++, (o = t[1]), (t = [0]));
-              continue;
-            case 7:
-              ((t = n.ops.pop()), n.trys.pop());
-              continue;
-            default:
-              if (
-                ((i = n.trys),
-                !(i = i.length > 0 && i[i.length - 1]) &&
-                  (t[0] === 6 || t[0] === 2))
-              ) {
-                n = 0;
-                continue;
-              }
-              if (t[0] === 3 && (!i || (t[1] > i[0] && t[1] < i[3]))) {
-                n.label = t[1];
-                break;
-              }
-              if (t[0] === 6 && n.label < i[1]) {
-                ((n.label = i[1]), (i = t));
-                break;
-              }
-              if (i && n.label < i[2]) {
-                ((n.label = i[2]), n.ops.push(t));
-                break;
-              }
-              (i[2] && n.ops.pop(), n.trys.pop());
-              continue;
-          }
-          t = r.call(e, n);
-        } catch (a) {
-          ((t = [6, a]), (o = 0));
-        } finally {
-          s = i = 0;
-        }
-      if (t[0] & 5) throw t[1];
-      return { value: t[0] ? t[1] : void 0, done: !0 };
-    }
-  },
-  N = (function () {
-    function e(r) {
-      this.promise = Promise.resolve(r);
-    }
-    return (
-      (e.prototype.andThen = function (r) {
-        var n = this;
-        return this.thenInternal(function (s) {
-          return ee(n, void 0, void 0, function () {
-            var o;
-            return re(this, function (i) {
-              return s.isNone()
-                ? [2, s]
-                : ((o = r(s.value)), [2, o instanceof e ? o.promise : o]);
-            });
-          });
-        });
-      }),
-      (e.prototype.map = function (r) {
-        var n = this;
-        return this.thenInternal(function (s) {
-          return ee(n, void 0, void 0, function () {
-            var o;
-            return re(this, function (i) {
-              switch (i.label) {
-                case 0:
-                  return s.isNone() ? [2, s] : ((o = b), [4, r(s.value)]);
-                case 1:
-                  return [2, o.apply(void 0, [i.sent()])];
-              }
-            });
-          });
-        });
-      }),
-      (e.prototype.or = function (r) {
-        return this.orElse(function () {
-          return r;
-        });
-      }),
-      (e.prototype.orElse = function (r) {
-        var n = this;
-        return this.thenInternal(function (s) {
-          return ee(n, void 0, void 0, function () {
-            var o;
-            return re(this, function (i) {
-              return s.isSome()
-                ? [2, s]
-                : ((o = r()), [2, o instanceof e ? o.promise : o]);
-            });
-          });
-        });
-      }),
-      (e.prototype.toResult = function (r) {
-        return new q(
-          this.promise.then(function (n) {
-            return n.toResult(r);
-          }),
-        );
-      }),
-      (e.prototype.thenInternal = function (r) {
-        return new e(this.promise.then(r));
-      }),
-      e
-    );
-  })();
-function se(e) {
-  return e.length > 0;
-}
-function C(e) {
-  if (typeof e == "string") return { __serde_tag: "primitive", __serde_val: e };
-  if (typeof e == "number") return { __serde_tag: "primitive", __serde_val: e };
-  if (typeof e == "boolean")
-    return { __serde_tag: "primitive", __serde_val: e };
-  if (typeof e > "u") return { __serde_tag: "primitive", __serde_val: e };
-  if (e == null) return { __serde_tag: "primitive", __serde_val: e };
-  if (Array.isArray(e))
-    return { __serde_tag: "array", __serde_val: e.map((r) => C(r)) };
-  if (e instanceof URL) return { __serde_tag: "url", __serde_val: e.href };
-  if (e instanceof Headers) {
-    let r = [];
-    return (
-      e.forEach((n, s) => {
-        r.push([s, n]);
-      }),
-      { __serde_tag: "headers", __serde_val: r }
-    );
-  } else {
-    if (e instanceof Set)
-      return { __serde_tag: "set", __serde_val: [...e.values()].map(C) };
-    if (e instanceof Map)
+    if (value instanceof Map) {
       return {
         __serde_tag: "map",
-        __serde_val: [...e.entries()].map(([r, n]) => [C(r), C(n)]),
+        __serde_val: [...value.entries()].map(([key, entryValue]) => [
+          serialize(key),
+          serialize(entryValue)
+        ])
       };
-    if (e instanceof RegExp)
-      return { __serde_tag: "regex", __serde_val: [e.source, e.flags] };
-    if ($.isOption(e))
-      return e.isSome()
-        ? { __serde_tag: "some", __serde_val: C(e.value) }
-        : { __serde_tag: "none" };
-    if (H.isResult(e))
-      return e.isOk()
-        ? { __serde_tag: "ok", __serde_val: C(e.value) }
-        : { __serde_tag: "err", __serde_val: C(e.error) };
-    if (typeof e == "object") {
-      let r = {};
-      for (let [n, s] of Object.entries(e)) r[n] = C(s);
-      return { __serde_tag: "object", __serde_val: r };
-    } else throw new Error("Unreachable");
+    }
+    if (value instanceof RegExp) {
+      return {
+        __serde_tag: "regex",
+        __serde_val: [value.source, value.flags]
+      };
+    }
+    if (isOption(value)) {
+      return value.kind === "some" ? { __serde_tag: "some", __serde_val: serialize(value.value) } : { __serde_tag: "none" };
+    }
+    if (typeof value === "object") {
+      return {
+        __serde_tag: "object",
+        __serde_val: Object.fromEntries(
+          Object.entries(value).map(([key, entryValue]) => [
+            key,
+            serialize(entryValue)
+          ])
+        )
+      };
+    }
+    throw new TypeError(`Cannot serialize value of type ${typeof value}`);
   }
-}
-var ke = ["mp4", "webm", "mkv"],
-  Re = ["mp3", "m4a", "ogg"],
-  Pe = [...ke, ...Re];
-function le(e) {
-  if (e == "mp3") return "mp4";
-  if (e == "m4a") return "mp4";
-  if (e == "ogg") return "webm";
-  throw new Error("Unreachable");
-}
-var Ce = [
-    { mime_reg: /(avc1|avc3).*/i, demuxer: "mp4", codec: "H264" },
-    {
-      mime_reg: /(hvc1|hev1|hevc|h265|h\.265).*/i,
-      demuxer: "mp4",
-      codec: "H265",
-    },
-    { mime_reg: /mp4v\.20.*/i, demuxer: "mp4", codec: "MP4V" },
-    { mime_reg: /av0?1.*/i, demuxer: "webm", codec: "AV1" },
-    { mime_reg: /vp0?8.*/i, demuxer: "webm", codec: "VP8" },
-    { mime_reg: /vp0?9.*/i, demuxer: "webm", codec: "VP9" },
-  ],
-  De = [
-    { mime_reg: /(aac|mp4a.40).*/i, demuxer: "m4a", codec: "AAC" },
-    { mime_reg: /(\.?mp3|mp4a\.69|mp4a\.6b).*/i, demuxer: "mp3", codec: "MP3" },
-    { mime_reg: /(opus|(mp4a\.ad.*))/i, demuxer: "ogg", codec: "Opus" },
-    { mime_reg: /vorbis/i, demuxer: "ogg", codec: "Vorbis" },
-  ];
-function ue(e) {
-  for (let r of Ce) if (r.mime_reg.test(e)) return b(r.demuxer);
-  return A;
-}
-function me(e) {
-  for (let r of De) if (r.mime_reg.test(e)) return b(r.demuxer);
-  return A;
-}
-function K(e, r) {
-  try {
-    if (e) return b(new URL(e, r));
-  } catch {}
-  return A;
-}
-function ze(e, r) {
-  let i = Le(e.size, r.size);
-  if (i != 0) return i;
-  let f = e.bitrate.unwrapOr(0),
-    p = r.bitrate.unwrapOr(0);
-  return f > p ? -1 : f < p ? 1 : 0;
-}
-function Le(e, r) {
-  let i = e.map((p) => p.height).unwrapOr(0),
-    f = r.map((p) => p.height).unwrapOr(0);
-  return i > f ? -1 : i < f ? 1 : 0;
-}
-function de(e) {
-  return [...e.values()].sort((r, n) => ze(r.quality, n.quality));
-}
-function ce(e) {
-  function r(c, w) {
-    return (c << w) | (c >>> (32 - w));
-  }
-  function n(c) {
-    let w = c.length,
-      T = (((w + 8) >> 6) + 1) * 16,
-      F = new Array(T).fill(0);
-    for (let y = 0; y < w; y++) F[y >> 2] |= c.charCodeAt(y) << ((y % 4) * 8);
-    return ((F[w >> 2] |= 128 << ((w % 4) * 8)), (F[T - 2] = w * 8), F);
-  }
-  function s(c, w) {
-    return (c + w) >>> 0;
-  }
-  function o(c, w, T) {
-    return (c & w) | (~c & T);
-  }
-  function i(c, w, T) {
-    return (c & T) | (w & ~T);
-  }
-  function f(c, w, T) {
-    return c ^ w ^ T;
-  }
-  function p(c, w, T) {
-    return w ^ (c | ~T);
-  }
-  function l(c, w, T, F, y, _, v, x) {
-    let S = s(w, s(c(T, F, y), s(_, x)));
-    return s(r(S, v), T);
-  }
-  let t = new Array(65);
-  for (let c = 1; c <= 64; c++)
-    t[c] = Math.floor(Math.abs(Math.sin(c)) * 2 ** 32);
-  let a = 1732584193,
-    u = 4023233417,
-    m = 2562383102,
-    d = 271733878,
-    g = n(e);
-  for (let c = 0; c < g.length; c += 16) {
-    let w = a,
-      T = u,
-      F = m,
-      y = d;
-    ((a = l(o, a, u, m, d, g[c + 0], 7, t[1])),
-      (d = l(o, d, a, u, m, g[c + 1], 12, t[2])),
-      (m = l(o, m, d, a, u, g[c + 2], 17, t[3])),
-      (u = l(o, u, m, d, a, g[c + 3], 22, t[4])),
-      (a = l(o, a, u, m, d, g[c + 4], 7, t[5])),
-      (d = l(o, d, a, u, m, g[c + 5], 12, t[6])),
-      (m = l(o, m, d, a, u, g[c + 6], 17, t[7])),
-      (u = l(o, u, m, d, a, g[c + 7], 22, t[8])),
-      (a = l(o, a, u, m, d, g[c + 8], 7, t[9])),
-      (d = l(o, d, a, u, m, g[c + 9], 12, t[10])),
-      (m = l(o, m, d, a, u, g[c + 10], 17, t[11])),
-      (u = l(o, u, m, d, a, g[c + 11], 22, t[12])),
-      (a = l(o, a, u, m, d, g[c + 12], 7, t[13])),
-      (d = l(o, d, a, u, m, g[c + 13], 12, t[14])),
-      (m = l(o, m, d, a, u, g[c + 14], 17, t[15])),
-      (u = l(o, u, m, d, a, g[c + 15], 22, t[16])),
-      (a = l(i, a, u, m, d, g[c + 1], 5, t[17])),
-      (d = l(i, d, a, u, m, g[c + 6], 9, t[18])),
-      (m = l(i, m, d, a, u, g[c + 11], 14, t[19])),
-      (u = l(i, u, m, d, a, g[c + 0], 20, t[20])),
-      (a = l(i, a, u, m, d, g[c + 5], 5, t[21])),
-      (d = l(i, d, a, u, m, g[c + 10], 9, t[22])),
-      (m = l(i, m, d, a, u, g[c + 15], 14, t[23])),
-      (u = l(i, u, m, d, a, g[c + 4], 20, t[24])),
-      (a = l(i, a, u, m, d, g[c + 9], 5, t[25])),
-      (d = l(i, d, a, u, m, g[c + 14], 9, t[26])),
-      (m = l(i, m, d, a, u, g[c + 3], 14, t[27])),
-      (u = l(i, u, m, d, a, g[c + 8], 20, t[28])),
-      (a = l(i, a, u, m, d, g[c + 13], 5, t[29])),
-      (d = l(i, d, a, u, m, g[c + 2], 9, t[30])),
-      (m = l(i, m, d, a, u, g[c + 7], 14, t[31])),
-      (u = l(i, u, m, d, a, g[c + 12], 20, t[32])),
-      (a = l(f, a, u, m, d, g[c + 5], 4, t[33])),
-      (d = l(f, d, a, u, m, g[c + 8], 11, t[34])),
-      (m = l(f, m, d, a, u, g[c + 11], 16, t[35])),
-      (u = l(f, u, m, d, a, g[c + 14], 23, t[36])),
-      (a = l(f, a, u, m, d, g[c + 1], 4, t[37])),
-      (d = l(f, d, a, u, m, g[c + 4], 11, t[38])),
-      (m = l(f, m, d, a, u, g[c + 7], 16, t[39])),
-      (u = l(f, u, m, d, a, g[c + 10], 23, t[40])),
-      (a = l(f, a, u, m, d, g[c + 13], 4, t[41])),
-      (d = l(f, d, a, u, m, g[c + 0], 11, t[42])),
-      (m = l(f, m, d, a, u, g[c + 3], 16, t[43])),
-      (u = l(f, u, m, d, a, g[c + 6], 23, t[44])),
-      (a = l(f, a, u, m, d, g[c + 9], 4, t[45])),
-      (d = l(f, d, a, u, m, g[c + 12], 11, t[46])),
-      (m = l(f, m, d, a, u, g[c + 15], 16, t[47])),
-      (u = l(f, u, m, d, a, g[c + 2], 23, t[48])),
-      (a = l(p, a, u, m, d, g[c + 0], 6, t[49])),
-      (d = l(p, d, a, u, m, g[c + 7], 10, t[50])),
-      (m = l(p, m, d, a, u, g[c + 14], 15, t[51])),
-      (u = l(p, u, m, d, a, g[c + 5], 21, t[52])),
-      (a = l(p, a, u, m, d, g[c + 12], 6, t[53])),
-      (d = l(p, d, a, u, m, g[c + 3], 10, t[54])),
-      (m = l(p, m, d, a, u, g[c + 10], 15, t[55])),
-      (u = l(p, u, m, d, a, g[c + 1], 21, t[56])),
-      (a = l(p, a, u, m, d, g[c + 8], 6, t[57])),
-      (d = l(p, d, a, u, m, g[c + 15], 10, t[58])),
-      (m = l(p, m, d, a, u, g[c + 6], 15, t[59])),
-      (u = l(p, u, m, d, a, g[c + 13], 21, t[60])),
-      (a = l(p, a, u, m, d, g[c + 4], 6, t[61])),
-      (d = l(p, d, a, u, m, g[c + 11], 10, t[62])),
-      (m = l(p, m, d, a, u, g[c + 2], 15, t[63])),
-      (u = l(p, u, m, d, a, g[c + 9], 21, t[64])),
-      (a = s(a, w)),
-      (u = s(u, T)),
-      (m = s(m, F)),
-      (d = s(d, y)));
-  }
-  function B(c) {
-    return ("00000000" + c.toString(16)).slice(-8);
-  }
-  return B(a) + B(u) + B(m) + B(d);
-}
-var Ve = /\.tv\/(?:[^/]+\/)?(?:play|video)\//,
-  Ue = /\.com\/video\//;
-function Ne(e) {
-  ae({ name: "on_media", data: { media: C(e) } });
-}
-function qe(e, r) {
-  let n = window.location.href.split("?")[0],
-    o = b("mp4");
-  return {
-    type: "http_playlist",
-    discovery_timestamp_ms: Date.now(),
-    hash: `media_hash_${W(window.location.href)}`,
-    initiator: K(window.location.href),
-    is_youtube: !1,
-    preferred_entry: A,
-    sent_headers: new Headers({ Referer: n }),
-    title: A,
-    thumbnail_url: A,
-    cache: "default",
-    has_drm: !1,
-    supports_byte_ranges: !0,
-    libav_demuxer: o,
-    filename: A,
-    extension: "mp4",
-    playlist: e,
-    duration: r.unwrapOr("unknown"),
-  };
-}
-function We(e, r) {
-  let n = [],
-    s = new Map();
-  for (let o of e) {
-    let i = K(o.url ?? o.base_url);
-    if (i.isNone()) continue;
-    let f = me(o.codecs);
-    if (f.isNone()) continue;
-    let p = le(f.value),
-      l = s.get(p);
-    (!l || l.bitrate < o.bandwidth) &&
-      s.set(p, {
-        bitrate: o.bandwidth,
-        url: i.value,
-        size: Number.isFinite(o.size) ? b(o.size) : A,
-      });
-  }
-  for (let o of r) {
-    let i = K(o.url ?? o.base_url);
-    if (i.isNone()) continue;
-    let f = ue(o.codecs);
-    if (f.isNone()) continue;
-    let p = A;
-    o.height && o.width && (p = b({ width: o.width, height: o.height }));
-    let l = { bitrate: b(o.bandwidth), size: p },
-      t = Number.isFinite(o.size) ? b(o.size) : A,
-      a = s.get(f.value);
-    if (a) {
-      let u = t.unwrapOr(0) + a.size.unwrapOr(0);
-      n.push({
-        quality: l,
-        demuxer: f.value,
-        size: u != 0 ? b(u) : A,
-        av: { video: i.value, audio: a.url },
-      });
-    } else console.log(`No matching audio for ${i}`);
-  }
-  return ((n = de(n)), se(n) ? I(n) : M("No media for playlist"));
-}
-async function $e() {
-  let e = await new Promise((r) => {
-    let n = X((s) => {
-      s.name == "bilibili_tv_on_config" && (r(s.data), n());
+
+  // src/shared/extension-messaging.js
+  async function reportMedia(media) {
+    await chrome.runtime.sendMessage({
+      msg: {
+        name: "on_media",
+        data: { media: serialize(media) }
+      },
+      channel: MessageChannel.FROM_INJECTED_TO_SERVICE
     });
-    Q({ name: "bilibili_tv_request_config", data: null });
-  });
-  if (e.ep_id)
-    try {
-      let r = await fetch(
-        `https://api.bilibili.tv/intl/gateway/web/playurl?s_locale=en_US&platform=web&ep_id=${e.ep_id}&qn=120&type=0&device=wap&tf=0&spm_id=bstar-web.pgc-video-detail.0.0&from_spm_id=bstar-web.homepage.recommend.all`,
-        { credentials: "include" },
-      );
-      return I(JSON.parse(await r.text()));
-    } catch (r) {
-      return M(`Error fetching /web/playurl for episode id ${e} : ${r}`);
+  }
+
+  // src/shared/hash.js
+  function hashString(value, seed = 0) {
+    let low = 3735928559 ^ seed;
+    let high = 1103547991 ^ seed;
+    for (let index = 0; index < value.length; index += 1) {
+      const character = value.charCodeAt(index);
+      low = Math.imul(low ^ character, 2654435761);
+      high = Math.imul(high ^ character, 1597334677);
     }
-  else if (e.ai_id)
-    try {
-      let r = await fetch(
-        `https://api.bilibili.tv/intl/gateway/web/playurl?s_locale=en_US&platform=web&aid=${e.ai_id}&qn=120&type=0&device=wap&tf=0&spm_id=bstar-web.ugc-video-detail.0.0&from_spm_id=bstar-web.homepage.recommend.all`,
-        { credentials: "include" },
-      );
-      return I(JSON.parse(await r.text()));
-    } catch (r) {
-      return M(`Error fetching /web/playurl for episode id ${e} : ${r}`);
+    low = Math.imul(low ^ low >>> 16, 2246822507);
+    low ^= Math.imul(high ^ high >>> 13, 3266489909);
+    high = Math.imul(high ^ high >>> 16, 2246822507);
+    high ^= Math.imul(low ^ low >>> 13, 3266489909);
+    return 4294967296 * (2097151 & high) + (low >>> 0);
+  }
+
+  // src/shared/page-bridge.js
+  function createPageBridge(pageUrl = window.location.href) {
+    const channel = new BroadcastChannel(`injected-${hashString(pageUrl)}`);
+    function postToPage(message) {
+      channel.postMessage({
+        msg: message,
+        channel: MessageChannel.FROM_CONTENT_TO_PAGE
+      });
     }
-  return M("Fatal : neither ai id nor ep id were found for current media");
-}
-var He = [
-  46, 47, 18, 2, 53, 8, 23, 32, 15, 50, 10, 31, 58, 3, 45, 35, 27, 43, 5, 49,
-  33, 9, 42, 19, 29, 28, 14, 39, 12, 38, 41, 13, 37, 48, 7, 16, 24, 55, 40, 61,
-  26, 17, 0, 1, 60, 51, 30, 4, 22, 25, 54, 21, 56, 59, 6, 63, 57, 62, 11, 36,
-  20, 34, 44, 52,
-];
-async function je() {
-  let e = await fetch("https://api.bilibili.com/x/web-interface/nav", {
-    credentials: "include",
-  });
-  if (e.ok) {
-    let r = await e.json(),
-      n = r.data.wbi_img.img_url,
-      s = r.data.wbi_img.sub_url;
-    if (n && s) {
-      let o = n.substring(n.lastIndexOf("/") + 1, n.lastIndexOf(".")),
-        i = n.substring(s.lastIndexOf("/") + 1, s.lastIndexOf(".")),
-        f = `${o}${i}`,
-        p = He.map((l) => f.charAt(l)).join("");
-      return I(p);
+    function onMessageFromPage(listener) {
+      const eventListener = (event) => {
+        if (event.data?.channel === MessageChannel.FROM_PAGE_TO_CONTENT) {
+          listener(event.data.msg);
+        }
+      };
+      channel.addEventListener("message", eventListener);
+      return () => channel.removeEventListener("message", eventListener);
+    }
+    function requestFromPage(request, responseName, timeoutMs = 1e4) {
+      return new Promise((resolve, reject) => {
+        let timeout;
+        const removeListener = onMessageFromPage((message) => {
+          if (message?.name !== responseName) return;
+          clearTimeout(timeout);
+          removeListener();
+          resolve(message.data);
+        });
+        timeout = setTimeout(() => {
+          removeListener();
+          reject(
+            new Error(`Timed out waiting for page message: ${responseName}`)
+          );
+        }, timeoutMs);
+        postToPage(request);
+      });
+    }
+    return { postToPage, onMessageFromPage, requestFromPage };
+  }
+
+  // src/shared/url.js
+  function optionalUrl(value, base) {
+    if (!value) return NONE;
+    try {
+      return some(new URL(value, base));
+    } catch {
+      return NONE;
     }
   }
-  return M("Error during WBI fetching");
-}
-async function Ge() {
-  let e = await new Promise((s) => {
-      let o = X((i) => {
-        i.name == "bilibili_com_on_id" && (s(i.data), o());
+  function asUrl(value, base) {
+    if (!value) return null;
+    try {
+      return new URL(value, base);
+    } catch {
+      return null;
+    }
+  }
+
+  // src/injected/bilibili/content.js
+  var BILIBILI_COM_VIDEO = /\.com\/video\//;
+  var BILIBILI_TV_VIDEO = /\.tv\/(?:[^/]+\/)?(?:play|video)\//;
+  var pageBridge = createPageBridge();
+  var WBI_MIXIN_KEY_ORDER = [
+    46,
+    47,
+    18,
+    2,
+    53,
+    8,
+    23,
+    32,
+    15,
+    50,
+    10,
+    31,
+    58,
+    3,
+    45,
+    35,
+    27,
+    43,
+    5,
+    49,
+    33,
+    9,
+    42,
+    19,
+    29,
+    28,
+    14,
+    39,
+    12,
+    38,
+    41,
+    13,
+    37,
+    48,
+    7,
+    16,
+    24,
+    55,
+    40,
+    61,
+    26,
+    17,
+    0,
+    1,
+    60,
+    51,
+    30,
+    4,
+    22,
+    25,
+    54,
+    21,
+    56,
+    59,
+    6,
+    63,
+    57,
+    62,
+    11,
+    36,
+    20,
+    34,
+    44,
+    52
+  ];
+  var VIDEO_CODECS = [
+    { pattern: /(avc1|avc3).*/i, container: "mp4" },
+    { pattern: /(hvc1|hev1|hevc|h265|h\.265).*/i, container: "mp4" },
+    { pattern: /mp4v\.20.*/i, container: "mp4" },
+    { pattern: /av0?1.*/i, container: "webm" },
+    { pattern: /vp0?8.*/i, container: "webm" },
+    { pattern: /vp0?9.*/i, container: "webm" }
+  ];
+  var AUDIO_CODECS = [
+    { pattern: /(aac|mp4a\.40).*/i, container: "m4a" },
+    { pattern: /(\.?mp3|mp4a\.69|mp4a\.6b).*/i, container: "mp3" },
+    { pattern: /(opus|mp4a\.ad.*)/i, container: "ogg" },
+    { pattern: /vorbis/i, container: "ogg" }
+  ];
+  function classifyCodec(codecs, definitions) {
+    return definitions.find(({ pattern }) => pattern.test(codecs ?? ""))?.container ?? null;
+  }
+  function outputContainerForAudio(audioContainer) {
+    if (audioContainer === "m4a" || audioContainer === "mp3") return "mp4";
+    if (audioContainer === "ogg") return "webm";
+    return null;
+  }
+  function qualityValue(width, height) {
+    return width && height ? some({ width, height }) : NONE;
+  }
+  function comparePlaylistEntries(left, right) {
+    const leftHeight = left.quality.size.kind === "some" ? left.quality.size.value.height : 0;
+    const rightHeight = right.quality.size.kind === "some" ? right.quality.size.value.height : 0;
+    if (leftHeight !== rightHeight) return rightHeight - leftHeight;
+    const leftBitrate = left.quality.bitrate.kind === "some" ? left.quality.bitrate.value : 0;
+    const rightBitrate = right.quality.bitrate.kind === "some" ? right.quality.bitrate.value : 0;
+    return rightBitrate - leftBitrate;
+  }
+  function buildPlaylist(audioStreams, videoStreams) {
+    const bestAudioByContainer = /* @__PURE__ */ new Map();
+    for (const audioStream of audioStreams ?? []) {
+      const url = asUrl(audioStream.url ?? audioStream.base_url);
+      const audioContainer = classifyCodec(audioStream.codecs, AUDIO_CODECS);
+      const outputContainer = outputContainerForAudio(audioContainer);
+      if (!url || !outputContainer) continue;
+      const current = bestAudioByContainer.get(outputContainer);
+      if (!current || current.bitrate < (audioStream.bandwidth ?? 0)) {
+        bestAudioByContainer.set(outputContainer, {
+          bitrate: audioStream.bandwidth ?? 0,
+          url,
+          size: Number.isFinite(audioStream.size) ? some(audioStream.size) : NONE
+        });
+      }
+    }
+    const playlist = [];
+    for (const videoStream of videoStreams ?? []) {
+      const videoUrl = asUrl(videoStream.url ?? videoStream.base_url);
+      const videoContainer = classifyCodec(videoStream.codecs, VIDEO_CODECS);
+      if (!videoUrl || !videoContainer) continue;
+      const audio = bestAudioByContainer.get(videoContainer);
+      if (!audio) continue;
+      const videoSize = Number.isFinite(videoStream.size) ? videoStream.size : 0;
+      const audioSize = audio.size.kind === "some" ? audio.size.value : 0;
+      const combinedSize = videoSize + audioSize;
+      playlist.push({
+        quality: {
+          bitrate: some(videoStream.bandwidth ?? 0),
+          size: qualityValue(videoStream.width, videoStream.height)
+        },
+        demuxer: videoContainer,
+        size: combinedSize > 0 ? some(combinedSize) : NONE,
+        av: {
+          video: videoUrl,
+          audio: audio.url
+        }
       });
-      Q({ name: "bilibili_com_request_id", data: null });
-    }),
-    r = new URLSearchParams({
-      bvid: String(e.bvid),
-      cid: String(e.cid),
+    }
+    return playlist.sort(comparePlaylistEntries);
+  }
+  async function fetchWbiMixinKey() {
+    const response = await fetch("https://api.bilibili.com/x/web-interface/nav", {
+      credentials: "include"
+    });
+    if (!response.ok)
+      throw new Error(`WBI navigation request failed: ${response.status}`);
+    const payload = await response.json();
+    const imageUrl = payload?.data?.wbi_img?.img_url;
+    const subUrl = payload?.data?.wbi_img?.sub_url;
+    if (!imageUrl || !subUrl) throw new Error("WBI image keys are missing");
+    const filename = (url) => url.slice(url.lastIndexOf("/") + 1, url.lastIndexOf("."));
+    const source = `${filename(imageUrl)}${filename(subUrl)}`;
+    return WBI_MIXIN_KEY_ORDER.map((index) => source[index]).join("");
+  }
+  async function requestBilibiliComPlayData() {
+    const identity = await pageBridge.requestFromPage(
+      { name: "bilibili_com_request_id", data: null },
+      "bilibili_com_on_id"
+    );
+    const search = new URLSearchParams({
+      bvid: String(identity.bvid),
+      cid: String(identity.cid),
       fnval: "4048",
       fnver: "0",
       fourk: "1",
       qn: "127",
       try_look: "1",
-      wts: String(Math.round(Date.now() / 1e3)),
-    }),
-    n = await je();
-  if (n.isOk()) {
-    r.append("w_rid", ce(`${r.toString()}${n}`));
-    let s = await fetch(
-      "https://api.bilibili.com/x/player/wbi/playurl?" + r.toString(),
-      { credentials: "include" },
+      wts: String(Math.round(Date.now() / 1e3))
+    });
+    const mixinKey = await fetchWbiMixinKey();
+    search.set("w_rid", (0, import_blueimp_md5.default)(`${search.toString()}${mixinKey}`));
+    const response = await fetch(
+      `https://api.bilibili.com/x/player/wbi/playurl?${search}`,
+      {
+        credentials: "include"
+      }
     );
-    if (s.ok) {
-      let o = await s.json();
-      return I(o);
-    }
+    if (!response.ok)
+      throw new Error(`Bilibili play URL request failed: ${response.status}`);
+    const payload = await response.json();
+    if (!payload?.data?.dash)
+      throw new Error(payload?.message || "Bilibili returned no DASH data");
+    return payload;
   }
-  return M("Couldn't fetch bilibili com video data");
-}
-async function ge() {
-  let e = window.location.href;
-  if (!Ue.test(e) && !Ve.test(e)) return;
-  let r = A,
-    n = A,
-    s = A,
-    o = A,
-    i;
-  if (Ue.test(e)) {
-    let p = await Ge();
-    if (p.isErr()) {
-      console.error(`Error fetching bilibili.com playlist data ${p.error}`);
-      return;
-    }
-    ((o = Number.isFinite(p.value.data.timelength)
-      ? b(p.value.data.timelength / 1e3)
-      : A),
-      (r = p.value.data.dash.audio ? b(p.value.data.dash.audio) : A),
-      (n = p.value.data.dash.video ? b(p.value.data.dash.video) : A));
-  } else if (Ve.test(e)) {
-    let p = await $e();
-    if (p.isErr()) {
-      console.error(`Error during bilibili tv data fetch ${p.error}`);
-      return;
-    }
-    ((r = p.value?.data?.playurl.audio_resource
-      ? b(p.value?.data?.playurl.audio_resource)
-      : A),
-      (n = p.value.data.playurl.video
-        ? b([...p.value.data.playurl.video].map((l) => l.video_resource))
-        : A));
-  }
-  if (r.isNone() || n.isNone()) {
-    console.error("Missing audio or video data to build playlist");
-    return;
-  }
-  let f = We(r.value, n.value);
-  if (f.isErr()) {
-    console.error(
-      `Invalid bilibili tv data, playlist failed to build ${f.error}`,
+  async function requestBilibiliTvPlayData() {
+    const identity = await pageBridge.requestFromPage(
+      { name: "bilibili_tv_request_config", data: null },
+      "bilibili_tv_on_config"
     );
-    return;
+    const search = new URLSearchParams({
+      s_locale: "en_US",
+      platform: "web",
+      qn: "120",
+      type: "0",
+      device: "wap",
+      tf: "0",
+      spm_id: "bstar-web.pgc-video-detail.0.0",
+      from_spm_id: "bstar-web.homepage.recommend.all"
+    });
+    if (identity.ep_id) search.set("ep_id", identity.ep_id);
+    else if (identity.ai_id) search.set("aid", identity.ai_id);
+    else throw new Error("No episode or video ID was found");
+    const response = await fetch(
+      `https://api.bilibili.tv/intl/gateway/web/playurl?${search}`,
+      { credentials: "include" }
+    );
+    if (!response.ok)
+      throw new Error(`Bilibili TV play URL request failed: ${response.status}`);
+    return response.json();
   }
-  if (((s = b(f.value)), s.isNone())) {
-    console.log("No media playlist found");
-    return;
+  function createMedia(playlist, duration = "unknown") {
+    const referer = window.location.href.split("?")[0];
+    return {
+      type: "http_playlist",
+      discovery_timestamp_ms: Date.now(),
+      hash: `media_hash_${hashString(window.location.href)}`,
+      initiator: optionalUrl(window.location.href),
+      is_youtube: false,
+      preferred_entry: NONE,
+      sent_headers: new Headers({ Referer: referer }),
+      title: NONE,
+      thumbnail_url: NONE,
+      cache: "default",
+      has_drm: false,
+      supports_byte_ranges: true,
+      libav_demuxer: some("mp4"),
+      filename: NONE,
+      extension: "mp4",
+      playlist,
+      duration
+    };
   }
-  ((i = qe(s.value, o)), Ne(i));
-}
-ge();
-var pe = document.location.href,
-  Ke = new MutationObserver((e) => {
-    pe !== document.location.href &&
-      ((pe = document.location.href),
-      setTimeout(() => {
-        ge();
-      }, 5e3));
-  });
-Ke.observe(document.body, { childList: !0, subtree: !0 });
+  async function detectCurrentVideo() {
+    const currentUrl = window.location.href;
+    if (!BILIBILI_COM_VIDEO.test(currentUrl) && !BILIBILI_TV_VIDEO.test(currentUrl))
+      return;
+    let audioStreams;
+    let videoStreams;
+    let duration = "unknown";
+    if (BILIBILI_COM_VIDEO.test(currentUrl)) {
+      const payload = await requestBilibiliComPlayData();
+      audioStreams = payload.data.dash.audio;
+      videoStreams = payload.data.dash.video;
+      if (Number.isFinite(payload.data.timelength))
+        duration = payload.data.timelength / 1e3;
+    } else {
+      const payload = await requestBilibiliTvPlayData();
+      audioStreams = payload?.data?.playurl?.audio_resource;
+      videoStreams = payload?.data?.playurl?.video?.map(
+        (entry) => entry.video_resource
+      );
+    }
+    const playlist = buildPlaylist(audioStreams, videoStreams);
+    if (playlist.length === 0)
+      throw new Error("No compatible Bilibili audio/video pairs found");
+    await reportMedia(createMedia(playlist, duration));
+  }
+  function scheduleDetection() {
+    setTimeout(() => {
+      detectCurrentVideo().catch(
+        (error) => console.warn("Bilibili media detection failed", error)
+      );
+    }, 1e3);
+  }
+  detectCurrentVideo().catch(
+    (error) => console.warn("Bilibili media detection failed", error)
+  );
+  var previousUrl = window.location.href;
+  new MutationObserver(() => {
+    if (previousUrl === window.location.href) return;
+    previousUrl = window.location.href;
+    scheduleDetection();
+  }).observe(document.documentElement, { childList: true, subtree: true });
+})();
+//# sourceMappingURL=bilibili.js.map

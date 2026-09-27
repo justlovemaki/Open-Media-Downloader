@@ -1,81 +1,94 @@
-var w = new BroadcastChannel("worker_service");
-var n = {
-  FromInjectedToService: 0,
-  FromContentToService: 1,
-  FromServiceToWorker: 2,
-  FromWorkerToService: 3,
-  FromUntrustedInjectedToTrusted: 4,
-  FromTrustedInjectedToUntrusted: 5,
-  FromServiceToContent: 6,
-  FromServiceToInjected: 7,
-  FromServiceToService: 8,
-};
-function l(o, e = 0) {
-  let t = 3735928559 ^ e,
-    a = 1103547991 ^ e;
-  for (let r = 0, i; r < o.length; r++)
-    ((i = o.charCodeAt(r)),
-      (t = Math.imul(t ^ i, 2654435761)),
-      (a = Math.imul(a ^ i, 1597334677)));
-  return (
-    (t = Math.imul(t ^ (t >>> 16), 2246822507)),
-    (t ^= Math.imul(a ^ (a >>> 13), 3266489909)),
-    (a = Math.imul(a ^ (a >>> 16), 2246822507)),
-    (a ^= Math.imul(t ^ (t >>> 13), 3266489909)),
-    4294967296 * (2097151 & a) + (t >>> 0)
-  );
-}
-var s = new BroadcastChannel(`injected-${l(window.location.href)}`);
-function d(o) {
-  let e = n.FromUntrustedInjectedToTrusted;
-  s.postMessage({ msg: o, channel: e });
-}
-function m(o) {
-  let e = (t) => {
-    let a = t.data.msg;
-    t.data.channel == n.FromTrustedInjectedToUntrusted && o(a);
-  };
-  return (
-    s.addEventListener("message", e),
-    () => {
-      s.removeEventListener("message", e);
+(() => {
+  // src/shared/channels.js
+  var MessageChannel = Object.freeze({
+    FROM_INJECTED_TO_SERVICE: 0,
+    FROM_CONTENT_TO_SERVICE: 1,
+    FROM_SERVICE_TO_WORKER: 2,
+    FROM_WORKER_TO_SERVICE: 3,
+    FROM_PAGE_TO_CONTENT: 4,
+    FROM_CONTENT_TO_PAGE: 5,
+    FROM_SERVICE_TO_CONTENT: 6,
+    FROM_SERVICE_TO_INJECTED: 7,
+    FROM_SERVICE_TO_SERVICE: 8
+  });
+
+  // src/shared/hash.js
+  function hashString(value, seed = 0) {
+    let low = 3735928559 ^ seed;
+    let high = 1103547991 ^ seed;
+    for (let index = 0; index < value.length; index += 1) {
+      const character = value.charCodeAt(index);
+      low = Math.imul(low ^ character, 2654435761);
+      high = Math.imul(high ^ character, 1597334677);
     }
-  );
-}
-var v = /\.tv\/.+\/(?:play|video)\//,
-  g = /\.com\/video\//;
-async function c() {
-  let o = 1;
-  for (;;) {
-    let e = window.__initialState;
-    if (e && (e.ogv.epId._value || e.ugc.aid._value)) {
-      d({
-        name: "bilibili_tv_on_config",
-        data: { ep_id: e.ogv.epId._value, ai_id: e.ugc.aid._value },
-      });
-      break;
-    } else await new Promise((t) => setTimeout(t, 1e3 * o++));
+    low = Math.imul(low ^ low >>> 16, 2246822507);
+    low ^= Math.imul(high ^ high >>> 13, 3266489909);
+    high = Math.imul(high ^ high >>> 16, 2246822507);
+    high ^= Math.imul(low ^ low >>> 13, 3266489909);
+    return 4294967296 * (2097151 & high) + (low >>> 0);
   }
-}
-async function u() {
-  let o = 1;
-  for (;;) {
-    let e = window.__INITIAL_STATE__;
-    if (e && e.cid && e.videoData.bvid) {
-      d({
-        name: "bilibili_com_on_id",
-        data: { cid: e.cid, bvid: e.videoData.bvid },
+
+  // src/shared/page-bridge.js
+  function createMainWorldBridge(pageUrl = window.location.href) {
+    const channel = new BroadcastChannel(`injected-${hashString(pageUrl)}`);
+    function postToContent(message) {
+      channel.postMessage({
+        msg: message,
+        channel: MessageChannel.FROM_PAGE_TO_CONTENT
       });
-      break;
-    } else await new Promise((t) => setTimeout(t, 1e3 * o++));
+    }
+    function onMessageFromContent(listener) {
+      const eventListener = (event) => {
+        if (event.data?.channel === MessageChannel.FROM_CONTENT_TO_PAGE) {
+          listener(event.data.msg);
+        }
+      };
+      channel.addEventListener("message", eventListener);
+      return () => channel.removeEventListener("message", eventListener);
+    }
+    return { postToContent, onMessageFromContent };
   }
-}
-m((o) => {
-  o.name == "bilibili_com_request_id" && u();
-});
-m((o) => {
-  o.name == "bilibili_tv_request_config" && c();
-});
-var _ = window.location.href;
-g.test(_) && u();
-v.test(_) && c();
+
+  // src/injected/bilibili/main.js
+  var PAGE_STATE_TIMEOUT_MS = 15e3;
+  var pageBridge = createMainWorldBridge();
+  async function waitFor(readState) {
+    const deadline = Date.now() + PAGE_STATE_TIMEOUT_MS;
+    while (Date.now() < deadline) {
+      const value = readState();
+      if (value) return value;
+      await new Promise((resolve) => setTimeout(resolve, 250));
+    }
+    return null;
+  }
+  async function readBilibiliComIdentity() {
+    return waitFor(() => {
+      const state = window.__INITIAL_STATE__;
+      const cid = state?.cid ?? state?.videoData?.cid;
+      const bvid = state?.videoData?.bvid;
+      return cid && bvid ? { cid, bvid } : null;
+    });
+  }
+  async function readBilibiliTvIdentity() {
+    return waitFor(() => {
+      const state = window.__initialState;
+      const episodeId = state?.ogv?.epId?._value;
+      const videoId = state?.ugc?.aid?._value;
+      return episodeId || videoId ? {
+        ep_id: episodeId,
+        ai_id: videoId
+      } : null;
+    });
+  }
+  pageBridge.onMessageFromContent(async (message) => {
+    if (message?.name === "bilibili_com_request_id") {
+      const identity = await readBilibiliComIdentity();
+      pageBridge.postToContent({ name: "bilibili_com_on_id", data: identity });
+    }
+    if (message?.name === "bilibili_tv_request_config") {
+      const identity = await readBilibiliTvIdentity();
+      pageBridge.postToContent({ name: "bilibili_tv_on_config", data: identity });
+    }
+  });
+})();
+//# sourceMappingURL=bilibili_untrusted.js.map

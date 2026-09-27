@@ -88,15 +88,31 @@
 ## 项目结构
 
 ```text
+├─ src/                # 语义重构后的可维护源码
+├─ scripts/            # 构建和检查脚本
+├─ test/               # 重构核心协议测试
 ├─ manifest.json       # 扩展清单
-├─ content/            # 弹窗、侧边栏和界面逻辑
-├─ injected/           # 各网站的媒体识别脚本
-├─ service/            # 后台 Service Worker
+├─ content/            # 弹窗、侧边栏和界面构建产物
+├─ injected/           # 网站适配器构建产物
+├─ service/            # 后台 Service Worker 构建产物
 ├─ download_worker/    # 下载、转码与音视频合并逻辑
 ├─ factory/            # Worker 创建页面
 ├─ _locales/           # 多语言资源
 └─ bitmaps/            # 扩展图标与图片资源
 ```
+
+## 开发与构建
+
+仓库正在将压缩构建产物逐步迁移为 `src/` 下的可维护源码。当前哔哩哔哩和爱奇艺适配器已经完成语义重构，拥有有意义的变量名、模块边界和 Source Map。重构名称基于运行行为推断，不代表原始发布者使用的名称。
+
+```bash
+npm install
+npm run build
+npm test
+npm run check
+```
+
+`npm run build` 会生成 `manifest.json` 当前引用的 `injected/*.js` 文件。尚未迁移的模块继续使用已经格式化的构建产物，迁移进度和约定见 [`src/README.md`](src/README.md)。
 
 ## 故障排查
 
