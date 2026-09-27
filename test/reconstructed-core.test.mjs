@@ -15,6 +15,7 @@ import {
   parseSmartNamingRules,
   stringifySmartNamingRules,
 } from "../src/content/smartnaming-rules.js";
+import { buildDownloadArguments } from "../src/service/download-arguments.js";
 import { DownloadQueue } from "../src/service/download-queue.js";
 import {
   mediaQualityScore,
@@ -27,6 +28,43 @@ import { parseMasterPlaylist } from "../src/media/master-playlist.js";
 import { parseMpdPlaylist } from "../src/media/mpd.js";
 import { NONE, some } from "../src/shared/option.js";
 import { serialize } from "../src/shared/serialize.js";
+
+test("download arguments use a separate DASH audio URL when available", () => {
+  const videoUrl = new URL("https://cdn.example/video.m4s");
+  const audioUrl = new URL("https://cdn.example/audio.m4s");
+  const args = buildDownloadArguments(
+    {
+      type: "http_playlist",
+      is_youtube: false,
+      sent_headers: new Headers(),
+      cache: "default",
+      extension: "mp4",
+      libav_demuxer: some("mp4"),
+      supports_byte_ranges: true,
+      duration: 10,
+      playlist: [
+        {
+          av: { video: videoUrl, audio: audioUrl },
+          size: some(1234),
+          quality: { size: NONE, bitrate: NONE },
+        },
+      ],
+    },
+    {
+      audioOnly: true,
+      basename: "example",
+      subdir: "",
+      persistent: {
+        youtube_throttle: false,
+        preferred_av_muxer: "mp4",
+        subtitle_languages: new Set(["en"]),
+      },
+    },
+  );
+  assert.equal(args.strategy, "http_strip_audio_jsfetch");
+  assert.equal(args.url.href, audioUrl.href);
+  assert.equal(args.size.kind, "none");
+});
 
 test("download strategy router resolves readable handlers", async () => {
   assert.equal(

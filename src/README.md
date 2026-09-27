@@ -49,6 +49,7 @@ src/
 │  ├─ master-playlist.js
 │  └─ mpd.js         # MPEG-DASH parsing and media normalization
 ├─ service/
+│  ├─ download-arguments.js
 │  ├─ download-queue.js
 │  ├─ media-deduplication.js
 │  └─ version.js

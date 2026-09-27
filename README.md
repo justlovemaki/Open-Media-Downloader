@@ -103,7 +103,7 @@
 
 ## 开发与构建
 
-仓库正在将压缩构建产物逐步迁移为 `src/` 下的可维护源码。当前媒体详情页、下载历史页、持久化状态、智能命名编辑器、激活桥接、哔哩哔哩、爱奇艺、Canva、Chaturbate、Facebook、JavRank、Kick、OK.ru、Osmosis、Taiav、TwitCasting、Vimeo、VK、XGPlayer Crypto 和 YouTube 适配器已经完成语义重构，拥有有意义的变量名、模块边界和 Source Map。重构名称基于运行行为推断，不代表原始发布者使用的名称。后台服务中的下载队列、媒体去重和版本解析，以及下载 Worker 的 FFmpeg 命令、错误模型和策略路由也已拆分为可测试模块；完整 Service Worker 与下载 Worker 入口仍在逐步迁移。
+仓库正在将压缩构建产物逐步迁移为 `src/` 下的可维护源码。当前媒体详情页、下载历史页、持久化状态、智能命名编辑器、激活桥接、哔哩哔哩、爱奇艺、Canva、Chaturbate、Facebook、JavRank、Kick、OK.ru、Osmosis、Taiav、TwitCasting、Vimeo、VK、XGPlayer Crypto 和 YouTube 适配器已经完成语义重构，拥有有意义的变量名、模块边界和 Source Map。重构名称基于运行行为推断，不代表原始发布者使用的名称。后台服务中的下载参数构建、下载队列、媒体去重和版本解析，以及下载 Worker 的 FFmpeg 命令、错误模型和策略路由也已拆分为可测试模块；完整 Service Worker 与下载 Worker 入口仍在逐步迁移。
 
 ```bash
 npm install
