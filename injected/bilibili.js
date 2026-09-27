@@ -323,14 +323,14 @@
   }
 
   // src/shared/extension-messaging.js
-  async function reportMedia(media) {
+  async function sendInjectedMessage(name, data) {
     await chrome.runtime.sendMessage({
-      msg: {
-        name: "on_media",
-        data: { media: serialize(media) }
-      },
+      msg: { name, data },
       channel: MessageChannel.FROM_INJECTED_TO_SERVICE
     });
+  }
+  async function reportMedia(media) {
+    await sendInjectedMessage("on_media", { media: serialize(media) });
   }
 
   // src/shared/hash.js

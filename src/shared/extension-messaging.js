@@ -1,14 +1,15 @@
 import { MessageChannel } from "./channels.js";
 import { serialize } from "./serialize.js";
 
-export async function reportMedia(media) {
+export async function sendInjectedMessage(name, data) {
   await chrome.runtime.sendMessage({
-    msg: {
-      name: "on_media",
-      data: { media: serialize(media) },
-    },
+    msg: { name, data },
     channel: MessageChannel.FROM_INJECTED_TO_SERVICE,
   });
+}
+
+export async function reportMedia(media) {
+  await sendInjectedMessage("on_media", { media: serialize(media) });
 }
 
 export function onServiceMessage(listener) {

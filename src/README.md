@@ -16,14 +16,19 @@ They are not claimed to be the publisher's original source files or original sym
 ```text
 src/
 ├─ injected/
-│  ├─ bilibili/
-│  │  ├─ content.js  # Isolated-world API requests and media normalization
-│  │  └─ main.js     # Main-world page state access
-│  └─ iqiyi/
-│     ├─ content.js  # DASH response handling and quality monitoring
-│     └─ main.js     # Main-world __playerdata__ access
+│  ├─ activate/       # Website-to-extension activation bridge
+│  ├─ bilibili/      # API requests, DASH pairing and page-state bridge
+│  ├─ canva/         # Embedded HLS manifest extraction
+│  ├─ chaturbate/    # Live HLS discovery and health monitoring
+│  ├─ iqiyi/         # DASH response handling and quality monitoring
+│  ├─ javrank/       # XHR manifest interception
+│  ├─ kick/          # Live, VOD and clip API extraction
+│  ├─ osmosis/       # Reversed playlist decoding
+│  ├─ taiav/         # Page metadata normalization
+│  └─ twitcasting/   # Live HLS discovery
 ├─ media/
-│  └─ m3u8.js        # Lightweight media-playlist inspection
+│  ├─ m3u8.js        # Lightweight media-playlist inspection
+│  └─ master-playlist.js
 └─ shared/
    ├─ channels.js
    ├─ extension-messaging.js

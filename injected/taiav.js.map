@@ -1,0 +1,7 @@
+{
+  "version": 3,
+  "sources": ["../src/injected/taiav/main.js"],
+  "sourcesContent": ["for (const script of document.querySelectorAll(\n  \"head script[type='application/ld+json']\",\n)) {\n  const source = script.textContent;\n  if (!source) continue;\n\n  const match = source.match(\n    /[\"']thumbnail(?:url|_url)[\"']\\s*:\\s*[\"']([^\"'\\\\\\n\\r]+)[\"']/i,\n  );\n  if (!match?.[1]) continue;\n\n  let imageMeta = document.querySelector('meta[property=\"og:image\"]');\n  if (!imageMeta) {\n    imageMeta = document.createElement(\"meta\");\n    imageMeta.setAttribute(\"property\", \"og:image\");\n    document.head.appendChild(imageMeta);\n  }\n  imageMeta.setAttribute(\"content\", match[1]);\n  break;\n}\n"],
+  "mappings": ";;AAAA,aAAW,UAAU,SAAS;AAAA,IAC5B;AAAA,EACF,GAAG;AACD,UAAM,SAAS,OAAO;AACtB,QAAI,CAAC,OAAQ;AAEb,UAAM,QAAQ,OAAO;AAAA,MACnB;AAAA,IACF;AACA,QAAI,CAAC,QAAQ,CAAC,EAAG;AAEjB,QAAI,YAAY,SAAS,cAAc,2BAA2B;AAClE,QAAI,CAAC,WAAW;AACd,kBAAY,SAAS,cAAc,MAAM;AACzC,gBAAU,aAAa,YAAY,UAAU;AAC7C,eAAS,KAAK,YAAY,SAAS;AAAA,IACrC;AACA,cAAU,aAAa,WAAW,MAAM,CAAC,CAAC;AAC1C;AAAA,EACF;",
+  "names": []
+}

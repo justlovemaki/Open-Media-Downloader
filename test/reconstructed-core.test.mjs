@@ -3,6 +3,7 @@ import test from "node:test";
 
 import { hashString } from "../src/shared/hash.js";
 import { inspectMediaPlaylist } from "../src/media/m3u8.js";
+import { parseMasterPlaylist } from "../src/media/master-playlist.js";
 import { NONE, some } from "../src/shared/option.js";
 import { serialize } from "../src/shared/serialize.js";
 
@@ -21,6 +22,26 @@ test("serialize emits the service worker tagged format", () => {
       __serde_val: "https://example.com/video.mp4",
     },
   });
+});
+
+test("parseMasterPlaylist returns sorted video renditions", () => {
+  const master = [
+    "#EXTM3U",
+    '#EXT-X-MEDIA:TYPE=AUDIO,GROUP-ID="audio",LANGUAGE="en",DEFAULT=YES,URI="audio.m3u8"',
+    '#EXT-X-STREAM-INF:BANDWIDTH=1200000,RESOLUTION=1280x720,CODECS="avc1.64001f,mp4a.40.2",AUDIO="audio"',
+    "720.m3u8",
+    '#EXT-X-STREAM-INF:BANDWIDTH=500000,RESOLUTION=640x360,CODECS="avc1.4d401e,mp4a.40.2",AUDIO="audio"',
+    "360.m3u8",
+  ].join("\n");
+
+  const playlist = parseMasterPlaylist(
+    master,
+    new URL("https://cdn.example/master.m3u8"),
+  );
+  assert.equal(playlist.length, 2);
+  assert.equal(playlist[0].quality.size.value.height, 720);
+  assert.equal(playlist[0].av.video.href, "https://cdn.example/720.m3u8");
+  assert.equal(playlist[0].av.audio.href, "https://cdn.example/audio.m3u8");
 });
 
 test("inspectMediaPlaylist calculates VOD duration", () => {
