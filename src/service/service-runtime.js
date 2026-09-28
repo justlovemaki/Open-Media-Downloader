@@ -12964,34 +12964,6 @@ function buildDownloadArguments(e, t, i, n, r, o, a) {
     throw "Missing playlist_entry";
   } else throw new Error("Unreachable");
 }
-var Jv = chrome.runtime.id,
-  mo = new Map();
-function Yv() {
-  qe &&
-    (chrome.downloads.onDeterminingFilename.hasListener(eu) ||
-      chrome.downloads.onDeterminingFilename.addListener(eu));
-}
-function Xv() {
-  qe &&
-    mo.size == 0 &&
-    chrome.downloads.onDeterminingFilename.removeListener(eu);
-}
-function eu(e, t) {
-  if (e.byExtensionId !== Jv) {
-    t();
-    return;
-  }
-  let i = mo.get(e.finalUrl);
-  if (!i) {
-    t();
-    return;
-  }
-  (mo.delete(e.finalUrl),
-    t({
-      filename: i,
-      conflictAction: "uniquify",
-    }));
-}
 async function ew(e) {
   if (!Number.isInteger(e))
     return I({
@@ -13133,15 +13105,13 @@ async function executeDownloadAndSave(e, t, i) {
         filename: u,
         saveAs: e.save_as,
       };
-    (qe && mo.set(o, u), Ue && i && (s.incognito = !0));
+    Ue && i && (s.incognito = !0);
     let l = Date.now(),
       d,
       c;
     try {
-      (Yv(),
-        (c = await Ft.default.downloads.download(s)),
-        (d = await ew(c)),
-        Xv());
+      c = await Ft.default.downloads.download(s);
+      d = await ew(c);
     } catch (h) {
       if (h?.message === "Download canceled by the user")
         d = I({
