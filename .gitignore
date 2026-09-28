@@ -1,3 +1,4 @@
 .pi/
+dist/
 node_modules/
 .webcrack-test/

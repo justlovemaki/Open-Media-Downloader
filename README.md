@@ -37,12 +37,15 @@
 
 ## 安装方法
 
-本仓库目前提供的是可直接加载的浏览器扩展文件。
+构建后生成的完整浏览器扩展位于 `dist/` 目录。
 
-1. 下载或克隆本仓库：
+1. 下载或克隆仓库并构建：
 
    ```bash
    git clone https://github.com/justlovemaki/Open-Media-Downloader.git
+   cd Open-Media-Downloader
+   npm install
+   npm run build
    ```
 
 2. 打开 Chrome 或其他 Chromium 浏览器的扩展管理页面：
@@ -53,9 +56,9 @@
 
 3. 开启右上角的“开发者模式”。
 4. 点击“加载已解压的扩展程序”。
-5. 选择本仓库根目录。
+5. 选择本仓库的 `dist/` 目录。
 
-更新代码后，请在扩展管理页面点击“重新加载”。
+更新代码后，请重新执行 `npm run build`，再在扩展管理页面点击“重新加载”。
 
 ## 使用方法
 
@@ -91,14 +94,14 @@
 ├─ src/                # 语义重构后的可维护源码
 ├─ scripts/            # 构建和检查脚本
 ├─ test/               # 重构核心协议测试
-├─ manifest.json       # 扩展清单
-├─ content/            # 弹窗、侧边栏和界面构建产物
-├─ injected/           # 网站适配器构建产物
-├─ service/            # 后台 Service Worker 构建产物
-├─ download_worker/    # 下载、转码与音视频合并逻辑
+├─ manifest.json       # 扩展清单源文件
+├─ content/            # 弹窗、侧边栏等静态 HTML
+├─ download_worker/    # 下载 Worker 静态 WASM 资源
 ├─ factory/            # Worker 创建页面
+├─ service/            # Service Worker 静态 WASM 资源
 ├─ _locales/           # 多语言资源
-└─ bitmaps/            # 扩展图标与图片资源
+├─ bitmaps/            # 扩展图标与图片资源
+└─ dist/               # 完整构建产物（由 npm run build 生成）
 ```
 
 ## 开发与构建
@@ -112,7 +115,7 @@ npm test
 npm run check
 ```
 
-`npm run build` 现在可以从 `src/` 重新生成全部运行时 JavaScript，并为所有入口生成 Source Map；`npm run check` 会检查是否有文件遗漏在构建图之外。语义重构范围和少数包含第三方代码的完整恢复入口见 [`src/RECOVERY_STATUS.md`](src/RECOVERY_STATUS.md)。
+`npm run build` 会清理并重新创建 `dist/`，复制扩展清单及静态资源，从 `src/` 生成全部运行时 JavaScript，并为所有入口生成 Source Map。`npm run check` 会先构建，再检查是否有文件遗漏在构建图之外。语义重构范围和少数包含第三方代码的完整恢复入口见 [`src/RECOVERY_STATUS.md`](src/RECOVERY_STATUS.md)。
 
 ## 故障排查
 

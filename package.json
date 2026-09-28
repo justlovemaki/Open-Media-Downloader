@@ -5,7 +5,7 @@
   "type": "module",
   "scripts": {
     "build": "node scripts/build.mjs",
-    "check": "node scripts/check.mjs && node scripts/verify-build-coverage.mjs",
+    "check": "npm run build && node scripts/check.mjs && node scripts/verify-build-coverage.mjs",
     "format": "prettier --write src scripts test package.json README.md",
     "semantic-rename": "node scripts/semantic-rename.mjs",
     "split-download-worker": "node scripts/split-download-worker.mjs",

@@ -4,6 +4,7 @@ import { relative, resolve } from "node:path";
 import { allBuildEntries } from "./build-entries.mjs";
 
 const projectRoot = resolve(import.meta.dirname, "..");
+const outputRoot = resolve(projectRoot, "dist");
 const runtimeDirectories = [
   "content",
   "download_worker",
@@ -24,8 +25,8 @@ const generatedFiles = new Set(
   allBuildEntries.map(([, output]) => normalize(output)),
 );
 const runtimeFiles = runtimeDirectories
-  .flatMap((directory) => walk(resolve(projectRoot, directory)))
-  .map((path) => normalize(relative(projectRoot, path)))
+  .flatMap((directory) => walk(resolve(outputRoot, directory)))
+  .map((path) => normalize(relative(outputRoot, path)))
   .filter((path) => path.endsWith(".js") || path.endsWith(".mjs"));
 
 const missing = runtimeFiles.filter((path) => !generatedFiles.has(path));

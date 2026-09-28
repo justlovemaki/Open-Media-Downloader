@@ -15,11 +15,11 @@ a runtime file is missing from the build graph.
 ## Canonical recovered application entries
 
 The complete panel, Service Worker and download worker implementations now live at canonical source
-paths and directly generate their runtime counterparts:
+paths and directly generate their runtime counterparts under `dist/`:
 
-- `src/content/panel.js` + `panel-runtime.js` → `content/panel.js`
-- `src/service/main.js` + `service-runtime.js` → `service/main.js`
-- `src/download-worker/main.js` + `worker-runtime.js` → `download_worker/main.js`
+- `src/content/panel.js` + `panel-runtime.js` → `dist/content/panel.js`
+- `src/service/main.js` + `service-runtime.js` → `dist/service/main.js`
+- `src/download-worker/main.js` + `worker-runtime.js` → `dist/download_worker/main.js`
 
 Application UI/lifecycle/strategy entry code is separated from its recovered runtime dependencies.
 Application-owned symbols have been semantically renamed with the scope-safe Babel script at

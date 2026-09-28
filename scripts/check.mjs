@@ -9,16 +9,7 @@ function walk(directory) {
   });
 }
 
-const files = [
-  "content",
-  "download_worker",
-  "factory",
-  "injected",
-  "scripts",
-  "service",
-  "src",
-  "test",
-]
+const files = ["dist", "scripts", "src", "test"]
   .flatMap(walk)
   .filter((path) => path.endsWith(".js") || path.endsWith(".mjs"));
 

@@ -8,7 +8,7 @@ They are not claimed to be the publisher's original source files or original sym
 - Meaningful names are inferred from message names, API fields, call sites, and runtime behavior.
 - Browser-specific adapters are kept separate from shared serialization and messaging code.
 - Third-party libraries should be dependencies instead of copied, minified source.
-- Root-level `injected/*.js` files remain build artifacts referenced by `manifest.json`.
+- Runtime JavaScript is generated under `dist/` and referenced by the copied `dist/manifest.json`.
 - Build artifacts are generated without minification and with source maps.
 
 ## Current structure
